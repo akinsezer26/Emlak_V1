@@ -1,0 +1,2137 @@
+﻿@{
+    Layout = null;
+    if (Session["UserID"] == null)
+    {
+        Response.Redirect("~/Login/Index");
+    }
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+    <style>
+        body {
+            font-family: "Lato", sans-serif;
+        }
+
+        /* Style the tab */
+        .tab {
+            position: relative;
+            float: left;
+            background-color: black;
+            width: 10%;
+            min-width: 150px;
+            height: 650px;
+        }
+
+            /* Style the buttons inside the tab */
+            .tab button {
+                display: block;
+                background-color: inherit;
+                color: #808080;
+                padding: 22px 16px;
+                width: 100%;
+                border: none;
+                outline: none;
+                text-align: left;
+                cursor: pointer;
+                transition: 0.3s;
+                font-size: 15px;
+                border: thin;
+                border-color: white;
+            }
+
+        .drop-down {
+            position: relative;
+        }
+        /* Change background color of buttons on hover */
+        .tablinks:hover {
+            color: #ddd;
+        }
+
+        .dropdown-btn:hover {
+            color: #ddd;
+        }
+
+        /* Create an active/current "tab button" class */
+        .tablinks.active {
+            background-color: #8d8b8b;
+            color: #fff;
+        }
+
+        .dropdown-btn.active {
+            color: black;
+            background-color: #ddd;
+        }
+
+        /* Style the tab content */
+        .tabcontent {
+            float: left;
+            padding: 0px 12px;
+            border: 1px solid #ccc;
+            width: 80%;
+            border-left: none;
+            height: 650px;
+        }
+
+        .dropdown-menu {
+            position: static !important;
+            display: none;
+            background-color: #303030;
+        }
+
+        /* Optional: Style the caret down icon */
+        .fa-caret-down {
+            float: right;
+            padding-right: 8px;
+        }
+
+        .dropdown-btn {
+            padding: 6px 8px 6px 16px;
+            text-decoration: none;
+            font-size: 20px;
+            color: #818181;
+            display: block;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .field-validation-error {
+            color: #e80c4d;
+            font-weight: bold;
+        }
+
+        input.input-validation-error {
+            border: 1px solid #e80c4d;
+        }
+
+        .field {
+            border: none;
+            border-spacing: 0px;
+        }
+
+            .field tr, .field td {
+                border: none;
+                padding: 10px;
+                vertical-align: top;
+            }
+
+            .field img {
+                display: block;
+                width: 200px;
+                height: 128px;
+                image-rendering: pixelated;
+                image-rendering: -moz-crisp-edges;
+            }
+    </style>
+</head>
+
+<body>
+    <h2>ESSE EMLAK</h2>
+    <div class="tab">
+        <button class="dropdown-btn">Kullanıcı<i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-menu">
+            <button class="tablinks" onclick="openCity(event, 'Kullanici')" id="defaultOpen">Kullanıcı Bilgileri</button>
+            <button class="tablinks" onclick="openCity(event, 'Ajanda')">Ajanda</button>
+            <button class="tablinks" onclick="openCity(event, 'Alacaklarim')">Alacaklarım</button>
+            <button class="tablinks" onclick="openCity(event, 'Borclarim')">Borçlarım</button>
+            <button class="tablinks" onclick="openCity(event, 'Mesajlarim')">Mesajlarım</button>
+            <button class="tablinks" onclick="openCity(event, 'Mesaj_Gonder')">Mesaj Gönder</button>
+        </div>
+        <button class="dropdown-btn">Müşteri Ara<i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-menu">
+            <button class="tablinks" onclick="openCity(event, 'EmlakArayanlar')">Emlak Arayanlar</button>
+            <button class="tablinks" onclick="openCity(event, 'Paris')">Geçmiş Kayıtlar</button>
+            <button class="tablinks" onclick="openCity(event, 'Paris')">Kiracı Takip 1hafta</button>
+            <button class="tablinks" onclick="openCity(event, 'Paris')">Borçlu Listesi</button>
+            <button class="tablinks" onclick="openCity(event, 'Paris')">Kontrat Takip 2Ay</button>
+        </div>
+        <button class="dropdown-btn">Konut<i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-menu">
+            <button class="tablinks" onclick="openCity(event, 'KonutSatilik')">Satılık</button>
+            <button class="tablinks" onclick="openCity(event, 'KonutKiralik')">Kiralık</button>
+        </div>
+
+        <button class="dropdown-btn">İş Yeri<i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-menu">
+            <button class="tablinks" onclick="openCity(event, 'IsyeriSatilik')">Satılık</button>
+            <button class="tablinks" onclick="openCity(event, 'IsyeriKiralik')">Kiralık</button>
+            <button class="tablinks" onclick="openCity(event, 'IsyeriDevrenSatilik')">Devren Satılık</button>
+            <button class="tablinks" onclick="openCity(event, 'IsyeriDevrenKiralik')">Devren Kiralık</button>
+        </div>
+
+        <button class="dropdown-btn">Arsa<i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-menu">
+            <button class="tablinks" onclick="openCity(event, 'ArsaKonutImarli')">Konut İmarlı</button>
+            <button class="tablinks" onclick="openCity(event, 'ArsaTicariImarli')">Ticari İmarlı</button>
+        </div>
+
+        <button class="dropdown-btn">Tarla<i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-menu">
+            <button class="tablinks" onclick="openCity(event, 'TarlaSatilik')">Satılık</button>
+            <button class="tablinks" onclick="openCity(event, 'TarlaKiralik')">Kiralık</button>
+        </div>
+
+        <button class="dropdown-btn">Bina<i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-menu">
+            <button class="tablinks" onclick="openCity(event, 'BinaSatilik')">Satılık</button>
+            <button class="tablinks" onclick="openCity(event, 'BinaKiralik')">Kiralık</button>
+        </div>
+
+        <button type="button" class="tablinks" onclick="location.href='@Url.Action("LogOut", "Login")'">Çıkış</button>
+    </div>
+
+    <div id="Kullanici" class="tabcontent">
+        @{
+            if (@Session["Userpp"] == null)
+            {
+                <img src="~/Image/default_user.png" style="margin-top:5%;margin-left:32%;" />
+            }
+
+            else
+            {
+                <img src="@Session["Userpp"].ToString()" />
+            }
+        }
+        <br /><br />
+        <label style="margin-left:28%;font-size:25px">İsim Soyisim :</label><label style="font-size:25px; font-weight:normal;">&nbsp @Session["UserName"].ToString() @Session["UserSurName"].ToString()</label><br />
+        <label style="margin-left:28%;font-size:25px">Kullanıcı Adı :</label><label style="font-size:25px; font-weight:normal">&nbsp @Session["UserNickName"].ToString()</label><br />
+        <label style="margin-left:28%;font-size:25px">Şifre</label><label style="padding-left:4.1em; font-size:25px">:</label><label style="font-size:25px; font-weight:normal">&nbsp @Session["UserPassword"].ToString()</label><br />
+        <label style="margin-left:28%;font-size:25px">Cep Tel</label><label style="padding-left:2.8em; font-size:25px">:</label><label style="font-size:25px; font-weight:normal">&nbsp @Session["CepTel"]</label><br />
+        <label style="margin-left:28%;font-size:25px">İş Tel</label><label style="padding-left:3.9em; font-size:25px">:</label><label style="font-size:25px; font-weight:normal">&nbsp @Session["IsTel"]</label><br />
+        <label style="margin-left:28%;font-size:25px">Unvan</label><label style="padding-left:3.3em; font-size:25px">:</label><label style="font-size:25px; font-weight:normal">&nbsp @Session["Unvan"].ToString()</label><br />
+        <label style="margin-left:28%;font-size:25px">Yetki</label><label style="padding-left:4em; font-size:25px">:</label><label style="font-size:25px; font-weight:normal">&nbsp @Session["UserType"].ToString()</label><br />
+    </div>
+
+    <div id="Ajanda" class="tabcontent">
+        <h1>Ajanda</h1>
+        <table id="tableReadAjanda" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Konu</th>
+                    <th>Nerede</th>
+                    <th>Kiminle</th>
+                    <th>Tarih</th>
+                    <th>Not</th>
+                    <th></th>
+                </tr>
+            </thead>
+        </table>
+        <a class="btn btn-success" style="margin-bottom: 10px" onclick="PopupForm('@Url.Action("AddOrEditAjanda","DB")')"><i class="fa fa-plus"></i> Ekle </a>
+    </div>
+
+    <div id="Alacaklarim" class="tabcontent">
+        <h1>Alacaklarım</h1>
+        <table id="tableAlacaklarim" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Kimden</th>
+                    <th>Miktar</th>
+                    <th>Borçlu Cep</th>
+                    <th>Tarih</th>
+                    <th>Ödeme Tarihi</th>
+                    <th>Not</th>
+                    <th></th>
+                </tr>
+            </thead>
+        </table>
+        <a class="btn btn-success" style="margin-bottom: 10px" onclick="PopupFormAlacaklarim('@Url.Action("AddOrEditAlacaklarim","DB")')"><i class="fa fa-plus"></i> Ekle </a>
+    </div>
+
+    <div id="Borclarim" class="tabcontent">
+        <h1>Borçlarım</h1>
+        <table id="tableBorclarim" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Kime</th>
+                    <th>Miktar</th>
+                    <th>Alacaklı Cep</th>
+                    <th>Tarih</th>
+                    <th>Ödeme Tarihi</th>
+                    <th>Not</th>
+                    <th></th>
+                </tr>
+            </thead>
+        </table>
+        <a class="btn btn-success" style="margin-bottom: 10px" onclick="PopupFormBorclarim('@Url.Action("AddOrEditBorclarim","DB")')"><i class="fa fa-plus"></i> Ekle </a>
+    </div>
+
+    <div id="Mesajlarim" class="tabcontent">
+        <h1>Mesajlarım</h1>
+    </div>
+
+    <div id="Mesaj_Gonder" class="tabcontent">
+        <h1>Mesaj Gönder</h1>
+    </div>
+
+    <div id="EmlakArayanlar" class="tabcontent">
+        <h1>Emlak Arayanlar</h1>
+        <table id="tableEmlakArayanlar" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Ad</th>
+                    <th>Soyad</th>
+                    <th>Cep Tel</th>
+                    <th>İş Tel</th>
+                    <th>Kiracı/Alıcı</th>
+                    <th>Emlak Türü</th>
+                    <th>Oda Sayısı</th>
+                    <th>Metrekare</th>
+                    <th>Bina Yaşı</th>
+                    <th>Kat</th>
+                    <th>Fiyat</th>
+                    <th>Not</th>
+                    <th></th>
+                </tr>
+            </thead>
+        </table>
+        <a class="btn btn-success" style="margin-bottom: 10px" onclick="PopupFormEmlakArayanlar('@Url.Action("AddOrEditEmlakArayanlar","DB")')"><i class="fa fa-plus"></i> Ekle </a>
+
+    </div>
+
+    <div id="KonutSatilik" class="tabcontent">
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        @Html.DropDownList("konutTipiKonutSatilik", (List<SelectListItem>)ViewBag.konutTipi, new { @class = "form-control" })
+                    </td>
+                    <td>
+                        @Html.DropDownList("OdaSayisiKonutSatilik", (List<SelectListItem>)ViewBag.OdaSayisi, new { @class = "form-control" })
+                    </td>
+                    <td>
+                        <input type="text" id="IlKonutSatilik" placeholder="İl" />
+                    </td>
+                    <td>
+                        <input type="text" id="IlceKonutSatilik" placeholder="İlçe" />
+                    </td>
+                    <td>
+                        <input type="text" id="MahalleKonutSatilik" placeholder="Mahalle" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="text" id="MinTLKonutSatilik" placeholder="Min TL" />
+                    </td>
+                    <td>
+                        <input type="text" id="MaxTLKonutSatilik" placeholder="Max TL" />
+                    </td>
+                    <td>
+                        <input type="button" value="Ara" id="SearchKonutSatilik" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table id="tableKonutSatilik" style="width:85%"></table>
+        <a class="btn btn-success" style="margin-bottom: 10px" onclick="PopupFormKonutSatilik('@Url.Action("AddOrEditKonutSatilik","DB")')"><i class="fa fa-plus"></i> Ekle </a>
+    </div>
+
+    <div id="KonutKiralik" class="tabcontent">
+        <table id="tableKonutKiralik" style="width:85%"></table>
+        <a class="btn btn-success" style="margin-bottom: 10px" onclick="PopupFormKonutKiralik('@Url.Action("AddOrEditKonutKiralik","DB")')"><i class="fa fa-plus"></i> Ekle </a>
+    </div>
+
+    <div id="IsyeriSatilik" class="tabcontent">
+        <table id="tableIsyeriSatilik" style="width:85%"></table>
+        <a class="btn btn-success" style="margin-bottom: 10px" onclick="PopupFormIsyeriSatilik('@Url.Action("AddOrEditIsyeriSatilik","DB")')"><i class="fa fa-plus"></i> Ekle </a>
+    </div>
+
+    <div id="IsyeriKiralik" class="tabcontent">
+        <table id="tableIsyeriKiralik" style="width:85%"></table>
+        <a class="btn btn-success" style="margin-bottom: 10px" onclick="PopupFormIsyeriKiralik('@Url.Action("AddOrEditIsyeriKiralik","DB")')"><i class="fa fa-plus"></i> Ekle </a>
+
+    </div>
+
+    <div id="IsyeriDevrenSatilik" class="tabcontent">
+        <table id="tableIsyeriDevrenSatilik" style="width:85%"></table>
+        <a class="btn btn-success" style="margin-bottom: 10px" onclick="PopupFormIsyeriDevrenSatilik('@Url.Action("AddOrEditIsyeriDevrenSatilik","DB")')"><i class="fa fa-plus"></i> Ekle </a>
+    </div>
+
+    <div id="IsyeriDevrenKiralik" class="tabcontent">
+        <table id="tableIsyeriDevrenKiralik" style="width:85%"></table>
+        <a class="btn btn-success" style="margin-bottom: 10px" onclick="PopupFormIsyeriDevrenKiralik('@Url.Action("AddOrEditIsyeriDevrenKiralik","DB")')"><i class="fa fa-plus"></i> Ekle </a>
+    </div>
+
+    <div id="ArsaKonutImarli" class="tabcontent">
+        <table id="tableArsaKonutImarli" style="width:85%"></table>
+        @*<a class="btn btn-success" style="margin-bottom: 10px" onclick="PopupFormKonutSatilik('@Url.Action("AddOrEditKonutSatilik","DB")')"><i class="fa fa-plus"></i> Ekle </a>*@
+    </div>
+
+    <div id="ArsaTicariImarli" class="tabcontent">
+        <table id="tableArsaTicariImarli" style="width:85%"></table>
+        @*<a class="btn btn-success" style="margin-bottom: 10px" onclick="PopupFormKonutSatilik('@Url.Action("AddOrEditKonutSatilik","DB")')"><i class="fa fa-plus"></i> Ekle </a>*@
+    </div>
+
+    <div id="TarlaSatilik" class="tabcontent">
+        <table id="tableTarlaSatilik" style="width:85%"></table>
+        @*<a class="btn btn-success" style="margin-bottom: 10px" onclick="PopupFormKonutSatilik('@Url.Action("AddOrEditKonutSatilik","DB")')"><i class="fa fa-plus"></i> Ekle </a>*@
+    </div>
+
+    <div id="TarlaKiralik" class="tabcontent">
+        <table id="tableTarlaKiralik" style="width:85%"></table>
+        @*<a class="btn btn-success" style="margin-bottom: 10px" onclick="PopupFormKonutSatilik('@Url.Action("AddOrEditKonutSatilik","DB")')"><i class="fa fa-plus"></i> Ekle </a>*@
+    </div>
+
+    <div id="BinaSatilik" class="tabcontent">
+        <table id="tableBinaSatilik" style="width:85%"></table>
+        @*<a class="btn btn-success" style="margin-bottom: 10px" onclick="PopupFormKonutSatilik('@Url.Action("AddOrEditKonutSatilik","DB")')"><i class="fa fa-plus"></i> Ekle </a>*@
+    </div>
+
+    <div id="BinaKiralik" class="tabcontent">
+        <table id="tableBinaKiralik" style="width:85%"></table>
+        @*<a class="btn btn-success" style="margin-bottom: 10px" onclick="PopupFormKonutSatilik('@Url.Action("AddOrEditKonutSatilik","DB")')"><i class="fa fa-plus"></i> Ekle </a>*@
+    </div>
+
+    <div id="Paris" class="tabcontent">
+        <h3>Paris</h3>
+        <p>Paris is the capital of France.</p>
+    </div>
+
+    <div id="Cikis" class="tabcontent">
+        <h3>Tokyo</h3>
+        <p>Tokyo is the capital of Japan.</p>
+    </div>
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Scripts/notify.min.js"></script>
+    
+    <script>
+    var popUp, dataTableAjanda, dataTableKonutSatilik, dataTableKonutKiralik, dataTableIsyeriSatilik, dataTableIsyeriKiralik, dataTableIsyeriDevrenSatilik, dataTableIsyeriDevrenKiralik;
+    $(document).ready(function () {
+        dataTableAjanda = $('#tableReadAjanda').DataTable({
+            "ajax": {
+                "url": "/DB/getAjanda",
+                "type": "GET",
+                "datatype": "json",
+            },
+            "columns": [
+                { "data": "AjandaID" },
+                { "data": "Konu" },
+                { "data": "Nerede" },
+                { "data": "Kiminle" },
+                {
+                    "data": "Tarih", "render": function (data) {
+                        var date = new Date(Number(data.replace(/\D/g, '')));
+                        var month = date.getMonth() + 1;
+                        return date.getDate() + "/" + (month.toString().length > 1 ? month : "0" + month) + "/" + date.getFullYear();
+                    }
+                },
+                { "data": "Note" },
+                {
+                    "data": "AjandaID", "render": function (data) {
+                        return "<a class='btn btn-default btn-sm' onclick=PopupForm('@Url.Action("AddOrEditAjanda","DB")/" + data + "')><i class='fa fa-pencil'></i> Düzenle</a><a class='btn btn-danger btn-sm' onclick=Delete(" + data + ") style='margin-left:5px' ><i class='fa fa-trash'></i> Sil</a>"
+                    }
+                    ,
+                    "orderable": false,
+                    "searchable": false,
+                    "width": "150px"
+                }
+            ],
+            "language": {
+                "sDecimal": ",",
+                "sEmptyTable": "Tabloda herhangi bir veri mevcut değil",
+                "sInfo": "_TOTAL_ kayıttan _START_ - _END_ arasındaki kayıtlar gösteriliyor",
+                "sInfoEmpty": "Kayıt yok",
+                "sInfoFiltered": "(_MAX_ kayıt içerisinden bulunan)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ".",
+                "sLengthMenu": "Sayfada _MENU_ kayıt göster",
+                "sLoadingRecords": "Yükleniyor...",
+                "sProcessing": "İşleniyor...",
+                "sSearch": "Ara:",
+                "sZeroRecords": "Eşleşen kayıt bulunamadı",
+                "oPaginate": {
+                    "sFirst": "İlk",
+                    "sLast": "Son",
+                    "sNext": "Sonraki",
+                    "sPrevious": "Önceki"
+                },
+                "oAria": {
+                    "sSortAscending": ": artan sütun sıralamasını aktifleştir",
+                    "sSortDescending": ": azalan sütun sıralamasını aktifleştir"
+                },
+                "select": {
+                    "rows": {
+                        "_": "%d kayıt seçildi",
+                        "0": "",
+                        "1": "1 kayıt seçildi"
+                    }
+                }
+            }
+        });
+
+        dataTableAlacaklarim = $('#tableAlacaklarim').DataTable({
+            "ajax": {
+                "url": "/DB/getAlacaklarim",
+                "type": "GET",
+                "datatype": "json",
+            },
+            "columns": [
+                { "data": "AlacakID" },
+                { "data": "Kimden" },
+                { "data": "miktar" },
+                { "data": "BorcluCep" },
+                {
+                    "data": "tarih", "render": function (data) {
+                        var date = new Date(Number(data.replace(/\D/g, '')));
+                        var month = date.getMonth() + 1;
+                        return date.getDate() + "/" + (month.toString().length > 1 ? month : "0" + month) + "/" + date.getFullYear();
+                    }
+                },
+                {
+                    "data": "OdemeTarihi", "render": function (data) {
+                        var date = new Date(Number(data.replace(/\D/g, '')));
+                        var month = date.getMonth() + 1;
+                        return date.getDate() + "/" + (month.toString().length > 1 ? month : "0" + month) + "/" + date.getFullYear();
+                    }
+                },
+                { "data": "Note" },
+                {
+                    "data": "AlacakID", "render": function (data) {
+                        return "<a class='btn btn-default btn-sm' onclick=PopupFormAlacaklarim('@Url.Action("AddOrEditAlacaklarim","DB")/" + data + "')><i class='fa fa-pencil'></i> Düzenle</a><a class='btn btn-danger btn-sm' onclick=DeleteAlacaklarim(" + data + ") style='margin-left:5px' ><i class='fa fa-trash'></i> Sil</a>"
+                    }
+                    ,
+                    "orderable": false,
+                    "searchable": false,
+                    "width": "150px"
+                }
+            ],
+            "language": {
+                "sDecimal": ",",
+                "sEmptyTable": "Tabloda herhangi bir veri mevcut değil",
+                "sInfo": "_TOTAL_ kayıttan _START_ - _END_ arasındaki kayıtlar gösteriliyor",
+                "sInfoEmpty": "Kayıt yok",
+                "sInfoFiltered": "(_MAX_ kayıt içerisinden bulunan)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ".",
+                "sLengthMenu": "Sayfada _MENU_ kayıt göster",
+                "sLoadingRecords": "Yükleniyor...",
+                "sProcessing": "İşleniyor...",
+                "sSearch": "Ara:",
+                "sZeroRecords": "Eşleşen kayıt bulunamadı",
+                "oPaginate": {
+                    "sFirst": "İlk",
+                    "sLast": "Son",
+                    "sNext": "Sonraki",
+                    "sPrevious": "Önceki"
+                },
+                "oAria": {
+                    "sSortAscending": ": artan sütun sıralamasını aktifleştir",
+                    "sSortDescending": ": azalan sütun sıralamasını aktifleştir"
+                },
+                "select": {
+                    "rows": {
+                        "_": "%d kayıt seçildi",
+                        "0": "",
+                        "1": "1 kayıt seçildi"
+                    }
+                }
+            }
+        });
+
+        dataTableBorclarim = $('#tableBorclarim').DataTable({
+            "ajax": {
+                "url": "/DB/getBorclarim",
+                "type": "GET",
+                "datatype": "json",
+            },
+            "columns": [
+                { "data": "BorcID" },
+                { "data": "Kime" },
+                { "data": "miktar" },
+                { "data": "AlacakliCep" },
+                {
+                    "data": "Tarih", "render": function (data) {
+                        var date = new Date(Number(data.replace(/\D/g, '')));
+                        var month = date.getMonth() + 1;
+                        return date.getDate() + "/" + (month.toString().length > 1 ? month : "0" + month) + "/" + date.getFullYear();
+                    }
+                },
+                {
+                    "data": "OdemeTarihi", "render": function (data) {
+                        var date = new Date(Number(data.replace(/\D/g, '')));
+                        var month = date.getMonth() + 1;
+                        return date.getDate() + "/" + (month.toString().length > 1 ? month : "0" + month) + "/" + date.getFullYear();
+                    }
+                },
+                { "data": "Note" },
+                {
+                    "data": "BorcID", "render": function (data) {
+                        return "<a class='btn btn-default btn-sm' onclick=PopupFormBorclarim('@Url.Action("AddOrEditBorclarim","DB")/" + data + "')><i class='fa fa-pencil'></i> Düzenle</a><a class='btn btn-danger btn-sm' onclick=DeleteBorclarim(" + data + ") style='margin-left:5px' ><i class='fa fa-trash'></i> Sil</a>"
+                    }
+                    ,
+                    "orderable": false,
+                    "searchable": false,
+                    "width": "150px"
+                }
+            ],
+            "language": {
+                "sDecimal": ",",
+                "sEmptyTable": "Tabloda herhangi bir veri mevcut değil",
+                "sInfo": "_TOTAL_ kayıttan _START_ - _END_ arasındaki kayıtlar gösteriliyor",
+                "sInfoEmpty": "Kayıt yok",
+                "sInfoFiltered": "(_MAX_ kayıt içerisinden bulunan)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ".",
+                "sLengthMenu": "Sayfada _MENU_ kayıt göster",
+                "sLoadingRecords": "Yükleniyor...",
+                "sProcessing": "İşleniyor...",
+                "sSearch": "Ara:",
+                "sZeroRecords": "Eşleşen kayıt bulunamadı",
+                "oPaginate": {
+                    "sFirst": "İlk",
+                    "sLast": "Son",
+                    "sNext": "Sonraki",
+                    "sPrevious": "Önceki"
+                },
+                "oAria": {
+                    "sSortAscending": ": artan sütun sıralamasını aktifleştir",
+                    "sSortDescending": ": azalan sütun sıralamasını aktifleştir"
+                },
+                "select": {
+                    "rows": {
+                        "_": "%d kayıt seçildi",
+                        "0": "",
+                        "1": "1 kayıt seçildi"
+                    }
+                }
+            }
+        });
+
+        dataTableEmlakArayanlar = $('#tableEmlakArayanlar').DataTable({
+            "ajax": {
+                "url": "/DB/getEmlakArayanlar",
+                "type": "GET",
+                "datatype": "json",
+            },
+            "columns": [
+                { "data": "ArayanlarID" },
+                { "data": "ArayanAd" },
+                { "data": "ArayanSoyAd" },
+                { "data": "Cep" },
+                { "data": "IsTel" },
+                { "data": "Kiraci_Alici" },
+                { "data": "EmlakTuru" },
+                { "data": "OdaSayisi" },
+                { "data": "MetreKare" },
+                { "data": "BinaYasi" },
+                { "data": "KacinciKat" },
+                { "data": "Fiyat" },
+                { "data": "Note" },
+                {
+                    "data": "ArayanlarID", "render": function (data) {
+                        return "<a class='btn btn-default btn-sm' onclick=PopupFormEmlakArayanlar('@Url.Action("AddOrEditEmlakArayanlar","DB")/" + data + "')><i class='fa fa-pencil'></i> Düzenle</a><a class='btn btn-danger btn-sm' onclick=DeleteEmlakArayanlar(" + data + ") style='margin-left:5px' ><i class='fa fa-trash'></i> Sil</a>"
+                    }
+                    ,
+                    "orderable": false,
+                    "searchable": false,
+                    "width": "150px"
+                }
+            ],
+            "language": {
+                "sDecimal": ",",
+                "sEmptyTable": "Tabloda herhangi bir veri mevcut değil",
+                "sInfo": "_TOTAL_ kayıttan _START_ - _END_ arasındaki kayıtlar gösteriliyor",
+                "sInfoEmpty": "Kayıt yok",
+                "sInfoFiltered": "(_MAX_ kayıt içerisinden bulunan)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ".",
+                "sLengthMenu": "Sayfada _MENU_ kayıt göster",
+                "sLoadingRecords": "Yükleniyor...",
+                "sProcessing": "İşleniyor...",
+                "sSearch": "Ara:",
+                "sZeroRecords": "Eşleşen kayıt bulunamadı",
+                "oPaginate": {
+                    "sFirst": "İlk",
+                    "sLast": "Son",
+                    "sNext": "Sonraki",
+                    "sPrevious": "Önceki"
+                },
+                "oAria": {
+                    "sSortAscending": ": artan sütun sıralamasını aktifleştir",
+                    "sSortDescending": ": azalan sütun sıralamasını aktifleştir"
+                },
+                "select": {
+                    "rows": {
+                        "_": "%d kayıt seçildi",
+                        "0": "",
+                        "1": "1 kayıt seçildi"
+                    }
+                }
+            }
+        });
+
+        dataTableKonutSatilik = $('#tableKonutSatilik').DataTable({
+            "order": [[3, "desc"]],
+            "iDisplayLength": 3,
+            "ajax": {
+                "url": "/DB/getKonutSatilik",
+                "type": "GET",
+                "datatype": "json",
+                "datasrc": "data.0",
+            }, "columnDefs": [{
+                "defaultContent": "-",
+                "targets": "_all"
+            }],
+            "columns": [
+                {
+                    "0": { ID: "ID", odaS: "OdaSayisi", pic: "picture1", Mk: "MetreKare", Mah: "Mahalle", il: "il", fiyat: "FiyatNet" }, "render": function (data) {
+
+                        if (data != null) {
+
+
+                            if (data.picture1 == null) {
+                                return ("<a href='@Url.Action("Goruntule","KonutSatilik")/" + data.ID + "' target='_blank' rel='noopener noreferrer'>"
+                                    + "<img src='/EmlakImages/default.JPG' width='180' height='120'></a><br>"
+                                    + "<label>" + "Konut Satılık" + "</label><br>"
+                                    + "<label>" + data.Mahalle + "  " + data.il + "</label><br>"
+                                    + "<label>" + data.FiyatNet + " tl</label>"
+                                );
+                            }
+                            else {
+                                return ("<a href='@Url.Action("Goruntule","KonutSatilik")/" + data.ID + "' target='_blank' rel='noopener noreferrer'>"
+                                    + "<img src='/EmlakImages/Kisyeri_" + data.ID + "_1" + ".JPG'  width='180' height='120'></a><br>"
+                                    + "<label>" + "Konut Satılık" + "</label><br>"
+                                    + "<label>" + data.Mahalle + "  " + data.il + "</label><br>"
+                                    + "<label>" + data.FiyatNet + " tl</label>"
+                                );
+                            }
+
+                        }
+                    }, "orderable": false, "searchable": false
+                },
+                {
+                    "1": { ID: "ID", odaS: "OdaSayisi", pic: "picture1", Mk: "MetreKare", Mah: "Mahalle", il: "il", fiyat: "FiyatNet" }, "render": function (data) {
+
+                        if (data != null) {
+
+                            if (data.picture1 == null) {
+                                return ("<a href='@Url.Action("Goruntule","KonutSatilik")/" + data.ID + "' target='_blank' rel='noopener noreferrer'>"
+                                    + "<img src='/EmlakImages/default.JPG' width='180' height='120'></a><br>"
+                                    + "<label>" + "Konut Satılık" + "</label><br>"
+                                    + "<label>" + data.Mahalle + "  " + data.il + "</label><br>"
+                                    + "<label>" + data.FiyatNet + " tl</label>"
+                                );
+                            }
+                            else {
+                                return ("<a href='@Url.Action("Goruntule","KonutSatilik")/" + data.ID + "' target='_blank' rel='noopener noreferrer'>"
+                                    + "<img src='/EmlakImages/Kisyeri_" + data.ID + "_1" + ".JPG'  width='180' height='120'></a><br>"
+                                    + "<label>" + "Konut Satılık" + "</label><br>"
+                                    + "<label>" + data.Mahalle + "  " + data.il + "</label><br>"
+                                    + "<label>" + data.FiyatNet + " tl</label>"
+                                );
+                            }
+                        }
+
+                    }, "orderable": false, "searchable": false
+                },
+                {
+                    "2": { ID: "ID", odaS: "OdaSayisi", pic: "picture1", Mk: "MetreKare", Mah: "Mahalle", il: "il", fiyat: "FiyatNet" }, "render": function (data) {
+
+                        if (data != null) {
+
+                            if (data.picture1 == null) {
+                                return ("<a href='@Url.Action("Goruntule","KonutSatilik")/" + data.ID + "' target='_blank' rel='noopener noreferrer'>"
+                                    + "<img src='/EmlakImages/default.JPG' width='180' height='120'></a><br>"
+                                    + "<label>" + "Konut Satılık" + "</label><br>"
+                                    + "<label>" + data.Mahalle + "  " + data.il + "</label><br>"
+                                    + "<label>" + data.FiyatNet + " tl</label>"
+                                );
+                            }
+                            else {
+                                return ("<a href='@Url.Action("Goruntule","KonutSatilik")/" + data.ID + "' target='_blank' rel='noopener noreferrer'>"
+                                    + "<img src='/EmlakImages/Kisyeri_" + data.ID + "_1" + ".JPG'  width='180' height='120'></a><br>"
+                                    + "<label>" + "Konut Satılık" + "</label><br>"
+                                    + "<label>" + data.Mahalle + "  " + data.il + "</label><br>"
+                                    + "<label>" + data.FiyatNet + " tl</label>"
+                                );
+                            }
+                        }
+                    }, "orderable": false, "searchable": false
+                },
+                {
+                    "3": { ID: "ID", odaS: "OdaSayisi", pic: "picture1", Mk: "MetreKare", Mah: "Mahalle", il: "il", fiyat: "FiyatNet" }, "render": function (data) {
+
+                        if (data != null) {
+
+                            if (data.picture1 == null) {
+                                return ("<a href='@Url.Action("Goruntule","KonutSatilik")/" + data.ID + "' target='_blank' rel='noopener noreferrer'>"
+                                    + "<img src='/EmlakImages/default.JPG' width='180' height='120'></a><br>"
+                                    + "<label>" + "Konut Satılık" + "</label><br>"
+                                    + "<label>" + data.Mahalle + "  " + data.il + "</label><br>"
+                                    + "<label>" + data.FiyatNet + " tl</label>"
+                                );
+                            }
+                            else {
+                                return ("<a href='@Url.Action("Goruntule","KonutSatilik")/" + data.ID + "' target='_blank' rel='noopener noreferrer'>"
+                                    + "<img src='/EmlakImages/Kisyeri_" + data.ID + "_1" + ".JPG'  width='180' height='120'></a><br>"
+                                    + "<label>" + "Konut Satılık" + "</label><br>"
+                                    + "<label>" + data.Mahalle + "  " + data.il + "</label><br>"
+                                    + "<label>" + data.FiyatNet + " tl</label>"
+                                );
+                            }
+                        }
+                    }, "orderable": false, "searchable": false
+                }
+            ],
+            "language": {
+                "sDecimal": ",",
+                "sEmptyTable": "Tabloda herhangi bir veri mevcut değil",
+                "sInfo": "_TOTAL_ kayıttan _START_ - _END_ arasındaki kayıtlar gösteriliyor",
+                "sInfoEmpty": "Kayıt yok",
+                "sInfoFiltered": "(_MAX_ kayıt içerisinden bulunan)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ".",
+                "sLengthMenu": "Sayfada _MENU_ kayıt göster",
+                "sLoadingRecords": "Yükleniyor...",
+                "sProcessing": "İşleniyor...",
+                "sSearch": "Ara:",
+                "sZeroRecords": "Eşleşen kayıt bulunamadı",
+                "oPaginate": {
+                    "sFirst": "İlk",
+                    "sLast": "Son",
+                    "sNext": "Sonraki",
+                    "sPrevious": "Önceki"
+                },
+                "oAria": {
+                    "sSortAscending": ": artan sütun sıralamasını aktifleştir",
+                    "sSortDescending": ": azalan sütun sıralamasını aktifleştir"
+                },
+                "select": {
+                    "rows": {
+                        "_": "%d kayıt seçildi",
+                        "0": "",
+                        "1": "1 kayıt seçildi"
+                    }
+                }
+            }
+        });
+
+        dataTableKonutKiralik = $('#tableKonutKiralik').DataTable({
+            "order": [[3, "desc"]],
+            "iDisplayLength": 3,
+            "ajax": {
+                "url": "/DB/getKonutKiralik",
+                "type": "GET",
+                "datatype": "json",
+                "datasrc": "data.0"
+            }, "columnDefs": [{
+                "defaultContent": "-",
+                "targets": "_all"
+            }],
+            "columns": [
+                {
+                    "0": { ID: "ID", odaS: "OdaSayisi", pic: "picture1", Mk: "MetreKare", Mah: "Mahalle", il: "il", fiyat: "FiyatNet" }, "render": function (data) {
+
+                        if (data != null) {
+
+
+                            if (data.picture1 == null) {
+                                return ("<a href='@Url.Action("Goruntule","KonutKiralik")/" + data.ID + "' target='_blank' rel='noopener noreferrer'>"
+                                    + "<img src='/EmlakImages/default.JPG' width='180' height='120'></a><br>"
+                                    + "<label>" + "Konut Kiralik" + "</label><br>"
+                                    + "<label>" + data.Mahalle + "  " + data.il + "</label><br>"
+                                    + "<label>" + data.FiyatNet + " tl</label>"
+                                );
+                            }
+                            else {
+                                return ("<a href='@Url.Action("Goruntule","KonutKiralik")/" + data.ID + "' target='_blank' rel='noopener noreferrer'>"
+                                    + "<img src='/EmlakImages/Kisyeri_" + data.ID + "_1" + ".JPG'  width='180' height='120'></a><br>"
+                                    + "<label>" + "Konut Kiralik" + "</label><br>"
+                                    + "<label>" + data.Mahalle + "  " + data.il + "</label><br>"
+                                    + "<label>" + data.FiyatNet + " tl</label>"
+                                );
+                            }
+
+                        }
+                    }, "orderable": false, "searchable": false
+                },
+                {
+                    "1": { ID: "ID", odaS: "OdaSayisi", pic: "picture1", Mk: "MetreKare", Mah: "Mahalle", il: "il", fiyat: "FiyatNet" }, "render": function (data) {
+
+                        if (data != null) {
+
+                            if (data.picture1 == null) {
+                                return ("<a href='@Url.Action("Goruntule","KonutKiralik")/" + data.ID + "' target='_blank' rel='noopener noreferrer'>"
+                                    + "<img src='/EmlakImages/default.JPG' width='180' height='120'></a><br>"
+                                    + "<label>" + "Konut Kiralik" + "</label><br>"
+                                    + "<label>" + data.Mahalle + "  " + data.il + "</label><br>"
+                                    + "<label>" + data.FiyatNet + " tl</label>"
+                                );
+                            }
+                            else {
+                                return ("<a href='@Url.Action("Goruntule","KonutKiralik")/" + data.ID + "' target='_blank' rel='noopener noreferrer'>"
+                                    + "<img src='/EmlakImages/Kisyeri_" + data.ID + "_1" + ".JPG'  width='180' height='120'></a><br>"
+                                    + "<label>" + "Konut Kiralik" + "</label><br>"
+                                    + "<label>" + data.Mahalle + "  " + data.il + "</label><br>"
+                                    + "<label>" + data.FiyatNet + " tl</label>"
+                                );
+                            }
+                        }
+
+                    }, "orderable": false, "searchable": false
+                },
+                {
+                    "2": { ID: "ID", odaS: "OdaSayisi", pic: "picture1", Mk: "MetreKare", Mah: "Mahalle", il: "il", fiyat: "FiyatNet" }, "render": function (data) {
+
+                        if (data != null) {
+
+                            if (data.picture1 == null) {
+                                return ("<a href='@Url.Action("Goruntule","KonutKiralik")/" + data.ID + "' target='_blank' rel='noopener noreferrer'>"
+                                    + "<img src='/EmlakImages/default.JPG' width='180' height='120'></a><br>"
+                                    + "<label>" + "Konut Kiralik" + "</label><br>"
+                                    + "<label>" + data.Mahalle + "  " + data.il + "</label><br>"
+                                    + "<label>" + data.FiyatNet + " tl</label>"
+                                );
+                            }
+                            else {
+                                return ("<a href='@Url.Action("Goruntule","KonutKiralik")/" + data.ID + "' target='_blank' rel='noopener noreferrer'>"
+                                    + "<img src='/EmlakImages/Kisyeri_" + data.ID + "_1" + ".JPG'  width='180' height='120'></a><br>"
+                                    + "<label>" + "Konut Kiralik" + "</label><br>"
+                                    + "<label>" + data.Mahalle + "  " + data.il + "</label><br>"
+                                    + "<label>" + data.FiyatNet + " tl</label>"
+                                );
+                            }
+                        }
+                    }, "orderable": false, "searchable": false
+                },
+                {
+                    "3": { ID: "ID", odaS: "OdaSayisi", pic: "picture1", Mk: "MetreKare", Mah: "Mahalle", il: "il", fiyat: "FiyatNet" }, "render": function (data) {
+
+                        if (data != null) {
+
+                            if (data.picture1 == null) {
+                                return ("<a href='@Url.Action("Goruntule","KonutKiralik")/" + data.ID + "' target='_blank' rel='noopener noreferrer'>"
+                                    + "<img src='/EmlakImages/default.JPG' width='180' height='120'></a><br>"
+                                    + "<label>" + "Konut Kiralik" + "</label><br>"
+                                    + "<label>" + data.Mahalle + "  " + data.il + "</label><br>"
+                                    + "<label>" + data.FiyatNet + " tl</label>"
+                                );
+                            }
+                            else {
+                                return ("<a href='@Url.Action("Goruntule","KonutKiralik")/" + data.ID + "' target='_blank' rel='noopener noreferrer'>"
+                                    + "<img src='/EmlakImages/Kisyeri_" + data.ID + "_1" + ".JPG'  width='180' height='120'></a><br>"
+                                    + "<label>" + "Konut Kiralik" + "</label><br>"
+                                    + "<label>" + data.Mahalle + "  " + data.il + "</label><br>"
+                                    + "<label>" + data.FiyatNet + " tl</label>"
+                                );
+                            }
+                        }
+                    }, "orderable": false, "searchable": false
+                }
+            ],
+            "language": {
+                "sDecimal": ",",
+                "sEmptyTable": "Tabloda herhangi bir veri mevcut değil",
+                "sInfo": "_TOTAL_ kayıttan _START_ - _END_ arasındaki kayıtlar gösteriliyor",
+                "sInfoEmpty": "Kayıt yok",
+                "sInfoFiltered": "(_MAX_ kayıt içerisinden bulunan)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ".",
+                "sLengthMenu": "Sayfada _MENU_ kayıt göster",
+                "sLoadingRecords": "Yükleniyor...",
+                "sProcessing": "İşleniyor...",
+                "sSearch": "Ara:",
+                "sZeroRecords": "Eşleşen kayıt bulunamadı",
+                "oPaginate": {
+                    "sFirst": "İlk",
+                    "sLast": "Son",
+                    "sNext": "Sonraki",
+                    "sPrevious": "Önceki"
+                },
+                "oAria": {
+                    "sSortAscending": ": artan sütun sıralamasını aktifleştir",
+                    "sSortDescending": ": azalan sütun sıralamasını aktifleştir"
+                },
+                "select": {
+                    "rows": {
+                        "_": "%d kayıt seçildi",
+                        "0": "",
+                        "1": "1 kayıt seçildi"
+                    }
+                }
+            }
+        });
+
+        dataTableIsyeriSatilik = $('#tableIsyeriSatilik').DataTable({
+            "order": [[3, "desc"]],
+            "iDisplayLength": 3,
+            "ajax": {
+                "url": "/DB/getIsyeriSatilik",
+                "type": "GET",
+                "datatype": "json",
+                "datasrc": "data.0"
+            }, "columnDefs": [{
+                "defaultContent": "-",
+                "targets": "_all"
+            }],
+            "columns": [
+                {
+                    "0": { ID: "ID", odaS: "OdaSayisi", pic: "picture1", Mk: "MetreKare", Mah: "Mahalle", il: "il", fiyat: "FiyatNet" }, "render": function (data) {
+
+                        if (data != null) {
+
+
+                            if (data.picture1 == null) {
+                                return ("<a href='@Url.Action("Goruntule","IsyeriSatilik")/" + data.ID + "' target='_blank' rel='noopener noreferrer'>"
+                                    + "<img src='/EmlakImages/default.JPG' width='180' height='120'></a><br>"
+                                    + "<label>" + "İşyeri Satılık" + "</label><br>"
+                                    + "<label>" + data.Mahalle + "  " + data.il + "</label><br>"
+                                    + "<label>" + data.FiyatNet + " tl</label>"
+                                );
+                            }
+                            else {
+                                return ("<a href='@Url.Action("Goruntule","IsyeriSatilik")/" + data.ID + "' target='_blank' rel='noopener noreferrer'>"
+                                    + "<img src='/EmlakImages/Kisyeri_" + data.ID + "_1" + ".JPG'  width='180' height='120'></a><br>"
+                                    + "<label>" + "İşyeri Satılık" + "</label><br>"
+                                    + "<label>" + data.Mahalle + "  " + data.il + "</label><br>"
+                                    + "<label>" + data.FiyatNet + " tl</label>"
+                                );
+                            }
+
+                        }
+                    }, "orderable": false, "searchable": false
+                },
+                {
+                    "1": { ID: "ID", odaS: "OdaSayisi", pic: "picture1", Mk: "MetreKare", Mah: "Mahalle", il: "il", fiyat: "FiyatNet" }, "render": function (data) {
+
+                        if (data != null) {
+
+                            if (data.picture1 == null) {
+                                return ("<a href='@Url.Action("Goruntule","IsyeriSatilik")/" + data.ID + "' target='_blank' rel='noopener noreferrer'>"
+                                    + "<img src='/EmlakImages/default.JPG' width='180' height='120'></a><br>"
+                                    + "<label>" + "İşyeri Satılık" + "</label><br>"
+                                    + "<label>" + data.Mahalle + "  " + data.il + "</label><br>"
+                                    + "<label>" + data.FiyatNet + " tl</label>"
+                                );
+                            }
+                            else {
+                                return ("<a href='@Url.Action("Goruntule","IsyeriSatilik")/" + data.ID + "' target='_blank' rel='noopener noreferrer'>"
+                                    + "<img src='/EmlakImages/Kisyeri_" + data.ID + "_1" + ".JPG'  width='180' height='120'></a><br>"
+                                    + "<label>" + "İşyeri Satılık" + "</label><br>"
+                                    + "<label>" + data.Mahalle + "  " + data.il + "</label><br>"
+                                    + "<label>" + data.FiyatNet + " tl</label>"
+                                );
+                            }
+                        }
+
+                    }, "orderable": false, "searchable": false
+                },
+                {
+                    "2": { ID: "ID", odaS: "OdaSayisi", pic: "picture1", Mk: "MetreKare", Mah: "Mahalle", il: "il", fiyat: "FiyatNet" }, "render": function (data) {
+
+                        if (data != null) {
+
+                            if (data.picture1 == null) {
+                                return ("<a href='@Url.Action("Goruntule","IsyeriSatilik")/" + data.ID + "' target='_blank' rel='noopener noreferrer'>"
+                                    + "<img src='/EmlakImages/default.JPG' width='180' height='120'></a><br>"
+                                    + "<label>" + "İşyeri Satılık" + "</label><br>"
+                                    + "<label>" + data.Mahalle + "  " + data.il + "</label><br>"
+                                    + "<label>" + data.FiyatNet + " tl</label>"
+                                );
+                            }
+                            else {
+                                return ("<a href='@Url.Action("Goruntule","IsyeriSatilik")/" + data.ID + "' target='_blank' rel='noopener noreferrer'>"
+                                    + "<img src='/EmlakImages/Kisyeri_" + data.ID + "_1" + ".JPG'  width='180' height='120'></a><br>"
+                                    + "<label>" + "İşyeri Satılık" + "</label><br>"
+                                    + "<label>" + data.Mahalle + "  " + data.il + "</label><br>"
+                                    + "<label>" + data.FiyatNet + " tl</label>"
+                                );
+                            }
+                        }
+                    }, "orderable": false, "searchable": false
+                },
+                {
+                    "3": { ID: "ID", odaS: "OdaSayisi", pic: "picture1", Mk: "MetreKare", Mah: "Mahalle", il: "il", fiyat: "FiyatNet" }, "render": function (data) {
+
+                        if (data != null) {
+
+                            if (data.picture1 == null) {
+                                return ("<a href='@Url.Action("Goruntule","IsyeriSatilik")/" + data.ID + "' target='_blank' rel='noopener noreferrer'>"
+                                    + "<img src='/EmlakImages/default.JPG' width='180' height='120'></a><br>"
+                                    + "<label>" + "İşyeri Satılık" + "</label><br>"
+                                    + "<label>" + data.Mahalle + "  " + data.il + "</label><br>"
+                                    + "<label>" + data.FiyatNet + " tl</label>"
+                                );
+                            }
+                            else {
+                                return ("<a href='@Url.Action("Goruntule","IsyeriSatilik")/" + data.ID + "' target='_blank' rel='noopener noreferrer'>"
+                                    + "<img src='/EmlakImages/Kisyeri_" + data.ID + "_1" + ".JPG'  width='180' height='120'></a><br>"
+                                    + "<label>" + "İşyeri Satılık" + "</label><br>"
+                                    + "<label>" + data.Mahalle + "  " + data.il + "</label><br>"
+                                    + "<label>" + data.FiyatNet + " tl</label>"
+                                );
+                            }
+                        }
+                    }, "orderable": false, "searchable": false
+                }
+            ],
+            "language": {
+                "sDecimal": ",",
+                "sEmptyTable": "Tabloda herhangi bir veri mevcut değil",
+                "sInfo": "_TOTAL_ kayıttan _START_ - _END_ arasındaki kayıtlar gösteriliyor",
+                "sInfoEmpty": "Kayıt yok",
+                "sInfoFiltered": "(_MAX_ kayıt içerisinden bulunan)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ".",
+                "sLengthMenu": "Sayfada _MENU_ kayıt göster",
+                "sLoadingRecords": "Yükleniyor...",
+                "sProcessing": "İşleniyor...",
+                "sSearch": "Ara:",
+                "sZeroRecords": "Eşleşen kayıt bulunamadı",
+                "oPaginate": {
+                    "sFirst": "İlk",
+                    "sLast": "Son",
+                    "sNext": "Sonraki",
+                    "sPrevious": "Önceki"
+                },
+                "oAria": {
+                    "sSortAscending": ": artan sütun sıralamasını aktifleştir",
+                    "sSortDescending": ": azalan sütun sıralamasını aktifleştir"
+                },
+                "select": {
+                    "rows": {
+                        "_": "%d kayıt seçildi",
+                        "0": "",
+                        "1": "1 kayıt seçildi"
+                    }
+                }
+            }
+        });
+
+        dataTableIsyeriKiralik = $('#tableIsyeriKiralik').DataTable({
+            "order": [[3, "desc"]],
+            "iDisplayLength": 3,
+            "ajax": {
+                "url": "/DB/getIsyeriKiralik",
+                "type": "GET",
+                "datatype": "json",
+                "datasrc": "data.0"
+            }, "columnDefs": [{
+                "defaultContent": "-",
+                "targets": "_all"
+            }],
+            "columns": [
+                {
+                    "0": { ID: "ID", odaS: "OdaSayisi", pic: "picture1", Mk: "MetreKare", Mah: "Mahalle", il: "il", fiyat: "FiyatNet" }, "render": function (data) {
+
+                        if (data != null) {
+
+
+                            if (data.picture1 == null) {
+                                return ("<a href='@Url.Action("Goruntule","IsyeriKiralik")/" + data.ID + "' target='_blank' rel='noopener noreferrer'>"
+                                    + "<img src='/EmlakImages/default.JPG' width='180' height='120'></a><br>"
+                                    + "<label>" + "İşyeri Kiralık" + "</label><br>"
+                                    + "<label>" + data.Mahalle + "  " + data.il + "</label><br>"
+                                    + "<label>" + data.FiyatNet + " tl</label>"
+                                );
+                            }
+                            else {
+                                return ("<a href='@Url.Action("Goruntule","IsyeriKiralik")/" + data.ID + "' target='_blank' rel='noopener noreferrer'>"
+                                    + "<img src='/EmlakImages/Kisyeri_" + data.ID + "_1" + ".JPG'  width='180' height='120'></a><br>"
+                                    + "<label>" + "İşyeri Kiralık" + "</label><br>"
+                                    + "<label>" + data.Mahalle + "  " + data.il + "</label><br>"
+                                    + "<label>" + data.FiyatNet + " tl</label>"
+                                );
+                            }
+
+                        }
+                    }, "orderable": false, "searchable": false
+                },
+                {
+                    "1": { ID: "ID", odaS: "OdaSayisi", pic: "picture1", Mk: "MetreKare", Mah: "Mahalle", il: "il", fiyat: "FiyatNet" }, "render": function (data) {
+
+                        if (data != null) {
+
+                            if (data.picture1 == null) {
+                                return ("<a href='@Url.Action("Goruntule","IsyeriKiralik")/" + data.ID + "' target='_blank' rel='noopener noreferrer'>"
+                                    + "<img src='/EmlakImages/default.JPG' width='180' height='120'></a><br>"
+                                    + "<label>" + "İşyeri Kiralık" + "</label><br>"
+                                    + "<label>" + data.Mahalle + "  " + data.il + "</label><br>"
+                                    + "<label>" + data.FiyatNet + " tl</label>"
+                                );
+                            }
+                            else {
+                                return ("<a href='@Url.Action("Goruntule","IsyeriKiralik")/" + data.ID + "' target='_blank' rel='noopener noreferrer'>"
+                                    + "<img src='/EmlakImages/Kisyeri_" + data.ID + "_1" + ".JPG'  width='180' height='120'></a><br>"
+                                    + "<label>" + "İşyeri Kiralık" + "</label><br>"
+                                    + "<label>" + data.Mahalle + "  " + data.il + "</label><br>"
+                                    + "<label>" + data.FiyatNet + " tl</label>"
+                                );
+                            }
+                        }
+
+                    }, "orderable": false, "searchable": false
+                },
+                {
+                    "2": { ID: "ID", odaS: "OdaSayisi", pic: "picture1", Mk: "MetreKare", Mah: "Mahalle", il: "il", fiyat: "FiyatNet" }, "render": function (data) {
+
+                        if (data != null) {
+
+                            if (data.picture1 == null) {
+                                return ("<a href='@Url.Action("Goruntule","IsyeriKiralik")/" + data.ID + "' target='_blank' rel='noopener noreferrer'>"
+                                    + "<img src='/EmlakImages/default.JPG' width='180' height='120'></a><br>"
+                                    + "<label>" + "İşyeri Kiralık" + "</label><br>"
+                                    + "<label>" + data.Mahalle + "  " + data.il + "</label><br>"
+                                    + "<label>" + data.FiyatNet + " tl</label>"
+                                );
+                            }
+                            else {
+                                return ("<a href='@Url.Action("Goruntule","IsyeriKiralik")/" + data.ID + "' target='_blank' rel='noopener noreferrer'>"
+                                    + "<img src='/EmlakImages/Kisyeri_" + data.ID + "_1" + ".JPG'  width='180' height='120'></a><br>"
+                                    + "<label>" + "İşyeri Kiralık" + "</label><br>"
+                                    + "<label>" + data.Mahalle + "  " + data.il + "</label><br>"
+                                    + "<label>" + data.FiyatNet + " tl</label>"
+                                );
+                            }
+                        }
+                    }, "orderable": false, "searchable": false
+                },
+                {
+                    "3": { ID: "ID", odaS: "OdaSayisi", pic: "picture1", Mk: "MetreKare", Mah: "Mahalle", il: "il", fiyat: "FiyatNet" }, "render": function (data) {
+
+                        if (data != null) {
+
+                            if (data.picture1 == null) {
+                                return ("<a href='@Url.Action("Goruntule","IsyeriKiralik")/" + data.ID + "' target='_blank' rel='noopener noreferrer'>"
+                                    + "<img src='/EmlakImages/default.JPG' width='180' height='120'></a><br>"
+                                    + "<label>" + "İşyeri Kiralık" + "</label><br>"
+                                    + "<label>" + data.Mahalle + "  " + data.il + "</label><br>"
+                                    + "<label>" + data.FiyatNet + " tl</label>"
+                                );
+                            }
+                            else {
+                                return ("<a href='@Url.Action("Goruntule","IsyeriKiralik")/" + data.ID + "' target='_blank' rel='noopener noreferrer'>"
+                                    + "<img src='/EmlakImages/Kisyeri_" + data.ID + "_1" + ".JPG'  width='180' height='120'></a><br>"
+                                    + "<label>" + "İşyeri Kiralık" + "</label><br>"
+                                    + "<label>" + data.Mahalle + "  " + data.il + "</label><br>"
+                                    + "<label>" + data.FiyatNet + " tl</label>"
+                                );
+                            }
+                        }
+                    }, "orderable": false, "searchable": false
+                }
+            ],
+            "language": {
+                "sDecimal": ",",
+                "sEmptyTable": "Tabloda herhangi bir veri mevcut değil",
+                "sInfo": "_TOTAL_ kayıttan _START_ - _END_ arasındaki kayıtlar gösteriliyor",
+                "sInfoEmpty": "Kayıt yok",
+                "sInfoFiltered": "(_MAX_ kayıt içerisinden bulunan)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ".",
+                "sLengthMenu": "Sayfada _MENU_ kayıt göster",
+                "sLoadingRecords": "Yükleniyor...",
+                "sProcessing": "İşleniyor...",
+                "sSearch": "Ara:",
+                "sZeroRecords": "Eşleşen kayıt bulunamadı",
+                "oPaginate": {
+                    "sFirst": "İlk",
+                    "sLast": "Son",
+                    "sNext": "Sonraki",
+                    "sPrevious": "Önceki"
+                },
+                "oAria": {
+                    "sSortAscending": ": artan sütun sıralamasını aktifleştir",
+                    "sSortDescending": ": azalan sütun sıralamasını aktifleştir"
+                },
+                "select": {
+                    "rows": {
+                        "_": "%d kayıt seçildi",
+                        "0": "",
+                        "1": "1 kayıt seçildi"
+                    }
+                }
+            }
+        });
+
+        dataTableIsyeriDevrenSatilik = $('#tableIsyeriDevrenSatilik').DataTable({
+            "order": [[3, "desc"]],
+            "iDisplayLength": 3,
+            "ajax": {
+                "url": "/DB/getIsyeriDevrenSatilik",
+                "type": "GET",
+                "datatype": "json",
+                "datasrc": "data.0"
+            }, "columnDefs": [{
+                "defaultContent": "-",
+                "targets": "_all"
+            }],
+            "columns": [
+                {
+                    "0": { ID: "ID", odaS: "OdaSayisi", pic: "picture1", Mk: "MetreKare", Mah: "Mahalle", il: "il", fiyat: "FiyatNet" }, "render": function (data) {
+
+                        if (data != null) {
+
+
+                            if (data.picture1 == null) {
+                                return ("<a href='@Url.Action("Goruntule","IsyeriDevrenSatilik")/" + data.ID + "' target='_blank' rel='noopener noreferrer'>"
+                                    + "<img src='/EmlakImages/default.JPG' width='180' height='120'></a><br>"
+                                    + "<label>" + "İşyeri Devren Satılık" + "</label><br>"
+                                    + "<label>" + data.Mahalle + "  " + data.il + "</label><br>"
+                                    + "<label>" + data.FiyatNet + " tl</label>"
+                                );
+                            }
+                            else {
+                                return ("<a href='@Url.Action("Goruntule","IsyeriDevrenSatilik")/" + data.ID + "' target='_blank' rel='noopener noreferrer'>"
+                                    + "<img src='/EmlakImages/Kisyeri_" + data.ID + "_1" + ".JPG'  width='180' height='120'></a><br>"
+                                    + "<label>" + "İşyeri Devren Satılık" + "</label><br>"
+                                    + "<label>" + data.Mahalle + "  " + data.il + "</label><br>"
+                                    + "<label>" + data.FiyatNet + " tl</label>"
+                                );
+                            }
+
+                        }
+                    }, "orderable": false, "searchable": false
+                },
+                {
+                    "1": { ID: "ID", odaS: "OdaSayisi", pic: "picture1", Mk: "MetreKare", Mah: "Mahalle", il: "il", fiyat: "FiyatNet" }, "render": function (data) {
+
+                        if (data != null) {
+
+                            if (data.picture1 == null) {
+                                return ("<a href='@Url.Action("Goruntule","IsyeriDevrenSatilik")/" + data.ID + "' target='_blank' rel='noopener noreferrer'>"
+                                    + "<img src='/EmlakImages/default.JPG' width='180' height='120'></a><br>"
+                                    + "<label>" + "İşyeri Devren Satılık" + "</label><br>"
+                                    + "<label>" + data.Mahalle + "  " + data.il + "</label><br>"
+                                    + "<label>" + data.FiyatNet + " tl</label>"
+                                );
+                            }
+                            else {
+                                return ("<a href='@Url.Action("Goruntule","IsyeriDevrenSatilik")/" + data.ID + "' target='_blank' rel='noopener noreferrer'>"
+                                    + "<img src='/EmlakImages/Kisyeri_" + data.ID + "_1" + ".JPG'  width='180' height='120'></a><br>"
+                                    + "<label>" + "İşyeri Devren Satılık" + "</label><br>"
+                                    + "<label>" + data.Mahalle + "  " + data.il + "</label><br>"
+                                    + "<label>" + data.FiyatNet + " tl</label>"
+                                );
+                            }
+                        }
+
+                    }, "orderable": false, "searchable": false
+                },
+                {
+                    "2": { ID: "ID", odaS: "OdaSayisi", pic: "picture1", Mk: "MetreKare", Mah: "Mahalle", il: "il", fiyat: "FiyatNet" }, "render": function (data) {
+
+                        if (data != null) {
+
+                            if (data.picture1 == null) {
+                                return ("<a href='@Url.Action("Goruntule","IsyeriDevrenSatilik")/" + data.ID + "' target='_blank' rel='noopener noreferrer'>"
+                                    + "<img src='/EmlakImages/default.JPG' width='180' height='120'></a><br>"
+                                    + "<label>" + "İşyeri Devren Satılık" + "</label><br>"
+                                    + "<label>" + data.Mahalle + "  " + data.il + "</label><br>"
+                                    + "<label>" + data.FiyatNet + " tl</label>"
+                                );
+                            }
+                            else {
+                                return ("<a href='@Url.Action("Goruntule","IsyeriDevrenSatilik")/" + data.ID + "' target='_blank' rel='noopener noreferrer'>"
+                                    + "<img src='/EmlakImages/Kisyeri_" + data.ID + "_1" + ".JPG'  width='180' height='120'></a><br>"
+                                    + "<label>" + "İşyeri Devren Satılık" + "</label><br>"
+                                    + "<label>" + data.Mahalle + "  " + data.il + "</label><br>"
+                                    + "<label>" + data.FiyatNet + " tl</label>"
+                                );
+                            }
+                        }
+                    }, "orderable": false, "searchable": false
+                },
+                {
+                    "3": { ID: "ID", odaS: "OdaSayisi", pic: "picture1", Mk: "MetreKare", Mah: "Mahalle", il: "il", fiyat: "FiyatNet" }, "render": function (data) {
+
+                        if (data != null) {
+
+                            if (data.picture1 == null) {
+                                return ("<a href='@Url.Action("Goruntule","IsyeriDevrenSatilik")/" + data.ID + "' target='_blank' rel='noopener noreferrer'>"
+                                    + "<img src='/EmlakImages/default.JPG' width='180' height='120'></a><br>"
+                                    + "<label>" + "İşyeri Devren Satılık" + "</label><br>"
+                                    + "<label>" + data.Mahalle + "  " + data.il + "</label><br>"
+                                    + "<label>" + data.FiyatNet + " tl</label>"
+                                );
+                            }
+                            else {
+                                return ("<a href='@Url.Action("Goruntule","IsyeriDevrenSatilik")/" + data.ID + "' target='_blank' rel='noopener noreferrer'>"
+                                    + "<img src='/EmlakImages/Kisyeri_" + data.ID + "_1" + ".JPG'  width='180' height='120'></a><br>"
+                                    + "<label>" + "İşyeri Devren Satılık" + "</label><br>"
+                                    + "<label>" + data.Mahalle + "  " + data.il + "</label><br>"
+                                    + "<label>" + data.FiyatNet + " tl</label>"
+                                );
+                            }
+                        }
+                    }, "orderable": false, "searchable": false
+                }
+            ],
+            "language": {
+                "sDecimal": ",",
+                "sEmptyTable": "Tabloda herhangi bir veri mevcut değil",
+                "sInfo": "_TOTAL_ kayıttan _START_ - _END_ arasındaki kayıtlar gösteriliyor",
+                "sInfoEmpty": "Kayıt yok",
+                "sInfoFiltered": "(_MAX_ kayıt içerisinden bulunan)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ".",
+                "sLengthMenu": "Sayfada _MENU_ kayıt göster",
+                "sLoadingRecords": "Yükleniyor...",
+                "sProcessing": "İşleniyor...",
+                "sSearch": "Ara:",
+                "sZeroRecords": "Eşleşen kayıt bulunamadı",
+                "oPaginate": {
+                    "sFirst": "İlk",
+                    "sLast": "Son",
+                    "sNext": "Sonraki",
+                    "sPrevious": "Önceki"
+                },
+                "oAria": {
+                    "sSortAscending": ": artan sütun sıralamasını aktifleştir",
+                    "sSortDescending": ": azalan sütun sıralamasını aktifleştir"
+                },
+                "select": {
+                    "rows": {
+                        "_": "%d kayıt seçildi",
+                        "0": "",
+                        "1": "1 kayıt seçildi"
+                    }
+                }
+            }
+        });
+
+        dataTableIsyeriDevrenKiralik = $('#tableIsyeriDevrenKiralik').DataTable({
+            "order": [[3, "desc"]],
+            "iDisplayLength": 3,
+            "ajax": {
+                "url": "/DB/getIsyeriDevrenKiralik",
+                "type": "GET",
+                "datatype": "json",
+                "datasrc": "data.0"
+            }, "columnDefs": [{
+                "defaultContent": "-",
+                "targets": "_all"
+            }],
+            "columns": [
+                {
+                    "0": { ID: "ID", odaS: "OdaSayisi", pic: "picture1", Mk: "MetreKare", Mah: "Mahalle", il: "il", fiyat: "FiyatNet" }, "render": function (data) {
+
+                        if (data != null) {
+
+
+                            if (data.picture1 == null) {
+                                return ("<a href='@Url.Action("Goruntule","IsyeriDevrenKiralik")/" + data.ID + "' target='_blank' rel='noopener noreferrer'>"
+                                    + "<img src='/EmlakImages/default.JPG' width='180' height='120'></a><br>"
+                                    + "<label>" + "İşyeri Devren Kiralık" + "</label><br>"
+                                    + "<label>" + data.Mahalle + "  " + data.il + "</label><br>"
+                                    + "<label>" + data.FiyatNet + " tl</label>"
+                                );
+                            }
+                            else {
+                                return ("<a href='@Url.Action("Goruntule","IsyeriDevrenKiralik")/" + data.ID + "' target='_blank' rel='noopener noreferrer'>"
+                                    + "<img src='/EmlakImages/Kisyeri_" + data.ID + "_1" + ".JPG'  width='180' height='120'></a><br>"
+                                    + "<label>" + "İşyeri Devren Kiralık" + "</label><br>"
+                                    + "<label>" + data.Mahalle + "  " + data.il + "</label><br>"
+                                    + "<label>" + data.FiyatNet + " tl</label>"
+                                );
+                            }
+
+                        }
+                    }, "orderable": false, "searchable": false
+                },
+                {
+                    "1": { ID: "ID", odaS: "OdaSayisi", pic: "picture1", Mk: "MetreKare", Mah: "Mahalle", il: "il", fiyat: "FiyatNet" }, "render": function (data) {
+
+                        if (data != null) {
+
+                            if (data.picture1 == null) {
+                                return ("<a href='@Url.Action("Goruntule","IsyeriDevrenKiralik")/" + data.ID + "' target='_blank' rel='noopener noreferrer'>"
+                                    + "<img src='/EmlakImages/default.JPG' width='180' height='120'></a><br>"
+                                    + "<label>" + "İşyeri Devren Kiralık" + "</label><br>"
+                                    + "<label>" + data.Mahalle + "  " + data.il + "</label><br>"
+                                    + "<label>" + data.FiyatNet + " tl</label>"
+                                );
+                            }
+                            else {
+                                return ("<a href='@Url.Action("Goruntule","IsyeriDevrenKiralik")/" + data.ID + "' target='_blank' rel='noopener noreferrer'>"
+                                    + "<img src='/EmlakImages/Kisyeri_" + data.ID + "_1" + ".JPG'  width='180' height='120'></a><br>"
+                                    + "<label>" + "İşyeri Devren Kiralık" + "</label><br>"
+                                    + "<label>" + data.Mahalle + "  " + data.il + "</label><br>"
+                                    + "<label>" + data.FiyatNet + " tl</label>"
+                                );
+                            }
+                        }
+
+                    }, "orderable": false, "searchable": false
+                },
+                {
+                    "2": { ID: "ID", odaS: "OdaSayisi", pic: "picture1", Mk: "MetreKare", Mah: "Mahalle", il: "il", fiyat: "FiyatNet" }, "render": function (data) {
+
+                        if (data != null) {
+
+                            if (data.picture1 == null) {
+                                return ("<a href='@Url.Action("Goruntule","IsyeriDevrenKiralik")/" + data.ID + "' target='_blank' rel='noopener noreferrer'>"
+                                    + "<img src='/EmlakImages/default.JPG' width='180' height='120'></a><br>"
+                                    + "<label>" + "İşyeri Devren Kiralık" + "</label><br>"
+                                    + "<label>" + data.Mahalle + "  " + data.il + "</label><br>"
+                                    + "<label>" + data.FiyatNet + " tl</label>"
+                                );
+                            }
+                            else {
+                                return ("<a href='@Url.Action("Goruntule","IsyeriDevrenKiralik")/" + data.ID + "' target='_blank' rel='noopener noreferrer'>"
+                                    + "<img src='/EmlakImages/Kisyeri_" + data.ID + "_1" + ".JPG'  width='180' height='120'></a><br>"
+                                    + "<label>" + "İşyeri Devren Kiralık" + "</label><br>"
+                                    + "<label>" + data.Mahalle + "  " + data.il + "</label><br>"
+                                    + "<label>" + data.FiyatNet + " tl</label>"
+                                );
+                            }
+                        }
+                    }, "orderable": false, "searchable": false
+                },
+                {
+                    "3": { ID: "ID", odaS: "OdaSayisi", pic: "picture1", Mk: "MetreKare", Mah: "Mahalle", il: "il", fiyat: "FiyatNet" }, "render": function (data) {
+
+                        if (data != null) {
+
+                            if (data.picture1 == null) {
+                                return ("<a href='@Url.Action("Goruntule","IsyeriDevrenKiralik")/" + data.ID + "' target='_blank' rel='noopener noreferrer'>"
+                                    + "<img src='/EmlakImages/default.JPG' width='180' height='120'></a><br>"
+                                    + "<label>" + "İşyeri Devren Kiralık" + "</label><br>"
+                                    + "<label>" + data.Mahalle + "  " + data.il + "</label><br>"
+                                    + "<label>" + data.FiyatNet + " tl</label>"
+                                );
+                            }
+                            else {
+                                return ("<a href='@Url.Action("Goruntule","IsyeriDevrenKiralik")/" + data.ID + "' target='_blank' rel='noopener noreferrer'>"
+                                    + "<img src='/EmlakImages/Kisyeri_" + data.ID + "_1" + ".JPG'  width='180' height='120'></a><br>"
+                                    + "<label>" + "İşyeri Devren Kiralık" + "</label><br>"
+                                    + "<label>" + data.Mahalle + "  " + data.il + "</label><br>"
+                                    + "<label>" + data.FiyatNet + " tl</label>"
+                                );
+                            }
+                        }
+                    }, "orderable": false, "searchable": false
+                }
+            ],
+            "language": {
+                "sDecimal": ",",
+                "sEmptyTable": "Tabloda herhangi bir veri mevcut değil",
+                "sInfo": "_TOTAL_ kayıttan _START_ - _END_ arasındaki kayıtlar gösteriliyor",
+                "sInfoEmpty": "Kayıt yok",
+                "sInfoFiltered": "(_MAX_ kayıt içerisinden bulunan)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ".",
+                "sLengthMenu": "Sayfada _MENU_ kayıt göster",
+                "sLoadingRecords": "Yükleniyor...",
+                "sProcessing": "İşleniyor...",
+                "sSearch": "Ara:",
+                "sZeroRecords": "Eşleşen kayıt bulunamadı",
+                "oPaginate": {
+                    "sFirst": "İlk",
+                    "sLast": "Son",
+                    "sNext": "Sonraki",
+                    "sPrevious": "Önceki"
+                },
+                "oAria": {
+                    "sSortAscending": ": artan sütun sıralamasını aktifleştir",
+                    "sSortDescending": ": azalan sütun sıralamasını aktifleştir"
+                },
+                "select": {
+                    "rows": {
+                        "_": "%d kayıt seçildi",
+                        "0": "",
+                        "1": "1 kayıt seçildi"
+                    }
+                }
+            }
+        });
+
+        });
+
+function PopupForm(url) {
+    var formDiv = $('<div/>');
+    $.get(url)
+        .done(function (response) {
+            formDiv.html(response);
+
+            popUp = formDiv.dialog({
+                autoOpen: true,
+                resizable: false,
+                title: 'Ajanda Ekle',
+                height: 370,
+                width: 600,
+                close: function myfunction() {
+                    popUp.dialog('destroy').remove();
+                }
+            });
+        });
+}
+function SubmitForm(form) {
+
+    $.validator.unobtrusive.parse(form);
+
+    if ($(form).valid()) {
+        $.ajax({
+            type: "POST",
+            url: form.action,
+            data: $(form).serialize(),
+            success: function (data) {
+                if (data.success) {
+                    popUp.dialog('close');
+                    dataTableAjanda.ajax.reload();
+
+                    $.notify(data.message, {
+                        globalPosition: "top center",
+                        className: "success"
+                    })
+                }
+            }
+        });
+    }
+    return false;
+}
+function Delete(id) {
+    if (confirm('Bu kaydı silmek istediğinizden emin misiniz ?')) {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("DeleteAjanda","DB")/' + id,
+            success: function (data) {
+                if (data.success) {
+                    dataTableAjanda.ajax.reload();
+
+                    $.notify(data.message, {
+                        globalPosition: "top center",
+                        className: "success"
+                    })
+                }
+            }
+        });
+    }
+}
+
+
+function PopupFormAlacaklarim(url) {
+    var formDiv = $('<div/>');
+    $.get(url)
+        .done(function (response) {
+            formDiv.html(response);
+
+            popUp = formDiv.dialog({
+                autoOpen: true,
+                resizable: false,
+                title: 'Alacaklarım Ekle',
+                height: 370,
+                width: 600,
+                close: function myfunction() {
+                    popUp.dialog('destroy').remove();
+                }
+            });
+        });
+}
+function SubmitFormAlacaklarim(form) {
+
+    $.validator.unobtrusive.parse(form);
+
+    if ($(form).valid()) {
+        $.ajax({
+            type: "POST",
+            url: form.action,
+            data: $(form).serialize(),
+            success: function (data) {
+                if (data.success) {
+                    popUp.dialog('close');
+                    dataTableAlacaklarim.ajax.reload();
+
+                    $.notify(data.message, {
+                        globalPosition: "top center",
+                        className: "success"
+                    })
+                }
+            }
+        });
+    }
+    return false;
+}
+function DeleteAlacaklarim(id) {
+    if (confirm('Bu kaydı silmek istediğinizden emin misiniz ?')) {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("DeleteAlacaklarim","DB")/' + id,
+            success: function (data) {
+                if (data.success) {
+                    dataTableAlacaklarim.ajax.reload();
+
+                    $.notify(data.message, {
+                        globalPosition: "top center",
+                        className: "success"
+                    })
+                }
+            }
+        });
+    }
+}
+
+
+function PopupFormBorclarim(url) {
+    var formDiv = $('<div/>');
+    $.get(url)
+        .done(function (response) {
+            formDiv.html(response);
+
+            popUp = formDiv.dialog({
+                autoOpen: true,
+                resizable: false,
+                title: 'Borçlarım Ekle',
+                height: 370,
+                width: 600,
+                close: function myfunction() {
+                    popUp.dialog('destroy').remove();
+                }
+            });
+        });
+}
+function SubmitFormBorclarim(form) {
+
+    $.validator.unobtrusive.parse(form);
+
+    if ($(form).valid()) {
+        $.ajax({
+            type: "POST",
+            url: form.action,
+            data: $(form).serialize(),
+            success: function (data) {
+                if (data.success) {
+                    popUp.dialog('close');
+                    dataTableBorclarim.ajax.reload();
+
+                    $.notify(data.message, {
+                        globalPosition: "top center",
+                        className: "success"
+                    })
+                }
+            }
+        });
+    }
+    return false;
+}
+function DeleteBorclarim(id) {
+    if (confirm('Bu kaydı silmek istediğinizden emin misiniz ?')) {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("DeleteBorclarim","DB")/' + id,
+            success: function (data) {
+                if (data.success) {
+                    dataTableBorclarim.ajax.reload();
+
+                    $.notify(data.message, {
+                        globalPosition: "top center",
+                        className: "success"
+                    })
+                }
+            }
+        });
+    }
+}
+
+
+function PopupFormEmlakArayanlar(url) {
+    var formDiv = $('<div/>');
+    $.get(url)
+        .done(function (response) {
+            formDiv.html(response);
+
+            popUp = formDiv.dialog({
+                autoOpen: true,
+                resizable: false,
+                title: 'Emlak Arayan Ekle',
+                height: 370,
+                width: 600,
+                close: function myfunction() {
+                    popUp.dialog('destroy').remove();
+                }
+            });
+        });
+}
+function SubmitFormEmlakArayanlar(form) {
+
+    $.validator.unobtrusive.parse(form);
+
+    if ($(form).valid()) {
+        $.ajax({
+            type: "POST",
+            url: form.action,
+            data: $(form).serialize(),
+            success: function (data) {
+                if (data.success) {
+                    popUp.dialog('close');
+                    dataTableEmlakArayanlar.ajax.reload();
+
+                    $.notify(data.message, {
+                        globalPosition: "top center",
+                        className: "success"
+                    })
+                }
+            }
+        });
+    }
+    return false;
+}
+function DeleteEmlakArayanlar(id) {
+    if (confirm('Bu kaydı silmek istediğinizden emin misiniz ?')) {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("DeleteEmlakArayanlar","DB")/' + id,
+            success: function (data) {
+                if (data.success) {
+                    dataTableEmlakArayanlar.ajax.reload();
+
+                    $.notify(data.message, {
+                        globalPosition: "top center",
+                        className: "success"
+                    })
+                }
+            }
+        });
+    }
+}
+
+
+function PopupFormKonutSatilik(url) {
+    var formDiv = $('<div/>');
+    $.get(url)
+        .done(function (response) {
+            formDiv.html(response);
+
+            popUp = formDiv.dialog({
+                autoOpen: true,
+                resizable: false,
+                title: 'Satılık Konut Ekle',
+                height: 600,
+                width: 1200,
+                close: function myfunction() {
+                    popUp.dialog('destroy').remove();
+                }
+            });
+        });
+}
+function SubmitFormKonutSatilik(form) {
+    $.validator.unobtrusive.parse(form);
+    var data = new FormData(form)
+
+    if ($(form).valid()) {
+        $.ajax({
+            type: "POST",
+            enctype: 'multipart/form-data',
+            url: "/DB/AddOrEditKonutSatilik",
+            processData: false,  // Important!
+            contentType: false,
+            cache: false,
+            data: data,
+            success: function (data) {
+                if (data.success) {
+                    popUp.dialog('close');
+                    dataTableKonutSatilik.ajax.reload();
+
+                    $.notify(data.message, {
+                        globalPosition: "top center",
+                        className: "success"
+                    })
+                }
+            }
+        });
+    }
+    return false;
+}
+
+
+function PopupFormKonutKiralik(url) {
+    var formDiv = $('<div/>');
+    $.get(url)
+        .done(function (response) {
+            formDiv.html(response);
+
+            popUp = formDiv.dialog({
+                autoOpen: true,
+                resizable: false,
+                title: 'Kiralik Konut Ekle',
+                height: 600,
+                width: 1200,
+                close: function myfunction() {
+                    popUp.dialog('destroy').remove();
+                }
+            });
+        });
+}
+function SubmitFormKonutKiralik(form) {
+    $.validator.unobtrusive.parse(form);
+    var data = new FormData(form)
+
+    if ($(form).valid()) {
+        $.ajax({
+            type: "POST",
+            enctype: 'multipart/form-data',
+            url: "/DB/AddOrEditKonutKiralik",
+            processData: false,  // Important!
+            contentType: false,
+            cache: false,
+            data: data,
+            success: function (data) {
+                if (data.success) {
+                    popUp.dialog('close');
+                    dataTableKonutKiralik.ajax.reload();
+
+                    $.notify(data.message, {
+                        globalPosition: "top center",
+                        className: "success"
+                    })
+                }
+            }
+        });
+    }
+    return false;
+}
+
+
+function PopupFormIsyeriSatilik(url) {
+    var formDiv = $('<div/>');
+    $.get(url)
+        .done(function (response) {
+            formDiv.html(response);
+
+            popUp = formDiv.dialog({
+                autoOpen: true,
+                resizable: false,
+                title: 'Satılık İşyeri Ekle',
+                height: 600,
+                width: 1200,
+                close: function myfunction() {
+                    popUp.dialog('destroy').remove();
+                }
+            });
+        });
+}
+function SubmitFormIsyeriSatilik(form) {
+    $.validator.unobtrusive.parse(form);
+    var data = new FormData(form)
+
+    if ($(form).valid()) {
+        $.ajax({
+            type: "POST",
+            enctype: 'multipart/form-data',
+            url: "/DB/AddOrEditIsyeriSatilik",
+            processData: false,  // Important!
+            contentType: false,
+            cache: false,
+            data: data,
+            success: function (data) {
+                if (data.success) {
+                    popUp.dialog('close');
+                    dataTableIsyeriSatilik.ajax.reload();
+
+                    $.notify(data.message, {
+                        globalPosition: "top center",
+                        className: "success"
+                    })
+                }
+            }
+        });
+    }
+    return false;
+}
+
+
+function PopupFormIsyeriKiralik(url) {
+    var formDiv = $('<div/>');
+    $.get(url)
+        .done(function (response) {
+            formDiv.html(response);
+
+            popUp = formDiv.dialog({
+                autoOpen: true,
+                resizable: false,
+                title: 'Kiralık İşyeri Ekle',
+                height: 600,
+                width: 1200,
+                close: function myfunction() {
+                    popUp.dialog('destroy').remove();
+                }
+            });
+        });
+}
+function SubmitFormIsyeriKiralik(form) {
+    $.validator.unobtrusive.parse(form);
+    var data = new FormData(form)
+
+    if ($(form).valid()) {
+        $.ajax({
+            type: "POST",
+            enctype: 'multipart/form-data',
+            url: "/DB/AddOrEditIsyeriKiralik",
+            processData: false,  // Important!
+            contentType: false,
+            cache: false,
+            data: data,
+            success: function (data) {
+                if (data.success) {
+                    popUp.dialog('close');
+                    dataTableIsyeriKiralik.ajax.reload();
+
+                    $.notify(data.message, {
+                        globalPosition: "top center",
+                        className: "success"
+                    })
+                }
+            }
+        });
+    }
+    return false;
+}
+
+
+function PopupFormIsyeriDevrenSatilik(url) {
+    var formDiv = $('<div/>');
+    $.get(url)
+        .done(function (response) {
+            formDiv.html(response);
+
+            popUp = formDiv.dialog({
+                autoOpen: true,
+                resizable: false,
+                title: 'Devren Satılık İşyeri Ekle',
+                height: 600,
+                width: 1200,
+                close: function myfunction() {
+                    popUp.dialog('destroy').remove();
+                }
+            });
+        });
+}
+function SubmitFormIsyeriDevrenSatilik(form) {
+    $.validator.unobtrusive.parse(form);
+    var data = new FormData(form)
+
+    if ($(form).valid()) {
+        $.ajax({
+            type: "POST",
+            enctype: 'multipart/form-data',
+            url: "/DB/AddOrEditIsyeriDevrenSatilik",
+            processData: false,  // Important!
+            contentType: false,
+            cache: false,
+            data: data,
+            success: function (data) {
+                if (data.success) {
+                    popUp.dialog('close');
+                    dataTableIsyeriDevrenSatilik.ajax.reload();
+
+                    $.notify(data.message, {
+                        globalPosition: "top center",
+                        className: "success"
+                    })
+                }
+            }
+        });
+    }
+    return false;
+}
+
+
+function PopupFormIsyeriDevrenKiralik(url) {
+    var formDiv = $('<div/>');
+    $.get(url)
+        .done(function (response) {
+            formDiv.html(response);
+
+            popUp = formDiv.dialog({
+                autoOpen: true,
+                resizable: false,
+                title: 'Devren Kiralık İşyeri Ekle',
+                height: 600,
+                width: 1200,
+                close: function myfunction() {
+                    popUp.dialog('destroy').remove();
+                }
+            });
+        });
+}
+function SubmitFormIsyeriDevrenKiralik(form) {
+    $.validator.unobtrusive.parse(form);
+    var data = new FormData(form)
+
+    if ($(form).valid()) {
+        $.ajax({
+            type: "POST",
+            enctype: 'multipart/form-data',
+            url: "/DB/AddOrEditIsyeriDevrenKiralik",
+            processData: false,  // Important!
+            contentType: false,
+            cache: false,
+            data: data,
+            success: function (data) {
+                if (data.success) {
+                    popUp.dialog('close');
+                    dataTableIsyeriDevrenKiralik.ajax.reload();
+
+                    $.notify(data.message, {
+                        globalPosition: "top center",
+                        className: "success"
+                    })
+                }
+            }
+        });
+    }
+    return false;
+}
+
+    </script>
+    <script>
+        function openCity(evt, cityName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+
+        // Get the element with id="defaultOpen" and click on it
+        document.getElementById("defaultOpen").click();
+
+        var dropdown = document.getElementsByClassName("dropdown-btn");
+        var i;
+
+        for (i = 0; i < dropdown.length; i++) {
+            dropdown[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var dropdownContent = this.nextElementSibling;
+                if (dropdownContent.style.display === "block") {
+                    dropdownContent.style.display = "none";
+                } else {
+                    dropdownContent.style.display = "block";
+                    for (var j = 0; j < dropdown.length; j++) {
+                        index = Array.from(this.parentElement.children).indexOf(this);
+                        if (index / 2 != j) {
+                            dropdown[j].className = dropdown[j].className.replace(" active", "");
+                            dropdown[j].nextElementSibling.style.display = "none";
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

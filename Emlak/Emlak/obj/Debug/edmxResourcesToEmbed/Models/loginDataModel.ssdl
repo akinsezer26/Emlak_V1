@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="loginDataModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="USERS">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserNickName" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="UserPassword" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="UserType" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserSurname" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CepTelefonu" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="IsTelefonu" Type="nvarchar" MaxLength="15" />
+    <Property Name="Unvan" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="iban" Type="nvarchar" MaxLength="26" />
+    <Property Name="adres" Type="nvarchar" MaxLength="75" />
+    <Property Name="ppicture" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="USERTYPES">
+    <Key>
+      <PropertyRef Name="UserTypeID" />
+    </Key>
+    <Property Name="UserTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserType" Type="nvarchar" MaxLength="25" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__USERS__UserType__5FB337D6">
+    <End Role="USERTYPES" Type="Self.USERTYPES" Multiplicity="1" />
+    <End Role="USERS" Type="Self.USERS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USERTYPES">
+        <PropertyRef Name="UserTypeID" />
+      </Principal>
+      <Dependent Role="USERS">
+        <PropertyRef Name="UserType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="loginDataModelStoreContainer">
+    <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="USERTYPES" EntityType="Self.USERTYPES" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__USERS__UserType__5FB337D6" Association="Self.FK__USERS__UserType__5FB337D6">
+      <End Role="USERTYPES" EntitySet="USERTYPES" />
+      <End Role="USERS" EntitySet="USERS" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

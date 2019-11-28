@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="loginDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="USERS">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserNickName" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserPassword" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserType" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserSurname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CepTelefonu" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsTelefonu" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Unvan" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="iban" Type="String" MaxLength="26" FixedLength="false" Unicode="true" />
+    <Property Name="adres" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+    <Property Name="ppicture" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="USERTYPES" Relationship="Self.FK__USERS__UserType__5FB337D6" FromRole="USERS" ToRole="USERTYPES" />
+  </EntityType>
+  <EntityType Name="USERTYPES">
+    <Key>
+      <PropertyRef Name="UserTypeID" />
+    </Key>
+    <Property Name="UserTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserType" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="USERS" Relationship="Self.FK__USERS__UserType__5FB337D6" FromRole="USERTYPES" ToRole="USERS" />
+  </EntityType>
+  <Association Name="FK__USERS__UserType__5FB337D6">
+    <End Role="USERTYPES" Type="Self.USERTYPES" Multiplicity="1" />
+    <End Role="USERS" Type="Self.USERS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USERTYPES">
+        <PropertyRef Name="UserTypeID" />
+      </Principal>
+      <Dependent Role="USERS">
+        <PropertyRef Name="UserType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="EmlakEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="USERS" EntityType="Self.USERS" />
+    <EntitySet Name="USERTYPES" EntityType="Self.USERTYPES" />
+    <AssociationSet Name="FK__USERS__UserType__5FB337D6" Association="Self.FK__USERS__UserType__5FB337D6">
+      <End Role="USERTYPES" EntitySet="USERTYPES" />
+      <End Role="USERS" EntitySet="USERS" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

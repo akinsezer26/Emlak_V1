@@ -1,0 +1,111 @@
+﻿
+@using Emlak.Models;
+@model KONUT_ISYERI
+@{
+    Layout = null;
+}
+
+@using (Html.BeginForm("AddOrEditKonutSatilik", "DB", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "return SubmitFormKonutSatilik(this)" }))
+{
+    @Html.HiddenFor(model => model.ID)
+    <div class="form-group">
+        @Html.EditorFor(model => model.Adi, new { @htmlAttributes = new { placeholder = "İlan Sahibinin Adı", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.Soyadi, new { @htmlAttributes = new { placeholder = "İlan Sahibinin Soyadı", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.MusteriKaynagi, new { @htmlAttributes = new { placeholder = "Müşteri Kaynağı", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.TC, new { @htmlAttributes = new { placeholder = "TC Kimlik No", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.Iban, new { @htmlAttributes = new { placeholder = "Iban No", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.CepTelefonu, new { @htmlAttributes = new { placeholder = "Cep Telefonu", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.IsTelefonu, new { @htmlAttributes = new { placeholder = "İş Telefonu", @class = "form-control", autocomplete = "off" } })
+    </div>
+    @*<div class="form-group">
+            @Html.EditorFor(model => model.Tarih, new { @htmlAttributes = new { placeholder = "Tarih", @class = "form-control", autocomplete = "off" } })
+        </div>*@
+    <div class="form-group">
+        @Html.EditorFor(model => model.il, new { @htmlAttributes = new { placeholder = "İl", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.ilce, new { @htmlAttributes = new { placeholder = "İlçe", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.Mahalle, new { @htmlAttributes = new { placeholder = "Mahalle", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.Cadde, new { @htmlAttributes = new { placeholder = "Cadde", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.Sokak, new { @htmlAttributes = new { placeholder = "Sokak", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.AptAdi, new { @htmlAttributes = new { placeholder = "Apartman Adı", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.AptNo, new { @htmlAttributes = new { placeholder = "Apartman No", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.DaireNo, new { @htmlAttributes = new { placeholder = "Daire No", @class = "form-control", autocomplete = "off" } })
+    </div>
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.Kira_Satilik, new { @class = "control-label" })
+            @Html.EditorFor(model => model.Kira_Satilik, new { @htmlAttributes = new { @class = "form-control",autocomplete="off" } })
+            @Html.DropDownListFor(model => model.Kira_Satilik, new SelectList(new List<string>() { "Kiralık", "Satılık" }, new { @class = "form-control" }))
+        </div>*@
+    <div class="form-group">
+        @Html.EditorFor(model => model.MetreKare, new { @htmlAttributes = new { placeholder = "Metrekare", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.BinaYasi, new { @htmlAttributes = new { placeholder = "Binayaşı", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.KatSayisi, new { @htmlAttributes = new { placeholder = "Binayaşı", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.Kat, new { @htmlAttributes = new { placeholder = "Binayaşı", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @Html.DropDownListFor(model => model.OdaSayisi, (List<SelectListItem>)ViewBag.OdaSayisi, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.DropDownListFor(model => model.IsitmaTipi, (List<SelectListItem>)ViewBag.IsitmaTipi, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.BanyoSayisi, new { @htmlAttributes = new { placeholder = "Banyo Sayısı", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.FiyatNet, new { @htmlAttributes = new { placeholder = "Fiyat Net", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.FiyatSatis, new { @htmlAttributes = new { placeholder = "Fiyat Satış", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @*@Html.LabelFor(model => model.EsyaliMi, new { @class = "control-label" })
+            @Html.EditorFor(model => model.EsyaliMi, new { @htmlAttributes = new { @class = "form-control", autocomplete = "off" } })*@
+        @Html.DropDownListFor(model => model.EsyaliMi, new[] { new SelectListItem { Text = "Belirtilmemiş", Value = null }, new SelectListItem { Text = "Evet", Value = "True" }, new SelectListItem { Text = "Hayır", Value = "False" } })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.DepozitTL, new { @htmlAttributes = new { placeholder = "DepozitTL", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @*@Html.LabelFor(model => model.EmlakTuru, new { @class = "control-label" })
+            @Html.EditorFor(model => model.EmlakTuru, new { @htmlAttributes = new { @class = "form-control", autocomplete = "off" } })*@
+        @Html.DropDownListFor(model => model.EmlakTuru, (List<SelectListItem>)ViewBag.konutTipi, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.Note, new { @htmlAttributes = new { placeholder = "Not", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        <input id="Kisyeri_images" type="file" name="Kisyeri_images" multiple accept=".jpg,.jpeg">
+        <input type="submit" value="Ekle" class="btn btn-primary" />
+    </div>
+}

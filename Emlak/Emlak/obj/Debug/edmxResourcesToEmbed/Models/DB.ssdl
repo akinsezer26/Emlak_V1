@@ -1,0 +1,622 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EmlakModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AJANDA">
+    <Key>
+      <PropertyRef Name="AjandaID" />
+    </Key>
+    <Property Name="AjandaID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="bigint" Nullable="false" />
+    <Property Name="Tarih" Type="datetime" />
+    <Property Name="Nerede" Type="nvarchar" MaxLength="50" />
+    <Property Name="Kiminle" Type="nvarchar" MaxLength="50" />
+    <Property Name="Konu" Type="nvarchar" MaxLength="50" />
+    <Property Name="Note" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="ALACAKLARIM">
+    <Key>
+      <PropertyRef Name="AlacakID" />
+    </Key>
+    <Property Name="AlacakID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tarih" Type="datetime" />
+    <Property Name="Kimden" Type="nvarchar" MaxLength="50" />
+    <Property Name="miktar" Type="int" />
+    <Property Name="BorcluCep" Type="nvarchar" MaxLength="15" />
+    <Property Name="OdemeTarihi" Type="date" />
+    <Property Name="Note" Type="nvarchar" MaxLength="250" />
+    <Property Name="UserID" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ARSA_TARLA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Tarih" Type="datetime" />
+    <Property Name="ImarDurumu" Type="nvarchar" MaxLength="10" />
+    <Property Name="Belediye" Type="nvarchar" MaxLength="100" />
+    <Property Name="Ada" Type="int" />
+    <Property Name="Parsel" Type="int" />
+    <Property Name="MetreKare" Type="int" />
+    <Property Name="KatKarsiligiOlabilir" Type="bit" />
+    <Property Name="Takas" Type="bit" />
+    <Property Name="TapuDurumu" Type="nvarchar" MaxLength="25" />
+    <Property Name="IskanDurumu" Type="bit" />
+    <Property Name="KonutImarli" Type="bit" />
+    <Property Name="TicariImarli" Type="bit" />
+    <Property Name="Kira_Satilik" Type="nvarchar" MaxLength="7" />
+    <Property Name="picture1" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture2" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture3" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture4" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture5" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture6" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture7" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture8" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture9" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture10" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture11" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture12" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture13" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture14" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture15" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture16" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture17" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture18" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture19" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture20" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture21" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture22" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture23" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture24" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture25" Type="nvarchar" MaxLength="250" />
+    <Property Name="UserID" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BINA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Tarih" Type="datetime" />
+    <Property Name="KatSayisi" Type="int" />
+    <Property Name="BirKattakiDaireSayisi" Type="int" />
+    <Property Name="IsitmaTipi" Type="int" />
+    <Property Name="MetreKare" Type="int" />
+    <Property Name="BinaYasi" Type="int" />
+    <Property Name="KrediyeUygun" Type="bit" />
+    <Property Name="Takas" Type="bit" />
+    <Property Name="Kira_Satilik" Type="nvarchar" MaxLength="7" />
+    <Property Name="EmlakTuru" Type="int" />
+    <Property Name="UserID" Type="bigint" Nullable="false" />
+    <Property Name="picture1" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture2" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture3" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture4" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture5" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture6" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture7" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture8" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture9" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture10" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture11" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture12" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture13" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture14" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture15" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture16" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture17" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture18" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture19" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture20" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture21" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture22" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture23" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture24" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture25" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="BORCLARIM">
+    <Key>
+      <PropertyRef Name="BorcID" />
+    </Key>
+    <Property Name="BorcID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Tarih" Type="datetime" />
+    <Property Name="Kime" Type="nvarchar" MaxLength="50" />
+    <Property Name="miktar" Type="int" />
+    <Property Name="AlacakliCep" Type="nvarchar" MaxLength="15" />
+    <Property Name="OdemeTarihi" Type="date" />
+    <Property Name="Note" Type="nvarchar" MaxLength="250" />
+    <Property Name="UserID" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EmlakArayanlar">
+    <Key>
+      <PropertyRef Name="ArayanlarID" />
+    </Key>
+    <Property Name="ArayanlarID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ArayanAd" Type="nvarchar" MaxLength="50" />
+    <Property Name="ArayanSoyAd" Type="nvarchar" MaxLength="50" />
+    <Property Name="Cep" Type="nvarchar" MaxLength="15" />
+    <Property Name="IsTel" Type="nvarchar" MaxLength="15" />
+    <Property Name="Kiraci_Alici" Type="nvarchar" MaxLength="6" />
+    <Property Name="EmlakTuru" Type="int" />
+    <Property Name="MetreKare" Type="int" />
+    <Property Name="Fiyat" Type="int" />
+    <Property Name="OdaSayisi" Type="int" />
+    <Property Name="BinaYasi" Type="int" />
+    <Property Name="KacinciKat" Type="int" />
+    <Property Name="Note" Type="nvarchar" MaxLength="250" />
+    <Property Name="UserID" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EMLAKTURU">
+    <Key>
+      <PropertyRef Name="EMLAK_TURU_ID" />
+    </Key>
+    <Property Name="EMLAK_TURU_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EMLAK_TURU" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="ISITMA_TIPI">
+    <Key>
+      <PropertyRef Name="ISITMA_TIPI_ID" />
+    </Key>
+    <Property Name="ISITMA_TIPI_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ISITMA_TIPI" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="KONUT_ISYERI">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MusteriKaynagi" Type="nvarchar" MaxLength="50" />
+    <Property Name="Adi" Type="nvarchar" MaxLength="50" />
+    <Property Name="Soyadi" Type="nvarchar" MaxLength="50" />
+    <Property Name="TC" Type="nvarchar" MaxLength="11" />
+    <Property Name="Iban" Type="nvarchar" MaxLength="26" />
+    <Property Name="CepTelefonu" Type="nvarchar" MaxLength="15" />
+    <Property Name="IsTelefonu" Type="nvarchar" MaxLength="15" />
+    <Property Name="Tarih" Type="datetime" />
+    <Property Name="il" Type="nvarchar" MaxLength="25" />
+    <Property Name="ilce" Type="nvarchar" MaxLength="50" />
+    <Property Name="Mahalle" Type="nvarchar" MaxLength="50" />
+    <Property Name="Cadde" Type="nvarchar" MaxLength="50" />
+    <Property Name="Sokak" Type="nvarchar" MaxLength="50" />
+    <Property Name="AptAdi" Type="nvarchar" MaxLength="50" />
+    <Property Name="AptNo" Type="int" />
+    <Property Name="DaireNo" Type="int" />
+    <Property Name="Kira_Satilik" Type="nvarchar" MaxLength="7" />
+    <Property Name="Isyeri_Konut" Type="nvarchar" MaxLength="6" />
+    <Property Name="MetreKare" Type="int" />
+    <Property Name="BinaYasi" Type="int" />
+    <Property Name="KatSayisi" Type="int" />
+    <Property Name="Kat" Type="int" />
+    <Property Name="OdaSayisi" Type="int" />
+    <Property Name="IsitmaTipi" Type="int" />
+    <Property Name="BanyoSayisi" Type="int" />
+    <Property Name="FiyatNet" Type="int" />
+    <Property Name="FiyatSatis" Type="int" />
+    <Property Name="EsyaliMi" Type="bit" />
+    <Property Name="DepozitTL" Type="int" />
+    <Property Name="EmlakTuru" Type="int" />
+    <Property Name="Note" Type="nvarchar" MaxLength="250" />
+    <Property Name="DevrenSatilik" Type="bit" />
+    <Property Name="DevrenKiralik" Type="bit" />
+    <Property Name="picture1" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture2" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture3" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture4" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture5" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture6" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture7" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture8" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture9" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture10" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture11" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture12" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture13" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture14" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture15" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture16" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture17" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture18" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture19" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture20" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture21" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture22" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture23" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture24" Type="nvarchar" MaxLength="250" />
+    <Property Name="picture25" Type="nvarchar" MaxLength="250" />
+    <Property Name="UserID" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MESAJ">
+    <Key>
+      <PropertyRef Name="MesajID" />
+    </Key>
+    <Property Name="MesajID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Kimden" Type="bigint" />
+    <Property Name="Kime" Type="bigint" />
+    <Property Name="isim" Type="nvarchar" MaxLength="50" />
+    <Property Name="soyisim" Type="nvarchar" MaxLength="50" />
+    <Property Name="Mesaj" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="MUSTERI">
+    <Key>
+      <PropertyRef Name="MusteriID" />
+    </Key>
+    <Property Name="MusteriID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MusteriAd" Type="nvarchar" MaxLength="50" />
+    <Property Name="MusteriSoyAd" Type="nvarchar" MaxLength="50" />
+    <Property Name="MusteriTC" Type="nvarchar" MaxLength="11" />
+    <Property Name="MusteriCep" Type="nvarchar" MaxLength="15" />
+    <Property Name="MusteriIsTelefonu" Type="nvarchar" MaxLength="15" />
+    <Property Name="Adres" Type="nvarchar" MaxLength="75" />
+    <Property Name="MusteriTipi" Type="int" />
+    <Property Name="UserID" Type="bigint" Nullable="false" />
+    <Property Name="Note" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="MUSTERI_TIPI">
+    <Key>
+      <PropertyRef Name="MUSTERI_TIPI_ID" />
+    </Key>
+    <Property Name="MUSTERI_TIPI_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MUSTERI_TIPI" Type="nvarchar" MaxLength="25" />
+  </EntityType>
+  <EntityType Name="ODA_SAYISI">
+    <Key>
+      <PropertyRef Name="ODA_SAYISI_ID" />
+    </Key>
+    <Property Name="ODA_SAYISI_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ISITMA_TIPI" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="USERS">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserNickName" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="UserPassword" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="UserType" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserSurname" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CepTelefonu" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="IsTelefonu" Type="nvarchar" MaxLength="15" />
+    <Property Name="Unvan" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="iban" Type="nvarchar" MaxLength="26" />
+    <Property Name="adres" Type="nvarchar" MaxLength="150" />
+    <Property Name="ppicture" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="USERTYPES">
+    <Key>
+      <PropertyRef Name="UserTypeID" />
+    </Key>
+    <Property Name="UserTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserType" Type="nvarchar" MaxLength="25" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__AJANDA__UserID__6FB49575">
+    <End Role="USERS" Type="Self.USERS" Multiplicity="1" />
+    <End Role="AJANDA" Type="Self.AJANDA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USERS">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="AJANDA">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ALACAKLAR__UserI__72910220">
+    <End Role="USERS" Type="Self.USERS" Multiplicity="1" />
+    <End Role="ALACAKLARIM" Type="Self.ALACAKLARIM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USERS">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="ALACAKLARIM">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ARSA_TARL__UserI__03BB8E22">
+    <End Role="USERS" Type="Self.USERS" Multiplicity="1" />
+    <End Role="ARSA_TARLA" Type="Self.ARSA_TARLA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USERS">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="ARSA_TARLA">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BINA__EmlakTuru__078C1F06">
+    <End Role="EMLAKTURU" Type="Self.EMLAKTURU" Multiplicity="0..1" />
+    <End Role="BINA" Type="Self.BINA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EMLAKTURU">
+        <PropertyRef Name="EMLAK_TURU_ID" />
+      </Principal>
+      <Dependent Role="BINA">
+        <PropertyRef Name="EmlakTuru" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BINA__IsitmaTipi__0880433F">
+    <End Role="ISITMA_TIPI" Type="Self.ISITMA_TIPI" Multiplicity="0..1" />
+    <End Role="BINA" Type="Self.BINA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ISITMA_TIPI">
+        <PropertyRef Name="ISITMA_TIPI_ID" />
+      </Principal>
+      <Dependent Role="BINA">
+        <PropertyRef Name="IsitmaTipi" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BINA__UserID__0697FACD">
+    <End Role="USERS" Type="Self.USERS" Multiplicity="1" />
+    <End Role="BINA" Type="Self.BINA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USERS">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="BINA">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BORCLARIM__UserI__756D6ECB">
+    <End Role="USERS" Type="Self.USERS" Multiplicity="1" />
+    <End Role="BORCLARIM" Type="Self.BORCLARIM" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USERS">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="BORCLARIM">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EmlakAray__Emlak__11158940">
+    <End Role="EMLAKTURU" Type="Self.EMLAKTURU" Multiplicity="0..1" />
+    <End Role="EmlakArayanlar" Type="Self.EmlakArayanlar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EMLAKTURU">
+        <PropertyRef Name="EMLAK_TURU_ID" />
+      </Principal>
+      <Dependent Role="EmlakArayanlar">
+        <PropertyRef Name="EmlakTuru" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EmlakAray__OdaSa__1209AD79">
+    <End Role="ODA_SAYISI" Type="Self.ODA_SAYISI" Multiplicity="0..1" />
+    <End Role="EmlakArayanlar" Type="Self.EmlakArayanlar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ODA_SAYISI">
+        <PropertyRef Name="ODA_SAYISI_ID" />
+      </Principal>
+      <Dependent Role="EmlakArayanlar">
+        <PropertyRef Name="OdaSayisi" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EmlakAray__UserI__12FDD1B2">
+    <End Role="USERS" Type="Self.USERS" Multiplicity="1" />
+    <End Role="EmlakArayanlar" Type="Self.EmlakArayanlar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USERS">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="EmlakArayanlar">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__KONUT_ISY__Emlak__7FEAFD3E">
+    <End Role="EMLAKTURU" Type="Self.EMLAKTURU" Multiplicity="0..1" />
+    <End Role="KONUT_ISYERI" Type="Self.KONUT_ISYERI" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EMLAKTURU">
+        <PropertyRef Name="EMLAK_TURU_ID" />
+      </Principal>
+      <Dependent Role="KONUT_ISYERI">
+        <PropertyRef Name="EmlakTuru" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__KONUT_ISY__Isitm__00DF2177">
+    <End Role="ISITMA_TIPI" Type="Self.ISITMA_TIPI" Multiplicity="0..1" />
+    <End Role="KONUT_ISYERI" Type="Self.KONUT_ISYERI" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ISITMA_TIPI">
+        <PropertyRef Name="ISITMA_TIPI_ID" />
+      </Principal>
+      <Dependent Role="KONUT_ISYERI">
+        <PropertyRef Name="IsitmaTipi" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__KONUT_ISY__OdaSa__7EF6D905">
+    <End Role="ODA_SAYISI" Type="Self.ODA_SAYISI" Multiplicity="0..1" />
+    <End Role="KONUT_ISYERI" Type="Self.KONUT_ISYERI" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ODA_SAYISI">
+        <PropertyRef Name="ODA_SAYISI_ID" />
+      </Principal>
+      <Dependent Role="KONUT_ISYERI">
+        <PropertyRef Name="OdaSayisi" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__KONUT_ISY__UserI__7E02B4CC">
+    <End Role="USERS" Type="Self.USERS" Multiplicity="1" />
+    <End Role="KONUT_ISYERI" Type="Self.KONUT_ISYERI" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USERS">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="KONUT_ISYERI">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__MESAJ__Kimden__6BE40491">
+    <End Role="USERS" Type="Self.USERS" Multiplicity="0..1" />
+    <End Role="MESAJ" Type="Self.MESAJ" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USERS">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="MESAJ">
+        <PropertyRef Name="Kimden" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__MESAJ__Kime__6CD828CA">
+    <End Role="USERS" Type="Self.USERS" Multiplicity="0..1" />
+    <End Role="MESAJ" Type="Self.MESAJ" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USERS">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="MESAJ">
+        <PropertyRef Name="Kime" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__MUSTERI__Musteri__0D44F85C">
+    <End Role="MUSTERI_TIPI" Type="Self.MUSTERI_TIPI" Multiplicity="0..1" />
+    <End Role="MUSTERI" Type="Self.MUSTERI" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MUSTERI_TIPI">
+        <PropertyRef Name="MUSTERI_TIPI_ID" />
+      </Principal>
+      <Dependent Role="MUSTERI">
+        <PropertyRef Name="MusteriTipi" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__MUSTERI__UserID__0E391C95">
+    <End Role="USERS" Type="Self.USERS" Multiplicity="1" />
+    <End Role="MUSTERI" Type="Self.MUSTERI" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USERS">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="MUSTERI">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__USERS__UserType__690797E6">
+    <End Role="USERTYPES" Type="Self.USERTYPES" Multiplicity="1" />
+    <End Role="USERS" Type="Self.USERS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USERTYPES">
+        <PropertyRef Name="UserTypeID" />
+      </Principal>
+      <Dependent Role="USERS">
+        <PropertyRef Name="UserType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="EmlakModelStoreContainer">
+    <EntitySet Name="AJANDA" EntityType="Self.AJANDA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ALACAKLARIM" EntityType="Self.ALACAKLARIM" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ARSA_TARLA" EntityType="Self.ARSA_TARLA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BINA" EntityType="Self.BINA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BORCLARIM" EntityType="Self.BORCLARIM" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmlakArayanlar" EntityType="Self.EmlakArayanlar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EMLAKTURU" EntityType="Self.EMLAKTURU" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ISITMA_TIPI" EntityType="Self.ISITMA_TIPI" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="KONUT_ISYERI" EntityType="Self.KONUT_ISYERI" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MESAJ" EntityType="Self.MESAJ" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MUSTERI" EntityType="Self.MUSTERI" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MUSTERI_TIPI" EntityType="Self.MUSTERI_TIPI" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ODA_SAYISI" EntityType="Self.ODA_SAYISI" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="USERTYPES" EntityType="Self.USERTYPES" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__AJANDA__UserID__6FB49575" Association="Self.FK__AJANDA__UserID__6FB49575">
+      <End Role="USERS" EntitySet="USERS" />
+      <End Role="AJANDA" EntitySet="AJANDA" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ALACAKLAR__UserI__72910220" Association="Self.FK__ALACAKLAR__UserI__72910220">
+      <End Role="USERS" EntitySet="USERS" />
+      <End Role="ALACAKLARIM" EntitySet="ALACAKLARIM" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ARSA_TARL__UserI__03BB8E22" Association="Self.FK__ARSA_TARL__UserI__03BB8E22">
+      <End Role="USERS" EntitySet="USERS" />
+      <End Role="ARSA_TARLA" EntitySet="ARSA_TARLA" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BINA__EmlakTuru__078C1F06" Association="Self.FK__BINA__EmlakTuru__078C1F06">
+      <End Role="EMLAKTURU" EntitySet="EMLAKTURU" />
+      <End Role="BINA" EntitySet="BINA" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BINA__IsitmaTipi__0880433F" Association="Self.FK__BINA__IsitmaTipi__0880433F">
+      <End Role="ISITMA_TIPI" EntitySet="ISITMA_TIPI" />
+      <End Role="BINA" EntitySet="BINA" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BINA__UserID__0697FACD" Association="Self.FK__BINA__UserID__0697FACD">
+      <End Role="USERS" EntitySet="USERS" />
+      <End Role="BINA" EntitySet="BINA" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BORCLARIM__UserI__756D6ECB" Association="Self.FK__BORCLARIM__UserI__756D6ECB">
+      <End Role="USERS" EntitySet="USERS" />
+      <End Role="BORCLARIM" EntitySet="BORCLARIM" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EmlakAray__Emlak__11158940" Association="Self.FK__EmlakAray__Emlak__11158940">
+      <End Role="EMLAKTURU" EntitySet="EMLAKTURU" />
+      <End Role="EmlakArayanlar" EntitySet="EmlakArayanlar" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EmlakAray__OdaSa__1209AD79" Association="Self.FK__EmlakAray__OdaSa__1209AD79">
+      <End Role="ODA_SAYISI" EntitySet="ODA_SAYISI" />
+      <End Role="EmlakArayanlar" EntitySet="EmlakArayanlar" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EmlakAray__UserI__12FDD1B2" Association="Self.FK__EmlakAray__UserI__12FDD1B2">
+      <End Role="USERS" EntitySet="USERS" />
+      <End Role="EmlakArayanlar" EntitySet="EmlakArayanlar" />
+    </AssociationSet>
+    <AssociationSet Name="FK__KONUT_ISY__Emlak__7FEAFD3E" Association="Self.FK__KONUT_ISY__Emlak__7FEAFD3E">
+      <End Role="EMLAKTURU" EntitySet="EMLAKTURU" />
+      <End Role="KONUT_ISYERI" EntitySet="KONUT_ISYERI" />
+    </AssociationSet>
+    <AssociationSet Name="FK__KONUT_ISY__Isitm__00DF2177" Association="Self.FK__KONUT_ISY__Isitm__00DF2177">
+      <End Role="ISITMA_TIPI" EntitySet="ISITMA_TIPI" />
+      <End Role="KONUT_ISYERI" EntitySet="KONUT_ISYERI" />
+    </AssociationSet>
+    <AssociationSet Name="FK__KONUT_ISY__OdaSa__7EF6D905" Association="Self.FK__KONUT_ISY__OdaSa__7EF6D905">
+      <End Role="ODA_SAYISI" EntitySet="ODA_SAYISI" />
+      <End Role="KONUT_ISYERI" EntitySet="KONUT_ISYERI" />
+    </AssociationSet>
+    <AssociationSet Name="FK__KONUT_ISY__UserI__7E02B4CC" Association="Self.FK__KONUT_ISY__UserI__7E02B4CC">
+      <End Role="USERS" EntitySet="USERS" />
+      <End Role="KONUT_ISYERI" EntitySet="KONUT_ISYERI" />
+    </AssociationSet>
+    <AssociationSet Name="FK__MESAJ__Kimden__6BE40491" Association="Self.FK__MESAJ__Kimden__6BE40491">
+      <End Role="USERS" EntitySet="USERS" />
+      <End Role="MESAJ" EntitySet="MESAJ" />
+    </AssociationSet>
+    <AssociationSet Name="FK__MESAJ__Kime__6CD828CA" Association="Self.FK__MESAJ__Kime__6CD828CA">
+      <End Role="USERS" EntitySet="USERS" />
+      <End Role="MESAJ" EntitySet="MESAJ" />
+    </AssociationSet>
+    <AssociationSet Name="FK__MUSTERI__Musteri__0D44F85C" Association="Self.FK__MUSTERI__Musteri__0D44F85C">
+      <End Role="MUSTERI_TIPI" EntitySet="MUSTERI_TIPI" />
+      <End Role="MUSTERI" EntitySet="MUSTERI" />
+    </AssociationSet>
+    <AssociationSet Name="FK__MUSTERI__UserID__0E391C95" Association="Self.FK__MUSTERI__UserID__0E391C95">
+      <End Role="USERS" EntitySet="USERS" />
+      <End Role="MUSTERI" EntitySet="MUSTERI" />
+    </AssociationSet>
+    <AssociationSet Name="FK__USERS__UserType__690797E6" Association="Self.FK__USERS__UserType__690797E6">
+      <End Role="USERTYPES" EntitySet="USERTYPES" />
+      <End Role="USERS" EntitySet="USERS" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

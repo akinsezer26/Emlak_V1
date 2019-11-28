@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="loginDataModelStoreContainer" CdmEntityContainer="EmlakEntities1">
+    <EntitySetMapping Name="USERS">
+      <EntityTypeMapping TypeName="loginDataModel.USERS">
+        <MappingFragment StoreEntitySet="USERS">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserNickName" ColumnName="UserNickName" />
+          <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+          <ScalarProperty Name="UserType" ColumnName="UserType" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserSurname" ColumnName="UserSurname" />
+          <ScalarProperty Name="CepTelefonu" ColumnName="CepTelefonu" />
+          <ScalarProperty Name="IsTelefonu" ColumnName="IsTelefonu" />
+          <ScalarProperty Name="Unvan" ColumnName="Unvan" />
+          <ScalarProperty Name="iban" ColumnName="iban" />
+          <ScalarProperty Name="adres" ColumnName="adres" />
+          <ScalarProperty Name="ppicture" ColumnName="ppicture" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="USERTYPES">
+      <EntityTypeMapping TypeName="loginDataModel.USERTYPES">
+        <MappingFragment StoreEntitySet="USERTYPES">
+          <ScalarProperty Name="UserTypeID" ColumnName="UserTypeID" />
+          <ScalarProperty Name="UserType" ColumnName="UserType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

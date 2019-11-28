@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EmlakModelStoreContainer" CdmEntityContainer="Entities">
+    <EntitySetMapping Name="AJANDA">
+      <EntityTypeMapping TypeName="EmlakModel.AJANDA">
+        <MappingFragment StoreEntitySet="AJANDA">
+          <ScalarProperty Name="AjandaID" ColumnName="AjandaID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+          <ScalarProperty Name="Nerede" ColumnName="Nerede" />
+          <ScalarProperty Name="Kiminle" ColumnName="Kiminle" />
+          <ScalarProperty Name="Konu" ColumnName="Konu" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ALACAKLARIM">
+      <EntityTypeMapping TypeName="EmlakModel.ALACAKLARIM">
+        <MappingFragment StoreEntitySet="ALACAKLARIM">
+          <ScalarProperty Name="AlacakID" ColumnName="AlacakID" />
+          <ScalarProperty Name="tarih" ColumnName="tarih" />
+          <ScalarProperty Name="Kimden" ColumnName="Kimden" />
+          <ScalarProperty Name="miktar" ColumnName="miktar" />
+          <ScalarProperty Name="BorcluCep" ColumnName="BorcluCep" />
+          <ScalarProperty Name="OdemeTarihi" ColumnName="OdemeTarihi" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ARSA_TARLA">
+      <EntityTypeMapping TypeName="EmlakModel.ARSA_TARLA">
+        <MappingFragment StoreEntitySet="ARSA_TARLA">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+          <ScalarProperty Name="ImarDurumu" ColumnName="ImarDurumu" />
+          <ScalarProperty Name="Belediye" ColumnName="Belediye" />
+          <ScalarProperty Name="Ada" ColumnName="Ada" />
+          <ScalarProperty Name="Parsel" ColumnName="Parsel" />
+          <ScalarProperty Name="MetreKare" ColumnName="MetreKare" />
+          <ScalarProperty Name="KatKarsiligiOlabilir" ColumnName="KatKarsiligiOlabilir" />
+          <ScalarProperty Name="Takas" ColumnName="Takas" />
+          <ScalarProperty Name="TapuDurumu" ColumnName="TapuDurumu" />
+          <ScalarProperty Name="IskanDurumu" ColumnName="IskanDurumu" />
+          <ScalarProperty Name="KonutImarli" ColumnName="KonutImarli" />
+          <ScalarProperty Name="TicariImarli" ColumnName="TicariImarli" />
+          <ScalarProperty Name="Kira_Satilik" ColumnName="Kira_Satilik" />
+          <ScalarProperty Name="picture1" ColumnName="picture1" />
+          <ScalarProperty Name="picture2" ColumnName="picture2" />
+          <ScalarProperty Name="picture3" ColumnName="picture3" />
+          <ScalarProperty Name="picture4" ColumnName="picture4" />
+          <ScalarProperty Name="picture5" ColumnName="picture5" />
+          <ScalarProperty Name="picture6" ColumnName="picture6" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BINA">
+      <EntityTypeMapping TypeName="EmlakModel.BINA">
+        <MappingFragment StoreEntitySet="BINA">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+          <ScalarProperty Name="KatSayisi" ColumnName="KatSayisi" />
+          <ScalarProperty Name="BirKattakiDaireSayisi" ColumnName="BirKattakiDaireSayisi" />
+          <ScalarProperty Name="IsitmaTipi" ColumnName="IsitmaTipi" />
+          <ScalarProperty Name="MetreKare" ColumnName="MetreKare" />
+          <ScalarProperty Name="BinaYasi" ColumnName="BinaYasi" />
+          <ScalarProperty Name="KrediyeUygun" ColumnName="KrediyeUygun" />
+          <ScalarProperty Name="Takas" ColumnName="Takas" />
+          <ScalarProperty Name="Kira_Satilik" ColumnName="Kira_Satilik" />
+          <ScalarProperty Name="EmlakTuru" ColumnName="EmlakTuru" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="picture1" ColumnName="picture1" />
+          <ScalarProperty Name="picture2" ColumnName="picture2" />
+          <ScalarProperty Name="picture3" ColumnName="picture3" />
+          <ScalarProperty Name="picture4" ColumnName="picture4" />
+          <ScalarProperty Name="picture5" ColumnName="picture5" />
+          <ScalarProperty Name="picture6" ColumnName="picture6" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BORCLARIM">
+      <EntityTypeMapping TypeName="EmlakModel.BORCLARIM">
+        <MappingFragment StoreEntitySet="BORCLARIM">
+          <ScalarProperty Name="BorcID" ColumnName="BorcID" />
+          <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+          <ScalarProperty Name="Kime" ColumnName="Kime" />
+          <ScalarProperty Name="miktar" ColumnName="miktar" />
+          <ScalarProperty Name="AlacakliCep" ColumnName="AlacakliCep" />
+          <ScalarProperty Name="OdemeTarihi" ColumnName="OdemeTarihi" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmlakArayanlar">
+      <EntityTypeMapping TypeName="EmlakModel.EmlakArayanlar">
+        <MappingFragment StoreEntitySet="EmlakArayanlar">
+          <ScalarProperty Name="ArayanlarID" ColumnName="ArayanlarID" />
+          <ScalarProperty Name="ArayanAd" ColumnName="ArayanAd" />
+          <ScalarProperty Name="ArayanSoyAd" ColumnName="ArayanSoyAd" />
+          <ScalarProperty Name="Cep" ColumnName="Cep" />
+          <ScalarProperty Name="IsTel" ColumnName="IsTel" />
+          <ScalarProperty Name="Kiraci_Alici" ColumnName="Kiraci_Alici" />
+          <ScalarProperty Name="EmlakTuru" ColumnName="EmlakTuru" />
+          <ScalarProperty Name="MetreKare" ColumnName="MetreKare" />
+          <ScalarProperty Name="Fiyat" ColumnName="Fiyat" />
+          <ScalarProperty Name="OdaSayisi" ColumnName="OdaSayisi" />
+          <ScalarProperty Name="BinaYasi" ColumnName="BinaYasi" />
+          <ScalarProperty Name="KacinciKat" ColumnName="KacinciKat" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EMLAKTURU">
+      <EntityTypeMapping TypeName="EmlakModel.EMLAKTURU">
+        <MappingFragment StoreEntitySet="EMLAKTURU">
+          <ScalarProperty Name="EMLAK_TURU_ID" ColumnName="EMLAK_TURU_ID" />
+          <ScalarProperty Name="EMLAK_TURU" ColumnName="EMLAK_TURU" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ISITMA_TIPI">
+      <EntityTypeMapping TypeName="EmlakModel.ISITMA_TIPI">
+        <MappingFragment StoreEntitySet="ISITMA_TIPI">
+          <ScalarProperty Name="ISITMA_TIPI_ID" ColumnName="ISITMA_TIPI_ID" />
+          <ScalarProperty Name="ISITMA_TIPI1" ColumnName="ISITMA_TIPI" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KONUT_ISYERI">
+      <EntityTypeMapping TypeName="EmlakModel.KONUT_ISYERI">
+        <MappingFragment StoreEntitySet="KONUT_ISYERI">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="MusteriKaynagi" ColumnName="MusteriKaynagi" />
+          <ScalarProperty Name="Adi" ColumnName="Adi" />
+          <ScalarProperty Name="Soyadi" ColumnName="Soyadi" />
+          <ScalarProperty Name="TC" ColumnName="TC" />
+          <ScalarProperty Name="Iban" ColumnName="Iban" />
+          <ScalarProperty Name="CepTelefonu" ColumnName="CepTelefonu" />
+          <ScalarProperty Name="IsTelefonu" ColumnName="IsTelefonu" />
+          <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+          <ScalarProperty Name="il" ColumnName="il" />
+          <ScalarProperty Name="ilce" ColumnName="ilce" />
+          <ScalarProperty Name="Mahalle" ColumnName="Mahalle" />
+          <ScalarProperty Name="Cadde" ColumnName="Cadde" />
+          <ScalarProperty Name="Sokak" ColumnName="Sokak" />
+          <ScalarProperty Name="AptAdi" ColumnName="AptAdi" />
+          <ScalarProperty Name="AptNo" ColumnName="AptNo" />
+          <ScalarProperty Name="DaireNo" ColumnName="DaireNo" />
+          <ScalarProperty Name="Kira_Satilik" ColumnName="Kira_Satilik" />
+          <ScalarProperty Name="Isyeri_Konut" ColumnName="Isyeri_Konut" />
+          <ScalarProperty Name="MetreKare" ColumnName="MetreKare" />
+          <ScalarProperty Name="BinaYasi" ColumnName="BinaYasi" />
+          <ScalarProperty Name="KatSayisi" ColumnName="KatSayisi" />
+          <ScalarProperty Name="Kat" ColumnName="Kat" />
+          <ScalarProperty Name="OdaSayisi" ColumnName="OdaSayisi" />
+          <ScalarProperty Name="IsitmaTipi" ColumnName="IsitmaTipi" />
+          <ScalarProperty Name="BanyoSayisi" ColumnName="BanyoSayisi" />
+          <ScalarProperty Name="FiyatNet" ColumnName="FiyatNet" />
+          <ScalarProperty Name="FiyatSatis" ColumnName="FiyatSatis" />
+          <ScalarProperty Name="EsyaliMi" ColumnName="EsyaliMi" />
+          <ScalarProperty Name="DepozitTL" ColumnName="DepozitTL" />
+          <ScalarProperty Name="EmlakTuru" ColumnName="EmlakTuru" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="DevrenSatilik" ColumnName="DevrenSatilik" />
+          <ScalarProperty Name="DevrenKiralik" ColumnName="DevrenKiralik" />
+          <ScalarProperty Name="picture1" ColumnName="picture1" />
+          <ScalarProperty Name="picture2" ColumnName="picture2" />
+          <ScalarProperty Name="picture3" ColumnName="picture3" />
+          <ScalarProperty Name="picture4" ColumnName="picture4" />
+          <ScalarProperty Name="picture5" ColumnName="picture5" />
+          <ScalarProperty Name="picture6" ColumnName="picture6" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MUSTERI">
+      <EntityTypeMapping TypeName="EmlakModel.MUSTERI">
+        <MappingFragment StoreEntitySet="MUSTERI">
+          <ScalarProperty Name="MusteriID" ColumnName="MusteriID" />
+          <ScalarProperty Name="MusteriAd" ColumnName="MusteriAd" />
+          <ScalarProperty Name="MusteriSoyAd" ColumnName="MusteriSoyAd" />
+          <ScalarProperty Name="MusteriTC" ColumnName="MusteriTC" />
+          <ScalarProperty Name="MusteriCep" ColumnName="MusteriCep" />
+          <ScalarProperty Name="MusteriIsTelefonu" ColumnName="MusteriIsTelefonu" />
+          <ScalarProperty Name="Adres" ColumnName="Adres" />
+          <ScalarProperty Name="MusteriTipi" ColumnName="MusteriTipi" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MUSTERI_TIPI">
+      <EntityTypeMapping TypeName="EmlakModel.MUSTERI_TIPI">
+        <MappingFragment StoreEntitySet="MUSTERI_TIPI">
+          <ScalarProperty Name="MUSTERI_TIPI_ID" ColumnName="MUSTERI_TIPI_ID" />
+          <ScalarProperty Name="MUSTERI_TIPI1" ColumnName="MUSTERI_TIPI" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="USERS">
+      <EntityTypeMapping TypeName="EmlakModel.USERS">
+        <MappingFragment StoreEntitySet="USERS">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserNickName" ColumnName="UserNickName" />
+          <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+          <ScalarProperty Name="UserType" ColumnName="UserType" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserSurname" ColumnName="UserSurname" />
+          <ScalarProperty Name="CepTelefonu" ColumnName="CepTelefonu" />
+          <ScalarProperty Name="IsTelefonu" ColumnName="IsTelefonu" />
+          <ScalarProperty Name="Unvan" ColumnName="Unvan" />
+          <ScalarProperty Name="iban" ColumnName="iban" />
+          <ScalarProperty Name="adres" ColumnName="adres" />
+          <ScalarProperty Name="ppicture" ColumnName="ppicture" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="USERTYPES">
+      <EntityTypeMapping TypeName="EmlakModel.USERTYPES">
+        <MappingFragment StoreEntitySet="USERTYPES">
+          <ScalarProperty Name="UserTypeID" ColumnName="UserTypeID" />
+          <ScalarProperty Name="UserType" ColumnName="UserType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

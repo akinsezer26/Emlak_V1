@@ -1,0 +1,58 @@
+﻿
+@model Emlak.Models.EmlakArayanlar
+@{
+    Layout = null;
+}
+
+@using (Html.BeginForm("AddOrEditEmlakArayanlar", "DB", FormMethod.Post, new { onsubmit = "return SubmitFormEmlakArayanlar(this)" }))
+{
+    @Html.HiddenFor(model => model.ArayanlarID)
+    <div class="form-group">
+        @Html.EditorFor(model => model.ArayanAd, new { @htmlAttributes = new { placeholder = "Ad", @class = "form-control", autocomplete = "off" } })
+        @*@Html.ValidationMessageFor(model => model.Konu)*@
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.ArayanSoyAd, new { @htmlAttributes = new { placeholder = "Soyad", @class = "form-control" } })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.Cep, new { @htmlAttributes = new { placeholder = "Cep Telefonu", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.IsTel, new { @htmlAttributes = new { placeholder = "İş Telefonu", @class = "form-control", autocomplete = "off" } })
+        @*@Html.ValidationMessageFor(model => model.Tarih)*@
+    </div>
+    <div class="form-group">
+        @Html.DropDownListFor(model => model.Kiraci_Alici, new[] { new SelectListItem { Text = "Kiracı", Value = "KIRACI" }, new SelectListItem { Text = "Alıcı", Value = "ALICI" } })
+    </div>
+    <div class="form-group">
+        @Html.DropDownListFor(model => model.EmlakTuru, (List<SelectListItem>)ViewBag.konutTipi, new { @class = "form-control" })
+        @*@Html.ValidationMessageFor(model => model.Tarih)*@
+    </div>
+    <div class="form-group">
+        @Html.DropDownListFor(model => model.OdaSayisi, (List<SelectListItem>)ViewBag.OdaSayisi, new { @class = "form-control" })
+        @*@Html.ValidationMessageFor(model => model.Tarih)*@
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.MetreKare, new { @htmlAttributes = new { placeholder = "Metrekare", @class = "form-control", autocomplete = "off" } })
+        @*@Html.ValidationMessageFor(model => model.Tarih)*@
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.BinaYasi, new { @htmlAttributes = new { placeholder = "Bina Yaşı", @class = "form-control", autocomplete = "off" } })
+        @*@Html.ValidationMessageFor(model => model.Tarih)*@
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.KacinciKat, new { @htmlAttributes = new { placeholder = "Kat", @class = "form-control", autocomplete = "off" } })
+        @*@Html.ValidationMessageFor(model => model.Tarih)*@
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.Fiyat, new { @htmlAttributes = new { placeholder = "Fiyat", @class = "form-control", autocomplete = "off" } })
+        @*@Html.ValidationMessageFor(model => model.Tarih)*@
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.Note, new { @htmlAttributes = new { placeholder = "NOt", @class = "form-control", autocomplete = "off" } })
+        @*@Html.ValidationMessageFor(model => model.Tarih)*@
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Ekle" class="btn btn-primary" />
+    </div>
+}

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c52a7c6cbd734910bf12c9c7d34119f2" Name="Diagram1">
+        <EntityTypeShape EntityType="EmlakModel.AJANDA" Width="1.5" PointX="5.25" PointY="19.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmlakModel.ALACAKLARIM" Width="1.5" PointX="5.25" PointY="23.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmlakModel.ARSA_TARLA" Width="1.5" PointX="5.25" PointY="30.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmlakModel.BINA" Width="1.5" PointX="8.25" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmlakModel.BORCLARIM" Width="1.5" PointX="5.25" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmlakModel.EmlakArayanlar" Width="1.5" PointX="11.25" PointY="29" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmlakModel.EMLAKTURU" Width="1.5" PointX="6" PointY="39.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmlakModel.ISITMA_TIPI" Width="1.5" PointX="6" PointY="42.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmlakModel.KONUT_ISYERI" Width="1.5" PointX="14.25" PointY="24.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmlakModel.MESAJ" Width="1.5" PointX="5.25" PointY="54.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmlakModel.MUSTERI" Width="1.5" PointX="11.25" PointY="24.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmlakModel.MUSTERI_TIPI" Width="1.5" PointX="9" PointY="24.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmlakModel.ODA_SAYISI" Width="1.5" PointX="9" PointY="36.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmlakModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmlakModel.USERS" Width="1.5" PointX="3" PointY="28.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmlakModel.USERTYPES" Width="1.5" PointX="0.75" PointY="30.375" IsExpanded="true" />
+        <AssociationConnector Association="EmlakModel.FK__AJANDA__UserID__6FB49575" ManuallyRouted="false" />
+        <AssociationConnector Association="EmlakModel.FK__ALACAKLAR__UserI__72910220" ManuallyRouted="false" />
+        <AssociationConnector Association="EmlakModel.FK__ARSA_TARL__UserI__03BB8E22" ManuallyRouted="false" />
+        <AssociationConnector Association="EmlakModel.FK__BINA__EmlakTuru__078C1F06" ManuallyRouted="false" />
+        <AssociationConnector Association="EmlakModel.FK__BINA__IsitmaTipi__0880433F" ManuallyRouted="false" />
+        <AssociationConnector Association="EmlakModel.FK__BINA__UserID__0697FACD" ManuallyRouted="false" />
+        <AssociationConnector Association="EmlakModel.FK__BORCLARIM__UserI__756D6ECB" ManuallyRouted="false" />
+        <AssociationConnector Association="EmlakModel.FK__EmlakAray__Emlak__11158940" ManuallyRouted="false" />
+        <AssociationConnector Association="EmlakModel.FK__EmlakAray__OdaSa__1209AD79" ManuallyRouted="false" />
+        <AssociationConnector Association="EmlakModel.FK__EmlakAray__UserI__12FDD1B2" ManuallyRouted="false" />
+        <AssociationConnector Association="EmlakModel.FK__KONUT_ISY__Emlak__7FEAFD3E" ManuallyRouted="false" />
+        <AssociationConnector Association="EmlakModel.FK__KONUT_ISY__Isitm__00DF2177" ManuallyRouted="false" />
+        <AssociationConnector Association="EmlakModel.FK__KONUT_ISY__OdaSa__7EF6D905" ManuallyRouted="false" />
+        <AssociationConnector Association="EmlakModel.FK__KONUT_ISY__UserI__7E02B4CC" ManuallyRouted="false" />
+        <AssociationConnector Association="EmlakModel.FK__MESAJ__Kimden__6BE40491" ManuallyRouted="false" />
+        <AssociationConnector Association="EmlakModel.FK__MESAJ__Kime__6CD828CA" ManuallyRouted="false" />
+        <AssociationConnector Association="EmlakModel.FK__MUSTERI__Musteri__0D44F85C" ManuallyRouted="false" />
+        <AssociationConnector Association="EmlakModel.FK__MUSTERI__UserID__0E391C95" ManuallyRouted="false" />
+        <AssociationConnector Association="EmlakModel.FK__USERS__UserType__690797E6" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
