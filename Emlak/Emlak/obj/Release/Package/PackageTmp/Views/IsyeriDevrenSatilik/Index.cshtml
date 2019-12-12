@@ -1,0 +1,142 @@
+﻿
+@using PagedList;
+@using PagedList.Mvc;
+
+@model IPagedList<Emlak.Models.KONUT_ISYERI>
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_LayoutPageOwner.cshtml";
+}
+
+@using (Html.BeginForm("Index", "IsyeriDevrenSatilik", FormMethod.Get))
+{
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    @Html.DropDownList("IsyeriTuru", (List<SelectListItem>)ViewBag.IsyeriTipi, new { @class = "form-control" })
+                </td>
+                <td>
+                    @Html.TextBox("Pil", null, new { @class = "form-control", @placeholder = "il" })
+                </td>
+                <td>
+                    @Html.TextBox("Pilce", null, new { @class = "form-control", @placeholder = "ilçe" })
+                </td>
+                <td>
+                    @Html.TextBox("Pmahalle", null, new { @class = "form-control", @placeholder = "mahalle" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.TextBox("minTL", null, new { @class = "form-control", @placeholder = "Min TL" })
+                </td>
+                <td>
+                    @Html.TextBox("maxTL", null, new { @class = "form-control", @placeholder = "Max TL" })
+                </td>
+                <td>
+                    <input type="submit" value="Ara" id="SearchIsyeriDevrenSatilik" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}
+@{ int rowCount = Model.Count / 4; double tmp = Double.Parse(Model.Count.ToString()) / 4.0; if (tmp != 1 && tmp != 2 && tmp != 3) { rowCount++; }
+    int z = 0;}
+<table>
+    <tbody>
+        @for (int i = 0; i < rowCount; i++)
+        {
+            <tr>
+                @for (int j = 0; j < 4; j++)
+                {
+                    if (z < Model.Count)//TO DO
+                    {
+                        <td style="padding-top:30px; padding-left:40px">
+                            @if (Model[z].picture1 == null)
+                            {
+                                <a href='@Url.Action("Goruntule", "IsyeriDevrenSatilik")/@Model[z].ID ' target='_blank' rel='noopener noreferrer'>
+                                    <img src='/EmlakImages/default.JPG' width='180' height='120'>
+                                </a><br>
+                                <label>Isyeri Devren Satılık</label><br>
+                                <label>@Model[z].Mahalle @Model[z].il</label><br>
+                                <label>@Model[z].FiyatNet tl</label>
+                            }
+                            else
+                            {
+                                string str = "/EmlakImages/Kisyeri_" + @Model[z].ID.ToString() + "_1.JPG";
+                                <a href='@Url.Action("Goruntule", "IsyeriDevrenSatilik")/@Model[z].ID ' target='_blank' rel='noopener noreferrer'>
+                                    <img src='@str' width='180' height='120'>
+                                </a><br>
+                                <label>Isyeri Devren Satılık</label><br>
+                                <label>@Model[z].Mahalle @Model[z].il</label><br>
+                                <label>@Model[z].FiyatNet tl</label>
+                            }
+                        </td>
+                        z++;
+                    }
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+@Html.PagedListPager(Model, page => Url.Action("Index", new
+{
+    page,
+    Pil = Request.QueryString["Pil"],
+    Pilce = Request.QueryString["Pilce"],
+    Pmahalle = Request.QueryString["Pmahalle"],
+    IsyeriTuru = Request.QueryString["IsyeriTuru"],
+    minTL = Request.QueryString["minTL"],
+    maxTL = Request.QueryString["maxTL"]
+}))
+<a class="btn btn-success" style="margin-bottom: 10px" onclick="PopupFormIsyeriDevrenSatilik('@Url.Action("AddOrEditIsyeriDevrenSatilik","DB")')"><i class="fa fa-plus"></i> Ekle </a>
+<script>
+    var popUp, dataTableIsyeriDevrenSatilik;
+    function PopupFormIsyeriDevrenSatilik(url) {
+        var formDiv = $('<div/>');
+        $.get(url)
+            .done(function (response) {
+                formDiv.html(response);
+
+                popUp = formDiv.dialog({
+                    autoOpen: true,
+                    resizable: false,
+                    title: 'Devren Satılık İşyeri Ekle',
+                    height: 600,
+                    width: 1200,
+                    close: function myfunction() {
+                        popUp.dialog('destroy').remove();
+                    }
+                });
+            });
+    }
+    function SubmitFormIsyeriDevrenSatilik(form) {
+        $.validator.unobtrusive.parse(form);
+        var data = new FormData(form)
+
+        if ($(form).valid()) {
+            $.ajax({
+                type: "POST",
+                enctype: 'multipart/form-data',
+                url: "/DB/AddOrEditIsyeriDevrenSatilik",
+                processData: false,  // Important!
+                contentType: false,
+                cache: false,
+                data: data,
+                success: function (data) {
+                    if (data.success) {
+                        popUp.dialog('close');
+
+                        location.reload();
+
+                        $.notify(data.message, {
+                            globalPosition: "top center",
+                            className: "success"
+                        })
+                    }
+                }
+            });
+        }
+        return false;
+    }
+</script>

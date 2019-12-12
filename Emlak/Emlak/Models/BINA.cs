@@ -15,7 +15,21 @@ namespace Emlak.Models
     public partial class BINA
     {
         public long ID { get; set; }
+        public string ilanBasligi { get; set; }
+        public string ilanDetayi { get; set; }
         public Nullable<System.DateTime> Tarih { get; set; }
+        public string MusteriKaynagi { get; set; }
+        public string Adi { get; set; }
+        public string Soyadi { get; set; }
+        public string TC { get; set; }
+        public string Iban { get; set; }
+        public string CepTelefonu { get; set; }
+        public string IsTelefonu { get; set; }
+        public string il { get; set; }
+        public string ilce { get; set; }
+        public string mahalle { get; set; }
+        public Nullable<int> FiyatNet { get; set; }
+        public Nullable<int> FiyatSatis { get; set; }
         public Nullable<int> KatSayisi { get; set; }
         public Nullable<int> BirKattakiDaireSayisi { get; set; }
         public Nullable<int> IsitmaTipi { get; set; }
@@ -24,7 +38,6 @@ namespace Emlak.Models
         public Nullable<bool> KrediyeUygun { get; set; }
         public Nullable<bool> Takas { get; set; }
         public string Kira_Satilik { get; set; }
-        public Nullable<int> EmlakTuru { get; set; }
         public long UserID { get; set; }
         public string picture1 { get; set; }
         public string picture2 { get; set; }
@@ -51,9 +64,35 @@ namespace Emlak.Models
         public string picture23 { get; set; }
         public string picture24 { get; set; }
         public string picture25 { get; set; }
+        public string picture26 { get; set; }
+        public string picture27 { get; set; }
+        public string picture28 { get; set; }
+        public string picture29 { get; set; }
+        public string picture30 { get; set; }
+        public string picture31 { get; set; }
+        public string picture32 { get; set; }
+        public string picture33 { get; set; }
+        public string picture34 { get; set; }
+        public string picture35 { get; set; }
+        public Nullable<double> lat { get; set; }
+        public Nullable<double> lng { get; set; }
+        public Nullable<bool> DetayAsansor { get; set; }
+        public Nullable<bool> DetayBahce { get; set; }
+        public Nullable<bool> DetayBogazManzarasi { get; set; }
+        public Nullable<bool> DetayDenizManz { get; set; }
+        public Nullable<bool> DetayGuvenlik { get; set; }
+        public Nullable<bool> DetayHidrofor { get; set; }
+        public Nullable<bool> DetayJenerator { get; set; }
+        public Nullable<bool> DetayKabloTvUydu { get; set; }
+        public Nullable<bool> DetayKapaliGaraj { get; set; }
+        public Nullable<bool> DetayKapici { get; set; }
+        public Nullable<bool> DetayOtopark { get; set; }
+        public Nullable<bool> DetaySiteIcerisinde { get; set; }
+        public Nullable<bool> DetayYanginMerdiveni { get; set; }
     
-        public virtual EMLAKTURU EMLAKTURU1 { get; set; }
+        public virtual BINA_YASI BINA_YASI { get; set; }
         public virtual ISITMA_TIPI ISITMA_TIPI { get; set; }
+        public virtual KAT_SAYISI KAT_SAYISI { get; set; }
         public virtual USERS USERS { get; set; }
     }
 }

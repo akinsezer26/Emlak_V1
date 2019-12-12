@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPageOwner.cshtml";
+     if (Session["UserID"] == null)
+    {
+        Response.Redirect("~/Login/Index");
+    }
+}
+
+<h2>Kullanıcı Bilgileri</h2>
+
+@{
+    if (@Session["Userpp"] == null)
+    {
+        <img src="~/Image/default_user.png" style="margin-top:5%;margin-left:32%;" />
+    }
+
+    else
+    {
+        <img src="@Session["Userpp"].ToString()" />
+    }
+}
+<br /><br />
+<label style="margin-left:28%;font-size:25px">İsim Soyisim :</label><label style="font-size:25px; font-weight:normal;">&nbsp @Session["UserName"].ToString() @Session["UserSurName"].ToString()</label><br />
+<label style="margin-left:28%;font-size:25px">Kullanıcı Adı :</label><label style="font-size:25px; font-weight:normal">&nbsp @Session["UserNickName"].ToString()</label><br />
+<label style="margin-left:28%;font-size:25px">Şifre</label><label style="padding-left:4.1em; font-size:25px">:</label><label style="font-size:25px; font-weight:normal">&nbsp @Session["UserPassword"].ToString()</label><br />
+<label style="margin-left:28%;font-size:25px">Cep Tel</label><label style="padding-left:2.8em; font-size:25px">:</label><label style="font-size:25px; font-weight:normal">&nbsp @Session["CepTel"]</label><br />
+<label style="margin-left:28%;font-size:25px">İş Tel</label><label style="padding-left:3.9em; font-size:25px">:</label><label style="font-size:25px; font-weight:normal">&nbsp @Session["IsTel"]</label><br />
+<label style="margin-left:28%;font-size:25px">Unvan</label><label style="padding-left:3.3em; font-size:25px">:</label><label style="font-size:25px; font-weight:normal">&nbsp @Session["Unvan"].ToString()</label><br />
+<label style="margin-left:28%;font-size:25px">Yetki</label><label style="padding-left:4em; font-size:25px">:</label><label style="font-size:25px; font-weight:normal">&nbsp @Session["UserType"].ToString()</label><br />

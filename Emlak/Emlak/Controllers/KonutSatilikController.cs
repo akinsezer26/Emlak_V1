@@ -1,6 +1,8 @@
 ﻿using Emlak.Models;
+using PagedList;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -9,9 +11,79 @@ namespace Emlak.Controllers
 {
     public class KonutSatilikController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index(int? page, string Pil, string Pilce, string Pmahalle, int konutTuru=0, int PodaSayisi=0, int minTL=0, int maxTL=Int32.MaxValue)
         {
-            return View();
+            using (Entities db = new Entities())
+            {
+                List<SelectListItem> konutTipi = (from i in db.EMLAKTURU.ToList()
+                                                  select new SelectListItem
+                                                  {
+                                                      Text = i.EMLAK_TURU,
+                                                      Value = i.EMLAK_TURU_ID.ToString()
+                                                  }).ToList();
+                List<SelectListItem> OdaSayisi = (from i in db.ODA_SAYISI.ToList()
+                                                  select new SelectListItem
+                                                  {
+                                                      Text = i.ODA_SAYISI1,
+                                                      Value = i.ODA_SAYISI_ID.ToString()
+                                                  }).ToList();
+                List<SelectListItem> IsitmaTipi = (from i in db.ISITMA_TIPI.ToList()
+                                                   select new SelectListItem
+                                                   {
+                                                       Text = i.ISITMA_TIPI1,
+                                                       Value = i.ISITMA_TIPI_ID.ToString()
+                                                   }).ToList();
+
+                konutTipi.Insert(0, (new SelectListItem { Text = "Tüm Konut Tipleri", Value = "0" }));
+                OdaSayisi.Insert(0, (new SelectListItem { Text = "Tüm Oda Sayıları", Value = "0" }));
+                IsitmaTipi.Insert(0, (new SelectListItem { Text = "Tüm Isıtma Tipleri", Value = "0" }));
+
+                ViewBag.konutTipi = konutTipi;
+                ViewBag.OdaSayisi = OdaSayisi;
+                ViewBag.IsitmaTipi = IsitmaTipi;
+
+                if (konutTuru == 0 && PodaSayisi == 0 && Pil == null && Pilce == null && Pmahalle == null && minTL == 0 && maxTL == Int32.MaxValue)
+                {
+                    return View(db.KONUT_ISYERI.Where(s => s.Isyeri_Konut == "Konut" && s.Kira_Satilik == "Satılık"
+                    && s.FiyatNet < maxTL && s.FiyatNet > minTL)
+                   .ToList().ToPagedList(page ?? 1, 12));
+                }
+
+                if (konutTuru == 0 && PodaSayisi == 0)
+                {
+                    return View(db.KONUT_ISYERI.Where(s => s.Isyeri_Konut == "Konut" && s.Kira_Satilik == "Satılık" 
+                    && (s.il == null || s.il.StartsWith(Pil)) && (s.ilce == null || s.ilce.StartsWith(Pilce)) && (s.Mahalle == null || s.Mahalle.StartsWith(Pmahalle)) 
+                    && s.FiyatNet < maxTL && s.FiyatNet > minTL)
+                   .ToList().ToPagedList(page ?? 1, 12));
+                }
+                else if(konutTuru != 0 && PodaSayisi ==0)
+                {
+                    return View(db.KONUT_ISYERI.Where(s => s.Isyeri_Konut == "Konut" && s.Kira_Satilik == "Satılık" && s.EmlakTuru == konutTuru
+                    && (s.il == null || s.il.StartsWith(Pil)) && (s.ilce == null || s.ilce.StartsWith(Pilce)) && (s.Mahalle == null || s.Mahalle.StartsWith(Pmahalle))
+                    && s.FiyatNet < maxTL && s.FiyatNet > minTL)
+                   .ToList().ToPagedList(page ?? 1, 12));
+                }
+                else if (konutTuru == 0 && PodaSayisi != 0)
+                {
+                    return View(db.KONUT_ISYERI.Where(s => s.Isyeri_Konut == "Konut" && s.Kira_Satilik == "Satılık" && s.OdaSayisi == PodaSayisi
+                    && (s.il == null || s.il.StartsWith(Pil)) && (s.ilce == null || s.ilce.StartsWith(Pilce)) && (s.Mahalle == null || s.Mahalle.StartsWith(Pmahalle))
+                    && s.FiyatNet < maxTL && s.FiyatNet > minTL)
+                   .ToList().ToPagedList(page ?? 1, 12));
+                }
+                else if(konutTuru != 0 && PodaSayisi != 0)
+                {
+                    return View(db.KONUT_ISYERI.Where(s => s.Isyeri_Konut == "Konut" && s.Kira_Satilik == "Satılık" && s.EmlakTuru == konutTuru && s.OdaSayisi == PodaSayisi
+                    && (s.il == null || s.il.StartsWith(Pil)) && (s.ilce == null || s.ilce.StartsWith(Pilce)) && (s.Mahalle == null || s.Mahalle.StartsWith(Pmahalle))
+                    && s.FiyatNet < maxTL && s.FiyatNet > minTL)
+                   .ToList().ToPagedList(page ?? 1, 12));
+                }
+                else
+                {
+                    return View(db.KONUT_ISYERI.Where(s => s.Isyeri_Konut == "Konut" && s.Kira_Satilik == "Satılık"
+                    && s.FiyatNet < maxTL && s.FiyatNet > minTL)
+                   .ToList().ToPagedList(page ?? 1, 12));
+                }
+            }
         }
 
         [HttpGet]
@@ -28,7 +100,7 @@ namespace Emlak.Controllers
                 List<SelectListItem> OdaSayisi = (from i in db.ODA_SAYISI.ToList()
                                                   select new SelectListItem
                                                   {
-                                                      Text = i.ISITMA_TIPI,
+                                                      Text = i.ODA_SAYISI1,
                                                       Value = i.ODA_SAYISI_ID.ToString()
                                                   }).ToList();
                 List<SelectListItem> IsitmaTipi = (from i in db.ISITMA_TIPI.ToList()

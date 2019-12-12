@@ -1,0 +1,99 @@
+﻿
+@using Emlak.Models;
+@model BINA
+@{
+    Layout = null;
+}
+
+@using (Html.BeginForm("AddOrEditBinaKiralik", "DB", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "return SubmitFormBinaKiralik(this)" }))
+{
+    @Html.HiddenFor(model => model.ID)
+    <div class="form-group">
+        @Html.EditorFor(model => model.ilanBasligi, new { @htmlAttributes = new { placeholder = "İlan Başlığı", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @Html.TextAreaFor(model => model.ilanDetayi, 10, 120, htmlAttributes: new { style = "width: 100%; max-width: 100%;" })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.Adi, new { @htmlAttributes = new { placeholder = "İlan Sahibinin Adı", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.Soyadi, new { @htmlAttributes = new { placeholder = "İlan Sahibinin Soyadı", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.MusteriKaynagi, new { @htmlAttributes = new { placeholder = "Müşteri Kaynağı", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.TC, new { @htmlAttributes = new { placeholder = "TC Kimlik No", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.Iban, new { @htmlAttributes = new { placeholder = "Iban No", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.CepTelefonu, new { @htmlAttributes = new { placeholder = "Cep Telefonu", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.IsTelefonu, new { @htmlAttributes = new { placeholder = "İş Telefonu", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.FiyatNet, new { @htmlAttributes = new { placeholder = "Fiyat", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @Html.Label("Kat Sayısı", new { @class = "control-label" })
+        @Html.DropDownListFor(model => model.KatSayisi, (List<SelectListItem>)ViewBag.KatSayisi, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.BirKattakiDaireSayisi, new { @htmlAttributes = new { placeholder = "Bir Kattaki Daire", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @Html.Label("Isıtma Tipi", new { @class = "control-label" })
+        @Html.DropDownListFor(model => model.IsitmaTipi, (List<SelectListItem>)ViewBag.IsitmaTipi, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.MetreKare, new { @htmlAttributes = new { placeholder = "Metrekare", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @Html.Label("Bina Yaşı", new { @class = "control-label" })
+        @Html.DropDownListFor(model => model.BinaYasi, (List<SelectListItem>)ViewBag.BinaYasi, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.Label("Krediye Uygunluk", new { @class = "control-label" })
+        @Html.DropDownListFor(model => model.KrediyeUygun, new[] { new SelectListItem { Text = "Belirtilmemiş", Value = null }, new SelectListItem { Text = "Evet", Value = "True" }, new SelectListItem { Text = "Hayır", Value = "False" } })
+    </div>
+    <div>
+        @Html.Label("Adres Bilgileri")
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.il, new { @htmlAttributes = new { placeholder = "İl" } })
+        @Html.EditorFor(model => model.ilce, new { @htmlAttributes = new { placeholder = "İlçe" } })
+        @Html.EditorFor(model => model.mahalle, new { @htmlAttributes = new { placeholder = "Mahalle" } })
+    </div>
+    <div>
+        @Html.Label("Detaylı Bilgi")
+    </div>
+    <div class="form-group">
+        <label id="Detay" onclick="hideDetay()">Detaylı Bilgi</label>
+        <div id="divDetay" style="border: 1px solid #000000;">
+            <label style="margin-right:5px; margin-left:10px;">Asansör</label>@Html.CheckBox("AnaYolaYakin", Model.DetayAsansor ?? false)
+            <label style="margin-right:5px; margin-left:10px;">Bahçe</label>@Html.CheckBox("DenizeSifir", Model.DetayBahce ?? false)
+            <label style="margin-right:5px; margin-left:10px;">Boğaz manzarası</label>@Html.CheckBox("DenizeYakin", Model.DetayBogazManzarasi ?? false)
+            <label style="margin-right:5px; margin-left:10px;">Deniz Manzarası</label>@Html.CheckBox("HavaAlaninaYakin", Model.DetayDenizManz ?? false)<br />
+
+            <label style="margin-right:5px; margin-left:10px;">Güvenlik</label>@Html.CheckBox("AnaYolaYakin", Model.DetayGuvenlik ?? false)
+            <label style="margin-right:5px; margin-left:10px;">Hidrofor</label>@Html.CheckBox("DenizeSifir", Model.DetayHidrofor ?? false)
+            <label style="margin-right:5px; margin-left:10px;">Jeneratör</label>@Html.CheckBox("DenizeYakin", Model.DetayJenerator ?? false)
+            <label style="margin-right:5px; margin-left:10px;">Kablo TV-Uydu</label>@Html.CheckBox("HavaAlaninaYakin", Model.DetayKabloTvUydu ?? false)<br />
+
+            <label style="margin-right:5px; margin-left:10px;">Kapalı Garaj</label>@Html.CheckBox("AnaYolaYakin", Model.DetayKapaliGaraj ?? false)
+            <label style="margin-right:5px; margin-left:10px;">Kapıcı</label>@Html.CheckBox("DenizeSifir", Model.DetayKapici ?? false)
+            <label style="margin-right:5px; margin-left:10px;">Otopark</label>@Html.CheckBox("DenizeYakin", Model.DetayOtopark ?? false)
+            <label style="margin-right:5px; margin-left:10px;">Site İçerisinde</label>@Html.CheckBox("HavaAlaninaYakin", Model.DetaySiteIcerisinde ?? false)<br />
+
+            <label style="margin-right:5px; margin-left:10px;">Yangın Merdiveni</label>@Html.CheckBox("AnaYolaYakin", Model.DetayYanginMerdiveni ?? false)
+        </div>
+    </div>
+    <div class="form-group">
+        <input id="Kisyeri_images" type="file" name="Kisyeri_images" multiple accept=".jpg,.jpeg">
+        <input type="submit" value="Ekle" class="btn btn-primary" />
+    </div>
+}

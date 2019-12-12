@@ -23,7 +23,7 @@ namespace Emlak.Controllers
                 List<SelectListItem> OdaSayisi = (from i in db.ODA_SAYISI.ToList()
                                                   select new SelectListItem
                                                   {
-                                                      Text = i.ISITMA_TIPI,
+                                                      Text = i.ODA_SAYISI1,
                                                       Value = i.ODA_SAYISI_ID.ToString()
                                                   }).ToList();
                 List<SelectListItem> IsitmaTipi = (from i in db.ISITMA_TIPI.ToList()

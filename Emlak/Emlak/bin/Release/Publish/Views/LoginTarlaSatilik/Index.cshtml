@@ -1,0 +1,89 @@
+﻿
+@using PagedList;
+@using PagedList.Mvc;
+
+@model IPagedList<Emlak.Models.ARSA_TARLA>
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+@using (Html.BeginForm("Index", "LoginTarlaSatilik", FormMethod.Get))
+{
+    <table style="margin-top:25px; margin-left:25px;">
+        <tbody>
+            <tr>
+                <td>
+                    @Html.TextBox("Pil", null, new { @class = "form-control", @placeholder = "il",Style="width:180px" })
+                </td>
+                <td>
+                    @Html.TextBox("Pilce", null, new { @class = "form-control", @placeholder = "ilçe",Style="width:180px" })
+                </td>
+                <td>
+                    @Html.TextBox("Pmahalle", null, new { @class = "form-control", @placeholder = "mahalle",Style="width:180px" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.TextBox("minTL", null, new { @class = "form-control", @placeholder = "Min TL",Style="width:180px" })
+                </td>
+                <td>
+                    @Html.TextBox("maxTL", null, new { @class = "form-control", @placeholder = "Max TL",Style="width:180px" })
+                </td>
+                <td>
+                    <input type="submit" value="Ara" id="SearchTarlaSatilik" style="width:100px; color: black; text-shadow:none; margin-left:5px; font-size:16px; height:50px" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}
+@{ int rowCount = Model.Count / 4; double tmp = Double.Parse(Model.Count.ToString()) / 4.0; if (tmp != 1 && tmp != 2 && tmp != 3) { rowCount++; }
+    int z = 0;}
+<table>
+    <tbody>
+        @for (int i = 0; i < rowCount; i++)
+        {
+            <tr>
+                @for (int j = 0; j < 4; j++)
+                {
+                    if (z < Model.Count)//TO DO
+                    {
+                        <td style="padding-top:30px; padding-left:40px">
+                            @if (Model[z].picture1 == null)
+                            {
+                                <a href='@Url.Action("Goruntule", "TarlaSatilik")/@Model[z].ID ' target='_blank' rel='noopener noreferrer'>
+                                    <img src='/EmlakImages/default.JPG' width='180' height='120'>
+                                </a><br>
+                                <label>Tarla Satılık</label><br>
+                                <label>@Model[z].mahalle @Model[z].il</label><br>
+                                <label>@Model[z].FiyatNet tl</label>
+                            }
+                            else
+                            {
+                                string str = "/EmlakImages/ArTarla_" + @Model[z].ID.ToString() + "_1.JPG";
+                                <a href='@Url.Action("Goruntule", "TarlaSatilik")/@Model[z].ID ' target='_blank' rel='noopener noreferrer'>
+                                    <img src='@str' width='180' height='120'>
+                                </a><br>
+                                <label>Tarla Satılık</label><br>
+                                <label>@Model[z].mahalle @Model[z].il</label><br>
+                                <label>@Model[z].FiyatNet tl</label>
+                            }
+                        </td>
+                        z++;
+                    }
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+<div style="margin-left:25px">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new
+    {
+        page,
+        Pil = Request.QueryString["Pil"],
+        Pilce = Request.QueryString["Pilce"],
+        Pmahalle = Request.QueryString["Pmahalle"],
+        minTL = Request.QueryString["minTL"],
+        maxTL = Request.QueryString["maxTL"]
+    }))
+</div>

@@ -16,7 +16,7 @@ namespace Emlak
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Owner", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "KullaniciBilgileri", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

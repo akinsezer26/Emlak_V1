@@ -1,0 +1,366 @@
+﻿
+
+@model Emlak.Models.KONUT_ISYERI
+@{
+    Layout = null;
+}
+
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial;
+            margin: 0;
+            /*background-image:url('../../Image/bg2.jpg');*/
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        img {
+            vertical-align: middle;
+        }
+
+        /* Position the image container (needed to position the left and right arrows) */
+        .container {
+            position: relative;
+        }
+
+        /* Hide the images by default */
+        .mySlides {
+            display: none;
+        }
+
+        /* Add a pointer when hovering over the thumbnail images */
+        .cursor {
+            cursor: pointer;
+        }
+
+        /* Next & previous buttons */
+        .prev,
+        .next {
+            cursor: pointer;
+            position: absolute;
+            top: 40%;
+            width: auto;
+            padding: 16px;
+            margin-top: -50px;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        /* Position the "next button" to the right */
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+            /* On hover, add a black background color with a little bit see-through */
+            .prev:hover,
+            .next:hover {
+                background-color: rgba(0, 0, 0, 0.8);
+            }
+
+        /* Number text (1/3 etc) */
+        .numbertext {
+            color: #f2f2f2;
+            font-size: 12px;
+            padding: 8px 12px;
+            position: absolute;
+            text-shadow: 1px 1px 5px black;
+            top: 0;
+        }
+
+        /* Container for image text */
+        .caption-container {
+            text-align: center;
+            background-color: #222;
+            padding: 2px 16px;
+            color: white;
+        }
+
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* Six columns side by side */
+        .column {
+            float: left;
+            width: 20%;
+        }
+
+        /* Add a transparency effect for thumnbail images */
+        .demo {
+            opacity: 0.4;
+        }
+
+            .active,
+            .demo:hover {
+                opacity: 1;
+            }
+    </style>
+</head>
+<body>
+    <div style="width:50%;margin-left:20%;margin-top:10%;border:outset;">
+        <strong>Kiralık 3+1 İşyeri</strong><br />
+        <label>Kiralık İşyeri, @Model.il, @Model.Mahalle</label><br />
+        <strong>@Model.FiyatNet</strong><br />
+    </div>
+    <div style="width:50%; margin-left:20%">
+        <div class="container" style="width:70%; float:left">
+
+            @{
+                int nullCount = 0;
+                var paths = new List<string>();
+                if (true)
+                {
+                    if (Model.picture1 == null)
+                    {
+                        nullCount++;
+                    }
+                    else { paths.Add("~/EmlakImages" + Model.picture1.ToString().Split(new string[] { "EmlakImages" }, StringSplitOptions.None).Last()); }
+                    if (Model.picture2 == null)
+                    {
+                        nullCount++;
+                    }
+                    else { paths.Add("~/EmlakImages" + Model.picture2.ToString().Split(new string[] { "EmlakImages" }, StringSplitOptions.None).Last()); }
+                    if (Model.picture3 == null)
+                    {
+                        nullCount++;
+                    }
+                    else { paths.Add("~/EmlakImages" + Model.picture3.ToString().Split(new string[] { "EmlakImages" }, StringSplitOptions.None).Last()); }
+                    if (Model.picture4 == null)
+                    {
+                        nullCount++;
+                    }
+                    else { paths.Add("~/EmlakImages" + Model.picture4.ToString().Split(new string[] { "EmlakImages" }, StringSplitOptions.None).Last()); }
+                    if (Model.picture5 == null)
+                    {
+                        nullCount++;
+                    }
+                    else { paths.Add("~/EmlakImages" + Model.picture5.ToString().Split(new string[] { "EmlakImages" }, StringSplitOptions.None).Last()); }
+                    if (Model.picture6 == null)
+                    {
+                        nullCount++;
+                    }
+                    else { paths.Add("~/EmlakImages" + Model.picture6.ToString().Split(new string[] { "EmlakImages" }, StringSplitOptions.None).Last()); }
+                    if (Model.picture7 == null)
+                    {
+                        nullCount++;
+                    }
+                    else { paths.Add("~/EmlakImages" + Model.picture7.ToString().Split(new string[] { "EmlakImages" }, StringSplitOptions.None).Last()); }
+                    if (Model.picture8 == null)
+                    {
+                        nullCount++;
+                    }
+                    else { paths.Add("~/EmlakImages" + Model.picture8.ToString().Split(new string[] { "EmlakImages" }, StringSplitOptions.None).Last()); }
+                    if (Model.picture9 == null)
+                    {
+                        nullCount++;
+                    }
+                    else { paths.Add("~/EmlakImages" + Model.picture9.ToString().Split(new string[] { "EmlakImages" }, StringSplitOptions.None).Last()); }
+                    if (Model.picture10 == null)
+                    {
+                        nullCount++;
+                    }
+                    else { paths.Add("~/EmlakImages" + Model.picture10.ToString().Split(new string[] { "EmlakImages" }, StringSplitOptions.None).Last()); }
+                    if (Model.picture11 == null)
+                    {
+                        nullCount++;
+                    }
+                    else { paths.Add("~/EmlakImages" + Model.picture11.ToString().Split(new string[] { "EmlakImages" }, StringSplitOptions.None).Last()); }
+                    if (Model.picture12 == null)
+                    {
+                        nullCount++;
+                    }
+                    else { paths.Add("~/EmlakImages" + Model.picture12.ToString().Split(new string[] { "EmlakImages" }, StringSplitOptions.None).Last()); }
+                    if (Model.picture13 == null)
+                    {
+                        nullCount++;
+                    }
+                    else { paths.Add("~/EmlakImages" + Model.picture13.ToString().Split(new string[] { "EmlakImages" }, StringSplitOptions.None).Last()); }
+                    if (Model.picture14 == null)
+                    {
+                        nullCount++;
+                    }
+                    else { paths.Add("~/EmlakImages" + Model.picture14.ToString().Split(new string[] { "EmlakImages" }, StringSplitOptions.None).Last()); }
+                    if (Model.picture15 == null)
+                    {
+                        nullCount++;
+                    }
+                    else { paths.Add("~/EmlakImages" + Model.picture15.ToString().Split(new string[] { "EmlakImages" }, StringSplitOptions.None).Last()); }
+                    if (Model.picture16 == null)
+                    {
+                        nullCount++;
+                    }
+                    else { paths.Add("~/EmlakImages" + Model.picture16.ToString().Split(new string[] { "EmlakImages" }, StringSplitOptions.None).Last()); }
+                    if (Model.picture17 == null)
+                    {
+                        nullCount++;
+                    }
+                    else { paths.Add("~/EmlakImages" + Model.picture17.ToString().Split(new string[] { "EmlakImages" }, StringSplitOptions.None).Last()); }
+                    if (Model.picture18 == null)
+                    {
+                        nullCount++;
+                    }
+                    else { paths.Add("~/EmlakImages" + Model.picture18.ToString().Split(new string[] { "EmlakImages" }, StringSplitOptions.None).Last()); }
+                    if (Model.picture19 == null)
+                    {
+                        nullCount++;
+                    }
+                    else { paths.Add("~/EmlakImages" + Model.picture19.ToString().Split(new string[] { "EmlakImages" }, StringSplitOptions.None).Last()); }
+                    if (Model.picture20 == null)
+                    {
+                        nullCount++;
+                    }
+                    else { paths.Add("~/EmlakImages" + Model.picture20.ToString().Split(new string[] { "EmlakImages" }, StringSplitOptions.None).Last()); }
+                    if (Model.picture21 == null)
+                    {
+                        nullCount++;
+                    }
+                    else { paths.Add("~/EmlakImages" + Model.picture21.ToString().Split(new string[] { "EmlakImages" }, StringSplitOptions.None).Last()); }
+                    if (Model.picture22 == null)
+                    {
+                        nullCount++;
+                    }
+                    else { paths.Add("~/EmlakImages" + Model.picture22.ToString().Split(new string[] { "EmlakImages" }, StringSplitOptions.None).Last()); }
+                    if (Model.picture23 == null)
+                    {
+                        nullCount++;
+                    }
+                    else { paths.Add("~/EmlakImages" + Model.picture23.ToString().Split(new string[] { "EmlakImages" }, StringSplitOptions.None).Last()); }
+                    if (Model.picture24 == null)
+                    {
+                        nullCount++;
+                    }
+                    else { paths.Add("~/EmlakImages" + Model.picture24.ToString().Split(new string[] { "EmlakImages" }, StringSplitOptions.None).Last()); }
+                    if (Model.picture25 == null)
+                    {
+                        nullCount++;
+                    }
+                    else { paths.Add("~/EmlakImages" + Model.picture25.ToString().Split(new string[] { "EmlakImages" }, StringSplitOptions.None).Last()); }
+                }
+            }
+
+            @{
+                if ((25 - nullCount) == 0)
+                {
+                    <div class="mySlides">
+                        <img src='/EmlakImages/default.JPG' style="width:100%; height:30%;">
+                    </div>
+                }
+                else
+                {
+                    for (int i = 0; i < (25 - nullCount); i++)
+                    {
+                        <div class="mySlides">
+                            <div class="numbertext">@(i + 1) / @(25 - nullCount)</div>
+                            <img src='@Url.Content(paths[i])' style="width:100%; height:30%;">
+                        </div>
+                    }
+                }
+            }
+
+            <a class="prev" onclick="plusSlides(-1)">❮</a>
+            <a class="next" onclick="plusSlides(1)">❯</a>
+
+            <div class="caption-container">
+                <p id="caption"></p>
+            </div>
+            @{
+                if (nullCount != 25)
+                {
+                    for (int i = 0; i < (25 - nullCount); i++)
+                    {
+                        <div class="column">
+                            <img class="demo cursor" src='@Url.Content(paths[i])' style="width:100%;height:10%;" onclick="currentSlide(@(i + 1))" alt="Resim @(i + 1)">
+                        </div>
+                    }
+                }
+            }
+        </div>
+        <div style="width:30%; border:outset; float:right">
+            <strong>Ilan No:  </strong><label>@Model.ID</label><br />
+            <strong>Ilan Tarihi:  </strong><label>@Model.Tarih.GetValueOrDefault().ToString(("dd/MM/yyyy"))</label><br />
+            <strong>Konut Türü:  </strong><label>@Model.EmlakTuru</label><br />
+            <strong>Oda Sayısı:  </strong><label>@Model.OdaSayisi</label><br />
+            <strong> Banyo Sayısı: </strong><label>@Model.BanyoSayisi</label><br />
+            <strong> Metrekare:</strong> <label>@Model.MetreKare</label><br />
+            <strong> Binanın Yaşı:</strong> <label>@Model.BinaYasi</label><br />
+            <strong> Isınma Tipi:</strong> <label>@Model.IsitmaTipi</label><br />
+
+        </div>
+    </div>
+
+    @*<label>Ilan Veren: @Model.Adi @Model.Soyadi</label>
+        <label>Müşteri Kaynağı: @Model.MusteriKaynagi</label>
+        <label>TC: @Model.TC</label>
+        <label>Iban: @Model.Iban</label>
+        <label>Cep Telefonu: @Model.CepTelefonu</label>
+        <label>İş Telefonu: @Model.IsTelefonu</label>
+        <label>İlan Tarihi: @Model.Tarih</label>
+        <label>İl: @Model.il</label>
+        <label>İlçe: @Model.ilce</label>
+        <label>Mahalle: @Model.Mahalle</label>
+        <label>Cadde: @Model.Cadde</label>
+        <label>Sokak: @Model.Sokak</label>
+        <label>Apartman Adı: @Model.AptAdi</label>
+        <label>Apartman No: @Model.AptNo</label>
+        <label>Daire No: @Model.DaireNo</label>
+        <label>Kira/Satılık: @Model.Kira_Satilik</label>
+        <label>İşyeri/Konut: @Model.Isyeri_Konut</label>
+
+        <label>Bina Yaşı: @Model.BinaYasi</label>
+        <label>Kat Sayısı: @Model.KatSayisi</label>
+        <label>Kat: @Model.Kat</label>
+        <label>Oda Sayısı: @Model.OdaSayisi</label>
+        <label>Isıtma Tipi: @Model.ISITMA_TIPI</label>
+        <label>Banyo Sayısı: @Model.BanyoSayisi</label>
+        <label>Fiyat Net: @Model.FiyatNet</label>
+        <label>Fiyat Satış: @Model.FiyatSatis</label>
+        <label>Eşyalı Mı?: @Model.EsyaliMi</label>
+        <label>Depozit: @Model.DepozitTL TL</label>
+        <label>Not: @Model.Note</label>
+        <label>Eşyalı Mı?: @Model.EsyaliMi</label>
+        <label>Devren Satılık: @Model.DevrenSatilik</label>
+        <label>Devren Kiralık: @Model.DevrenKiralik</label>
+        <label>UserID: @Model.UserID</label>*@
+    <script>
+    var slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("demo");
+        var captionText = document.getElementById("caption");
+        if (n > slides.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = slides.length }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+        captionText.innerHTML = dots[slideIndex - 1].alt;
+    }
+    </script>
+</body>
+</html>

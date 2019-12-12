@@ -16,17 +16,34 @@ namespace Emlak.Models
     {
         public long ID { get; set; }
         public Nullable<System.DateTime> Tarih { get; set; }
-        public string ImarDurumu { get; set; }
+        public string MusteriKaynagi { get; set; }
+        public string Adi { get; set; }
+        public string Soyadi { get; set; }
+        public string TC { get; set; }
+        public string Iban { get; set; }
+        public string CepTelefonu { get; set; }
+        public string IsTelefonu { get; set; }
+        public string ilanBasligi { get; set; }
+        public string ilanDetayi { get; set; }
+        public string il { get; set; }
+        public string ilce { get; set; }
+        public string mahalle { get; set; }
+        public Nullable<int> FiyatNet { get; set; }
+        public string ImarTipi { get; set; }
+        public Nullable<int> ImarDurumu { get; set; }
+        public string Tarla_Arsa { get; set; }
         public string Belediye { get; set; }
-        public Nullable<int> Ada { get; set; }
-        public Nullable<int> Parsel { get; set; }
+        public Nullable<int> AdaNo { get; set; }
+        public Nullable<int> ParselNo { get; set; }
+        public string PaftaNo { get; set; }
+        public Nullable<int> Kaks_Emsal { get; set; }
+        public Nullable<int> Gabari { get; set; }
         public Nullable<int> MetreKare { get; set; }
         public Nullable<bool> KatKarsiligiOlabilir { get; set; }
         public Nullable<bool> Takas { get; set; }
-        public string TapuDurumu { get; set; }
-        public Nullable<bool> IskanDurumu { get; set; }
-        public Nullable<bool> KonutImarli { get; set; }
-        public Nullable<bool> TicariImarli { get; set; }
+        public Nullable<int> TapuDurumu { get; set; }
+        public Nullable<bool> KrediyeUygun { get; set; }
+        public Nullable<bool> Depozito { get; set; }
         public string Kira_Satilik { get; set; }
         public string picture1 { get; set; }
         public string picture2 { get; set; }
@@ -53,8 +70,50 @@ namespace Emlak.Models
         public string picture23 { get; set; }
         public string picture24 { get; set; }
         public string picture25 { get; set; }
+        public string picture26 { get; set; }
+        public string picture27 { get; set; }
+        public string picture28 { get; set; }
+        public string picture29 { get; set; }
+        public string picture30 { get; set; }
+        public string picture31 { get; set; }
+        public string picture32 { get; set; }
+        public string picture33 { get; set; }
+        public string picture34 { get; set; }
+        public string picture35 { get; set; }
+        public Nullable<bool> Elektrik { get; set; }
+        public Nullable<bool> SanayiElektrigi { get; set; }
+        public Nullable<bool> Su { get; set; }
+        public Nullable<bool> Telefon { get; set; }
+        public Nullable<bool> DogalGaz { get; set; }
+        public Nullable<bool> Kanalizasyon { get; set; }
+        public Nullable<bool> Aritma { get; set; }
+        public Nullable<bool> Sondaj_Kuyu { get; set; }
+        public Nullable<bool> Zemin_Etudu { get; set; }
+        public Nullable<bool> Yolu_Acilmis { get; set; }
+        public Nullable<bool> Yolu_Acilmamis { get; set; }
+        public Nullable<bool> Yolu_Yok { get; set; }
+        public Nullable<bool> AnaYolaYakin { get; set; }
+        public Nullable<bool> DenizeSifir { get; set; }
+        public Nullable<bool> DenizeYakin { get; set; }
+        public Nullable<bool> HavaAlaninaYakin { get; set; }
+        public Nullable<bool> TopluUlasimaYakin { get; set; }
+        public Nullable<bool> ifrazli { get; set; }
+        public Nullable<bool> Parselli { get; set; }
+        public Nullable<bool> Projeli { get; set; }
+        public Nullable<bool> KoseParsel { get; set; }
+        public Nullable<bool> Deniz { get; set; }
+        public Nullable<bool> Doga { get; set; }
+        public Nullable<bool> Bogaz { get; set; }
+        public Nullable<bool> Gol { get; set; }
         public long UserID { get; set; }
+        public string ParselSorgu { get; set; }
+        public Nullable<double> lat { get; set; }
+        public Nullable<double> lng { get; set; }
     
+        public virtual GABARI GABARI1 { get; set; }
+        public virtual IMAR_DURUMU IMAR_DURUMU { get; set; }
+        public virtual KAKS KAKS { get; set; }
+        public virtual TAPU_DURUMU TAPU_DURUMU { get; set; }
         public virtual USERS USERS { get; set; }
     }
 }

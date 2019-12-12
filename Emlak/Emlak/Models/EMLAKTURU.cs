@@ -17,7 +17,6 @@ namespace Emlak.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public EMLAKTURU()
         {
-            this.BINA = new HashSet<BINA>();
             this.EmlakArayanlar = new HashSet<EmlakArayanlar>();
             this.KONUT_ISYERI = new HashSet<KONUT_ISYERI>();
         }
@@ -25,8 +24,6 @@ namespace Emlak.Models
         public int EMLAK_TURU_ID { get; set; }
         public string EMLAK_TURU { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BINA> BINA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmlakArayanlar> EmlakArayanlar { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

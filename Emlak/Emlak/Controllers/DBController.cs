@@ -26,27 +26,96 @@ namespace Emlak.Controllers
             using (Entities db = new Entities())
             {
                 List<SelectListItem> konutTipi = (from i in db.EMLAKTURU.ToList()
-                                                 select new SelectListItem
-                                                 {
-                                                     Text = i.EMLAK_TURU,
-                                                     Value = i.EMLAK_TURU_ID.ToString()
-                                                 }).ToList();
+                                                  select new SelectListItem
+                                                  {
+                                                      Text = i.EMLAK_TURU,
+                                                      Value = i.EMLAK_TURU_ID.ToString()
+                                                  }).ToList();
                 List<SelectListItem> OdaSayisi = (from i in db.ODA_SAYISI.ToList()
                                                   select new SelectListItem
                                                   {
-                                                      Text = i.ISITMA_TIPI,
+                                                      Text = i.ODA_SAYISI1,
                                                       Value = i.ODA_SAYISI_ID.ToString()
                                                   }).ToList();
                 List<SelectListItem> IsitmaTipi = (from i in db.ISITMA_TIPI.ToList()
+                                                   select new SelectListItem
+                                                   {
+                                                       Text = i.ISITMA_TIPI1,
+                                                       Value = i.ISITMA_TIPI_ID.ToString()
+                                                   }).ToList();
+                List<SelectListItem> BinaYasi = (from i in db.BINA_YASI.ToList()
+                                                 select new SelectListItem
+                                                 {
+                                                     Text = i.BINA_YASI1,
+                                                     Value = i.BINA_YASI_ID.ToString()
+                                                 }).ToList();
+                List<SelectListItem> IsyeriTuru = (from i in db.ISYERITURU.ToList()
+                                                   select new SelectListItem
+                                                   {
+                                                       Text = i.ISYERI_TURU,
+                                                       Value = i.ISYERI_TURU_ID.ToString()
+                                                   }).ToList();
+                List<SelectListItem> BulunduguKat = (from i in db.BULUNDUGU_KAT.ToList()
+                                                     select new SelectListItem
+                                                     {
+                                                         Text = i.BULUNDUGU_KAT1,
+                                                         Value = i.BULUNDUGU_KAT_ID.ToString()
+                                                     }).ToList();
+                List<SelectListItem> KatSayisi = (from i in db.KAT_SAYISI.ToList()
                                                   select new SelectListItem
                                                   {
-                                                      Text = i.ISITMA_TIPI1,
-                                                      Value = i.ISITMA_TIPI_ID.ToString()
+                                                      Text = i.KAT_SAYISI1,
+                                                      Value = i.KAT_SAYISI_ID.ToString()
                                                   }).ToList();
-
+                List<SelectListItem> BanyoSayisi = (from i in db.BANYO_SAYISI.ToList()
+                                                    select new SelectListItem
+                                                    {
+                                                        Text = i.BANYO_SAYISI1,
+                                                        Value = i.BANYO_SAYISI_ID.ToString()
+                                                    }).ToList();
+                List<SelectListItem> KullanimDurumu = (from i in db.KULLANIM_DURUMU.ToList()
+                                                       select new SelectListItem
+                                                       {
+                                                           Text = i.KULLANIM_DURUMU1,
+                                                           Value = i.KULLANIM_DURUMU_ID.ToString()
+                                                       }).ToList();
+                List<SelectListItem> ImarDurumu = (from i in db.IMAR_DURUMU.ToList()
+                                                   select new SelectListItem
+                                                   {
+                                                       Text = i.IMAR_DURUMU1,
+                                                       Value = i.IMAR_DURUMU_ID.ToString()
+                                                   }).ToList();
+                List<SelectListItem> Kaks = (from i in db.KAKS.ToList()
+                                             select new SelectListItem
+                                             {
+                                                 Text = i.KAKS1,
+                                                 Value = i.KAKS_ID.ToString()
+                                             }).ToList();
+                List<SelectListItem> Gabari = (from i in db.GABARI.ToList()
+                                               select new SelectListItem
+                                               {
+                                                   Text = i.GABARI1,
+                                                   Value = i.GABARI_ID.ToString()
+                                               }).ToList();
+                List<SelectListItem> TapuDurumu = (from i in db.TAPU_DURUMU.ToList()
+                                                   select new SelectListItem
+                                                   {
+                                                       Text = i.TAPU_DURUMU1,
+                                                       Value = i.TAPU_DURUMU_ID.ToString()
+                                                   }).ToList();
                 ViewBag.konutTipi = konutTipi;
                 ViewBag.OdaSayisi = OdaSayisi;
                 ViewBag.IsitmaTipi = IsitmaTipi;
+                ViewBag.BinaYasi = BinaYasi;
+                ViewBag.IsyeriTuru = IsyeriTuru;
+                ViewBag.BulunduguKat = BulunduguKat;
+                ViewBag.KatSayisi = KatSayisi;
+                ViewBag.BanyoSayisi = BanyoSayisi;
+                ViewBag.KullanimDurumu = KullanimDurumu;
+                ViewBag.ImarDurumu = ImarDurumu;
+                ViewBag.Kaks = Kaks;
+                ViewBag.Gabari = Gabari;
+                ViewBag.TapuDurumu = TapuDurumu;
                 return true;
             }
         }
@@ -82,7 +151,16 @@ namespace Emlak.Controllers
             {
                 if (ajanda.AjandaID == 0)
                 {
+                    if (db.AJANDA.Count() != 0)
+                    {
+                        ajanda.AjandaID = db.AJANDA.Max(item => item.AjandaID) + 1;
+                    }
+                    else
+                    {
+                        ajanda.AjandaID = 1;
+                    }
                     ajanda.UserID = Int16.Parse(Session["userID"].ToString());
+
                     db.AJANDA.Add(ajanda);
 
                     db.SaveChanges();
@@ -143,6 +221,15 @@ namespace Emlak.Controllers
             {
                 if (alacaklarim.AlacakID == 0)
                 {
+                    if (db.ALACAKLARIM.Count() != 0)
+                    {
+                        alacaklarim.AlacakID = db.ALACAKLARIM.Max(item => item.AlacakID) + 1;
+                    }
+                    else
+                    {
+                        alacaklarim.AlacakID = 1;
+                    }
+
                     alacaklarim.UserID = Int16.Parse(Session["userID"].ToString());
                     alacaklarim.tarih = DateTime.Now;
                     db.ALACAKLARIM.Add(alacaklarim);
@@ -206,6 +293,15 @@ namespace Emlak.Controllers
             {
                 if (borclarim.BorcID == 0)
                 {
+                    if (db.BORCLARIM.Count() != 0)
+                    {
+                        borclarim.BorcID = db.BORCLARIM.Max(item => item.BorcID) + 1;
+                    }
+                    else
+                    {
+                        borclarim.BorcID = 1;
+                    }
+
                     borclarim.UserID = Int16.Parse(Session["userID"].ToString());
                     borclarim.Tarih = DateTime.Now;
                     db.BORCLARIM.Add(borclarim);
@@ -269,6 +365,15 @@ namespace Emlak.Controllers
             {
                 if (arayanlar.ArayanlarID == 0)
                 {
+                    if (db.EmlakArayanlar.Count() != 0)
+                    {
+                        arayanlar.ArayanlarID = db.EmlakArayanlar.Max(item => item.ArayanlarID) + 1;
+                    }
+                    else
+                    {
+                        arayanlar.ArayanlarID = 1;
+                    }
+
                     arayanlar.UserID = Int16.Parse(Session["userID"].ToString());
                     //alacaklarim.tarih = DateTime.Now;
                     db.EmlakArayanlar.Add(arayanlar);
@@ -299,33 +404,7 @@ namespace Emlak.Controllers
         }
 
 
-        public ActionResult getKonutSatilik()
-        {
-            //var draw = Request.Form.GetValues("draw").FirstOrDefault();
-            //var start = Request.Form.GetValues("start").FirstOrDefault();
-            //var length = Request.Form.GetValues("length").FirstOrDefault();
-            //var sortColumn = Request.Form.GetValues("columns[" + Request.Form.GetValues("order[0][column]").FirstOrDefault() + "][name]").FirstOrDefault();
-            //var sortColumnDir = Request.Form.GetValues("order[0][dir]").FirstOrDefault();
 
-            //var il = Request.Form.GetValues("columns[0][search][value]").FirstOrDefault();
-
-            //int pageSize = length != null ? Convert.ToInt32(length) : 0;
-            //int skip = start != null ? Convert.ToInt16(start) : 0;
-            //int records = 0;
-
-            using (Entities db = new Entities())
-            {
-                db.Configuration.LazyLoadingEnabled = false;
-                List<KONUT_ISYERI> KonutList = db.KONUT_ISYERI.Where(s => s.Isyeri_Konut == "Konut" && s.Kira_Satilik=="Satılık")
-                    .ToList<KONUT_ISYERI>();
-
-
-                return Json(new { data = KonutList.Select((x, idx) => new { x, idx })
-                    .GroupBy(x => x.idx / 4)
-                    .Select(g => g.Select(a => a.x)) }
-                , JsonRequestBehavior.AllowGet);
-            }
-        }
         [HttpGet]
         public ActionResult AddOrEditKonutSatilik(int id = 0)
         {
@@ -347,10 +426,9 @@ namespace Emlak.Controllers
         {
             using (Entities db = new Entities())
             {
-                try
+                if (konutisyeri.ID == 0)
                 {
-                    Debug.WriteLine(Request.Files.Count.ToString());
-                    if (Request.Files.Count < 25 && Path.GetFileName(Request.Files[0].FileName)!="")
+                    if (Request.Files.Count < 35 && Path.GetFileName(Request.Files[0].FileName)!="")
                     {
                         for (int i = 0; i < Request.Files.Count; i++)
                         {
@@ -363,12 +441,23 @@ namespace Emlak.Controllers
                             else { return Json(new { status = "error", message = "Lütfen jpg veya png uzantılı dosyalar yükleyin!" }); }
                         }
 
+
+                        long tKIsyeri = 0, tArsaTarla = 0, tBina = 0;
+                        if (db.KONUT_ISYERI.Count() != 0) { tKIsyeri = db.KONUT_ISYERI.Max(item => item.ID); }
+                        if (db.ARSA_TARLA.Count() != 0) { tArsaTarla = db.ARSA_TARLA.Max(item => item.ID); }
+                        if (db.BINA.Count() != 0) { tBina = db.BINA.Max(item => item.ID); }
+                        if (tKIsyeri > tArsaTarla && tKIsyeri > tBina) { konutisyeri.ID = tKIsyeri + 1; }
+                        else if (tArsaTarla > tKIsyeri && tArsaTarla > tBina) { konutisyeri.ID = tArsaTarla + 1; }
+                        else if (tBina > tKIsyeri && tBina > tArsaTarla) { konutisyeri.ID = tBina + 1; }
+                        else { konutisyeri.ID = 1; }
+
+
                         for (int i = 0; i < Request.Files.Count; i++)
                         {
                             string imgname = Path.GetFileName(Request.Files[i].FileName);
                             string ext = Path.GetExtension(imgname);
 
-                            string imgpath = Path.Combine(Server.MapPath("~/EmlakImages"), "Kisyeri_" + (db.KONUT_ISYERI.Max(item => item.ID) + 1).ToString() + "_" + (i + 1).ToString() + ext);
+                            string imgpath = Path.Combine(Server.MapPath("~/EmlakImages"), "Kisyeri_" + konutisyeri.ID.ToString() + "_" + (i + 1).ToString() + ext);
                             Request.Files[i].SaveAs(imgpath);
                             switch (i)
                             {
@@ -395,6 +484,9 @@ namespace Emlak.Controllers
                                     break;
                                 case 7:
                                     konutisyeri.picture8 = imgpath;
+                                    break;
+                                case 8:
+                                    konutisyeri.picture9 = imgpath;
                                     break;
                                 case 9:
                                     konutisyeri.picture10 = imgpath;
@@ -444,59 +536,77 @@ namespace Emlak.Controllers
                                 case 24:
                                     konutisyeri.picture25 = imgpath;
                                     break;
+                                case 25:
+                                    konutisyeri.picture26 = imgpath;
+                                    break;
+                                case 26:
+                                    konutisyeri.picture27 = imgpath;
+                                    break;
+                                case 27:
+                                    konutisyeri.picture28 = imgpath;
+                                    break;
+                                case 28:
+                                    konutisyeri.picture29 = imgpath;
+                                    break;
+                                case 29:
+                                    konutisyeri.picture30 = imgpath;
+                                    break;
+                                case 30:
+                                    konutisyeri.picture31 = imgpath;
+                                    break;
+                                case 31:
+                                    konutisyeri.picture32 = imgpath;
+                                    break;
+                                case 32:
+                                    konutisyeri.picture33 = imgpath;
+                                    break;
+                                case 33:
+                                    konutisyeri.picture34 = imgpath;
+                                    break;
+                                case 34:
+                                    konutisyeri.picture35 = imgpath;
+                                    break;
                                 default:
                                     break;
                             }
                         }
                     }
-                    else if(Request.Files.Count>25 && Path.GetFileName(Request.Files[0].FileName) != "") {return Json(new { status = "error", message = "25'den fazla resim giremezsiniz!" }); }
-                    if (konutisyeri.ID == 0)
-                    {
-                        konutisyeri.UserID = Int16.Parse(Session["userID"].ToString());
-                        konutisyeri.Isyeri_Konut = "Konut";
-                        konutisyeri.Tarih = DateTime.Now;
-                        konutisyeri.Kira_Satilik = "Satılık";
-                        db.KONUT_ISYERI.Add(konutisyeri);
- 
-                        db.SaveChanges();
+                    else if(Request.Files.Count>35 && Path.GetFileName(Request.Files[0].FileName) != "") {return Json(new { status = "error", message = "25'den fazla resim giremezsiniz!" }); }
 
-                        return Json(new { success = true, message = "Başarıyla Kaydedildi" }, JsonRequestBehavior.AllowGet);
-                    }
-                    else
+                    if (Path.GetFileName(Request.Files[0].FileName) == "")
                     {
-                        konutisyeri.UserID = Int16.Parse(Session["userID"].ToString());
-                        db.Entry(konutisyeri).State = EntityState.Modified;
-                        db.SaveChanges();
-                        return Json(new { success = true, message = "Başarıyla Güncellendi" }, JsonRequestBehavior.AllowGet);
+                        long tKIsyeri = 0, tArsaTarla = 0, tBina = 0;
+                        if (db.KONUT_ISYERI.Count() != 0) { tKIsyeri = db.KONUT_ISYERI.Max(item => item.ID); }
+                        if (db.ARSA_TARLA.Count() != 0) { tArsaTarla = db.ARSA_TARLA.Max(item => item.ID); }
+                        if (db.BINA.Count() != 0) { tBina = db.BINA.Max(item => item.ID); }
+                        if (tKIsyeri > tArsaTarla && tKIsyeri > tBina) { konutisyeri.ID = tKIsyeri + 1; }
+                        else if (tArsaTarla > tKIsyeri && tArsaTarla > tBina) { konutisyeri.ID = tArsaTarla + 1; }
+                        else if (tBina > tKIsyeri && tBina > tArsaTarla) { konutisyeri.ID = tBina + 1; }
+                        else { konutisyeri.ID = 1; }
                     }
+                        
+                    konutisyeri.UserID = Int16.Parse(Session["userID"].ToString());
+                    konutisyeri.Isyeri_Konut = "Konut";
+                    konutisyeri.Tarih = DateTime.Now;
+                    konutisyeri.Kira_Satilik = "Satılık";
+                    db.KONUT_ISYERI.Add(konutisyeri);
+
+                    db.SaveChanges();
+
+                    return Json(new { success = true, message = "Başarıyla Kaydedildi" }, JsonRequestBehavior.AllowGet);
                 }
-                catch(Exception ex)
+                else
                 {
-                    Debug.WriteLine(ex.ToString());
-                    throw;
+                    konutisyeri.UserID = Int16.Parse(Session["userID"].ToString());
+                    db.Entry(konutisyeri).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return Json(new { success = true, message = "Başarıyla Güncellendi" }, JsonRequestBehavior.AllowGet);
                 }
             }
         }
 
 
 
-        public ActionResult getKonutKiralik() {
-            using (Entities db = new Entities())
-            {
-                db.Configuration.LazyLoadingEnabled = false;
-                List<KONUT_ISYERI> KonutList = db.KONUT_ISYERI.Where(s => s.Isyeri_Konut == "Konut" && s.Kira_Satilik == "Kiralik")
-                    .ToList<KONUT_ISYERI>();
-
-
-                return Json(new
-                {
-                    data = KonutList.Select((x, idx) => new { x, idx })
-                    .GroupBy(x => x.idx / 4)
-                    .Select(g => g.Select(a => a.x))
-                }
-                , JsonRequestBehavior.AllowGet);
-            }
-        }
         [HttpGet]
         public ActionResult AddOrEditKonutKiralik(int id = 0)
         {
@@ -518,10 +628,9 @@ namespace Emlak.Controllers
         {
             using (Entities db = new Entities())
             {
-                try
+                if (konutisyeri.ID == 0)
                 {
-                    Debug.WriteLine(Request.Files.Count.ToString());
-                    if (Request.Files.Count < 25 && Path.GetFileName(Request.Files[0].FileName) != "")
+                    if (Request.Files.Count < 35 && Path.GetFileName(Request.Files[0].FileName) != "")
                     {
                         for (int i = 0; i < Request.Files.Count; i++)
                         {
@@ -534,12 +643,21 @@ namespace Emlak.Controllers
                             else { return Json(new { status = "error", message = "Lütfen jpg veya png uzantılı dosyalar yükleyin!" }); }
                         }
 
+                        long tKIsyeri = 0, tArsaTarla = 0, tBina = 0;
+                        if (db.KONUT_ISYERI.Count() != 0) { tKIsyeri = db.KONUT_ISYERI.Max(item => item.ID); }
+                        if (db.ARSA_TARLA.Count() != 0) { tArsaTarla = db.ARSA_TARLA.Max(item => item.ID); }
+                        if (db.BINA.Count() != 0) { tBina = db.BINA.Max(item => item.ID); }
+                        if (tKIsyeri > tArsaTarla && tKIsyeri > tBina) { konutisyeri.ID = tKIsyeri + 1; }
+                        else if (tArsaTarla > tKIsyeri && tArsaTarla > tBina) { konutisyeri.ID = tArsaTarla + 1; }
+                        else if (tBina > tKIsyeri && tBina > tArsaTarla) { konutisyeri.ID = tBina + 1; }
+                        else { konutisyeri.ID = 1; }
+
                         for (int i = 0; i < Request.Files.Count; i++)
                         {
                             string imgname = Path.GetFileName(Request.Files[i].FileName);
                             string ext = Path.GetExtension(imgname);
 
-                            string imgpath = Path.Combine(Server.MapPath("~/EmlakImages"), "Kisyeri_" + (db.KONUT_ISYERI.Max(item => item.ID) + 1).ToString() + "_" + (i + 1).ToString() + ext);
+                            string imgpath = Path.Combine(Server.MapPath("~/EmlakImages"), "Kisyeri_" + konutisyeri.ID.ToString() + "_" + (i + 1).ToString() + ext);
                             Request.Files[i].SaveAs(imgpath);
                             switch (i)
                             {
@@ -566,6 +684,9 @@ namespace Emlak.Controllers
                                     break;
                                 case 7:
                                     konutisyeri.picture8 = imgpath;
+                                    break;
+                                case 8:
+                                    konutisyeri.picture9 = imgpath;
                                     break;
                                 case 9:
                                     konutisyeri.picture10 = imgpath;
@@ -615,60 +736,77 @@ namespace Emlak.Controllers
                                 case 24:
                                     konutisyeri.picture25 = imgpath;
                                     break;
+                                case 25:
+                                    konutisyeri.picture26 = imgpath;
+                                    break;
+                                case 26:
+                                    konutisyeri.picture27 = imgpath;
+                                    break;
+                                case 27:
+                                    konutisyeri.picture28 = imgpath;
+                                    break;
+                                case 28:
+                                    konutisyeri.picture29 = imgpath;
+                                    break;
+                                case 29:
+                                    konutisyeri.picture30 = imgpath;
+                                    break;
+                                case 30:
+                                    konutisyeri.picture31 = imgpath;
+                                    break;
+                                case 31:
+                                    konutisyeri.picture32 = imgpath;
+                                    break;
+                                case 32:
+                                    konutisyeri.picture33 = imgpath;
+                                    break;
+                                case 33:
+                                    konutisyeri.picture34 = imgpath;
+                                    break;
+                                case 34:
+                                    konutisyeri.picture35 = imgpath;
+                                    break;
                                 default:
                                     break;
                             }
                         }
                     }
-                    else if (Request.Files.Count > 25 && Path.GetFileName(Request.Files[0].FileName) != "") { return Json(new { status = "error", message = "25'den fazla resim giremezsiniz!" }); }
-                    if (konutisyeri.ID == 0)
-                    {
-                        konutisyeri.UserID = Int16.Parse(Session["userID"].ToString());
-                        konutisyeri.Isyeri_Konut = "Konut";
-                        konutisyeri.Tarih = DateTime.Now;
-                        konutisyeri.Kira_Satilik = "Kiralik";
-                        db.KONUT_ISYERI.Add(konutisyeri);
+                    else if (Request.Files.Count > 35 && Path.GetFileName(Request.Files[0].FileName) != "") { return Json(new { status = "error", message = "25'den fazla resim giremezsiniz!" }); }
 
-                        db.SaveChanges();
-
-                        return Json(new { success = true, message = "Başarıyla Kaydedildi" }, JsonRequestBehavior.AllowGet);
-                    }
-                    else
+                    if (Path.GetFileName(Request.Files[0].FileName) == "")
                     {
-                        konutisyeri.UserID = Int16.Parse(Session["userID"].ToString());
-                        db.Entry(konutisyeri).State = EntityState.Modified;
-                        db.SaveChanges();
-                        return Json(new { success = true, message = "Başarıyla Güncellendi" }, JsonRequestBehavior.AllowGet);
+                        long tKIsyeri = 0, tArsaTarla = 0, tBina = 0;
+                        if (db.KONUT_ISYERI.Count() != 0) { tKIsyeri = db.KONUT_ISYERI.Max(item => item.ID); }
+                        if (db.ARSA_TARLA.Count() != 0) { tArsaTarla = db.ARSA_TARLA.Max(item => item.ID); }
+                        if (db.BINA.Count() != 0) { tBina = db.BINA.Max(item => item.ID); }
+                        if (tKIsyeri > tArsaTarla && tKIsyeri > tBina) { konutisyeri.ID = tKIsyeri + 1; }
+                        else if (tArsaTarla > tKIsyeri && tArsaTarla > tBina) { konutisyeri.ID = tArsaTarla + 1; }
+                        else if (tBina > tKIsyeri && tBina > tArsaTarla) { konutisyeri.ID = tBina + 1; }
+                        else { konutisyeri.ID = 1; }
                     }
+
+                    konutisyeri.UserID = Int16.Parse(Session["userID"].ToString());
+                    konutisyeri.Isyeri_Konut = "Konut";
+                    konutisyeri.Tarih = DateTime.Now;
+                    konutisyeri.Kira_Satilik = "Kiralık";
+                    db.KONUT_ISYERI.Add(konutisyeri);
+
+                    db.SaveChanges();
+
+                    return Json(new { success = true, message = "Başarıyla Kaydedildi" }, JsonRequestBehavior.AllowGet);
                 }
-                catch (Exception ex)
+                else
                 {
-                    Debug.WriteLine(ex.ToString());
-                    throw;
+                    konutisyeri.UserID = Int16.Parse(Session["userID"].ToString());
+                    db.Entry(konutisyeri).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return Json(new { success = true, message = "Başarıyla Güncellendi" }, JsonRequestBehavior.AllowGet);
                 }
             }
         }
 
 
 
-        public ActionResult getIsyeriSatilik()
-        {
-            using (Entities db = new Entities())
-            {
-                db.Configuration.LazyLoadingEnabled = false;
-                List<KONUT_ISYERI> KonutList = db.KONUT_ISYERI.Where(s => s.Isyeri_Konut == "Isyeri" && s.Kira_Satilik == "Satilik" && s.DevrenSatilik == false && s.DevrenKiralik == false)
-                    .ToList<KONUT_ISYERI>();
-
-
-                return Json(new
-                {
-                    data = KonutList.Select((x, idx) => new { x, idx })
-                    .GroupBy(x => x.idx / 4)
-                    .Select(g => g.Select(a => a.x))
-                }
-                , JsonRequestBehavior.AllowGet);
-            }
-        }
         [HttpGet]
         public ActionResult AddOrEditIsyeriSatilik(int id = 0)
         {
@@ -690,10 +828,9 @@ namespace Emlak.Controllers
         {
             using (Entities db = new Entities())
             {
-                try
+                if (konutisyeri.ID == 0)
                 {
-                    Debug.WriteLine(Request.Files.Count.ToString());
-                    if (Request.Files.Count < 25 && Path.GetFileName(Request.Files[0].FileName) != "")
+                    if (Request.Files.Count < 35 && Path.GetFileName(Request.Files[0].FileName) != "")
                     {
                         for (int i = 0; i < Request.Files.Count; i++)
                         {
@@ -706,12 +843,21 @@ namespace Emlak.Controllers
                             else { return Json(new { status = "error", message = "Lütfen jpg veya png uzantılı dosyalar yükleyin!" }); }
                         }
 
+                        long tKIsyeri = 0, tArsaTarla = 0, tBina = 0;
+                        if (db.KONUT_ISYERI.Count() != 0) { tKIsyeri = db.KONUT_ISYERI.Max(item => item.ID); }
+                        if (db.ARSA_TARLA.Count() != 0) { tArsaTarla = db.ARSA_TARLA.Max(item => item.ID); }
+                        if (db.BINA.Count() != 0) { tBina = db.BINA.Max(item => item.ID); }
+                        if (tKIsyeri > tArsaTarla && tKIsyeri > tBina) { konutisyeri.ID = tKIsyeri + 1; }
+                        else if (tArsaTarla > tKIsyeri && tArsaTarla > tBina) { konutisyeri.ID = tArsaTarla + 1; }
+                        else if (tBina > tKIsyeri && tBina > tArsaTarla) { konutisyeri.ID = tBina + 1; }
+                        else { konutisyeri.ID = 1; }
+
                         for (int i = 0; i < Request.Files.Count; i++)
                         {
                             string imgname = Path.GetFileName(Request.Files[i].FileName);
                             string ext = Path.GetExtension(imgname);
 
-                            string imgpath = Path.Combine(Server.MapPath("~/EmlakImages"), "Kisyeri_" + (db.KONUT_ISYERI.Max(item => item.ID) + 1).ToString() + "_" + (i + 1).ToString() + ext);
+                            string imgpath = Path.Combine(Server.MapPath("~/EmlakImages"), "Kisyeri_" + konutisyeri.ID.ToString() + "_" + (i + 1).ToString() + ext);
                             Request.Files[i].SaveAs(imgpath);
                             switch (i)
                             {
@@ -738,6 +884,9 @@ namespace Emlak.Controllers
                                     break;
                                 case 7:
                                     konutisyeri.picture8 = imgpath;
+                                    break;
+                                case 8:
+                                    konutisyeri.picture9 = imgpath;
                                     break;
                                 case 9:
                                     konutisyeri.picture10 = imgpath;
@@ -787,63 +936,79 @@ namespace Emlak.Controllers
                                 case 24:
                                     konutisyeri.picture25 = imgpath;
                                     break;
+                                case 25:
+                                    konutisyeri.picture26 = imgpath;
+                                    break;
+                                case 26:
+                                    konutisyeri.picture27 = imgpath;
+                                    break;
+                                case 27:
+                                    konutisyeri.picture28 = imgpath;
+                                    break;
+                                case 28:
+                                    konutisyeri.picture29 = imgpath;
+                                    break;
+                                case 29:
+                                    konutisyeri.picture30 = imgpath;
+                                    break;
+                                case 30:
+                                    konutisyeri.picture31 = imgpath;
+                                    break;
+                                case 31:
+                                    konutisyeri.picture32 = imgpath;
+                                    break;
+                                case 32:
+                                    konutisyeri.picture33 = imgpath;
+                                    break;
+                                case 33:
+                                    konutisyeri.picture34 = imgpath;
+                                    break;
+                                case 34:
+                                    konutisyeri.picture35 = imgpath;
+                                    break;
                                 default:
                                     break;
                             }
                         }
                     }
-                    else if (Request.Files.Count > 25 && Path.GetFileName(Request.Files[0].FileName) != "") { return Json(new { status = "error", message = "25'den fazla resim giremezsiniz!" }); }
-                    if (konutisyeri.ID == 0)
-                    {
-                        konutisyeri.UserID = Int16.Parse(Session["userID"].ToString());
-                        konutisyeri.Isyeri_Konut = "Isyeri";
-                        konutisyeri.Tarih = DateTime.Now;
-                        konutisyeri.Kira_Satilik = "Satilik";
-                        konutisyeri.DevrenKiralik = false;
-                        konutisyeri.DevrenSatilik = false;
-                        db.KONUT_ISYERI.Add(konutisyeri);
+                    else if (Request.Files.Count > 35 && Path.GetFileName(Request.Files[0].FileName) != "") { return Json(new { status = "error", message = "25'den fazla resim giremezsiniz!" }); }
 
-                        db.SaveChanges();
-
-                        return Json(new { success = true, message = "Başarıyla Kaydedildi" }, JsonRequestBehavior.AllowGet);
-                    }
-                    else
+                    if (Path.GetFileName(Request.Files[0].FileName) == "")
                     {
-                        konutisyeri.UserID = Int16.Parse(Session["userID"].ToString());
-                        db.Entry(konutisyeri).State = EntityState.Modified;
-                        db.SaveChanges();
-                        return Json(new { success = true, message = "Başarıyla Güncellendi" }, JsonRequestBehavior.AllowGet);
+                        long tKIsyeri = 0, tArsaTarla = 0, tBina = 0;
+                        if (db.KONUT_ISYERI.Count() != 0) { tKIsyeri = db.KONUT_ISYERI.Max(item => item.ID); }
+                        if (db.ARSA_TARLA.Count() != 0) { tArsaTarla = db.ARSA_TARLA.Max(item => item.ID); }
+                        if (db.BINA.Count() != 0) { tBina = db.BINA.Max(item => item.ID); }
+                        if (tKIsyeri > tArsaTarla && tKIsyeri > tBina) { konutisyeri.ID = tKIsyeri + 1; }
+                        else if (tArsaTarla > tKIsyeri && tArsaTarla > tBina) { konutisyeri.ID = tArsaTarla + 1; }
+                        else if (tBina > tKIsyeri && tBina > tArsaTarla) { konutisyeri.ID = tBina + 1; }
+                        else { konutisyeri.ID = 1; }
                     }
+
+                    konutisyeri.UserID = Int16.Parse(Session["userID"].ToString());
+                    konutisyeri.Isyeri_Konut = "Isyeri";
+                    konutisyeri.Tarih = DateTime.Now;
+                    konutisyeri.Kira_Satilik = "Satılık";
+                    konutisyeri.DevrenKiralik = false;
+                    konutisyeri.DevrenSatilik = false;
+                    db.KONUT_ISYERI.Add(konutisyeri);
+
+                    db.SaveChanges();
+
+                    return Json(new { success = true, message = "Başarıyla Kaydedildi" }, JsonRequestBehavior.AllowGet);
                 }
-                catch (Exception ex)
+                else
                 {
-                    Debug.WriteLine(ex.ToString());
-                    throw;
+                    konutisyeri.UserID = Int16.Parse(Session["userID"].ToString());
+                    db.Entry(konutisyeri).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return Json(new { success = true, message = "Başarıyla Güncellendi" }, JsonRequestBehavior.AllowGet);
                 }
             }
         }
 
 
 
-
-        public ActionResult getIsyeriKiralik()
-        {
-            using (Entities db = new Entities())
-            {
-                db.Configuration.LazyLoadingEnabled = false;
-                List<KONUT_ISYERI> KonutList = db.KONUT_ISYERI.Where(s => s.Isyeri_Konut == "Isyeri" && s.Kira_Satilik == "Kiralik" && s.DevrenSatilik==false && s.DevrenKiralik==false)
-                    .ToList<KONUT_ISYERI>();
-
-
-                return Json(new
-                {
-                    data = KonutList.Select((x, idx) => new { x, idx })
-                    .GroupBy(x => x.idx / 4)
-                    .Select(g => g.Select(a => a.x))
-                }
-                , JsonRequestBehavior.AllowGet);
-            }
-        }
         [HttpGet]
         public ActionResult AddOrEditIsyeriKiralik(int id = 0)
         {
@@ -865,10 +1030,9 @@ namespace Emlak.Controllers
         {
             using (Entities db = new Entities())
             {
-                try
+                if (konutisyeri.ID == 0)
                 {
-                    Debug.WriteLine(Request.Files.Count.ToString());
-                    if (Request.Files.Count < 25 && Path.GetFileName(Request.Files[0].FileName) != "")
+                    if (Request.Files.Count < 35 && Path.GetFileName(Request.Files[0].FileName) != "")
                     {
                         for (int i = 0; i < Request.Files.Count; i++)
                         {
@@ -881,12 +1045,21 @@ namespace Emlak.Controllers
                             else { return Json(new { status = "error", message = "Lütfen jpg veya png uzantılı dosyalar yükleyin!" }); }
                         }
 
+                        long tKIsyeri = 0, tArsaTarla = 0, tBina = 0;
+                        if (db.KONUT_ISYERI.Count() != 0) { tKIsyeri = db.KONUT_ISYERI.Max(item => item.ID); }
+                        if (db.ARSA_TARLA.Count() != 0) { tArsaTarla = db.ARSA_TARLA.Max(item => item.ID); }
+                        if (db.BINA.Count() != 0) { tBina = db.BINA.Max(item => item.ID); }
+                        if (tKIsyeri > tArsaTarla && tKIsyeri > tBina) { konutisyeri.ID = tKIsyeri + 1; }
+                        else if (tArsaTarla > tKIsyeri && tArsaTarla > tBina) { konutisyeri.ID = tArsaTarla + 1; }
+                        else if (tBina > tKIsyeri && tBina > tArsaTarla) { konutisyeri.ID = tBina + 1; }
+                        else { konutisyeri.ID = 1; }
+
                         for (int i = 0; i < Request.Files.Count; i++)
                         {
                             string imgname = Path.GetFileName(Request.Files[i].FileName);
                             string ext = Path.GetExtension(imgname);
 
-                            string imgpath = Path.Combine(Server.MapPath("~/EmlakImages"), "Kisyeri_" + (db.KONUT_ISYERI.Max(item => item.ID) + 1).ToString() + "_" + (i + 1).ToString() + ext);
+                            string imgpath = Path.Combine(Server.MapPath("~/EmlakImages"), "Kisyeri_" + konutisyeri.ID.ToString() + "_" + (i + 1).ToString() + ext);
                             Request.Files[i].SaveAs(imgpath);
                             switch (i)
                             {
@@ -913,6 +1086,9 @@ namespace Emlak.Controllers
                                     break;
                                 case 7:
                                     konutisyeri.picture8 = imgpath;
+                                    break;
+                                case 8:
+                                    konutisyeri.picture9 = imgpath;
                                     break;
                                 case 9:
                                     konutisyeri.picture10 = imgpath;
@@ -962,38 +1138,73 @@ namespace Emlak.Controllers
                                 case 24:
                                     konutisyeri.picture25 = imgpath;
                                     break;
+                                case 25:
+                                    konutisyeri.picture26 = imgpath;
+                                    break;
+                                case 26:
+                                    konutisyeri.picture27 = imgpath;
+                                    break;
+                                case 27:
+                                    konutisyeri.picture28 = imgpath;
+                                    break;
+                                case 28:
+                                    konutisyeri.picture29 = imgpath;
+                                    break;
+                                case 29:
+                                    konutisyeri.picture30 = imgpath;
+                                    break;
+                                case 30:
+                                    konutisyeri.picture31 = imgpath;
+                                    break;
+                                case 31:
+                                    konutisyeri.picture32 = imgpath;
+                                    break;
+                                case 32:
+                                    konutisyeri.picture33 = imgpath;
+                                    break;
+                                case 33:
+                                    konutisyeri.picture34 = imgpath;
+                                    break;
+                                case 34:
+                                    konutisyeri.picture35 = imgpath;
+                                    break;
                                 default:
                                     break;
                             }
                         }
                     }
-                    else if (Request.Files.Count > 25 && Path.GetFileName(Request.Files[0].FileName) != "") { return Json(new { status = "error", message = "25'den fazla resim giremezsiniz!" }); }
-                    if (konutisyeri.ID == 0)
-                    {
-                        konutisyeri.UserID = Int16.Parse(Session["userID"].ToString());
-                        konutisyeri.Isyeri_Konut = "Isyeri";
-                        konutisyeri.Tarih = DateTime.Now;
-                        konutisyeri.Kira_Satilik = "Kiralik";
-                        konutisyeri.DevrenKiralik = false;
-                        konutisyeri.DevrenSatilik = false;
-                        db.KONUT_ISYERI.Add(konutisyeri);
+                    else if (Request.Files.Count > 35 && Path.GetFileName(Request.Files[0].FileName) != "") { return Json(new { status = "error", message = "25'den fazla resim giremezsiniz!" }); }
 
-                        db.SaveChanges();
-
-                        return Json(new { success = true, message = "Başarıyla Kaydedildi" }, JsonRequestBehavior.AllowGet);
-                    }
-                    else
+                    if (Path.GetFileName(Request.Files[0].FileName) == "")
                     {
-                        konutisyeri.UserID = Int16.Parse(Session["userID"].ToString());
-                        db.Entry(konutisyeri).State = EntityState.Modified;
-                        db.SaveChanges();
-                        return Json(new { success = true, message = "Başarıyla Güncellendi" }, JsonRequestBehavior.AllowGet);
+                        long tKIsyeri = 0, tArsaTarla = 0, tBina = 0;
+                        if (db.KONUT_ISYERI.Count() != 0) { tKIsyeri = db.KONUT_ISYERI.Max(item => item.ID); }
+                        if (db.ARSA_TARLA.Count() != 0) { tArsaTarla = db.ARSA_TARLA.Max(item => item.ID); }
+                        if (db.BINA.Count() != 0) { tBina = db.BINA.Max(item => item.ID); }
+                        if (tKIsyeri > tArsaTarla && tKIsyeri > tBina) { konutisyeri.ID = tKIsyeri + 1; }
+                        else if (tArsaTarla > tKIsyeri && tArsaTarla > tBina) { konutisyeri.ID = tArsaTarla + 1; }
+                        else if (tBina > tKIsyeri && tBina > tArsaTarla) { konutisyeri.ID = tBina + 1; }
+                        else { konutisyeri.ID = 1; }
                     }
+
+                    konutisyeri.UserID = Int16.Parse(Session["userID"].ToString());
+                    konutisyeri.Isyeri_Konut = "Isyeri";
+                    konutisyeri.Tarih = DateTime.Now;
+                    konutisyeri.Kira_Satilik = "Kiralık";
+                    konutisyeri.DevrenKiralik = false;
+                    konutisyeri.DevrenSatilik = false;
+                    db.KONUT_ISYERI.Add(konutisyeri);
+
+                    db.SaveChanges();
+
+                    return Json(new { success = true, message = "Başarıyla Kaydedildi" }, JsonRequestBehavior.AllowGet);
                 }
-                catch (Exception ex)
+                else
                 {
-                    Debug.WriteLine(ex.ToString());
-                    throw;
+                    konutisyeri.UserID = Int16.Parse(Session["userID"].ToString());
+                    db.Entry(konutisyeri).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return Json(new { success = true, message = "Başarıyla Güncellendi" }, JsonRequestBehavior.AllowGet);
                 }
             }
         }
@@ -1001,24 +1212,6 @@ namespace Emlak.Controllers
 
 
 
-        public ActionResult getIsyeriDevrenSatilik()
-        {
-            using (Entities db = new Entities())
-            {
-                db.Configuration.LazyLoadingEnabled = false;
-                List<KONUT_ISYERI> KonutList = db.KONUT_ISYERI.Where(s => s.Isyeri_Konut == "Isyeri" && s.Kira_Satilik == "Satilik" && s.DevrenSatilik == true && s.DevrenKiralik == false)
-                    .ToList<KONUT_ISYERI>();
-
-
-                return Json(new
-                {
-                    data = KonutList.Select((x, idx) => new { x, idx })
-                    .GroupBy(x => x.idx / 4)
-                    .Select(g => g.Select(a => a.x))
-                }
-                , JsonRequestBehavior.AllowGet);
-            }
-        }
         [HttpGet]
         public ActionResult AddOrEditIsyeriDevrenSatilik(int id = 0)
         {
@@ -1040,10 +1233,9 @@ namespace Emlak.Controllers
         {
             using (Entities db = new Entities())
             {
-                try
+                if (konutisyeri.ID == 0)
                 {
-                    Debug.WriteLine(Request.Files.Count.ToString());
-                    if (Request.Files.Count < 25 && Path.GetFileName(Request.Files[0].FileName) != "")
+                    if (Request.Files.Count < 35 && Path.GetFileName(Request.Files[0].FileName) != "")
                     {
                         for (int i = 0; i < Request.Files.Count; i++)
                         {
@@ -1056,12 +1248,21 @@ namespace Emlak.Controllers
                             else { return Json(new { status = "error", message = "Lütfen jpg veya png uzantılı dosyalar yükleyin!" }); }
                         }
 
+                        long tKIsyeri = 0, tArsaTarla = 0, tBina = 0;
+                        if (db.KONUT_ISYERI.Count() != 0) { tKIsyeri = db.KONUT_ISYERI.Max(item => item.ID); }
+                        if (db.ARSA_TARLA.Count() != 0) { tArsaTarla = db.ARSA_TARLA.Max(item => item.ID); }
+                        if (db.BINA.Count() != 0) { tBina = db.BINA.Max(item => item.ID); }
+                        if (tKIsyeri > tArsaTarla && tKIsyeri > tBina) { konutisyeri.ID = tKIsyeri + 1; }
+                        else if (tArsaTarla > tKIsyeri && tArsaTarla > tBina) { konutisyeri.ID = tArsaTarla + 1; }
+                        else if (tBina > tKIsyeri && tBina > tArsaTarla) { konutisyeri.ID = tBina + 1; }
+                        else { konutisyeri.ID = 1; }
+
                         for (int i = 0; i < Request.Files.Count; i++)
                         {
                             string imgname = Path.GetFileName(Request.Files[i].FileName);
                             string ext = Path.GetExtension(imgname);
 
-                            string imgpath = Path.Combine(Server.MapPath("~/EmlakImages"), "Kisyeri_" + (db.KONUT_ISYERI.Max(item => item.ID) + 1).ToString() + "_" + (i + 1).ToString() + ext);
+                            string imgpath = Path.Combine(Server.MapPath("~/EmlakImages"), "Kisyeri_" + konutisyeri.ID.ToString() + "_" + (i + 1).ToString() + ext);
                             Request.Files[i].SaveAs(imgpath);
                             switch (i)
                             {
@@ -1088,6 +1289,9 @@ namespace Emlak.Controllers
                                     break;
                                 case 7:
                                     konutisyeri.picture8 = imgpath;
+                                    break;
+                                case 8:
+                                    konutisyeri.picture9 = imgpath;
                                     break;
                                 case 9:
                                     konutisyeri.picture10 = imgpath;
@@ -1137,62 +1341,80 @@ namespace Emlak.Controllers
                                 case 24:
                                     konutisyeri.picture25 = imgpath;
                                     break;
+                                case 25:
+                                    konutisyeri.picture26 = imgpath;
+                                    break;
+                                case 26:
+                                    konutisyeri.picture27 = imgpath;
+                                    break;
+                                case 27:
+                                    konutisyeri.picture28 = imgpath;
+                                    break;
+                                case 28:
+                                    konutisyeri.picture29 = imgpath;
+                                    break;
+                                case 29:
+                                    konutisyeri.picture30 = imgpath;
+                                    break;
+                                case 30:
+                                    konutisyeri.picture31 = imgpath;
+                                    break;
+                                case 31:
+                                    konutisyeri.picture32 = imgpath;
+                                    break;
+                                case 32:
+                                    konutisyeri.picture33 = imgpath;
+                                    break;
+                                case 33:
+                                    konutisyeri.picture34 = imgpath;
+                                    break;
+                                case 34:
+                                    konutisyeri.picture35 = imgpath;
+                                    break;
                                 default:
                                     break;
                             }
                         }
                     }
-                    else if (Request.Files.Count > 25 && Path.GetFileName(Request.Files[0].FileName) != "") { return Json(new { status = "error", message = "25'den fazla resim giremezsiniz!" }); }
-                    if (konutisyeri.ID == 0)
-                    {
-                        konutisyeri.UserID = Int16.Parse(Session["userID"].ToString());
-                        konutisyeri.Isyeri_Konut = "Isyeri";
-                        konutisyeri.Tarih = DateTime.Now;
-                        konutisyeri.Kira_Satilik = "Satilik";
-                        konutisyeri.DevrenKiralik = false;
-                        konutisyeri.DevrenSatilik = true;
-                        db.KONUT_ISYERI.Add(konutisyeri);
+                    else if (Request.Files.Count > 35 && Path.GetFileName(Request.Files[0].FileName) != "") { return Json(new { status = "error", message = "25'den fazla resim giremezsiniz!" }); }
 
-                        db.SaveChanges();
-
-                        return Json(new { success = true, message = "Başarıyla Kaydedildi" }, JsonRequestBehavior.AllowGet);
-                    }
-                    else
+                    if (Path.GetFileName(Request.Files[0].FileName) == "")
                     {
-                        konutisyeri.UserID = Int16.Parse(Session["userID"].ToString());
-                        db.Entry(konutisyeri).State = EntityState.Modified;
-                        db.SaveChanges();
-                        return Json(new { success = true, message = "Başarıyla Güncellendi" }, JsonRequestBehavior.AllowGet);
+                        long tKIsyeri = 0, tArsaTarla = 0, tBina = 0;
+                        if (db.KONUT_ISYERI.Count() != 0) { tKIsyeri = db.KONUT_ISYERI.Max(item => item.ID); }
+                        if (db.ARSA_TARLA.Count() != 0) { tArsaTarla = db.ARSA_TARLA.Max(item => item.ID); }
+                        if (db.BINA.Count() != 0) { tBina = db.BINA.Max(item => item.ID); }
+                        if (tKIsyeri > tArsaTarla && tKIsyeri > tBina) { konutisyeri.ID = tKIsyeri + 1; }
+                        else if (tArsaTarla > tKIsyeri && tArsaTarla > tBina) { konutisyeri.ID = tArsaTarla + 1; }
+                        else if (tBina > tKIsyeri && tBina > tArsaTarla) { konutisyeri.ID = tBina + 1; }
+                        else { konutisyeri.ID = 1; }
                     }
+
+                    konutisyeri.UserID = Int16.Parse(Session["userID"].ToString());
+                    konutisyeri.Isyeri_Konut = "Isyeri";
+                    konutisyeri.Tarih = DateTime.Now;
+                    konutisyeri.Kira_Satilik = "Satılık";
+                    konutisyeri.DevrenKiralik = false;
+                    konutisyeri.DevrenSatilik = true;
+                    db.KONUT_ISYERI.Add(konutisyeri);
+
+                    db.SaveChanges();
+
+                    return Json(new { success = true, message = "Başarıyla Kaydedildi" }, JsonRequestBehavior.AllowGet);
                 }
-                catch (Exception ex)
+                else
                 {
-                    Debug.WriteLine(ex.ToString());
-                    throw;
+                    konutisyeri.UserID = Int16.Parse(Session["userID"].ToString());
+                    db.Entry(konutisyeri).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return Json(new { success = true, message = "Başarıyla Güncellendi" }, JsonRequestBehavior.AllowGet);
                 }
             }
         }
 
 
 
-        public ActionResult getIsyeriDevrenKiralik()
-        {
-            using (Entities db = new Entities())
-            {
-                db.Configuration.LazyLoadingEnabled = false;
-                List<KONUT_ISYERI> KonutList = db.KONUT_ISYERI.Where(s => s.Isyeri_Konut == "Isyeri" && s.Kira_Satilik == "Kiralik" && s.DevrenSatilik == false && s.DevrenKiralik == true)
-                    .ToList<KONUT_ISYERI>();
 
-
-                return Json(new
-                {
-                    data = KonutList.Select((x, idx) => new { x, idx })
-                    .GroupBy(x => x.idx / 4)
-                    .Select(g => g.Select(a => a.x))
-                }
-                , JsonRequestBehavior.AllowGet);
-            }
-        }
         [HttpGet]
         public ActionResult AddOrEditIsyeriDevrenKiralik(int id = 0)
         {
@@ -1214,10 +1436,9 @@ namespace Emlak.Controllers
         {
             using (Entities db = new Entities())
             {
-                try
+                if (konutisyeri.ID == 0)
                 {
-                    Debug.WriteLine(Request.Files.Count.ToString());
-                    if (Request.Files.Count < 25 && Path.GetFileName(Request.Files[0].FileName) != "")
+                    if (Request.Files.Count < 35 && Path.GetFileName(Request.Files[0].FileName) != "")
                     {
                         for (int i = 0; i < Request.Files.Count; i++)
                         {
@@ -1230,12 +1451,21 @@ namespace Emlak.Controllers
                             else { return Json(new { status = "error", message = "Lütfen jpg veya png uzantılı dosyalar yükleyin!" }); }
                         }
 
+                        long tKIsyeri = 0, tArsaTarla = 0, tBina = 0;
+                        if (db.KONUT_ISYERI.Count() != 0) { tKIsyeri = db.KONUT_ISYERI.Max(item => item.ID); }
+                        if (db.ARSA_TARLA.Count() != 0) { tArsaTarla = db.ARSA_TARLA.Max(item => item.ID); }
+                        if (db.BINA.Count() != 0) { tBina = db.BINA.Max(item => item.ID); }
+                        if (tKIsyeri > tArsaTarla && tKIsyeri > tBina) { konutisyeri.ID = tKIsyeri + 1; }
+                        else if (tArsaTarla > tKIsyeri && tArsaTarla > tBina) { konutisyeri.ID = tArsaTarla + 1; }
+                        else if (tBina > tKIsyeri && tBina > tArsaTarla) { konutisyeri.ID = tBina + 1; }
+                        else { konutisyeri.ID = 1; }
+
                         for (int i = 0; i < Request.Files.Count; i++)
                         {
                             string imgname = Path.GetFileName(Request.Files[i].FileName);
                             string ext = Path.GetExtension(imgname);
 
-                            string imgpath = Path.Combine(Server.MapPath("~/EmlakImages"), "Kisyeri_" + (db.KONUT_ISYERI.Max(item => item.ID) + 1).ToString() + "_" + (i + 1).ToString() + ext);
+                            string imgpath = Path.Combine(Server.MapPath("~/EmlakImages"), "Kisyeri_" + konutisyeri.ID.ToString() + "_" + (i + 1).ToString() + ext);
                             Request.Files[i].SaveAs(imgpath);
                             switch (i)
                             {
@@ -1262,6 +1492,9 @@ namespace Emlak.Controllers
                                     break;
                                 case 7:
                                     konutisyeri.picture8 = imgpath;
+                                    break;
+                                case 8:
+                                    konutisyeri.picture9 = imgpath;
                                     break;
                                 case 9:
                                     konutisyeri.picture10 = imgpath;
@@ -1311,40 +1544,1267 @@ namespace Emlak.Controllers
                                 case 24:
                                     konutisyeri.picture25 = imgpath;
                                     break;
+                                case 25:
+                                    konutisyeri.picture26 = imgpath;
+                                    break;
+                                case 26:
+                                    konutisyeri.picture27 = imgpath;
+                                    break;
+                                case 27:
+                                    konutisyeri.picture28 = imgpath;
+                                    break;
+                                case 28:
+                                    konutisyeri.picture29 = imgpath;
+                                    break;
+                                case 29:
+                                    konutisyeri.picture30 = imgpath;
+                                    break;
+                                case 30:
+                                    konutisyeri.picture31 = imgpath;
+                                    break;
+                                case 31:
+                                    konutisyeri.picture32 = imgpath;
+                                    break;
+                                case 32:
+                                    konutisyeri.picture33 = imgpath;
+                                    break;
+                                case 33:
+                                    konutisyeri.picture34 = imgpath;
+                                    break;
+                                case 34:
+                                    konutisyeri.picture35 = imgpath;
+                                    break;
                                 default:
                                     break;
                             }
                         }
                     }
-                    else if (Request.Files.Count > 25 && Path.GetFileName(Request.Files[0].FileName) != "") { return Json(new { status = "error", message = "25'den fazla resim giremezsiniz!" }); }
-                    if (konutisyeri.ID == 0)
-                    {
-                        konutisyeri.UserID = Int16.Parse(Session["userID"].ToString());
-                        konutisyeri.Isyeri_Konut = "Isyeri";
-                        konutisyeri.Tarih = DateTime.Now;
-                        konutisyeri.Kira_Satilik = "Kiralik";
-                        konutisyeri.DevrenKiralik = true;
-                        konutisyeri.DevrenSatilik = false;
-                        db.KONUT_ISYERI.Add(konutisyeri);
+                    else if (Request.Files.Count > 35 && Path.GetFileName(Request.Files[0].FileName) != "") { return Json(new { status = "error", message = "25'den fazla resim giremezsiniz!" }); }
 
-                        db.SaveChanges();
-
-                        return Json(new { success = true, message = "Başarıyla Kaydedildi" }, JsonRequestBehavior.AllowGet);
-                    }
-                    else
+                    if (Path.GetFileName(Request.Files[0].FileName) == "")
                     {
-                        konutisyeri.UserID = Int16.Parse(Session["userID"].ToString());
-                        db.Entry(konutisyeri).State = EntityState.Modified;
-                        db.SaveChanges();
-                        return Json(new { success = true, message = "Başarıyla Güncellendi" }, JsonRequestBehavior.AllowGet);
+                        long tKIsyeri = 0, tArsaTarla = 0, tBina = 0;
+                        if (db.KONUT_ISYERI.Count() != 0) { tKIsyeri = db.KONUT_ISYERI.Max(item => item.ID); }
+                        if (db.ARSA_TARLA.Count() != 0) { tArsaTarla = db.ARSA_TARLA.Max(item => item.ID); }
+                        if (db.BINA.Count() != 0) { tBina = db.BINA.Max(item => item.ID); }
+                        if (tKIsyeri > tArsaTarla && tKIsyeri > tBina) { konutisyeri.ID = tKIsyeri + 1; }
+                        else if (tArsaTarla > tKIsyeri && tArsaTarla > tBina) { konutisyeri.ID = tArsaTarla + 1; }
+                        else if (tBina > tKIsyeri && tBina > tArsaTarla) { konutisyeri.ID = tBina + 1; }
+                        else { konutisyeri.ID = 1; }
                     }
+
+                    konutisyeri.UserID = Int16.Parse(Session["userID"].ToString());
+                    konutisyeri.Isyeri_Konut = "Isyeri";
+                    konutisyeri.Tarih = DateTime.Now;
+                    konutisyeri.Kira_Satilik = "Kiralık";
+                    konutisyeri.DevrenKiralik = true;
+                    konutisyeri.DevrenSatilik = false;
+                    db.KONUT_ISYERI.Add(konutisyeri);
+
+                    db.SaveChanges();
+
+                    return Json(new { success = true, message = "Başarıyla Kaydedildi" }, JsonRequestBehavior.AllowGet);
                 }
-                catch (Exception ex)
+                else
                 {
-                    Debug.WriteLine(ex.ToString());
-                    throw;
+                    konutisyeri.UserID = Int16.Parse(Session["userID"].ToString());
+                    db.Entry(konutisyeri).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return Json(new { success = true, message = "Başarıyla Güncellendi" }, JsonRequestBehavior.AllowGet);
                 }
             }
         }
+
+
+        [HttpGet]
+        public ActionResult AddOrEditArsaSatilik(int id = 0)
+        {
+            setViewBags();
+            if (id == 0)
+            {
+                return View(new ARSA_TARLA());
+            }
+            else
+            {
+                using (Entities db = new Entities())
+                {
+                    return View(db.ARSA_TARLA.Where(x => x.ID == id).FirstOrDefault<ARSA_TARLA>());
+                }
+            }
+        }
+        [HttpPost]
+        public ActionResult AddOrEditArsaSatilik(ARSA_TARLA arsaTarla)
+        {
+            using (Entities db = new Entities())
+            {
+                if (arsaTarla.ID == 0)
+                {
+                    if (Request.Files.Count < 35 && Path.GetFileName(Request.Files[0].FileName) != "")
+                    {
+                        for (int i = 0; i < Request.Files.Count; i++)
+                        {
+                            string imgname = Path.GetFileName(Request.Files[i].FileName);
+                            string ext = Path.GetExtension(imgname);
+                            if (ext == ".jpg" || ext == ".JPG" || ext == ".jpeg")
+                            {
+                                //success
+                            }
+                            else { return Json(new { status = "error", message = "Lütfen jpg veya png uzantılı dosyalar yükleyin!" }); }
+                        }
+
+                        long tKIsyeri = 0, tArsaTarla = 0, tBina = 0;
+                        if (db.KONUT_ISYERI.Count() != 0) { tKIsyeri = db.KONUT_ISYERI.Max(item => item.ID); }
+                        if (db.ARSA_TARLA.Count() != 0) { tArsaTarla = db.ARSA_TARLA.Max(item => item.ID); }
+                        if (db.BINA.Count() != 0) { tBina = db.BINA.Max(item => item.ID); }
+                        if (tKIsyeri > tArsaTarla && tKIsyeri > tBina) { arsaTarla.ID = tKIsyeri + 1; }
+                        else if (tArsaTarla > tKIsyeri && tArsaTarla > tBina) { arsaTarla.ID = tArsaTarla + 1; }
+                        else if (tBina > tKIsyeri && tBina > tArsaTarla) { arsaTarla.ID = tBina + 1; }
+                        else { arsaTarla.ID = 1; }
+
+                        for (int i = 0; i < Request.Files.Count; i++)
+                        {
+                            string imgname = Path.GetFileName(Request.Files[i].FileName);
+                            string ext = Path.GetExtension(imgname);
+
+                            string imgpath = Path.Combine(Server.MapPath("~/EmlakImages"), "ArTarla_" + arsaTarla.ID.ToString() + "_" + (i + 1).ToString() + ext);
+                            Request.Files[i].SaveAs(imgpath);
+                            switch (i)
+                            {
+                                case 0:
+                                    arsaTarla.picture1 = imgpath;
+                                    break;
+                                case 1:
+                                    arsaTarla.picture2 = imgpath;
+                                    break;
+                                case 2:
+                                    arsaTarla.picture3 = imgpath;
+                                    break;
+                                case 3:
+                                    arsaTarla.picture4 = imgpath;
+                                    break;
+                                case 4:
+                                    arsaTarla.picture5 = imgpath;
+                                    break;
+                                case 5:
+                                    arsaTarla.picture6 = imgpath;
+                                    break;
+                                case 6:
+                                    arsaTarla.picture7 = imgpath;
+                                    break;
+                                case 7:
+                                    arsaTarla.picture8 = imgpath;
+                                    break;
+                                case 8:
+                                    arsaTarla.picture9 = imgpath;
+                                    break;
+                                case 9:
+                                    arsaTarla.picture10 = imgpath;
+                                    break;
+                                case 10:
+                                    arsaTarla.picture11 = imgpath;
+                                    break;
+                                case 11:
+                                    arsaTarla.picture12 = imgpath;
+                                    break;
+                                case 12:
+                                    arsaTarla.picture13 = imgpath;
+                                    break;
+                                case 13:
+                                    arsaTarla.picture14 = imgpath;
+                                    break;
+                                case 14:
+                                    arsaTarla.picture15 = imgpath;
+                                    break;
+                                case 15:
+                                    arsaTarla.picture16 = imgpath;
+                                    break;
+                                case 16:
+                                    arsaTarla.picture17 = imgpath;
+                                    break;
+                                case 17:
+                                    arsaTarla.picture18 = imgpath;
+                                    break;
+                                case 18:
+                                    arsaTarla.picture19 = imgpath;
+                                    break;
+                                case 19:
+                                    arsaTarla.picture20 = imgpath;
+                                    break;
+                                case 20:
+                                    arsaTarla.picture21 = imgpath;
+                                    break;
+                                case 21:
+                                    arsaTarla.picture22 = imgpath;
+                                    break;
+                                case 22:
+                                    arsaTarla.picture23 = imgpath;
+                                    break;
+                                case 23:
+                                    arsaTarla.picture24 = imgpath;
+                                    break;
+                                case 24:
+                                    arsaTarla.picture25 = imgpath;
+                                    break;
+                                case 25:
+                                    arsaTarla.picture26 = imgpath;
+                                    break;
+                                case 26:
+                                    arsaTarla.picture27 = imgpath;
+                                    break;
+                                case 27:
+                                    arsaTarla.picture28 = imgpath;
+                                    break;
+                                case 28:
+                                    arsaTarla.picture29 = imgpath;
+                                    break;
+                                case 29:
+                                    arsaTarla.picture30 = imgpath;
+                                    break;
+                                case 30:
+                                    arsaTarla.picture31 = imgpath;
+                                    break;
+                                case 31:
+                                    arsaTarla.picture32 = imgpath;
+                                    break;
+                                case 32:
+                                    arsaTarla.picture33 = imgpath;
+                                    break;
+                                case 33:
+                                    arsaTarla.picture34 = imgpath;
+                                    break;
+                                case 34:
+                                    arsaTarla.picture35 = imgpath;
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    }
+                    else if (Request.Files.Count > 35 && Path.GetFileName(Request.Files[0].FileName) != "") { return Json(new { status = "error", message = "25'den fazla resim giremezsiniz!" }); }
+
+                    if (Path.GetFileName(Request.Files[0].FileName) == "")
+                    {
+                        long tKIsyeri = 0, tArsaTarla = 0, tBina = 0;
+                        if (db.KONUT_ISYERI.Count() != 0) { tKIsyeri = db.KONUT_ISYERI.Max(item => item.ID); }
+                        if (db.ARSA_TARLA.Count() != 0) { tArsaTarla = db.ARSA_TARLA.Max(item => item.ID); }
+                        if (db.BINA.Count() != 0) { tBina = db.BINA.Max(item => item.ID); }
+                        if (tKIsyeri > tArsaTarla && tKIsyeri > tBina) { arsaTarla.ID = tKIsyeri + 1; }
+                        else if (tArsaTarla > tKIsyeri && tArsaTarla > tBina) { arsaTarla.ID = tArsaTarla + 1; }
+                        else if (tBina > tKIsyeri && tBina > tArsaTarla) { arsaTarla.ID = tBina + 1; }
+                        else { arsaTarla.ID = 1; }
+                    }
+
+                    arsaTarla.UserID = Int16.Parse(Session["userID"].ToString());
+                    arsaTarla.Tarih = DateTime.Now;
+                    arsaTarla.Tarla_Arsa = "Arsa";
+                    arsaTarla.Kira_Satilik = "Satılık";
+                    db.ARSA_TARLA.Add(arsaTarla);
+
+                    db.SaveChanges();
+
+                    return Json(new { success = true, message = "Başarıyla Kaydedildi" }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    arsaTarla.UserID = Int16.Parse(Session["userID"].ToString());
+                    db.Entry(arsaTarla).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return Json(new { success = true, message = "Başarıyla Güncellendi" }, JsonRequestBehavior.AllowGet);
+                }
+            }
+        }
+
+
+        [HttpGet]
+        public ActionResult AddOrEditArsaKiralik(int id = 0)
+        {
+            setViewBags();
+            if (id == 0)
+            {
+                return View(new ARSA_TARLA());
+            }
+            else
+            {
+                using (Entities db = new Entities())
+                {
+                    return View(db.ARSA_TARLA.Where(x => x.ID == id).FirstOrDefault<ARSA_TARLA>());
+                }
+            }
+        }
+        [HttpPost]
+        public ActionResult AddOrEditArsaKiralik(ARSA_TARLA arsaTarla)
+        {
+            using (Entities db = new Entities())
+            {
+                if (arsaTarla.ID == 0)
+                {
+                    if (Request.Files.Count < 35 && Path.GetFileName(Request.Files[0].FileName) != "")
+                    {
+                        for (int i = 0; i < Request.Files.Count; i++)
+                        {
+                            string imgname = Path.GetFileName(Request.Files[i].FileName);
+                            string ext = Path.GetExtension(imgname);
+                            if (ext == ".jpg" || ext == ".JPG" || ext == ".jpeg")
+                            {
+                                //success
+                            }
+                            else { return Json(new { status = "error", message = "Lütfen jpg veya png uzantılı dosyalar yükleyin!" }); }
+                        }
+
+                        long tKIsyeri = 0, tArsaTarla = 0, tBina = 0;
+                        if (db.KONUT_ISYERI.Count() != 0) { tKIsyeri = db.KONUT_ISYERI.Max(item => item.ID); }
+                        if (db.ARSA_TARLA.Count() != 0) { tArsaTarla = db.ARSA_TARLA.Max(item => item.ID); }
+                        if (db.BINA.Count() != 0) { tBina = db.BINA.Max(item => item.ID); }
+                        if (tKIsyeri > tArsaTarla && tKIsyeri > tBina) { arsaTarla.ID = tKIsyeri + 1; }
+                        else if (tArsaTarla > tKIsyeri && tArsaTarla > tBina) { arsaTarla.ID = tArsaTarla + 1; }
+                        else if (tBina > tKIsyeri && tBina > tArsaTarla) { arsaTarla.ID = tBina + 1; }
+                        else { arsaTarla.ID = 1; }
+
+                        for (int i = 0; i < Request.Files.Count; i++)
+                        {
+                            string imgname = Path.GetFileName(Request.Files[i].FileName);
+                            string ext = Path.GetExtension(imgname);
+
+                            string imgpath = Path.Combine(Server.MapPath("~/EmlakImages"), "ArTarla_" + arsaTarla.ID.ToString() + "_" + (i + 1).ToString() + ext);
+                            Request.Files[i].SaveAs(imgpath);
+                            switch (i)
+                            {
+                                case 0:
+                                    arsaTarla.picture1 = imgpath;
+                                    break;
+                                case 1:
+                                    arsaTarla.picture2 = imgpath;
+                                    break;
+                                case 2:
+                                    arsaTarla.picture3 = imgpath;
+                                    break;
+                                case 3:
+                                    arsaTarla.picture4 = imgpath;
+                                    break;
+                                case 4:
+                                    arsaTarla.picture5 = imgpath;
+                                    break;
+                                case 5:
+                                    arsaTarla.picture6 = imgpath;
+                                    break;
+                                case 6:
+                                    arsaTarla.picture7 = imgpath;
+                                    break;
+                                case 7:
+                                    arsaTarla.picture8 = imgpath;
+                                    break;
+                                case 8:
+                                    arsaTarla.picture9 = imgpath;
+                                    break;
+                                case 9:
+                                    arsaTarla.picture10 = imgpath;
+                                    break;
+                                case 10:
+                                    arsaTarla.picture11 = imgpath;
+                                    break;
+                                case 11:
+                                    arsaTarla.picture12 = imgpath;
+                                    break;
+                                case 12:
+                                    arsaTarla.picture13 = imgpath;
+                                    break;
+                                case 13:
+                                    arsaTarla.picture14 = imgpath;
+                                    break;
+                                case 14:
+                                    arsaTarla.picture15 = imgpath;
+                                    break;
+                                case 15:
+                                    arsaTarla.picture16 = imgpath;
+                                    break;
+                                case 16:
+                                    arsaTarla.picture17 = imgpath;
+                                    break;
+                                case 17:
+                                    arsaTarla.picture18 = imgpath;
+                                    break;
+                                case 18:
+                                    arsaTarla.picture19 = imgpath;
+                                    break;
+                                case 19:
+                                    arsaTarla.picture20 = imgpath;
+                                    break;
+                                case 20:
+                                    arsaTarla.picture21 = imgpath;
+                                    break;
+                                case 21:
+                                    arsaTarla.picture22 = imgpath;
+                                    break;
+                                case 22:
+                                    arsaTarla.picture23 = imgpath;
+                                    break;
+                                case 23:
+                                    arsaTarla.picture24 = imgpath;
+                                    break;
+                                case 24:
+                                    arsaTarla.picture25 = imgpath;
+                                    break;
+                                case 25:
+                                    arsaTarla.picture26 = imgpath;
+                                    break;
+                                case 26:
+                                    arsaTarla.picture27 = imgpath;
+                                    break;
+                                case 27:
+                                    arsaTarla.picture28 = imgpath;
+                                    break;
+                                case 28:
+                                    arsaTarla.picture29 = imgpath;
+                                    break;
+                                case 29:
+                                    arsaTarla.picture30 = imgpath;
+                                    break;
+                                case 30:
+                                    arsaTarla.picture31 = imgpath;
+                                    break;
+                                case 31:
+                                    arsaTarla.picture32 = imgpath;
+                                    break;
+                                case 32:
+                                    arsaTarla.picture33 = imgpath;
+                                    break;
+                                case 33:
+                                    arsaTarla.picture34 = imgpath;
+                                    break;
+                                case 34:
+                                    arsaTarla.picture35 = imgpath;
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    }
+                    else if (Request.Files.Count > 35 && Path.GetFileName(Request.Files[0].FileName) != "") { return Json(new { status = "error", message = "25'den fazla resim giremezsiniz!" }); }
+
+                    if (Path.GetFileName(Request.Files[0].FileName) == "")
+                    {
+                        long tKIsyeri = 0, tArsaTarla = 0, tBina = 0;
+                        if (db.KONUT_ISYERI.Count() != 0) { tKIsyeri = db.KONUT_ISYERI.Max(item => item.ID); }
+                        if (db.ARSA_TARLA.Count() != 0) { tArsaTarla = db.ARSA_TARLA.Max(item => item.ID); }
+                        if (db.BINA.Count() != 0) { tBina = db.BINA.Max(item => item.ID); }
+                        if (tKIsyeri > tArsaTarla && tKIsyeri > tBina) { arsaTarla.ID = tKIsyeri + 1; }
+                        else if (tArsaTarla > tKIsyeri && tArsaTarla > tBina) { arsaTarla.ID = tArsaTarla + 1; }
+                        else if (tBina > tKIsyeri && tBina > tArsaTarla) { arsaTarla.ID = tBina + 1; }
+                        else { arsaTarla.ID = 1; }
+                    }
+
+                    arsaTarla.UserID = Int16.Parse(Session["userID"].ToString());
+                    arsaTarla.Tarih = DateTime.Now;
+                    arsaTarla.Tarla_Arsa = "Arsa";
+                    arsaTarla.Kira_Satilik = "Kiralık";
+                    db.ARSA_TARLA.Add(arsaTarla);
+
+                    db.SaveChanges();
+
+                    return Json(new { success = true, message = "Başarıyla Kaydedildi" }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    arsaTarla.UserID = Int16.Parse(Session["userID"].ToString());
+                    db.Entry(arsaTarla).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return Json(new { success = true, message = "Başarıyla Güncellendi" }, JsonRequestBehavior.AllowGet);
+                }
+            }
+        }
+
+        [HttpGet]
+        public ActionResult AddOrEditTarlaSatilik(int id = 0)
+        {
+            setViewBags();
+            if (id == 0)
+            {
+                return View(new ARSA_TARLA());
+            }
+            else
+            {
+                using (Entities db = new Entities())
+                {
+                    return View(db.ARSA_TARLA.Where(x => x.ID == id).FirstOrDefault<ARSA_TARLA>());
+                }
+            }
+        }
+        [HttpPost]
+        public ActionResult AddOrEditTarlaSatilik(ARSA_TARLA arsaTarla)
+        {
+            using (Entities db = new Entities())
+            {
+                if (arsaTarla.ID == 0)
+                {
+                    if (Request.Files.Count < 35 && Path.GetFileName(Request.Files[0].FileName) != "")
+                    {
+                        for (int i = 0; i < Request.Files.Count; i++)
+                        {
+                            string imgname = Path.GetFileName(Request.Files[i].FileName);
+                            string ext = Path.GetExtension(imgname);
+                            if (ext == ".jpg" || ext == ".JPG" || ext == ".jpeg")
+                            {
+                                //success
+                            }
+                            else { return Json(new { status = "error", message = "Lütfen jpg veya png uzantılı dosyalar yükleyin!" }); }
+                        }
+
+                        long tKIsyeri = 0, tArsaTarla = 0, tBina = 0;
+                        if (db.KONUT_ISYERI.Count() != 0) { tKIsyeri = db.KONUT_ISYERI.Max(item => item.ID); }
+                        if (db.ARSA_TARLA.Count() != 0) { tArsaTarla = db.ARSA_TARLA.Max(item => item.ID); }
+                        if (db.BINA.Count() != 0) { tBina = db.BINA.Max(item => item.ID); }
+                        if (tKIsyeri > tArsaTarla && tKIsyeri > tBina) { arsaTarla.ID = tKIsyeri + 1; }
+                        else if (tArsaTarla > tKIsyeri && tArsaTarla > tBina) { arsaTarla.ID = tArsaTarla + 1; }
+                        else if (tBina > tKIsyeri && tBina > tArsaTarla) { arsaTarla.ID = tBina + 1; }
+                        else { arsaTarla.ID = 1; }
+
+                        for (int i = 0; i < Request.Files.Count; i++)
+                        {
+                            string imgname = Path.GetFileName(Request.Files[i].FileName);
+                            string ext = Path.GetExtension(imgname);
+
+                            string imgpath = Path.Combine(Server.MapPath("~/EmlakImages"), "ArTarla_" + arsaTarla.ID.ToString() + "_" + (i + 1).ToString() + ext);
+                            Request.Files[i].SaveAs(imgpath);
+                            switch (i)
+                            {
+                                case 0:
+                                    arsaTarla.picture1 = imgpath;
+                                    break;
+                                case 1:
+                                    arsaTarla.picture2 = imgpath;
+                                    break;
+                                case 2:
+                                    arsaTarla.picture3 = imgpath;
+                                    break;
+                                case 3:
+                                    arsaTarla.picture4 = imgpath;
+                                    break;
+                                case 4:
+                                    arsaTarla.picture5 = imgpath;
+                                    break;
+                                case 5:
+                                    arsaTarla.picture6 = imgpath;
+                                    break;
+                                case 6:
+                                    arsaTarla.picture7 = imgpath;
+                                    break;
+                                case 7:
+                                    arsaTarla.picture8 = imgpath;
+                                    break;
+                                case 8:
+                                    arsaTarla.picture9 = imgpath;
+                                    break;
+                                case 9:
+                                    arsaTarla.picture10 = imgpath;
+                                    break;
+                                case 10:
+                                    arsaTarla.picture11 = imgpath;
+                                    break;
+                                case 11:
+                                    arsaTarla.picture12 = imgpath;
+                                    break;
+                                case 12:
+                                    arsaTarla.picture13 = imgpath;
+                                    break;
+                                case 13:
+                                    arsaTarla.picture14 = imgpath;
+                                    break;
+                                case 14:
+                                    arsaTarla.picture15 = imgpath;
+                                    break;
+                                case 15:
+                                    arsaTarla.picture16 = imgpath;
+                                    break;
+                                case 16:
+                                    arsaTarla.picture17 = imgpath;
+                                    break;
+                                case 17:
+                                    arsaTarla.picture18 = imgpath;
+                                    break;
+                                case 18:
+                                    arsaTarla.picture19 = imgpath;
+                                    break;
+                                case 19:
+                                    arsaTarla.picture20 = imgpath;
+                                    break;
+                                case 20:
+                                    arsaTarla.picture21 = imgpath;
+                                    break;
+                                case 21:
+                                    arsaTarla.picture22 = imgpath;
+                                    break;
+                                case 22:
+                                    arsaTarla.picture23 = imgpath;
+                                    break;
+                                case 23:
+                                    arsaTarla.picture24 = imgpath;
+                                    break;
+                                case 24:
+                                    arsaTarla.picture25 = imgpath;
+                                    break;
+                                case 25:
+                                    arsaTarla.picture26 = imgpath;
+                                    break;
+                                case 26:
+                                    arsaTarla.picture27 = imgpath;
+                                    break;
+                                case 27:
+                                    arsaTarla.picture28 = imgpath;
+                                    break;
+                                case 28:
+                                    arsaTarla.picture29 = imgpath;
+                                    break;
+                                case 29:
+                                    arsaTarla.picture30 = imgpath;
+                                    break;
+                                case 30:
+                                    arsaTarla.picture31 = imgpath;
+                                    break;
+                                case 31:
+                                    arsaTarla.picture32 = imgpath;
+                                    break;
+                                case 32:
+                                    arsaTarla.picture33 = imgpath;
+                                    break;
+                                case 33:
+                                    arsaTarla.picture34 = imgpath;
+                                    break;
+                                case 34:
+                                    arsaTarla.picture35 = imgpath;
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    }
+                    else if (Request.Files.Count > 35 && Path.GetFileName(Request.Files[0].FileName) != "") { return Json(new { status = "error", message = "25'den fazla resim giremezsiniz!" }); }
+
+                    if (Path.GetFileName(Request.Files[0].FileName) == "")
+                    {
+                        long tKIsyeri = 0, tArsaTarla = 0, tBina = 0;
+                        if (db.KONUT_ISYERI.Count() != 0) { tKIsyeri = db.KONUT_ISYERI.Max(item => item.ID); }
+                        if (db.ARSA_TARLA.Count() != 0) { tArsaTarla = db.ARSA_TARLA.Max(item => item.ID); }
+                        if (db.BINA.Count() != 0) { tBina = db.BINA.Max(item => item.ID); }
+                        if (tKIsyeri > tArsaTarla && tKIsyeri > tBina) { arsaTarla.ID = tKIsyeri + 1; }
+                        else if (tArsaTarla > tKIsyeri && tArsaTarla > tBina) { arsaTarla.ID = tArsaTarla + 1; }
+                        else if (tBina > tKIsyeri && tBina > tArsaTarla) { arsaTarla.ID = tBina + 1; }
+                        else { arsaTarla.ID = 1; }
+                    }
+
+                    arsaTarla.UserID = Int16.Parse(Session["userID"].ToString());
+                    arsaTarla.Tarih = DateTime.Now;
+                    arsaTarla.Tarla_Arsa = "Tarla";
+                    arsaTarla.Kira_Satilik = "Satılık";
+                    db.ARSA_TARLA.Add(arsaTarla);
+
+                    db.SaveChanges();
+
+                    return Json(new { success = true, message = "Başarıyla Kaydedildi" }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    arsaTarla.UserID = Int16.Parse(Session["userID"].ToString());
+                    db.Entry(arsaTarla).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return Json(new { success = true, message = "Başarıyla Güncellendi" }, JsonRequestBehavior.AllowGet);
+                }
+            }
+        }
+
+
+        [HttpGet]
+        public ActionResult AddOrEditTarlaKiralik(int id = 0)
+        {
+            setViewBags();
+            if (id == 0)
+            {
+                return View(new ARSA_TARLA());
+            }
+            else
+            {
+                using (Entities db = new Entities())
+                {
+                    return View(db.ARSA_TARLA.Where(x => x.ID == id).FirstOrDefault<ARSA_TARLA>());
+                }
+            }
+        }
+        [HttpPost]
+        public ActionResult AddOrEditTarlaKiralik(ARSA_TARLA arsaTarla)
+        {
+            using (Entities db = new Entities())
+            {
+                if (arsaTarla.ID == 0)
+                {
+                    if (Request.Files.Count < 35 && Path.GetFileName(Request.Files[0].FileName) != "")
+                    {
+                        for (int i = 0; i < Request.Files.Count; i++)
+                        {
+                            string imgname = Path.GetFileName(Request.Files[i].FileName);
+                            string ext = Path.GetExtension(imgname);
+                            if (ext == ".jpg" || ext == ".JPG" || ext == ".jpeg")
+                            {
+                                //success
+                            }
+                            else { return Json(new { status = "error", message = "Lütfen jpg veya png uzantılı dosyalar yükleyin!" }); }
+                        }
+
+                        long tKIsyeri = 0, tArsaTarla = 0, tBina = 0;
+                        if (db.KONUT_ISYERI.Count() != 0) { tKIsyeri = db.KONUT_ISYERI.Max(item => item.ID); }
+                        if (db.ARSA_TARLA.Count() != 0) { tArsaTarla = db.ARSA_TARLA.Max(item => item.ID); }
+                        if (db.BINA.Count() != 0) { tBina = db.BINA.Max(item => item.ID); }
+                        if (tKIsyeri > tArsaTarla && tKIsyeri > tBina) { arsaTarla.ID = tKIsyeri + 1; }
+                        else if (tArsaTarla > tKIsyeri && tArsaTarla > tBina) { arsaTarla.ID = tArsaTarla + 1; }
+                        else if (tBina > tKIsyeri && tBina > tArsaTarla) { arsaTarla.ID = tBina + 1; }
+                        else { arsaTarla.ID = 1; }
+
+                        for (int i = 0; i < Request.Files.Count; i++)
+                        {
+                            string imgname = Path.GetFileName(Request.Files[i].FileName);
+                            string ext = Path.GetExtension(imgname);
+
+                            string imgpath = Path.Combine(Server.MapPath("~/EmlakImages"), "ArTarla_" + arsaTarla.ID.ToString() + "_" + (i + 1).ToString() + ext);
+                            Request.Files[i].SaveAs(imgpath);
+                            switch (i)
+                            {
+                                case 0:
+                                    arsaTarla.picture1 = imgpath;
+                                    break;
+                                case 1:
+                                    arsaTarla.picture2 = imgpath;
+                                    break;
+                                case 2:
+                                    arsaTarla.picture3 = imgpath;
+                                    break;
+                                case 3:
+                                    arsaTarla.picture4 = imgpath;
+                                    break;
+                                case 4:
+                                    arsaTarla.picture5 = imgpath;
+                                    break;
+                                case 5:
+                                    arsaTarla.picture6 = imgpath;
+                                    break;
+                                case 6:
+                                    arsaTarla.picture7 = imgpath;
+                                    break;
+                                case 7:
+                                    arsaTarla.picture8 = imgpath;
+                                    break;
+                                case 8:
+                                    arsaTarla.picture9 = imgpath;
+                                    break;
+                                case 9:
+                                    arsaTarla.picture10 = imgpath;
+                                    break;
+                                case 10:
+                                    arsaTarla.picture11 = imgpath;
+                                    break;
+                                case 11:
+                                    arsaTarla.picture12 = imgpath;
+                                    break;
+                                case 12:
+                                    arsaTarla.picture13 = imgpath;
+                                    break;
+                                case 13:
+                                    arsaTarla.picture14 = imgpath;
+                                    break;
+                                case 14:
+                                    arsaTarla.picture15 = imgpath;
+                                    break;
+                                case 15:
+                                    arsaTarla.picture16 = imgpath;
+                                    break;
+                                case 16:
+                                    arsaTarla.picture17 = imgpath;
+                                    break;
+                                case 17:
+                                    arsaTarla.picture18 = imgpath;
+                                    break;
+                                case 18:
+                                    arsaTarla.picture19 = imgpath;
+                                    break;
+                                case 19:
+                                    arsaTarla.picture20 = imgpath;
+                                    break;
+                                case 20:
+                                    arsaTarla.picture21 = imgpath;
+                                    break;
+                                case 21:
+                                    arsaTarla.picture22 = imgpath;
+                                    break;
+                                case 22:
+                                    arsaTarla.picture23 = imgpath;
+                                    break;
+                                case 23:
+                                    arsaTarla.picture24 = imgpath;
+                                    break;
+                                case 24:
+                                    arsaTarla.picture25 = imgpath;
+                                    break;
+                                case 25:
+                                    arsaTarla.picture26 = imgpath;
+                                    break;
+                                case 26:
+                                    arsaTarla.picture27 = imgpath;
+                                    break;
+                                case 27:
+                                    arsaTarla.picture28 = imgpath;
+                                    break;
+                                case 28:
+                                    arsaTarla.picture29 = imgpath;
+                                    break;
+                                case 29:
+                                    arsaTarla.picture30 = imgpath;
+                                    break;
+                                case 30:
+                                    arsaTarla.picture31 = imgpath;
+                                    break;
+                                case 31:
+                                    arsaTarla.picture32 = imgpath;
+                                    break;
+                                case 32:
+                                    arsaTarla.picture33 = imgpath;
+                                    break;
+                                case 33:
+                                    arsaTarla.picture34 = imgpath;
+                                    break;
+                                case 34:
+                                    arsaTarla.picture35 = imgpath;
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    }
+                    else if (Request.Files.Count > 35 && Path.GetFileName(Request.Files[0].FileName) != "") { return Json(new { status = "error", message = "25'den fazla resim giremezsiniz!" }); }
+
+                    if (Path.GetFileName(Request.Files[0].FileName) == "")
+                    {
+                        long tKIsyeri = 0, tArsaTarla = 0, tBina = 0;
+                        if (db.KONUT_ISYERI.Count() != 0) { tKIsyeri = db.KONUT_ISYERI.Max(item => item.ID); }
+                        if (db.ARSA_TARLA.Count() != 0) { tArsaTarla = db.ARSA_TARLA.Max(item => item.ID); }
+                        if (db.BINA.Count() != 0) { tBina = db.BINA.Max(item => item.ID); }
+                        if (tKIsyeri > tArsaTarla && tKIsyeri > tBina) { arsaTarla.ID = tKIsyeri + 1; }
+                        else if (tArsaTarla > tKIsyeri && tArsaTarla > tBina) { arsaTarla.ID = tArsaTarla + 1; }
+                        else if (tBina > tKIsyeri && tBina > tArsaTarla) { arsaTarla.ID = tBina + 1; }
+                        else { arsaTarla.ID = 1; }
+                    }
+
+                    arsaTarla.UserID = Int16.Parse(Session["userID"].ToString());
+                    arsaTarla.Tarih = DateTime.Now;
+                    arsaTarla.Tarla_Arsa = "Tarla";
+                    arsaTarla.Kira_Satilik = "Kiralık";
+                    db.ARSA_TARLA.Add(arsaTarla);
+
+                    db.SaveChanges();
+
+                    return Json(new { success = true, message = "Başarıyla Kaydedildi" }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    arsaTarla.UserID = Int16.Parse(Session["userID"].ToString());
+                    db.Entry(arsaTarla).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return Json(new { success = true, message = "Başarıyla Güncellendi" }, JsonRequestBehavior.AllowGet);
+                }
+            }
+        }
+
+
+        [HttpGet]
+        public ActionResult AddOrEditBinaSatilik(int id = 0)
+        {
+            setViewBags();
+            if (id == 0)
+            {
+                return View(new BINA());
+            }
+            else
+            {
+                using (Entities db = new Entities())
+                {
+                    return View(db.BINA.Where(x => x.ID == id).FirstOrDefault<BINA>());
+                }
+            }
+        }
+        [HttpPost]
+        public ActionResult AddOrEditBinaSatilik(BINA binaObj)
+        {
+            using (Entities db = new Entities())
+            {
+                if (binaObj.ID == 0)
+                {
+                    if (Request.Files.Count < 35 && Path.GetFileName(Request.Files[0].FileName) != "")
+                    {
+                        for (int i = 0; i < Request.Files.Count; i++)
+                        {
+                            string imgname = Path.GetFileName(Request.Files[i].FileName);
+                            string ext = Path.GetExtension(imgname);
+                            if (ext == ".jpg" || ext == ".JPG" || ext == ".jpeg")
+                            {
+                                //success
+                            }
+                            else { return Json(new { status = "error", message = "Lütfen jpg veya png uzantılı dosyalar yükleyin!" }); }
+                        }
+
+                        long tKIsyeri = 0, tArsaTarla = 0, tBina = 0;
+                        if (db.KONUT_ISYERI.Count() != 0) { tKIsyeri = db.KONUT_ISYERI.Max(item => item.ID); }
+                        if (db.ARSA_TARLA.Count() != 0) { tArsaTarla = db.ARSA_TARLA.Max(item => item.ID); }
+                        if (db.BINA.Count() != 0) { tBina = db.BINA.Max(item => item.ID); }
+                        if (tKIsyeri > tArsaTarla && tKIsyeri > tBina) { binaObj.ID = tKIsyeri + 1; }
+                        else if (tArsaTarla > tKIsyeri && tArsaTarla > tBina) { binaObj.ID = tArsaTarla + 1; }
+                        else if (tBina > tKIsyeri && tBina > tArsaTarla) { binaObj.ID = tBina + 1; }
+                        else { binaObj.ID = 1; }
+
+                        for (int i = 0; i < Request.Files.Count; i++)
+                        {
+                            string imgname = Path.GetFileName(Request.Files[i].FileName);
+                            string ext = Path.GetExtension(imgname);
+
+                            string imgpath = Path.Combine(Server.MapPath("~/EmlakImages"), "Bina_" + binaObj.ID.ToString() + "_" + (i + 1).ToString() + ext);
+                            Request.Files[i].SaveAs(imgpath);
+                            switch (i)
+                            {
+                                case 0:
+                                    binaObj.picture1 = imgpath;
+                                    break;
+                                case 1:
+                                    binaObj.picture2 = imgpath;
+                                    break;
+                                case 2:
+                                    binaObj.picture3 = imgpath;
+                                    break;
+                                case 3:
+                                    binaObj.picture4 = imgpath;
+                                    break;
+                                case 4:
+                                    binaObj.picture5 = imgpath;
+                                    break;
+                                case 5:
+                                    binaObj.picture6 = imgpath;
+                                    break;
+                                case 6:
+                                    binaObj.picture7 = imgpath;
+                                    break;
+                                case 7:
+                                    binaObj.picture8 = imgpath;
+                                    break;
+                                case 8:
+                                    binaObj.picture9 = imgpath;
+                                    break;
+                                case 9:
+                                    binaObj.picture10 = imgpath;
+                                    break;
+                                case 10:
+                                    binaObj.picture11 = imgpath;
+                                    break;
+                                case 11:
+                                    binaObj.picture12 = imgpath;
+                                    break;
+                                case 12:
+                                    binaObj.picture13 = imgpath;
+                                    break;
+                                case 13:
+                                    binaObj.picture14 = imgpath;
+                                    break;
+                                case 14:
+                                    binaObj.picture15 = imgpath;
+                                    break;
+                                case 15:
+                                    binaObj.picture16 = imgpath;
+                                    break;
+                                case 16:
+                                    binaObj.picture17 = imgpath;
+                                    break;
+                                case 17:
+                                    binaObj.picture18 = imgpath;
+                                    break;
+                                case 18:
+                                    binaObj.picture19 = imgpath;
+                                    break;
+                                case 19:
+                                    binaObj.picture20 = imgpath;
+                                    break;
+                                case 20:
+                                    binaObj.picture21 = imgpath;
+                                    break;
+                                case 21:
+                                    binaObj.picture22 = imgpath;
+                                    break;
+                                case 22:
+                                    binaObj.picture23 = imgpath;
+                                    break;
+                                case 23:
+                                    binaObj.picture24 = imgpath;
+                                    break;
+                                case 24:
+                                    binaObj.picture25 = imgpath;
+                                    break;
+                                case 25:
+                                    binaObj.picture26 = imgpath;
+                                    break;
+                                case 26:
+                                    binaObj.picture27 = imgpath;
+                                    break;
+                                case 27:
+                                    binaObj.picture28 = imgpath;
+                                    break;
+                                case 28:
+                                    binaObj.picture29 = imgpath;
+                                    break;
+                                case 29:
+                                    binaObj.picture30 = imgpath;
+                                    break;
+                                case 30:
+                                    binaObj.picture31 = imgpath;
+                                    break;
+                                case 31:
+                                    binaObj.picture32 = imgpath;
+                                    break;
+                                case 32:
+                                    binaObj.picture33 = imgpath;
+                                    break;
+                                case 33:
+                                    binaObj.picture34 = imgpath;
+                                    break;
+                                case 34:
+                                    binaObj.picture35 = imgpath;
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    }
+                    else if (Request.Files.Count > 35 && Path.GetFileName(Request.Files[0].FileName) != "") { return Json(new { status = "error", message = "25'den fazla resim giremezsiniz!" }); }
+
+                    if (Path.GetFileName(Request.Files[0].FileName) == "")
+                    {
+                        long tKIsyeri = 0, tArsaTarla = 0, tBina = 0;
+                        if (db.KONUT_ISYERI.Count() != 0) { tKIsyeri = db.KONUT_ISYERI.Max(item => item.ID); }
+                        if (db.ARSA_TARLA.Count() != 0) { tArsaTarla = db.ARSA_TARLA.Max(item => item.ID); }
+                        if (db.BINA.Count() != 0) { tBina = db.BINA.Max(item => item.ID); }
+                        if (tKIsyeri > tArsaTarla && tKIsyeri > tBina) { binaObj.ID = tKIsyeri + 1; }
+                        else if (tArsaTarla > tKIsyeri && tArsaTarla > tBina) { binaObj.ID = tArsaTarla + 1; }
+                        else if (tBina > tKIsyeri && tBina > tArsaTarla) { binaObj.ID = tBina + 1; }
+                        else { binaObj.ID = 1; }
+                    }
+
+                    binaObj.UserID = Int16.Parse(Session["userID"].ToString());
+                    binaObj.Tarih = DateTime.Now;
+                    binaObj.Kira_Satilik = "Satılık";
+                    db.BINA.Add(binaObj);
+
+                    db.SaveChanges();
+
+                    return Json(new { success = true, message = "Başarıyla Kaydedildi" }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    binaObj.UserID = Int16.Parse(Session["userID"].ToString());
+                    db.Entry(binaObj).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return Json(new { success = true, message = "Başarıyla Güncellendi" }, JsonRequestBehavior.AllowGet);
+                }
+            }
+        }
+
+
+        [HttpGet]
+        public ActionResult AddOrEditBinaKiralik(int id = 0)
+        {
+            setViewBags();
+            if (id == 0)
+            {
+                return View(new BINA());
+            }
+            else
+            {
+                using (Entities db = new Entities())
+                {
+                    return View(db.BINA.Where(x => x.ID == id).FirstOrDefault<BINA>());
+                }
+            }
+        }
+        [HttpPost]
+        public ActionResult AddOrEditBinaKiralik(BINA binaObj)
+        {
+            using (Entities db = new Entities())
+            {
+                if (binaObj.ID == 0)
+                {
+                    if (Request.Files.Count < 35 && Path.GetFileName(Request.Files[0].FileName) != "")
+                    {
+                        for (int i = 0; i < Request.Files.Count; i++)
+                        {
+                            string imgname = Path.GetFileName(Request.Files[i].FileName);
+                            string ext = Path.GetExtension(imgname);
+                            if (ext == ".jpg" || ext == ".JPG" || ext == ".jpeg")
+                            {
+                                //success
+                            }
+                            else { return Json(new { status = "error", message = "Lütfen jpg veya png uzantılı dosyalar yükleyin!" }); }
+                        }
+
+                        long tKIsyeri = 0, tArsaTarla = 0, tBina = 0;
+                        if (db.KONUT_ISYERI.Count() != 0) { tKIsyeri = db.KONUT_ISYERI.Max(item => item.ID); }
+                        if (db.ARSA_TARLA.Count() != 0) { tArsaTarla = db.ARSA_TARLA.Max(item => item.ID); }
+                        if (db.BINA.Count() != 0) { tBina = db.BINA.Max(item => item.ID); }
+                        if (tKIsyeri > tArsaTarla && tKIsyeri > tBina) { binaObj.ID = tKIsyeri + 1; }
+                        else if (tArsaTarla > tKIsyeri && tArsaTarla > tBina) { binaObj.ID = tArsaTarla + 1; }
+                        else if (tBina > tKIsyeri && tBina > tArsaTarla) { binaObj.ID = tBina + 1; }
+                        else { binaObj.ID = 1; }
+
+                        for (int i = 0; i < Request.Files.Count; i++)
+                        {
+                            string imgname = Path.GetFileName(Request.Files[i].FileName);
+                            string ext = Path.GetExtension(imgname);
+
+                            string imgpath = Path.Combine(Server.MapPath("~/EmlakImages"), "Bina_" + binaObj.ID.ToString() + "_" + (i + 1).ToString() + ext);
+                            Request.Files[i].SaveAs(imgpath);
+                            switch (i)
+                            {
+                                case 0:
+                                    binaObj.picture1 = imgpath;
+                                    break;
+                                case 1:
+                                    binaObj.picture2 = imgpath;
+                                    break;
+                                case 2:
+                                    binaObj.picture3 = imgpath;
+                                    break;
+                                case 3:
+                                    binaObj.picture4 = imgpath;
+                                    break;
+                                case 4:
+                                    binaObj.picture5 = imgpath;
+                                    break;
+                                case 5:
+                                    binaObj.picture6 = imgpath;
+                                    break;
+                                case 6:
+                                    binaObj.picture7 = imgpath;
+                                    break;
+                                case 7:
+                                    binaObj.picture8 = imgpath;
+                                    break;
+                                case 8:
+                                    binaObj.picture9 = imgpath;
+                                    break;
+                                case 9:
+                                    binaObj.picture10 = imgpath;
+                                    break;
+                                case 10:
+                                    binaObj.picture11 = imgpath;
+                                    break;
+                                case 11:
+                                    binaObj.picture12 = imgpath;
+                                    break;
+                                case 12:
+                                    binaObj.picture13 = imgpath;
+                                    break;
+                                case 13:
+                                    binaObj.picture14 = imgpath;
+                                    break;
+                                case 14:
+                                    binaObj.picture15 = imgpath;
+                                    break;
+                                case 15:
+                                    binaObj.picture16 = imgpath;
+                                    break;
+                                case 16:
+                                    binaObj.picture17 = imgpath;
+                                    break;
+                                case 17:
+                                    binaObj.picture18 = imgpath;
+                                    break;
+                                case 18:
+                                    binaObj.picture19 = imgpath;
+                                    break;
+                                case 19:
+                                    binaObj.picture20 = imgpath;
+                                    break;
+                                case 20:
+                                    binaObj.picture21 = imgpath;
+                                    break;
+                                case 21:
+                                    binaObj.picture22 = imgpath;
+                                    break;
+                                case 22:
+                                    binaObj.picture23 = imgpath;
+                                    break;
+                                case 23:
+                                    binaObj.picture24 = imgpath;
+                                    break;
+                                case 24:
+                                    binaObj.picture25 = imgpath;
+                                    break;
+                                case 25:
+                                    binaObj.picture26 = imgpath;
+                                    break;
+                                case 26:
+                                    binaObj.picture27 = imgpath;
+                                    break;
+                                case 27:
+                                    binaObj.picture28 = imgpath;
+                                    break;
+                                case 28:
+                                    binaObj.picture29 = imgpath;
+                                    break;
+                                case 29:
+                                    binaObj.picture30 = imgpath;
+                                    break;
+                                case 30:
+                                    binaObj.picture31 = imgpath;
+                                    break;
+                                case 31:
+                                    binaObj.picture32 = imgpath;
+                                    break;
+                                case 32:
+                                    binaObj.picture33 = imgpath;
+                                    break;
+                                case 33:
+                                    binaObj.picture34 = imgpath;
+                                    break;
+                                case 34:
+                                    binaObj.picture35 = imgpath;
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    }
+                    else if (Request.Files.Count > 35 && Path.GetFileName(Request.Files[0].FileName) != "") { return Json(new { status = "error", message = "25'den fazla resim giremezsiniz!" }); }
+
+                    if (Path.GetFileName(Request.Files[0].FileName) == "")
+                    {
+                        long tKIsyeri = 0, tArsaTarla = 0, tBina = 0;
+                        if (db.KONUT_ISYERI.Count() != 0) { tKIsyeri = db.KONUT_ISYERI.Max(item => item.ID); }
+                        if (db.ARSA_TARLA.Count() != 0) { tArsaTarla = db.ARSA_TARLA.Max(item => item.ID); }
+                        if (db.BINA.Count() != 0) { tBina = db.BINA.Max(item => item.ID); }
+                        if (tKIsyeri > tArsaTarla && tKIsyeri > tBina) { binaObj.ID = tKIsyeri + 1; }
+                        else if (tArsaTarla > tKIsyeri && tArsaTarla > tBina) { binaObj.ID = tArsaTarla + 1; }
+                        else if (tBina > tKIsyeri && tBina > tArsaTarla) { binaObj.ID = tBina + 1; }
+                        else { binaObj.ID = 1; }
+                    }
+
+                    binaObj.UserID = Int16.Parse(Session["userID"].ToString());
+                    binaObj.Tarih = DateTime.Now;
+                    binaObj.Kira_Satilik = "Kiralık";
+                    db.BINA.Add(binaObj);
+
+                    db.SaveChanges();
+
+                    return Json(new { success = true, message = "Başarıyla Kaydedildi" }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    binaObj.UserID = Int16.Parse(Session["userID"].ToString());
+                    db.Entry(binaObj).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return Json(new { success = true, message = "Başarıyla Güncellendi" }, JsonRequestBehavior.AllowGet);
+                }
+            }
+        }
+
     }
 }

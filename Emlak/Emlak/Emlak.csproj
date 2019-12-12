@@ -138,6 +138,15 @@
     <Reference Include="Microsoft.Net.Http.Headers, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Net.Http.Headers.2.2.0\lib\netstandard2.0\Microsoft.Net.Http.Headers.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.1016.290\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
@@ -247,15 +256,38 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AjandaController.cs" />
+    <Compile Include="Controllers\AlacaklarimController.cs" />
+    <Compile Include="Controllers\ArsaKiralikController.cs" />
+    <Compile Include="Controllers\ArsaSatilikController.cs" />
+    <Compile Include="Controllers\BinaKiralikController.cs" />
+    <Compile Include="Controllers\BinaSatilikController.cs" />
+    <Compile Include="Controllers\BorclarimController.cs" />
     <Compile Include="Controllers\DBController.cs" />
+    <Compile Include="Controllers\EmlakArayanlarController.cs" />
     <Compile Include="Controllers\IsyeriDevrenKiralikController.cs" />
     <Compile Include="Controllers\IsyeriDevrenSatilikController.cs" />
     <Compile Include="Controllers\IsyeriKiralikController.cs" />
     <Compile Include="Controllers\IsyeriSatilikController.cs" />
     <Compile Include="Controllers\KonutKiralikController.cs" />
     <Compile Include="Controllers\KonutSatilikController.cs" />
+    <Compile Include="Controllers\LoginArsaKiralikController.cs" />
+    <Compile Include="Controllers\LoginArsaSatilikController.cs" />
+    <Compile Include="Controllers\LoginBinaKiralikController.cs" />
+    <Compile Include="Controllers\LoginBinaSatilikController.cs" />
+    <Compile Include="Controllers\LoginIsyeriDevrenKiralikController.cs" />
+    <Compile Include="Controllers\LoginIsyeriDevrenSatilikController.cs" />
+    <Compile Include="Controllers\LoginIsyeriKiralikController.cs" />
+    <Compile Include="Controllers\LoginIsyeriSatilikController.cs" />
+    <Compile Include="Controllers\LoginKonutKiralikController.cs" />
+    <Compile Include="Controllers\LoginKonutSatilikController.cs" />
+    <Compile Include="Controllers\LoginTarlaKiralikController.cs" />
+    <Compile Include="Controllers\LoginTarlaSatilikController.cs" />
     <Compile Include="Controllers\OwnerController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\KullaniciBilgileriController.cs" />
+    <Compile Include="Controllers\TarlaKiralikController.cs" />
+    <Compile Include="Controllers\TarlaSatilikController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -268,10 +300,22 @@
     <Compile Include="Models\ARSA_TARLA.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BANYO_SAYISI.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\BINA.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BINA_YASI.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\BORCLARIM.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BorcluTakip.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BULUNDUGU_KAT.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DB.Context.cs">
@@ -295,10 +339,34 @@
     <Compile Include="Models\EMLAKTURU.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GABARI.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IMAR_DURUMU.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ISITMA_TIPI.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ISYERITURU.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KAKS.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KAT_SAYISI.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KiraTakip.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KontratTakip.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\KONUT_ISYERI.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KULLANIM_DURUMU.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MESAJ.cs">
@@ -313,7 +381,7 @@
     <Compile Include="Models\ODA_SAYISI.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagrams.cs">
+    <Compile Include="Models\TAPU_DURUMU.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\USERS.cs">
@@ -323,12 +391,14 @@
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SqlServerTypes\Loader.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -412,6 +482,7 @@
     <Content Include="Models\DB.edmx.diagram">
       <DependentUpon>DB.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -434,6 +505,19 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="SqlServerTypes\readme.htm" />
+    <Content Include="SqlServerTypes\x64\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -444,7 +528,6 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Owner\Index.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
@@ -472,6 +555,50 @@
     <Content Include="Views\DB\AddOrEditAlacaklarim.cshtml" />
     <Content Include="Views\DB\AddOrEditBorclarim.cshtml" />
     <Content Include="Views\DB\AddOrEditEmlakArayanlar.cshtml" />
+    <Content Include="Views\Shared\_LayoutPageOwner.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\KonutSatilik\Index.cshtml" />
+    <Content Include="Views\Ajanda\Index.cshtml" />
+    <Content Include="Views\KullaniciBilgileri\Index.cshtml" />
+    <Content Include="Views\Alacaklarim\Index.cshtml" />
+    <Content Include="Views\Borclarim\Index.cshtml" />
+    <Content Include="Views\EmlakArayanlar\Index.cshtml" />
+    <Content Include="Views\KonutKiralik\Index.cshtml" />
+    <Content Include="Views\IsyeriSatilik\Index.cshtml" />
+    <Content Include="Views\IsyeriDevrenSatilik\Index.cshtml" />
+    <Content Include="Views\IsyeriKiralik\Index.cshtml" />
+    <Content Include="Views\IsyeriDevrenKiralik\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutLogin.cshtml" />
+    <Content Include="Views\LoginIsyeriDevrenKiralik\Index.cshtml" />
+    <Content Include="Views\LoginIsyeriDevrenSatilik\Index.cshtml" />
+    <Content Include="Views\LoginIsyeriKiralik\Index.cshtml" />
+    <Content Include="Views\LoginIsyeriSatilik\Index.cshtml" />
+    <Content Include="Views\LoginKonutKiralik\Index.cshtml" />
+    <Content Include="Views\LoginKonutSatilik\Index.cshtml" />
+    <Content Include="Views\DB\AddOrEditArsaSatilik.cshtml" />
+    <Content Include="Views\ArsaSatilik\Index.cshtml" />
+    <Content Include="Views\ArsaSatilik\Goruntule.cshtml" />
+    <Content Include="Views\ArsaKiralik\Index.cshtml" />
+    <Content Include="Views\DB\AddOrEditArsaKiralik.cshtml" />
+    <Content Include="Views\ArsaKiralik\Goruntule.cshtml" />
+    <Content Include="Views\TarlaSatilik\Index.cshtml" />
+    <Content Include="Views\DB\AddOrEditTarlaSatilik.cshtml" />
+    <Content Include="Views\DB\AddOrEditTarlaKiralik.cshtml" />
+    <Content Include="Views\TarlaKiralik\Index.cshtml" />
+    <Content Include="Views\TarlaKiralik\Goruntule.cshtml" />
+    <Content Include="Views\TarlaSatilik\Goruntule.cshtml" />
+    <Content Include="Views\BinaSatilik\Index.cshtml" />
+    <Content Include="Views\BinaSatilik\Goruntule.cshtml" />
+    <Content Include="Views\DB\AddOrEditBinaSatilik.cshtml" />
+    <Content Include="Views\DB\AddOrEditBinaKiralik.cshtml" />
+    <Content Include="Views\BinaKiralik\Index.cshtml" />
+    <Content Include="Views\BinaKiralik\Goruntule.cshtml" />
+    <Content Include="Views\LoginArsaSatilik\Index.cshtml" />
+    <Content Include="Views\LoginArsaKiralik\Index.cshtml" />
+    <Content Include="Views\LoginTarlaSatilik\Index.cshtml" />
+    <Content Include="Views\LoginTarlaKiralik\Index.cshtml" />
+    <Content Include="Views\LoginBinaSatilik\Index.cshtml" />
+    <Content Include="Views\LoginBinaKiralik\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

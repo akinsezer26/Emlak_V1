@@ -11,10 +11,13 @@ namespace Emlak.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class KONUT_ISYERI
     {
         public long ID { get; set; }
+        public string ilanBasligi { get; set; }
+        public string ilanDetayi { get; set; }
         public string MusteriKaynagi { get; set; }
         public string Adi { get; set; }
         public string Soyadi { get; set; }
@@ -34,17 +37,29 @@ namespace Emlak.Models
         public string Kira_Satilik { get; set; }
         public string Isyeri_Konut { get; set; }
         public Nullable<int> MetreKare { get; set; }
+        public Nullable<int> MetreKareBrut { get; set; }
         public Nullable<int> BinaYasi { get; set; }
         public Nullable<int> KatSayisi { get; set; }
         public Nullable<int> Kat { get; set; }
         public Nullable<int> OdaSayisi { get; set; }
         public Nullable<int> IsitmaTipi { get; set; }
         public Nullable<int> BanyoSayisi { get; set; }
+        public Nullable<bool> BalkonVarmi { get; set; }
+        public Nullable<int> BalkonSayisi { get; set; }
+        public Nullable<int> KullanimDurumu { get; set; }
+        public Nullable<bool> SiteIcerisinde { get; set; }
+        public string SiteAdi { get; set; }
+        public Nullable<int> AidatTL { get; set; }
+        public Nullable<bool> krediyeUygun { get; set; }
+        public string TapuDurumu { get; set; }
+        public string kimden { get; set; }
+        public Nullable<bool> Takas { get; set; }
         public Nullable<int> FiyatNet { get; set; }
         public Nullable<int> FiyatSatis { get; set; }
         public Nullable<bool> EsyaliMi { get; set; }
         public Nullable<int> DepozitTL { get; set; }
         public Nullable<int> EmlakTuru { get; set; }
+        public Nullable<int> IsyeriTuru { get; set; }
         public string Note { get; set; }
         public Nullable<bool> DevrenSatilik { get; set; }
         public Nullable<bool> DevrenKiralik { get; set; }
@@ -73,10 +88,187 @@ namespace Emlak.Models
         public string picture23 { get; set; }
         public string picture24 { get; set; }
         public string picture25 { get; set; }
+        public string picture26 { get; set; }
+        public string picture27 { get; set; }
+        public string picture28 { get; set; }
+        public string picture29 { get; set; }
+        public string picture30 { get; set; }
+        public string picture31 { get; set; }
+        public string picture32 { get; set; }
+        public string picture33 { get; set; }
+        public string picture34 { get; set; }
+        public string picture35 { get; set; }
+        public Nullable<bool> CepheBati { get; set; }
+        public Nullable<bool> CepheDogu { get; set; }
+        public Nullable<bool> CepheGuney { get; set; }
+        public Nullable<bool> CepheKuzey { get; set; }
+        public Nullable<bool> IcOzADSL { get; set; }
+        public Nullable<bool> IcOzAhsapDograma { get; set; }
+        public Nullable<bool> IcOzAkilliEv { get; set; }
+        public Nullable<bool> IcOzAlarm_Hirsiz { get; set; }
+        public Nullable<bool> IcOzAlarm_Yangin { get; set; }
+        public Nullable<bool> IcOzAlaturka_Tuv { get; set; }
+        public Nullable<bool> IcOzAliminyumDograma { get; set; }
+        public Nullable<bool> IcOzAmerikanKapi { get; set; }
+        public Nullable<bool> IcOzAmerikanMutfak { get; set; }
+        public Nullable<bool> IcOzAnkastreFirin { get; set; }
+        public Nullable<bool> IcOzAsansor { get; set; }
+        public Nullable<bool> IcOzBalkon { get; set; }
+        public Nullable<bool> IcOzBarbeku { get; set; }
+        public Nullable<bool> IcOzBeyazEsya { get; set; }
+        public Nullable<bool> IcOzBoyali { get; set; }
+        public Nullable<bool> IcOzBulasikMak { get; set; }
+        public Nullable<bool> IcOzBuzdolabi { get; set; }
+        public Nullable<bool> IcOzDuvarKag { get; set; }
+        public Nullable<bool> IcOzDusakabin { get; set; }
+        public Nullable<bool> IcOzEbeveynBanyo { get; set; }
+        public Nullable<bool> IcOzFiberInternet { get; set; }
+        public Nullable<bool> IcOzFirin { get; set; }
+        public Nullable<bool> IcOzGiyinmeOdasi { get; set; }
+        public Nullable<bool> IcOzGommeDolap { get; set; }
+        public Nullable<bool> IcOzGoruntuluDiafon { get; set; }
+        public Nullable<bool> IcOzHiltonBanyo { get; set; }
+        public Nullable<bool> IcOzIntercomSistemi { get; set; }
+        public Nullable<bool> IcOzIsicam { get; set; }
+        public Nullable<bool> IcOzJakuzi { get; set; }
+        public Nullable<bool> IcOzKartonpiyer { get; set; }
+        public Nullable<bool> IcOzKiler { get; set; }
+        public Nullable<bool> IcOzKlima { get; set; }
+        public Nullable<bool> IcOzKuvet { get; set; }
+        public Nullable<bool> IcOzLaminatZemin { get; set; }
+        public Nullable<bool> IcOzMarley { get; set; }
+        public Nullable<bool> IcOzMobilya { get; set; }
+        public Nullable<bool> IcOzMutfak_Ankastre { get; set; }
+        public Nullable<bool> IcOzMutfak_Laminat { get; set; }
+        public Nullable<bool> IcOzMutfakDogalGazi { get; set; }
+        public Nullable<bool> IcOzPVCdograma { get; set; }
+        public Nullable<bool> IcOzPanjur { get; set; }
+        public Nullable<bool> IcOzParkeZemin { get; set; }
+        public Nullable<bool> IcOzSeramikZemin { get; set; }
+        public Nullable<bool> IcOzSetUstuOcak { get; set; }
+        public Nullable<bool> IcOzSpotAydinlatma { get; set; }
+        public Nullable<bool> IcOzTeras { get; set; }
+        public Nullable<bool> IcOzTermosifon { get; set; }
+        public Nullable<bool> IcOzVestiyer { get; set; }
+        public Nullable<bool> IcOzWi_Fi { get; set; }
+        public Nullable<bool> IcOzYuz_TanimaParmak_izi { get; set; }
+        public Nullable<bool> IcOzCamasirKurutmaMakinesi { get; set; }
+        public Nullable<bool> IcOzCamasirMakinesi { get; set; }
+        public Nullable<bool> IcOzCamasirOdasi { get; set; }
+        public Nullable<bool> IcOzCelikKapi { get; set; }
+        public Nullable<bool> IcOzSofben { get; set; }
+        public Nullable<bool> IcOzSomine { get; set; }
+        public Nullable<bool> DisOzAsansor { get; set; }
+        public Nullable<bool> DisOzBuharOdasi { get; set; }
+        public Nullable<bool> DisOzGuvenlik { get; set; }
+        public Nullable<bool> DisOzHamam { get; set; }
+        public Nullable<bool> DisOzHidrafor { get; set; }
+        public Nullable<bool> DisOzIsiYalitim { get; set; }
+        public Nullable<bool> DisOzJenerator { get; set; }
+        public Nullable<bool> DisOzKabloTV { get; set; }
+        public Nullable<bool> DisOzKapaliGaraj { get; set; }
+        public Nullable<bool> DisOzKapici { get; set; }
+        public Nullable<bool> DisOzKres { get; set; }
+        public Nullable<bool> DisOzMustakilHavuzlu { get; set; }
+        public Nullable<bool> DisOzOtopark { get; set; }
+        public Nullable<bool> DisOzOyunParki { get; set; }
+        public Nullable<bool> DisOzSauna { get; set; }
+        public Nullable<bool> DisOzSesYalitimi { get; set; }
+        public Nullable<bool> DisOzSiding { get; set; }
+        public Nullable<bool> DisOzSporAlani { get; set; }
+        public Nullable<bool> DisOzSuDeposu { get; set; }
+        public Nullable<bool> DisOzTenisKortu { get; set; }
+        public Nullable<bool> DisOzUydu { get; set; }
+        public Nullable<bool> DisOzYanginMerdiveni { get; set; }
+        public Nullable<bool> DisOzYuzmeHavuzuAcik { get; set; }
+        public Nullable<bool> DisOzYuzmeHavuzuKapali { get; set; }
+        public Nullable<bool> EngAracParki { get; set; }
+        public Nullable<bool> EngAsansor { get; set; }
+        public Nullable<bool> EngEngelliyeUygBanyo { get; set; }
+        public Nullable<bool> EngGenisKoridor { get; set; }
+        public Nullable<bool> EngGiris_Rampa { get; set; }
+        public Nullable<bool> EngMerdiven { get; set; }
+        public Nullable<bool> EngMutfak { get; set; }
+        public Nullable<bool> EngOdaKapisi { get; set; }
+        public Nullable<bool> EngPark { get; set; }
+        public Nullable<bool> EngPrizElAnahtari { get; set; }
+        public Nullable<bool> EngTutamakKorkuluk { get; set; }
+        public Nullable<bool> EngTuvalet { get; set; }
+        public Nullable<bool> EngYuzmeHav { get; set; }
+        public Nullable<bool> MuhitAVM { get; set; }
+        public Nullable<bool> MuhitBelediye { get; set; }
+        public Nullable<bool> MuhitCami { get; set; }
+        public Nullable<bool> MuhitCemevi { get; set; }
+        public Nullable<bool> MuhitDenizeSifir { get; set; }
+        public Nullable<bool> MuhitEczane { get; set; }
+        public Nullable<bool> MuhitEglenceMerkezi { get; set; }
+        public Nullable<bool> MuhitFuar { get; set; }
+        public Nullable<bool> MuhitHastane { get; set; }
+        public Nullable<bool> MuhitHavra { get; set; }
+        public Nullable<bool> MuhitKlise { get; set; }
+        public Nullable<bool> MuhitLise { get; set; }
+        public Nullable<bool> MuhitMarket { get; set; }
+        public Nullable<bool> MuhitPark { get; set; }
+        public Nullable<bool> MuhitPolisMerkezi { get; set; }
+        public Nullable<bool> MuhitSaglikOcagi { get; set; }
+        public Nullable<bool> MuhitSemtPazari { get; set; }
+        public Nullable<bool> MuhitSporSalonu { get; set; }
+        public Nullable<bool> MuhitUniversite { get; set; }
+        public Nullable<bool> MuhitIlkOrtaOkul { get; set; }
+        public Nullable<bool> MuhitItfaiye { get; set; }
+        public Nullable<bool> MuhitSehirMerkezi { get; set; }
+        public Nullable<bool> UlasAnayol { get; set; }
+        public Nullable<bool> UlasAvrasyaTuneli { get; set; }
+        public Nullable<bool> UlasBogazKopruleri { get; set; }
+        public Nullable<bool> UlasCadde { get; set; }
+        public Nullable<bool> UlasDenizOtobusu { get; set; }
+        public Nullable<bool> UlasDolmus { get; set; }
+        public Nullable<bool> UlasEBes { get; set; }
+        public Nullable<bool> UlasHavaAlani { get; set; }
+        public Nullable<bool> UlasMarmaray { get; set; }
+        public Nullable<bool> UlasMetro { get; set; }
+        public Nullable<bool> UlasMetrobus { get; set; }
+        public Nullable<bool> UlasMinibus { get; set; }
+        public Nullable<bool> UlasOtobusDuragi { get; set; }
+        public Nullable<bool> UlasSahil { get; set; }
+        public Nullable<bool> UlasTEM { get; set; }
+        public Nullable<bool> UlasTeleferik { get; set; }
+        public Nullable<bool> UlasTramvay { get; set; }
+        public Nullable<bool> UlasTrenIstasyonu { get; set; }
+        public Nullable<bool> UlasTroleybus { get; set; }
+        public Nullable<bool> UlasIskele { get; set; }
+        public Nullable<bool> ManzaraBogaz { get; set; }
+        public Nullable<bool> ManzaraDeniz { get; set; }
+        public Nullable<bool> ManzaraDoga { get; set; }
+        public Nullable<bool> ManzaraGol { get; set; }
+        public Nullable<bool> ManzaraHavuz { get; set; }
+        public Nullable<bool> ManzaraPark_YesilAlan { get; set; }
+        public Nullable<bool> ManzaraSehir { get; set; }
+        public Nullable<bool> KTAraKat { get; set; }
+        public Nullable<bool> KTAraKatDubleks { get; set; }
+        public Nullable<bool> KTBahceDubleks { get; set; }
+        public Nullable<bool> KTBahceKati { get; set; }
+        public Nullable<bool> KTBahceli { get; set; }
+        public Nullable<bool> KTEnUskKat { get; set; }
+        public Nullable<bool> KTGaraj_DukkanUstu { get; set; }
+        public Nullable<bool> KTGirisKati { get; set; }
+        public Nullable<bool> KTKatDubleksi { get; set; }
+        public Nullable<bool> KTMustakilGirisli { get; set; }
+        public Nullable<bool> KTTersDubleks { get; set; }
+        public Nullable<bool> KTTripleks { get; set; }
+        public Nullable<bool> KTZeminKat { get; set; }
+        public Nullable<bool> KTCatiDubleksi { get; set; }
         public long UserID { get; set; }
-    
+        public Nullable<double> lat { get; set; }
+        public Nullable<double> lng { get; set; }
+        public virtual BANYO_SAYISI BANYO_SAYISI { get; set; }
+        public virtual BINA_YASI BINA_YASI { get; set; }
+        public virtual BULUNDUGU_KAT BULUNDUGU_KAT { get; set; }
         public virtual EMLAKTURU EMLAKTURU1 { get; set; }
         public virtual ISITMA_TIPI ISITMA_TIPI { get; set; }
+        public virtual ISYERITURU ISYERITURU1 { get; set; }
+        public virtual KAT_SAYISI KAT_SAYISI { get; set; }
+        public virtual KULLANIM_DURUMU KULLANIM_DURUMU { get; set; }
         public virtual ODA_SAYISI ODA_SAYISI { get; set; }
         public virtual USERS USERS { get; set; }
     }

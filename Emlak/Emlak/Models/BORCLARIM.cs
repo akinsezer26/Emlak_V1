@@ -11,18 +11,14 @@ namespace Emlak.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class BORCLARIM
     {
         public long BorcID { get; set; }
         public Nullable<System.DateTime> Tarih { get; set; }
-        [Required(ErrorMessage = "Bu Alan Gereklidir")]
         public string Kime { get; set; }
-        [Required(ErrorMessage = "Bu Alan Gereklidir")]
         public Nullable<int> miktar { get; set; }
         public string AlacakliCep { get; set; }
-        [Required(ErrorMessage = "Bu Alan Gereklidir")]
         public Nullable<System.DateTime> OdemeTarihi { get; set; }
         public string Note { get; set; }
         public long UserID { get; set; }

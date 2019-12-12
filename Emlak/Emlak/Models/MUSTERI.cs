@@ -14,6 +14,14 @@ namespace Emlak.Models
     
     public partial class MUSTERI
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public MUSTERI()
+        {
+            this.BorcluTakip = new HashSet<BorcluTakip>();
+            this.KiraTakip = new HashSet<KiraTakip>();
+            this.KontratTakip = new HashSet<KontratTakip>();
+        }
+    
         public long MusteriID { get; set; }
         public string MusteriAd { get; set; }
         public string MusteriSoyAd { get; set; }
@@ -25,6 +33,12 @@ namespace Emlak.Models
         public long UserID { get; set; }
         public string Note { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BorcluTakip> BorcluTakip { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<KiraTakip> KiraTakip { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<KontratTakip> KontratTakip { get; set; }
         public virtual MUSTERI_TIPI MUSTERI_TIPI { get; set; }
         public virtual USERS USERS { get; set; }
     }

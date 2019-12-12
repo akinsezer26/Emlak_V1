@@ -28,17 +28,29 @@ namespace Emlak.Models
         public virtual DbSet<AJANDA> AJANDA { get; set; }
         public virtual DbSet<ALACAKLARIM> ALACAKLARIM { get; set; }
         public virtual DbSet<ARSA_TARLA> ARSA_TARLA { get; set; }
+        public virtual DbSet<BANYO_SAYISI> BANYO_SAYISI { get; set; }
         public virtual DbSet<BINA> BINA { get; set; }
+        public virtual DbSet<BINA_YASI> BINA_YASI { get; set; }
         public virtual DbSet<BORCLARIM> BORCLARIM { get; set; }
+        public virtual DbSet<BorcluTakip> BorcluTakip { get; set; }
+        public virtual DbSet<BULUNDUGU_KAT> BULUNDUGU_KAT { get; set; }
         public virtual DbSet<EmlakArayanlar> EmlakArayanlar { get; set; }
         public virtual DbSet<EMLAKTURU> EMLAKTURU { get; set; }
+        public virtual DbSet<GABARI> GABARI { get; set; }
+        public virtual DbSet<IMAR_DURUMU> IMAR_DURUMU { get; set; }
         public virtual DbSet<ISITMA_TIPI> ISITMA_TIPI { get; set; }
+        public virtual DbSet<ISYERITURU> ISYERITURU { get; set; }
+        public virtual DbSet<KAKS> KAKS { get; set; }
+        public virtual DbSet<KAT_SAYISI> KAT_SAYISI { get; set; }
+        public virtual DbSet<KiraTakip> KiraTakip { get; set; }
+        public virtual DbSet<KontratTakip> KontratTakip { get; set; }
         public virtual DbSet<KONUT_ISYERI> KONUT_ISYERI { get; set; }
+        public virtual DbSet<KULLANIM_DURUMU> KULLANIM_DURUMU { get; set; }
         public virtual DbSet<MESAJ> MESAJ { get; set; }
         public virtual DbSet<MUSTERI> MUSTERI { get; set; }
         public virtual DbSet<MUSTERI_TIPI> MUSTERI_TIPI { get; set; }
         public virtual DbSet<ODA_SAYISI> ODA_SAYISI { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<TAPU_DURUMU> TAPU_DURUMU { get; set; }
         public virtual DbSet<USERS> USERS { get; set; }
         public virtual DbSet<USERTYPES> USERTYPES { get; set; }
     }

@@ -1,0 +1,142 @@
+﻿
+@using PagedList;
+@using PagedList.Mvc;
+
+@model IPagedList<Emlak.Models.BINA>
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_LayoutPageOwner.cshtml";
+}
+
+@using (Html.BeginForm("Index", "BinaSatilik", FormMethod.Get))
+{
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    @Html.DropDownList("kSayisi", (List<SelectListItem>)ViewBag.KatSayisi, new { @class = "form-control" })
+                </td>
+                <td>
+                    @Html.TextBox("Pil", null, new { @class = "form-control", @placeholder = "il" })
+                </td>
+                <td>
+                    @Html.TextBox("Pilce", null, new { @class = "form-control", @placeholder = "ilçe" })
+                </td>
+                <td>
+                    @Html.TextBox("Pmahalle", null, new { @class = "form-control", @placeholder = "mahalle" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.TextBox("minTL", null, new { @class = "form-control", @placeholder = "Min TL" })
+                </td>
+                <td>
+                    @Html.TextBox("maxTL", null, new { @class = "form-control", @placeholder = "Max TL" })
+                </td>
+                <td>
+                    <input type="submit" value="Ara" id="SearchBinaSatilik" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}
+@{ int rowCount = Model.Count / 4; double tmp = Double.Parse(Model.Count.ToString()) / 4.0; if (tmp != 1 && tmp != 2 && tmp != 3) { rowCount++; }
+    int z = 0;}
+<table>
+    <tbody>
+        @for (int i = 0; i < rowCount; i++)
+        {
+            <tr>
+                @for (int j = 0; j < 4; j++)
+                {
+                    if (z < Model.Count)//TO DO
+                    {
+                        <td style="padding-top:30px; padding-left:40px">
+                            @if (Model[z].picture1 == null)
+                            {
+                                <a href='@Url.Action("Goruntule", "BinaSatilik")/@Model[z].ID ' target='_blank' rel='noopener noreferrer'>
+                                    <img src='/EmlakImages/default.JPG' width='180' height='120'>
+                                </a><br>
+                                <label>Bina Satılık</label><br>
+                                <label>@Model[z].mahalle @Model[z].il</label><br>
+                                <label>@Model[z].FiyatNet tl</label>
+                            }
+                            else
+                            {
+                                string str = "/EmlakImages/Bina_" + @Model[z].ID.ToString() + "_1.JPG";
+                                <a href='@Url.Action("Goruntule", "BinaSatilik")/@Model[z].ID ' target='_blank' rel='noopener noreferrer'>
+                                    <img src='@str' width='180' height='120'>
+                                </a><br>
+                                <label>Bina Satılık</label><br>
+                                <label>@Model[z].mahalle @Model[z].il</label><br>
+                                <label>@Model[z].FiyatNet tl</label>
+                            }
+                        </td>
+                        z++;
+                    }
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+@Html.PagedListPager(Model, page => Url.Action("Index", new
+{
+    page,
+    Pil = Request.QueryString["Pil"],
+    Pilce = Request.QueryString["Pilce"],
+    Pmahalle = Request.QueryString["Pmahalle"],
+    kSayisi = Request.QueryString["kSayisi"],
+    minTL = Request.QueryString["minTL"],
+    maxTL = Request.QueryString["maxTL"]
+}))
+<a class="btn btn-success" style="margin-bottom: 10px" onclick="PopupFormBinaSatilik('@Url.Action("AddOrEditBinaSatilik","DB")')"><i class="fa fa-plus"></i> Ekle </a>
+<script>
+    var popUp;
+    function PopupFormBinaSatilik(url) {
+        var formDiv = $('<div/>');
+        $.get(url)
+            .done(function (response) {
+                formDiv.html(response);
+
+                popUp = formDiv.dialog({
+                    autoOpen: true,
+                    resizable: false,
+                    title: 'Satılık Bina Ekle',
+                    height: 600,
+                    width: 1200,
+                    close: function myfunction() {
+                        popUp.dialog('destroy').remove();
+                    }
+                });
+            });
+    }
+    function SubmitFormBinaSatilik(form) {
+        $.validator.unobtrusive.parse(form);
+        var data = new FormData(form)
+
+        if ($(form).valid()) {
+            $.ajax({
+                type: "POST",
+                enctype: 'multipart/form-data',
+                url: "/DB/AddOrEditBinaSatilik",
+                processData: false,  // Important!
+                contentType: false,
+                cache: false,
+                data: data,
+                success: function (data) {
+                    if (data.success) {
+                        popUp.dialog('close');
+
+                        location.reload();
+
+                        $.notify(data.message, {
+                            globalPosition: "top center",
+                            className: "success"
+                        })
+                    }
+                }
+            });
+        }
+        return false;
+    }
+</script>

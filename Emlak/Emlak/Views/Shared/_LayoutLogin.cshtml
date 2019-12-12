@@ -1,0 +1,282 @@
+﻿
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Giriş</title>
+    @Styles.Render("~/Content/bootstrap.min.css")
+    @Styles.Render("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
+    @Styles.Render("https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css")
+    @Styles.Render("https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css")
+    @Styles.Render("~/Content/themes/base/jquery-ui.min.css")
+    <style>
+        /* Style the tab */
+        .tab {
+            position: relative;
+            float: left;
+            background-color: black;
+            width: 10%;
+            min-width: 150px;
+            height: 650px;
+        }
+
+            /* Style the buttons inside the tab */
+            .tab button {
+                display: block;
+                background-color: inherit;
+                color: #808080;
+                padding: 22px 16px;
+                width: 100%;
+                border: none;
+                outline: none;
+                text-align: left;
+                cursor: pointer;
+                transition: 0.3s;
+                font-size: 15px;
+                border: thin;
+                border-color: white;
+            }
+
+        .drop-down {
+            position: relative;
+        }
+        /* Change background color of buttons on hover */
+        .tablinks:hover {
+            color: #ddd;
+        }
+
+        .dropdown-btn:hover {
+            color: #ddd;
+        }
+
+        /* Create an active/current "tab button" class */
+        .tablinks.active {
+            background-color: #8d8b8b;
+            color: #fff;
+        }
+
+        .dropdown-btn.active {
+            color: black;
+            background-color: #ddd;
+        }
+
+        /* Style the tab content */
+        .tabcontent {
+            float: left;
+            padding: 0px 12px;
+            border: 1px solid #ccc;
+            width: 80%;
+            border-left: none;
+            height: 650px;
+        }
+
+        .dropdown-menu {
+            position: static !important;
+            display: none;
+            background-color: #303030;
+        }
+
+        /* Optional: Style the caret down icon */
+        .fa-caret-down {
+            float: right;
+            padding-right: 8px;
+        }
+
+        .dropdown-btn {
+            padding: 6px 8px 6px 16px;
+            text-decoration: none;
+            font-size: 20px;
+            color: #818181;
+            display: block;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .field-validation-error {
+            color: #e80c4d;
+            font-weight: bold;
+        }
+
+        input.input-validation-error {
+            border: 1px solid #e80c4d;
+        }
+
+        .field {
+            border: none;
+            border-spacing: 0px;
+        }
+
+            .field tr, .field td {
+                border: none;
+                padding: 10px;
+                vertical-align: top;
+            }
+
+            .field img {
+                display: block;
+                width: 200px;
+                height: 128px;
+                image-rendering: pixelated;
+                image-rendering: -moz-crisp-edges;
+            }
+
+        input[type=text] {
+            width: 400px;
+            padding: 12px 20px;
+            box-sizing: border-box;
+        }
+
+        input[type=password] {
+            width: 400px;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+        }
+
+        input[type=submit] {
+            width: 400px;
+            padding: 12px 20px;
+            margin: 8px 0;
+            font-size: 18px;
+            color: azure;
+            text-shadow: 0 0 6px black;
+            font-family:Consolas;
+            background: rgba(255,255,255,0.5);
+            background-repeat: no-repeat;
+            cursor: pointer;
+            overflow: hidden;
+            outline: none;
+            border-radius: 18px;
+            border-width: thick;
+        }
+
+        body {
+            font-family: "Lato", sans-serif;
+            background-image: url('../../Image/bg.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            height: 100%;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            overflow-x: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div style="width:100%; margin-left:60%">
+        @using (Html.BeginForm("Authorize", "Login", FormMethod.Post))
+        {
+            <table>
+                <tr>
+                    <td><input type="text" name="ID" placeholder="Kullanıcı Adı" style="width:200px" /></td>
+                    <td><input type="password" name="Sifre" placeholder="Şifre" style="width:200px; margin-left:5px" /></td>
+                    <td><input type="submit" name="LgnBtn" value="Giriş" style="width:100px; margin-left:5px; font-size:16px; height:50px" /></td>
+                </tr>
+            </table>
+        }
+    </div>
+    <div style="width:100%">
+        <table style="width:100%">
+            <tbody style="width:100%">
+                <tr>
+                    <td style="width:7%;height:700px"></td>
+                    <td style="width:11%;height:700px;background-color:black">
+                        <div class="tab" style="margin-top:0px;">
+                            @{ int KS = ViewBag.KSCount; int KK = ViewBag.KKCount; int KonutTotal = KS + KK; }
+                            <button class="dropdown-btn">Konut (@KonutTotal)<i class="fa fa-caret-down"></i></button>
+                            <div class="dropdown-menu">
+                                <button class="tablinks" onclick="location.href='@Url.Action("Index", "LoginKonutSatilik")'">Satılık (@ViewBag.KSCount)</button>
+                                <button class="tablinks" onclick="location.href='@Url.Action("Index", "LoginKonutKiralik")'">Kiralık (@ViewBag.KKCount)</button>
+                            </div>
+
+                            @{ int IS = ViewBag.ISCount; int IK = ViewBag.IKCount; int IDS = ViewBag.IDSCount; int IDK = ViewBag.IDKCount; int IsyeriTotal = IS + IK + IDS + IDK; }
+                            <button class="dropdown-btn">İş Yeri (@IsyeriTotal)<i class="fa fa-caret-down"></i></button>
+                            <div class="dropdown-menu">
+                                <button class="tablinks" onclick="location.href='@Url.Action("Index", "LoginIsyeriSatilik")'">Satılık (@ViewBag.ISCount)</button>
+                                <button class="tablinks" onclick="location.href='@Url.Action("Index", "LoginIsyeriKiralik")'">Kiralık (@ViewBag.IKCount)</button>
+                                <button class="tablinks" onclick="location.href='@Url.Action("Index", "LoginIsyeriDevrenSatilik")'">Devren Satılık (@ViewBag.IDSCount)</button>
+                                <button class="tablinks" onclick="location.href='@Url.Action("Index", "LoginIsyeriDevrenKiralik")'">Devren Kiralık (@ViewBag.IDKCount)</button>
+                            </div>
+
+                            @{ int AS = ViewBag.ASCount; int AK = ViewBag.AKCount; int ArsaTotal = AS + AK; }
+                            <button class="dropdown-btn">Arsa (@ArsaTotal)<i class="fa fa-caret-down"></i></button>
+                            <div class="dropdown-menu">
+                                <button class="tablinks" onclick="location.href='@Url.Action("Index", "LoginArsaSatilik")'">Satılık (@ViewBag.ASCount)</button>
+                                <button class="tablinks" onclick="location.href='@Url.Action("Index", "LoginArsaKiralik")'">Kiralık (@ViewBag.AKCount)</button>
+                            </div>
+
+                            @{ int TS = ViewBag.TSCount; int TK = ViewBag.TKCount; int TarlaTotal = TS + TK; }
+                            <button class="dropdown-btn">Tarla (@TarlaTotal)<i class="fa fa-caret-down"></i></button>
+                            <div class="dropdown-menu">
+                                <button class="tablinks" onclick="location.href='@Url.Action("Index", "LoginTarlaSatilik")'">Satılık (@ViewBag.TSCount)</button>
+                                <button class="tablinks" onclick="location.href='@Url.Action("Index", "LoginTarlaKiralik")'">Kiralık (@ViewBag.TKCount)</button>
+                            </div>
+
+                            @{ int BS = ViewBag.BSCount; int BK = ViewBag.BKCount; int BinaTotal = BS + BK; }
+                            <button class="dropdown-btn">Bina (@BinaTotal)<i class="fa fa-caret-down"></i></button>
+                            <div class="dropdown-menu">
+                                <button class="tablinks" onclick="location.href='@Url.Action("Index", "LoginBinaSatilik")'">Satılık (@ViewBag.BSCount)</button>
+                                <button class="tablinks" onclick="location.href='@Url.Action("Index", "LoginBinaKiralik")'">Kiralık (@ViewBag.BKCount)</button>
+                            </div>
+                        </div>
+                    </td>
+                    <td style="width:75%;height:700px; background-color:aliceblue; vertical-align:text-top;">@RenderBody()</td>
+                    <td style="width:7%;height:700px"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div style="width:100%;height:50px">
+        <label style="margin-left:45%; color:azure; text-shadow: 10px 5px 15px black;">Akın SEZER 2019</label>
+        <label style="margin-left:43.5%; color:azure; text-shadow: 10px 5px 15px black;">akinsezer26@gmail.com</label>
+    </div>
+    <script>
+        function openCity(evt, cityName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+
+        var dropdown = document.getElementsByClassName("dropdown-btn");
+        var i;
+
+        for (i = 0; i < dropdown.length; i++) {
+            dropdown[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var dropdownContent = this.nextElementSibling;
+                if (dropdownContent.style.display === "block") {
+                    dropdownContent.style.display = "none";
+                } else {
+                    dropdownContent.style.display = "block";
+                    for (var j = 0; j < dropdown.length; j++) {
+                        index = Array.from(this.parentElement.children).indexOf(this);
+                        if (index / 2 != j) {
+                            dropdown[j].className = dropdown[j].className.replace(" active", "");
+                            dropdown[j].nextElementSibling.style.display = "none";
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

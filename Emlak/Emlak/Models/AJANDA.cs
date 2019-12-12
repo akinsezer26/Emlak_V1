@@ -11,17 +11,14 @@ namespace Emlak.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class AJANDA
     {
         public long AjandaID { get; set; }
         public long UserID { get; set; }
-        [Required(ErrorMessage = "Bu Alan Gereklidir")]
         public Nullable<System.DateTime> Tarih { get; set; }
         public string Nerede { get; set; }
         public string Kiminle { get; set; }
-        [Required(ErrorMessage ="Bu Alan Gereklidir")]
         public string Konu { get; set; }
         public string Note { get; set; }
     
