@@ -15,14 +15,13 @@ namespace Emlak.Models
     public partial class BorcluTakip
     {
         public long BorcluTakipID { get; set; }
-        public Nullable<long> MusteriID { get; set; }
-        public string MusteriAd { get; set; }
-        public string MusteriSoyAd { get; set; }
-        public string MusteriCep { get; set; }
-        public Nullable<int> OdemeTL { get; set; }
+        public string Ad { get; set; }
+        public string SoyAd { get; set; }
+        public string Cep { get; set; }
+        public Nullable<int> OdemeToplamTL { get; set; }
+        public Nullable<int> Odenen { get; set; }
+        public Nullable<int> Kalan { get; set; }
         public Nullable<System.DateTime> OdemeTarihi { get; set; }
         public string Note { get; set; }
-    
-        public virtual MUSTERI MUSTERI { get; set; }
     }
 }

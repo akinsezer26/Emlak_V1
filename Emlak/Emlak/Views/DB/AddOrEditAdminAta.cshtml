@@ -1,0 +1,35 @@
+﻿@model Emlak.Models.USERS
+@{
+    Layout = null;
+}
+@using (Html.BeginForm("AddOrEditAdminAta", "DB", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
+{
+    @Html.HiddenFor(model => model.UserID)
+    <div class="form-group">
+        @Html.EditorFor(model => model.UserNickName, new { @htmlAttributes = new { placeholder = "Kullanıcı Adı", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.UserPassword, new { @htmlAttributes = new { placeholder = "Şifre", @class = "form-control" } })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.UserName, new { @htmlAttributes = new { placeholder = "Ad", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.UserSurname, new { @htmlAttributes = new { placeholder = "Soyad", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.CepTelefonu, new { @htmlAttributes = new { placeholder = "Cep Telefonu", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.IsTelefonu, new { @htmlAttributes = new { placeholder = "İş Telefonu", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.iban, new { @htmlAttributes = new { placeholder = "IBAN", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.adres, new { @htmlAttributes = new { placeholder = "Adres", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Ekle" class="btn btn-primary" />
+    </div>
+}

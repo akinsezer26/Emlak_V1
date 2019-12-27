@@ -9,125 +9,125 @@
     @Styles.Render("https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css")
     @Styles.Render("https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css")
     @Styles.Render("~/Content/themes/base/jquery-ui.min.css")
-<style>
-    body {
-        font-family: "Lato", sans-serif;
-    }
+    <style>
+        body {
+            font-family: "Lato", sans-serif;
+        }
 
-    /* Style the tab */
-    .tab {
-        position: relative;
-        float: left;
-        background-color: black;
-        width: 10%;
-        min-width: 150px;
-        height: 650px;
-    }
+        /* Style the tab */
+        .tab {
+            position: relative;
+            float: left;
+            background-color: black;
+            width: 10%;
+            min-width: 150px;
+            height: 650px;
+        }
 
-        /* Style the buttons inside the tab */
-        .tab button {
+            /* Style the buttons inside the tab */
+            .tab button {
+                display: block;
+                background-color: inherit;
+                color: #808080;
+                padding: 22px 16px;
+                width: 100%;
+                border: none;
+                outline: none;
+                text-align: left;
+                cursor: pointer;
+                transition: 0.3s;
+                font-size: 15px;
+                border: thin;
+                border-color: white;
+            }
+
+        .drop-down {
+            position: relative;
+        }
+        /* Change background color of buttons on hover */
+        .tablinks:hover {
+            color: #ddd;
+        }
+
+        .dropdown-btn:hover {
+            color: #ddd;
+        }
+
+        /* Create an active/current "tab button" class */
+        .tablinks.active {
+            background-color: #8d8b8b;
+            color: #fff;
+        }
+
+        .dropdown-btn.active {
+            color: black;
+            background-color: #ddd;
+        }
+
+        /* Style the tab content */
+        .tabcontent {
+            float: left;
+            padding: 0px 12px;
+            border: 1px solid #ccc;
+            width: 80%;
+            border-left: none;
+            height: 650px;
+        }
+
+        .dropdown-menu {
+            position: static !important;
+            display: none;
+            background-color: #303030;
+        }
+
+        /* Optional: Style the caret down icon */
+        .fa-caret-down {
+            float: right;
+            padding-right: 8px;
+        }
+
+        .dropdown-btn {
+            padding: 6px 8px 6px 16px;
+            text-decoration: none;
+            font-size: 20px;
+            color: #818181;
             display: block;
-            background-color: inherit;
-            color: #808080;
-            padding: 22px 16px;
-            width: 100%;
             border: none;
-            outline: none;
+            background: none;
+            width: 100%;
             text-align: left;
             cursor: pointer;
-            transition: 0.3s;
-            font-size: 15px;
-            border: thin;
-            border-color: white;
+            outline: none;
         }
 
-    .drop-down {
-        position: relative;
-    }
-    /* Change background color of buttons on hover */
-    .tablinks:hover {
-        color: #ddd;
-    }
+        .field-validation-error {
+            color: #e80c4d;
+            font-weight: bold;
+        }
 
-    .dropdown-btn:hover {
-        color: #ddd;
-    }
+        input.input-validation-error {
+            border: 1px solid #e80c4d;
+        }
 
-    /* Create an active/current "tab button" class */
-    .tablinks.active {
-        background-color: #8d8b8b;
-        color: #fff;
-    }
-
-    .dropdown-btn.active {
-        color: black;
-        background-color: #ddd;
-    }
-
-    /* Style the tab content */
-    .tabcontent {
-        float: left;
-        padding: 0px 12px;
-        border: 1px solid #ccc;
-        width: 80%;
-        border-left: none;
-        height: 650px;
-    }
-
-    .dropdown-menu {
-        position: static !important;
-        display: none;
-        background-color: #303030;
-    }
-
-    /* Optional: Style the caret down icon */
-    .fa-caret-down {
-        float: right;
-        padding-right: 8px;
-    }
-
-    .dropdown-btn {
-        padding: 6px 8px 6px 16px;
-        text-decoration: none;
-        font-size: 20px;
-        color: #818181;
-        display: block;
-        border: none;
-        background: none;
-        width: 100%;
-        text-align: left;
-        cursor: pointer;
-        outline: none;
-    }
-
-    .field-validation-error {
-        color: #e80c4d;
-        font-weight: bold;
-    }
-
-    input.input-validation-error {
-        border: 1px solid #e80c4d;
-    }
-
-    .field {
-        border: none;
-        border-spacing: 0px;
-    }
-
-        .field tr, .field td {
+        .field {
             border: none;
-            padding: 10px;
-            vertical-align: top;
+            border-spacing: 0px;
         }
 
-        .field img {
-            display: block;
-            width: 200px;
-            height: 128px;
-            image-rendering: pixelated;
-            image-rendering: -moz-crisp-edges;
-        }
-</style>
+            .field tr, .field td {
+                border: none;
+                padding: 10px;
+                vertical-align: top;
+            }
+
+            .field img {
+                display: block;
+                width: 200px;
+                height: 128px;
+                image-rendering: pixelated;
+                image-rendering: -moz-crisp-edges;
+            }
+    </style>
 </head>
 <body>
     <table style="width:100%">
@@ -137,7 +137,7 @@
         <tr>
             <td style="width:5%; height:80%"></td>
             <td style="width:15%; height:80%">
-
+                @{var yetki = ""; if (Session["userID"] != null) { yetki = Session["UserType"].ToString(); } else { Response.Redirect("~/Login/Index"); } }
                 <div class="tab">
                     <button class="dropdown-btn">Kullanıcı<i class="fa fa-caret-down"></i></button>
                     <div class="dropdown-menu">
@@ -147,14 +147,16 @@
                         <button class="tablinks" onclick="location.href='@Url.Action("Index", "Borclarim")'">Borçlarım</button>
                         <button class="tablinks" onclick="openCity(event, 'Mesajlarim')">Mesajlarım</button>
                         <button class="tablinks" onclick="openCity(event, 'Mesaj_Gonder')">Mesaj Gönder</button>
+                        @{if (yetki == "Owner") {<button class="tablinks" onclick="location.href='@Url.Action("Index", "AdminAta")'">Admin Ata</button>} }
+                        @{if (yetki=="Owner" || yetki=="Admin") {<button class="tablinks" onclick="location.href='@Url.Action("Index", "KullaniciAta")'">Kullanıcı Ata</button>} }
                     </div>
                     <button class="dropdown-btn">Müşteri Ara<i class="fa fa-caret-down"></i></button>
                     <div class="dropdown-menu">
                         <button class="tablinks" onclick="location.href='@Url.Action("Index", "EmlakArayanlar")'">Emlak Arayanlar</button>
-                        <button class="tablinks" onclick="openCity(event, 'Paris')">Geçmiş Kayıtlar</button>
-                        <button class="tablinks" onclick="openCity(event, 'Paris')">Kiracı Takip 1hafta</button>
-                        <button class="tablinks" onclick="openCity(event, 'Paris')">Borçlu Listesi</button>
-                        <button class="tablinks" onclick="openCity(event, 'Paris')">Kontrat Takip 2Ay</button>
+                        <button class="tablinks" onclick="location.href='@Url.Action("Index", "SozlesmeKontrat")'">Sözleşme/Kontrat</button>
+                        <button class="tablinks" onclick="location.href='@Url.Action("Index", "KiraTakip")'">Kira Takip</button>
+                        <button class="tablinks" onclick="location.href='@Url.Action("Index", "BorcluListesi")'">Borçlu Listesi</button>
+                        <button class="tablinks" onclick="location.href='@Url.Action("Index", "KontratTakip")'">Kontrat Takip</button>
                     </div>
                     <button class="dropdown-btn">Konut<i class="fa fa-caret-down"></i></button>
                     <div class="dropdown-menu">
@@ -219,10 +221,6 @@
             document.getElementById(cityName).style.display = "block";
             evt.currentTarget.className += " active";
         }
-
-        //Get the element with id="defaultOpen" and click on it
-
-        //$('#defaultOpen').hide();
 
         var dropdown = document.getElementsByClassName("dropdown-btn");
         var i;

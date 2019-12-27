@@ -11,10 +11,15 @@ namespace Emlak.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class KONUT_ISYERI
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public KONUT_ISYERI()
+        {
+            this.MAKBUZ_SOZLESME = new HashSet<MAKBUZ_SOZLESME>();
+        }
+    
         public long ID { get; set; }
         public string ilanBasligi { get; set; }
         public string ilanDetayi { get; set; }
@@ -49,6 +54,7 @@ namespace Emlak.Models
         public Nullable<int> KullanimDurumu { get; set; }
         public Nullable<bool> SiteIcerisinde { get; set; }
         public string SiteAdi { get; set; }
+        public string BlokAdi { get; set; }
         public Nullable<int> AidatTL { get; set; }
         public Nullable<bool> krediyeUygun { get; set; }
         public string TapuDurumu { get; set; }
@@ -261,6 +267,11 @@ namespace Emlak.Models
         public long UserID { get; set; }
         public Nullable<double> lat { get; set; }
         public Nullable<double> lng { get; set; }
+        public string HurriyetEmlak { get; set; }
+        public string EsseEmlak { get; set; }
+        public Nullable<bool> KiraTakip { get; set; }
+        public string EmlakSahibiAdres { get; set; }
+    
         public virtual BANYO_SAYISI BANYO_SAYISI { get; set; }
         public virtual BINA_YASI BINA_YASI { get; set; }
         public virtual BULUNDUGU_KAT BULUNDUGU_KAT { get; set; }
@@ -271,5 +282,7 @@ namespace Emlak.Models
         public virtual KULLANIM_DURUMU KULLANIM_DURUMU { get; set; }
         public virtual ODA_SAYISI ODA_SAYISI { get; set; }
         public virtual USERS USERS { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MAKBUZ_SOZLESME> MAKBUZ_SOZLESME { get; set; }
     }
 }

@@ -4,35 +4,34 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="bdd80ef120cf4de1a8e3c589bd3920cd" Name="Diagram1">
-        <EntityTypeShape EntityType="EmlakModel.AJANDA" Width="1.5" PointX="5.25" PointY="59.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmlakModel.ALACAKLARIM" Width="1.5" PointX="5.25" PointY="62.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmlakModel.ARSA_TARLA" Width="1.5" PointX="8.25" PointY="55.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmlakModel.BANYO_SAYISI" Width="1.5" PointX="15" PointY="58.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmlakModel.BINA" Width="1.5" PointX="11.25" PointY="57.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmlakModel.BINA_YASI" Width="1.5" PointX="9" PointY="52.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmlakModel.BORCLARIM" Width="1.5" PointX="5.25" PointY="66" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmlakModel.BorcluTakip" Width="1.5" PointX="16.5" PointY="36.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmlakModel.BULUNDUGU_KAT" Width="1.5" PointX="15" PointY="61.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmlakModel.EmlakArayanlar" Width="1.5" PointX="5.25" PointY="69.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmlakModel.EMLAKTURU" Width="1.5" PointX="15" PointY="68.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmlakModel.GABARI" Width="1.5" PointX="6" PointY="56.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmlakModel.IMAR_DURUMU" Width="1.5" PointX="6" PointY="53.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmlakModel.ISITMA_TIPI" Width="1.5" PointX="9" PointY="76.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmlakModel.ISYERITURU" Width="1.5" PointX="15" PointY="71" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmlakModel.KAKS" Width="1.5" PointX="6" PointY="75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmlakModel.KAT_SAYISI" Width="1.5" PointX="9" PointY="79.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmlakModel.KiraTakip" Width="1.5" PointX="16.5" PointY="92" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmlakModel.KontratTakip" Width="1.5" PointX="16.5" PointY="95.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmlakModel.KONUT_ISYERI" Width="1.5" PointX="17.25" PointY="40.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmlakModel.KULLANIM_DURUMU" Width="1.5" PointX="15" PointY="73.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmlakModel.MESAJ" Width="1.5" PointX="5.25" PointY="112.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmlakModel.MUSTERI" Width="1.5" PointX="14.25" PointY="63.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmlakModel.MUSTERI_TIPI" Width="1.5" PointX="12" PointY="54.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmlakModel.ODA_SAYISI" Width="1.5" PointX="15" PointY="75.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmlakModel.TAPU_DURUMU" Width="1.5" PointX="6" PointY="77.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmlakModel.USERS" Width="1.5" PointX="3" PointY="62.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="EmlakModel.USERTYPES" Width="1.5" PointX="0.75" PointY="64.75" IsExpanded="true" />
+      <Diagram DiagramId="429d3916bd904a56809af175f3f6230f" Name="Diagram1">
+        <EntityTypeShape EntityType="EmlakModel.AJANDA" Width="1.5" PointX="5.25" PointY="55.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmlakModel.ALACAKLARIM" Width="1.5" PointX="5.25" PointY="58.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmlakModel.ARSA_TARLA" Width="1.5" PointX="8.25" PointY="51" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmlakModel.BANYO_SAYISI" Width="1.5" PointX="12" PointY="49.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmlakModel.BINA" Width="1.5" PointX="11.25" PointY="52.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmlakModel.BINA_YASI" Width="1.5" PointX="9" PointY="48.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmlakModel.BORCLARIM" Width="1.5" PointX="5.25" PointY="62" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmlakModel.BorcluTakip" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmlakModel.BULUNDUGU_KAT" Width="1.5" PointX="12" PointY="47.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmlakModel.EmlakArayanlar" Width="1.5" PointX="5.25" PointY="65.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmlakModel.EMLAKTURU" Width="1.5" PointX="12" PointY="71.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmlakModel.GABARI" Width="1.5" PointX="6" PointY="52.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmlakModel.IMAR_DURUMU" Width="1.5" PointX="6" PointY="49.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmlakModel.ISITMA_TIPI" Width="1.5" PointX="9" PointY="73.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmlakModel.ISYERITURU" Width="1.5" PointX="12" PointY="74" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmlakModel.KAKS" Width="1.5" PointX="6" PointY="71" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmlakModel.KAT_SAYISI" Width="1.5" PointX="9" PointY="76.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmlakModel.KiraTakip" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmlakModel.KontratTakip" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmlakModel.KONUT_ISYERI" Width="1.5" PointX="14.25" PointY="35.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmlakModel.KULLANIM_DURUMU" Width="1.5" PointX="12" PointY="76.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmlakModel.MAKBUZ_SOZLESME" Width="1.5" PointX="16.5" PointY="55.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmlakModel.MESAJ" Width="1.5" PointX="5.25" PointY="111" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmlakModel.ODA_SAYISI" Width="1.5" PointX="12" PointY="78.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmlakModel.TAPU_DURUMU" Width="1.5" PointX="6" PointY="73.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmlakModel.USERS" Width="1.5" PointX="3" PointY="58.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmlakModel.USERTYPES" Width="1.5" PointX="0.75" PointY="60.75" IsExpanded="true" />
         <AssociationConnector Association="EmlakModel.FK__AJANDA__UserID__2D27B809" ManuallyRouted="false" />
         <AssociationConnector Association="EmlakModel.FK__ALACAKLAR__UserI__300424B4" ManuallyRouted="false" />
         <AssociationConnector Association="EmlakModel.FK__ARSA_TARL__Gabar__5CD6CB2B" ManuallyRouted="false" />
@@ -40,31 +39,30 @@
         <AssociationConnector Association="EmlakModel.FK__ARSA_TARL__Kaks___5BE2A6F2" ManuallyRouted="false" />
         <AssociationConnector Association="EmlakModel.FK__ARSA_TARL__TapuD__5DCAEF64" ManuallyRouted="false" />
         <AssociationConnector Association="EmlakModel.FK__ARSA_TARL__UserI__59FA5E80" ManuallyRouted="false" />
+        <AssociationConnector Association="EmlakModel.FK__MAKBUZ_SO__ArsaT__68487DD7" ManuallyRouted="false" />
         <AssociationConnector Association="EmlakModel.FK__KONUT_ISY__Banyo__4E88ABD4" ManuallyRouted="false" />
         <AssociationConnector Association="EmlakModel.FK__BINA__BinaYasi__628FA481" ManuallyRouted="false" />
         <AssociationConnector Association="EmlakModel.FK__BINA__IsitmaTipi__619B8048" ManuallyRouted="false" />
         <AssociationConnector Association="EmlakModel.FK__BINA__KatSayisi__6383C8BA" ManuallyRouted="false" />
         <AssociationConnector Association="EmlakModel.FK__BINA__UserID__60A75C0F" ManuallyRouted="false" />
+        <AssociationConnector Association="EmlakModel.FK__MAKBUZ_SO__BinaI__693CA210" ManuallyRouted="false" />
         <AssociationConnector Association="EmlakModel.FK__KONUT_ISY__BinaY__4BAC3F29" ManuallyRouted="false" />
         <AssociationConnector Association="EmlakModel.FK__BORCLARIM__UserI__32E0915F" ManuallyRouted="false" />
-        <AssociationConnector Association="EmlakModel.FK__BorcluTak__Muste__6C190EBB" ManuallyRouted="false" />
         <AssociationConnector Association="EmlakModel.FK__KONUT_ISYER__Kat__4CA06362" ManuallyRouted="false" />
-        <AssociationConnector Association="EmlakModel.FK__EmlakAray__Emlak__74AE54BC" ManuallyRouted="false" />
-        <AssociationConnector Association="EmlakModel.FK__EmlakAray__OdaSa__75A278F5" ManuallyRouted="false" />
-        <AssociationConnector Association="EmlakModel.FK__EmlakAray__UserI__76969D2E" ManuallyRouted="false" />
+        <AssociationConnector Association="EmlakModel.FK__EmlakAray__Emlak__71D1E811" ManuallyRouted="false" />
+        <AssociationConnector Association="EmlakModel.FK__EmlakAray__OdaSa__72C60C4A" ManuallyRouted="false" />
+        <AssociationConnector Association="EmlakModel.FK__EmlakAray__UserI__73BA3083" ManuallyRouted="false" />
         <AssociationConnector Association="EmlakModel.FK__KONUT_ISY__Emlak__48CFD27E" ManuallyRouted="false" />
         <AssociationConnector Association="EmlakModel.FK__KONUT_ISY__Isitm__4AB81AF0" ManuallyRouted="false" />
         <AssociationConnector Association="EmlakModel.FK__KONUT_ISY__Isyer__49C3F6B7" ManuallyRouted="false" />
         <AssociationConnector Association="EmlakModel.FK__KONUT_ISY__KatSa__4D94879B" ManuallyRouted="false" />
-        <AssociationConnector Association="EmlakModel.FK__KiraTakip__Muste__6EF57B66" ManuallyRouted="false" />
-        <AssociationConnector Association="EmlakModel.FK__KontratTa__Muste__71D1E811" ManuallyRouted="false" />
         <AssociationConnector Association="EmlakModel.FK__KONUT_ISY__Kulla__4F7CD00D" ManuallyRouted="false" />
         <AssociationConnector Association="EmlakModel.FK__KONUT_ISY__OdaSa__47DBAE45" ManuallyRouted="false" />
         <AssociationConnector Association="EmlakModel.FK__KONUT_ISY__UserI__46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="EmlakModel.FK__MAKBUZ_SO__Konut__6754599E" ManuallyRouted="false" />
+        <AssociationConnector Association="EmlakModel.FK__MAKBUZ_SO__userI__66603565" ManuallyRouted="false" />
         <AssociationConnector Association="EmlakModel.FK__MESAJ__Kimden__29572725" ManuallyRouted="false" />
         <AssociationConnector Association="EmlakModel.FK__MESAJ__Kime__2A4B4B5E" ManuallyRouted="false" />
-        <AssociationConnector Association="EmlakModel.FK__MUSTERI__Musteri__68487DD7" ManuallyRouted="false" />
-        <AssociationConnector Association="EmlakModel.FK__MUSTERI__UserID__693CA210" ManuallyRouted="false" />
         <AssociationConnector Association="EmlakModel.FK__USERS__UserType__267ABA7A" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>

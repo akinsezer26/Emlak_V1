@@ -124,6 +124,8 @@
     <Property Name="Gol" Type="Boolean" />
     <Property Name="UserID" Type="Int64" Nullable="false" />
     <Property Name="ParselSorgu" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="HurriyetEmlak" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="EsseEmlak" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="lat" Type="Double" />
     <Property Name="lng" Type="Double" />
     <NavigationProperty Name="GABARI1" Relationship="Self.FK__ARSA_TARL__Gabar__5CD6CB2B" FromRole="ARSA_TARLA" ToRole="GABARI" />
@@ -131,6 +133,7 @@
     <NavigationProperty Name="KAKS" Relationship="Self.FK__ARSA_TARL__Kaks___5BE2A6F2" FromRole="ARSA_TARLA" ToRole="KAKS" />
     <NavigationProperty Name="TAPU_DURUMU" Relationship="Self.FK__ARSA_TARL__TapuD__5DCAEF64" FromRole="ARSA_TARLA" ToRole="TAPU_DURUMU" />
     <NavigationProperty Name="USERS" Relationship="Self.FK__ARSA_TARL__UserI__59FA5E80" FromRole="ARSA_TARLA" ToRole="USERS" />
+    <NavigationProperty Name="MAKBUZ_SOZLESME" Relationship="Self.FK__MAKBUZ_SO__ArsaT__68487DD7" FromRole="ARSA_TARLA" ToRole="MAKBUZ_SOZLESME" />
   </EntityType>
   <EntityType Name="BANYO_SAYISI">
     <Key>
@@ -158,6 +161,9 @@
     <Property Name="il" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="ilce" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="mahalle" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+    <Property Name="sokak" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+    <Property Name="SiteAdi" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+    <Property Name="BlokAdi" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
     <Property Name="FiyatNet" Type="Int32" />
     <Property Name="FiyatSatis" Type="Int32" />
     <Property Name="KatSayisi" Type="Int32" />
@@ -206,6 +212,8 @@
     <Property Name="picture35" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="lat" Type="Double" />
     <Property Name="lng" Type="Double" />
+    <Property Name="HurriyetEmlak" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="EsseEmlak" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="DetayAsansor" Type="Boolean" />
     <Property Name="DetayBahce" Type="Boolean" />
     <Property Name="DetayBogazManzarasi" Type="Boolean" />
@@ -223,6 +231,7 @@
     <NavigationProperty Name="ISITMA_TIPI" Relationship="Self.FK__BINA__IsitmaTipi__619B8048" FromRole="BINA" ToRole="ISITMA_TIPI" />
     <NavigationProperty Name="KAT_SAYISI" Relationship="Self.FK__BINA__KatSayisi__6383C8BA" FromRole="BINA" ToRole="KAT_SAYISI" />
     <NavigationProperty Name="USERS" Relationship="Self.FK__BINA__UserID__60A75C0F" FromRole="BINA" ToRole="USERS" />
+    <NavigationProperty Name="MAKBUZ_SOZLESME" Relationship="Self.FK__MAKBUZ_SO__BinaI__693CA210" FromRole="BINA" ToRole="MAKBUZ_SOZLESME" />
   </EntityType>
   <EntityType Name="BINA_YASI">
     <Key>
@@ -252,14 +261,14 @@
       <PropertyRef Name="BorcluTakipID" />
     </Key>
     <Property Name="BorcluTakipID" Type="Int64" Nullable="false" />
-    <Property Name="MusteriID" Type="Int64" />
-    <Property Name="MusteriAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="MusteriSoyAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="MusteriCep" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-    <Property Name="OdemeTL" Type="Int32" />
-    <Property Name="OdemeTarihi" Type="DateTime" Precision="3" />
+    <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SoyAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Cep" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="OdemeToplamTL" Type="Int32" />
+    <Property Name="Odenen" Type="Int32" />
+    <Property Name="Kalan" Type="Int32" />
+    <Property Name="OdemeTarihi" Type="DateTime" Precision="0" />
     <Property Name="Note" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="MUSTERI" Relationship="Self.FK__BorcluTak__Muste__6C190EBB" FromRole="BorcluTakip" ToRole="MUSTERI" />
   </EntityType>
   <EntityType Name="BULUNDUGU_KAT">
     <Key>
@@ -287,9 +296,9 @@
     <Property Name="KacinciKat" Type="Int32" />
     <Property Name="Note" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="UserID" Type="Int64" Nullable="false" />
-    <NavigationProperty Name="EMLAKTURU1" Relationship="Self.FK__EmlakAray__Emlak__74AE54BC" FromRole="EmlakArayanlar" ToRole="EMLAKTURU" />
-    <NavigationProperty Name="ODA_SAYISI" Relationship="Self.FK__EmlakAray__OdaSa__75A278F5" FromRole="EmlakArayanlar" ToRole="ODA_SAYISI" />
-    <NavigationProperty Name="USERS" Relationship="Self.FK__EmlakAray__UserI__76969D2E" FromRole="EmlakArayanlar" ToRole="USERS" />
+    <NavigationProperty Name="EMLAKTURU1" Relationship="Self.FK__EmlakAray__Emlak__71D1E811" FromRole="EmlakArayanlar" ToRole="EMLAKTURU" />
+    <NavigationProperty Name="ODA_SAYISI" Relationship="Self.FK__EmlakAray__OdaSa__72C60C4A" FromRole="EmlakArayanlar" ToRole="ODA_SAYISI" />
+    <NavigationProperty Name="USERS" Relationship="Self.FK__EmlakAray__UserI__73BA3083" FromRole="EmlakArayanlar" ToRole="USERS" />
   </EntityType>
   <EntityType Name="EMLAKTURU">
     <Key>
@@ -297,7 +306,7 @@
     </Key>
     <Property Name="EMLAK_TURU_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="EMLAK_TURU" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="EmlakArayanlar" Relationship="Self.FK__EmlakAray__Emlak__74AE54BC" FromRole="EMLAKTURU" ToRole="EmlakArayanlar" />
+    <NavigationProperty Name="EmlakArayanlar" Relationship="Self.FK__EmlakAray__Emlak__71D1E811" FromRole="EMLAKTURU" ToRole="EmlakArayanlar" />
     <NavigationProperty Name="KONUT_ISYERI" Relationship="Self.FK__KONUT_ISY__Emlak__48CFD27E" FromRole="EMLAKTURU" ToRole="KONUT_ISYERI" />
   </EntityType>
   <EntityType Name="GABARI">
@@ -355,30 +364,25 @@
       <PropertyRef Name="KiraTakipID" />
     </Key>
     <Property Name="KiraTakipID" Type="Int64" Nullable="false" />
-    <Property Name="MusteriAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="MusteriSoyAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="MusteriCep" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-    <Property Name="MusteriID" Type="Int64" />
-    <Property Name="Kalan" Type="Int32" />
-    <Property Name="OdemeTL" Type="Int32" />
-    <Property Name="OdemeTarihi" Type="DateTime" Precision="3" />
+    <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SoyAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Cep" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="OdemeTarihi" Type="DateTime" Precision="0" />
     <Property Name="Note" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="MUSTERI" Relationship="Self.FK__KiraTakip__Muste__6EF57B66" FromRole="KiraTakip" ToRole="MUSTERI" />
   </EntityType>
   <EntityType Name="KontratTakip">
     <Key>
       <PropertyRef Name="KontratTakipID" />
     </Key>
     <Property Name="KontratTakipID" Type="Int64" Nullable="false" />
-    <Property Name="MusteriAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="MusteriSoyAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="MusteriCep" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-    <Property Name="MusteriID" Type="Int64" />
-    <Property Name="Kalan" Type="Int32" />
+    <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SoyAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TC" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+    <Property Name="Cep" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
     <Property Name="OdemeTarihi" Type="DateTime" Precision="3" />
     <Property Name="KaçAy" Type="Int32" />
+    <Property Name="Kalan" Type="Int32" />
     <Property Name="Note" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="MUSTERI" Relationship="Self.FK__KontratTa__Muste__71D1E811" FromRole="KontratTakip" ToRole="MUSTERI" />
   </EntityType>
   <EntityType Name="KONUT_ISYERI">
     <Key>
@@ -418,6 +422,7 @@
     <Property Name="KullanimDurumu" Type="Int32" />
     <Property Name="SiteIcerisinde" Type="Boolean" />
     <Property Name="SiteAdi" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+    <Property Name="BlokAdi" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
     <Property Name="AidatTL" Type="Int32" />
     <Property Name="krediyeUygun" Type="Boolean" />
     <Property Name="TapuDurumu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -630,6 +635,8 @@
     <Property Name="UserID" Type="Int64" Nullable="false" />
     <Property Name="lat" Type="Double" />
     <Property Name="lng" Type="Double" />
+    <Property Name="HurriyetEmlak" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="EsseEmlak" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="BANYO_SAYISI" Relationship="Self.FK__KONUT_ISY__Banyo__4E88ABD4" FromRole="KONUT_ISYERI" ToRole="BANYO_SAYISI" />
     <NavigationProperty Name="BINA_YASI" Relationship="Self.FK__KONUT_ISY__BinaY__4BAC3F29" FromRole="KONUT_ISYERI" ToRole="BINA_YASI" />
     <NavigationProperty Name="BULUNDUGU_KAT" Relationship="Self.FK__KONUT_ISYER__Kat__4CA06362" FromRole="KONUT_ISYERI" ToRole="BULUNDUGU_KAT" />
@@ -640,6 +647,7 @@
     <NavigationProperty Name="KULLANIM_DURUMU" Relationship="Self.FK__KONUT_ISY__Kulla__4F7CD00D" FromRole="KONUT_ISYERI" ToRole="KULLANIM_DURUMU" />
     <NavigationProperty Name="ODA_SAYISI" Relationship="Self.FK__KONUT_ISY__OdaSa__47DBAE45" FromRole="KONUT_ISYERI" ToRole="ODA_SAYISI" />
     <NavigationProperty Name="USERS" Relationship="Self.FK__KONUT_ISY__UserI__46E78A0C" FromRole="KONUT_ISYERI" ToRole="USERS" />
+    <NavigationProperty Name="MAKBUZ_SOZLESME" Relationship="Self.FK__MAKBUZ_SO__Konut__6754599E" FromRole="KONUT_ISYERI" ToRole="MAKBUZ_SOZLESME" />
   </EntityType>
   <EntityType Name="KULLANIM_DURUMU">
     <Key>
@@ -648,6 +656,66 @@
     <Property Name="KULLANIM_DURUMU_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="KULLANIM_DURUMU1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="KONUT_ISYERI" Relationship="Self.FK__KONUT_ISY__Kulla__4F7CD00D" FromRole="KULLANIM_DURUMU" ToRole="KONUT_ISYERI" />
+  </EntityType>
+  <EntityType Name="MAKBUZ_SOZLESME">
+    <Key>
+      <PropertyRef Name="MakbuzSozlesmeID" />
+    </Key>
+    <Property Name="MakbuzSozlesmeID" Type="Int64" Nullable="false" />
+    <Property Name="KiraciAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="KiraciSoyAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="KiraciTCKimlik" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+    <Property Name="Cep" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="KacAy" Type="Int32" />
+    <Property Name="AylikOdemeTL" Type="Int32" />
+    <Property Name="OdemeBaslangicTarihi" Type="DateTime" Precision="0" />
+    <Property Name="KiracininAdresi" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Ay1" Type="Int32" />
+    <Property Name="Ay2" Type="Int32" />
+    <Property Name="Ay3" Type="Int32" />
+    <Property Name="Ay4" Type="Int32" />
+    <Property Name="Ay5" Type="Int32" />
+    <Property Name="Ay6" Type="Int32" />
+    <Property Name="Ay7" Type="Int32" />
+    <Property Name="Ay8" Type="Int32" />
+    <Property Name="Ay9" Type="Int32" />
+    <Property Name="Ay10" Type="Int32" />
+    <Property Name="Ay11" Type="Int32" />
+    <Property Name="Ay12" Type="Int32" />
+    <Property Name="KirmiziList" Type="Boolean" />
+    <Property Name="Borclu" Type="Boolean" />
+    <Property Name="KiraTakip" Type="Boolean" />
+    <Property Name="Depozit" Type="Boolean" />
+    <Property Name="DepozitTL" Type="Boolean" />
+    <Property Name="DanismanAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DanismanSoyAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="KirayaVerenAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="KirayaVerenSoyAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="KirayaVerenTC" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+    <Property Name="KirayaVerenIBAN" Type="String" MaxLength="26" FixedLength="false" Unicode="true" />
+    <Property Name="KirayaVerenCep" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="IL" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="ILCE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Mahalle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Cadde" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Sokak" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SiteAdi" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
+    <Property Name="BlokAdi" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="AptAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AptNo" Type="Int32" />
+    <Property Name="Kat" Type="Int32" />
+    <Property Name="DaireNo" Type="Int32" />
+    <Property Name="EmlakTuru" Type="Int32" />
+    <Property Name="KirayaVerenAdres" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Note" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="userID" Type="Int64" />
+    <Property Name="KonutID" Type="Int64" />
+    <Property Name="ArsaTarlaID" Type="Int64" />
+    <Property Name="BinaID" Type="Int64" />
+    <NavigationProperty Name="ARSA_TARLA" Relationship="Self.FK__MAKBUZ_SO__ArsaT__68487DD7" FromRole="MAKBUZ_SOZLESME" ToRole="ARSA_TARLA" />
+    <NavigationProperty Name="BINA" Relationship="Self.FK__MAKBUZ_SO__BinaI__693CA210" FromRole="MAKBUZ_SOZLESME" ToRole="BINA" />
+    <NavigationProperty Name="KONUT_ISYERI" Relationship="Self.FK__MAKBUZ_SO__Konut__6754599E" FromRole="MAKBUZ_SOZLESME" ToRole="KONUT_ISYERI" />
+    <NavigationProperty Name="USERS" Relationship="Self.FK__MAKBUZ_SO__userI__66603565" FromRole="MAKBUZ_SOZLESME" ToRole="USERS" />
   </EntityType>
   <EntityType Name="MESAJ">
     <Key>
@@ -662,41 +730,13 @@
     <NavigationProperty Name="USERS" Relationship="Self.FK__MESAJ__Kimden__29572725" FromRole="MESAJ" ToRole="USERS" />
     <NavigationProperty Name="USERS1" Relationship="Self.FK__MESAJ__Kime__2A4B4B5E" FromRole="MESAJ" ToRole="USERS" />
   </EntityType>
-  <EntityType Name="MUSTERI">
-    <Key>
-      <PropertyRef Name="MusteriID" />
-    </Key>
-    <Property Name="MusteriID" Type="Int64" Nullable="false" />
-    <Property Name="MusteriAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="MusteriSoyAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="MusteriTC" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
-    <Property Name="MusteriCep" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-    <Property Name="MusteriIsTelefonu" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-    <Property Name="Adres" Type="String" MaxLength="75" FixedLength="false" Unicode="true" />
-    <Property Name="MusteriTipi" Type="Int32" />
-    <Property Name="UserID" Type="Int64" Nullable="false" />
-    <Property Name="Note" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="BorcluTakip" Relationship="Self.FK__BorcluTak__Muste__6C190EBB" FromRole="MUSTERI" ToRole="BorcluTakip" />
-    <NavigationProperty Name="KiraTakip" Relationship="Self.FK__KiraTakip__Muste__6EF57B66" FromRole="MUSTERI" ToRole="KiraTakip" />
-    <NavigationProperty Name="KontratTakip" Relationship="Self.FK__KontratTa__Muste__71D1E811" FromRole="MUSTERI" ToRole="KontratTakip" />
-    <NavigationProperty Name="MUSTERI_TIPI" Relationship="Self.FK__MUSTERI__Musteri__68487DD7" FromRole="MUSTERI" ToRole="MUSTERI_TIPI" />
-    <NavigationProperty Name="USERS" Relationship="Self.FK__MUSTERI__UserID__693CA210" FromRole="MUSTERI" ToRole="USERS" />
-  </EntityType>
-  <EntityType Name="MUSTERI_TIPI">
-    <Key>
-      <PropertyRef Name="MUSTERI_TIPI_ID" />
-    </Key>
-    <Property Name="MUSTERI_TIPI_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="MUSTERI_TIPI1" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="MUSTERI" Relationship="Self.FK__MUSTERI__Musteri__68487DD7" FromRole="MUSTERI_TIPI" ToRole="MUSTERI" />
-  </EntityType>
   <EntityType Name="ODA_SAYISI">
     <Key>
       <PropertyRef Name="ODA_SAYISI_ID" />
     </Key>
     <Property Name="ODA_SAYISI_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ODA_SAYISI1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="EmlakArayanlar" Relationship="Self.FK__EmlakAray__OdaSa__75A278F5" FromRole="ODA_SAYISI" ToRole="EmlakArayanlar" />
+    <NavigationProperty Name="EmlakArayanlar" Relationship="Self.FK__EmlakAray__OdaSa__72C60C4A" FromRole="ODA_SAYISI" ToRole="EmlakArayanlar" />
     <NavigationProperty Name="KONUT_ISYERI" Relationship="Self.FK__KONUT_ISY__OdaSa__47DBAE45" FromRole="ODA_SAYISI" ToRole="KONUT_ISYERI" />
   </EntityType>
   <EntityType Name="TAPU_DURUMU">
@@ -728,11 +768,11 @@
     <NavigationProperty Name="ARSA_TARLA" Relationship="Self.FK__ARSA_TARL__UserI__59FA5E80" FromRole="USERS" ToRole="ARSA_TARLA" />
     <NavigationProperty Name="BINA" Relationship="Self.FK__BINA__UserID__60A75C0F" FromRole="USERS" ToRole="BINA" />
     <NavigationProperty Name="BORCLARIM" Relationship="Self.FK__BORCLARIM__UserI__32E0915F" FromRole="USERS" ToRole="BORCLARIM" />
-    <NavigationProperty Name="EmlakArayanlar" Relationship="Self.FK__EmlakAray__UserI__76969D2E" FromRole="USERS" ToRole="EmlakArayanlar" />
+    <NavigationProperty Name="EmlakArayanlar" Relationship="Self.FK__EmlakAray__UserI__73BA3083" FromRole="USERS" ToRole="EmlakArayanlar" />
     <NavigationProperty Name="KONUT_ISYERI" Relationship="Self.FK__KONUT_ISY__UserI__46E78A0C" FromRole="USERS" ToRole="KONUT_ISYERI" />
+    <NavigationProperty Name="MAKBUZ_SOZLESME" Relationship="Self.FK__MAKBUZ_SO__userI__66603565" FromRole="USERS" ToRole="MAKBUZ_SOZLESME" />
     <NavigationProperty Name="MESAJ" Relationship="Self.FK__MESAJ__Kimden__29572725" FromRole="USERS" ToRole="MESAJ" />
     <NavigationProperty Name="MESAJ1" Relationship="Self.FK__MESAJ__Kime__2A4B4B5E" FromRole="USERS" ToRole="MESAJ" />
-    <NavigationProperty Name="MUSTERI" Relationship="Self.FK__MUSTERI__UserID__693CA210" FromRole="USERS" ToRole="MUSTERI" />
     <NavigationProperty Name="USERTYPES" Relationship="Self.FK__USERS__UserType__267ABA7A" FromRole="USERS" ToRole="USERTYPES" />
   </EntityType>
   <EntityType Name="USERTYPES">
@@ -827,6 +867,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__MAKBUZ_SO__ArsaT__68487DD7">
+    <End Role="ARSA_TARLA" Type="Self.ARSA_TARLA" Multiplicity="0..1" />
+    <End Role="MAKBUZ_SOZLESME" Type="Self.MAKBUZ_SOZLESME" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ARSA_TARLA">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="MAKBUZ_SOZLESME">
+        <PropertyRef Name="ArsaTarlaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__KONUT_ISY__Banyo__4E88ABD4">
     <End Role="BANYO_SAYISI" Type="Self.BANYO_SAYISI" Multiplicity="0..1" />
     <End Role="KONUT_ISYERI" Type="Self.KONUT_ISYERI" Multiplicity="*" />
@@ -887,6 +939,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__MAKBUZ_SO__BinaI__693CA210">
+    <End Role="BINA" Type="Self.BINA" Multiplicity="0..1" />
+    <End Role="MAKBUZ_SOZLESME" Type="Self.MAKBUZ_SOZLESME" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BINA">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="MAKBUZ_SOZLESME">
+        <PropertyRef Name="BinaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__KONUT_ISY__BinaY__4BAC3F29">
     <End Role="BINA_YASI" Type="Self.BINA_YASI" Multiplicity="0..1" />
     <End Role="KONUT_ISYERI" Type="Self.KONUT_ISYERI" Multiplicity="*" />
@@ -911,18 +975,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__BorcluTak__Muste__6C190EBB">
-    <End Role="MUSTERI" Type="Self.MUSTERI" Multiplicity="0..1" />
-    <End Role="BorcluTakip" Type="Self.BorcluTakip" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="MUSTERI">
-        <PropertyRef Name="MusteriID" />
-      </Principal>
-      <Dependent Role="BorcluTakip">
-        <PropertyRef Name="MusteriID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK__KONUT_ISYER__Kat__4CA06362">
     <End Role="BULUNDUGU_KAT" Type="Self.BULUNDUGU_KAT" Multiplicity="0..1" />
     <End Role="KONUT_ISYERI" Type="Self.KONUT_ISYERI" Multiplicity="*" />
@@ -935,7 +987,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__EmlakAray__Emlak__74AE54BC">
+  <Association Name="FK__EmlakAray__Emlak__71D1E811">
     <End Role="EMLAKTURU" Type="Self.EMLAKTURU" Multiplicity="0..1" />
     <End Role="EmlakArayanlar" Type="Self.EmlakArayanlar" Multiplicity="*" />
     <ReferentialConstraint>
@@ -947,7 +999,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__EmlakAray__OdaSa__75A278F5">
+  <Association Name="FK__EmlakAray__OdaSa__72C60C4A">
     <End Role="ODA_SAYISI" Type="Self.ODA_SAYISI" Multiplicity="0..1" />
     <End Role="EmlakArayanlar" Type="Self.EmlakArayanlar" Multiplicity="*" />
     <ReferentialConstraint>
@@ -959,7 +1011,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__EmlakAray__UserI__76969D2E">
+  <Association Name="FK__EmlakAray__UserI__73BA3083">
     <End Role="USERS" Type="Self.USERS" Multiplicity="1" />
     <End Role="EmlakArayanlar" Type="Self.EmlakArayanlar" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1019,30 +1071,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__KiraTakip__Muste__6EF57B66">
-    <End Role="MUSTERI" Type="Self.MUSTERI" Multiplicity="0..1" />
-    <End Role="KiraTakip" Type="Self.KiraTakip" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="MUSTERI">
-        <PropertyRef Name="MusteriID" />
-      </Principal>
-      <Dependent Role="KiraTakip">
-        <PropertyRef Name="MusteriID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__KontratTa__Muste__71D1E811">
-    <End Role="MUSTERI" Type="Self.MUSTERI" Multiplicity="0..1" />
-    <End Role="KontratTakip" Type="Self.KontratTakip" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="MUSTERI">
-        <PropertyRef Name="MusteriID" />
-      </Principal>
-      <Dependent Role="KontratTakip">
-        <PropertyRef Name="MusteriID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK__KONUT_ISY__Kulla__4F7CD00D">
     <End Role="KULLANIM_DURUMU" Type="Self.KULLANIM_DURUMU" Multiplicity="0..1" />
     <End Role="KONUT_ISYERI" Type="Self.KONUT_ISYERI" Multiplicity="*" />
@@ -1079,6 +1107,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__MAKBUZ_SO__Konut__6754599E">
+    <End Role="KONUT_ISYERI" Type="Self.KONUT_ISYERI" Multiplicity="0..1" />
+    <End Role="MAKBUZ_SOZLESME" Type="Self.MAKBUZ_SOZLESME" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KONUT_ISYERI">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="MAKBUZ_SOZLESME">
+        <PropertyRef Name="KonutID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__MAKBUZ_SO__userI__66603565">
+    <End Role="USERS" Type="Self.USERS" Multiplicity="0..1" />
+    <End Role="MAKBUZ_SOZLESME" Type="Self.MAKBUZ_SOZLESME" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USERS">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="MAKBUZ_SOZLESME">
+        <PropertyRef Name="userID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__MESAJ__Kimden__29572725">
     <End Role="USERS" Type="Self.USERS" Multiplicity="0..1" />
     <End Role="MESAJ" Type="Self.MESAJ" Multiplicity="*" />
@@ -1100,30 +1152,6 @@
       </Principal>
       <Dependent Role="MESAJ">
         <PropertyRef Name="Kime" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__MUSTERI__Musteri__68487DD7">
-    <End Role="MUSTERI_TIPI" Type="Self.MUSTERI_TIPI" Multiplicity="0..1" />
-    <End Role="MUSTERI" Type="Self.MUSTERI" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="MUSTERI_TIPI">
-        <PropertyRef Name="MUSTERI_TIPI_ID" />
-      </Principal>
-      <Dependent Role="MUSTERI">
-        <PropertyRef Name="MusteriTipi" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__MUSTERI__UserID__693CA210">
-    <End Role="USERS" Type="Self.USERS" Multiplicity="1" />
-    <End Role="MUSTERI" Type="Self.MUSTERI" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="USERS">
-        <PropertyRef Name="UserID" />
-      </Principal>
-      <Dependent Role="MUSTERI">
-        <PropertyRef Name="UserID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1161,9 +1189,8 @@
     <EntitySet Name="KontratTakip" EntityType="Self.KontratTakip" />
     <EntitySet Name="KONUT_ISYERI" EntityType="Self.KONUT_ISYERI" />
     <EntitySet Name="KULLANIM_DURUMU" EntityType="Self.KULLANIM_DURUMU" />
+    <EntitySet Name="MAKBUZ_SOZLESME" EntityType="Self.MAKBUZ_SOZLESME" />
     <EntitySet Name="MESAJ" EntityType="Self.MESAJ" />
-    <EntitySet Name="MUSTERI" EntityType="Self.MUSTERI" />
-    <EntitySet Name="MUSTERI_TIPI" EntityType="Self.MUSTERI_TIPI" />
     <EntitySet Name="ODA_SAYISI" EntityType="Self.ODA_SAYISI" />
     <EntitySet Name="TAPU_DURUMU" EntityType="Self.TAPU_DURUMU" />
     <EntitySet Name="USERS" EntityType="Self.USERS" />
@@ -1196,6 +1223,10 @@
       <End Role="USERS" EntitySet="USERS" />
       <End Role="ARSA_TARLA" EntitySet="ARSA_TARLA" />
     </AssociationSet>
+    <AssociationSet Name="FK__MAKBUZ_SO__ArsaT__68487DD7" Association="Self.FK__MAKBUZ_SO__ArsaT__68487DD7">
+      <End Role="ARSA_TARLA" EntitySet="ARSA_TARLA" />
+      <End Role="MAKBUZ_SOZLESME" EntitySet="MAKBUZ_SOZLESME" />
+    </AssociationSet>
     <AssociationSet Name="FK__KONUT_ISY__Banyo__4E88ABD4" Association="Self.FK__KONUT_ISY__Banyo__4E88ABD4">
       <End Role="BANYO_SAYISI" EntitySet="BANYO_SAYISI" />
       <End Role="KONUT_ISYERI" EntitySet="KONUT_ISYERI" />
@@ -1216,6 +1247,10 @@
       <End Role="USERS" EntitySet="USERS" />
       <End Role="BINA" EntitySet="BINA" />
     </AssociationSet>
+    <AssociationSet Name="FK__MAKBUZ_SO__BinaI__693CA210" Association="Self.FK__MAKBUZ_SO__BinaI__693CA210">
+      <End Role="BINA" EntitySet="BINA" />
+      <End Role="MAKBUZ_SOZLESME" EntitySet="MAKBUZ_SOZLESME" />
+    </AssociationSet>
     <AssociationSet Name="FK__KONUT_ISY__BinaY__4BAC3F29" Association="Self.FK__KONUT_ISY__BinaY__4BAC3F29">
       <End Role="BINA_YASI" EntitySet="BINA_YASI" />
       <End Role="KONUT_ISYERI" EntitySet="KONUT_ISYERI" />
@@ -1224,23 +1259,19 @@
       <End Role="USERS" EntitySet="USERS" />
       <End Role="BORCLARIM" EntitySet="BORCLARIM" />
     </AssociationSet>
-    <AssociationSet Name="FK__BorcluTak__Muste__6C190EBB" Association="Self.FK__BorcluTak__Muste__6C190EBB">
-      <End Role="MUSTERI" EntitySet="MUSTERI" />
-      <End Role="BorcluTakip" EntitySet="BorcluTakip" />
-    </AssociationSet>
     <AssociationSet Name="FK__KONUT_ISYER__Kat__4CA06362" Association="Self.FK__KONUT_ISYER__Kat__4CA06362">
       <End Role="BULUNDUGU_KAT" EntitySet="BULUNDUGU_KAT" />
       <End Role="KONUT_ISYERI" EntitySet="KONUT_ISYERI" />
     </AssociationSet>
-    <AssociationSet Name="FK__EmlakAray__Emlak__74AE54BC" Association="Self.FK__EmlakAray__Emlak__74AE54BC">
+    <AssociationSet Name="FK__EmlakAray__Emlak__71D1E811" Association="Self.FK__EmlakAray__Emlak__71D1E811">
       <End Role="EMLAKTURU" EntitySet="EMLAKTURU" />
       <End Role="EmlakArayanlar" EntitySet="EmlakArayanlar" />
     </AssociationSet>
-    <AssociationSet Name="FK__EmlakAray__OdaSa__75A278F5" Association="Self.FK__EmlakAray__OdaSa__75A278F5">
+    <AssociationSet Name="FK__EmlakAray__OdaSa__72C60C4A" Association="Self.FK__EmlakAray__OdaSa__72C60C4A">
       <End Role="ODA_SAYISI" EntitySet="ODA_SAYISI" />
       <End Role="EmlakArayanlar" EntitySet="EmlakArayanlar" />
     </AssociationSet>
-    <AssociationSet Name="FK__EmlakAray__UserI__76969D2E" Association="Self.FK__EmlakAray__UserI__76969D2E">
+    <AssociationSet Name="FK__EmlakAray__UserI__73BA3083" Association="Self.FK__EmlakAray__UserI__73BA3083">
       <End Role="USERS" EntitySet="USERS" />
       <End Role="EmlakArayanlar" EntitySet="EmlakArayanlar" />
     </AssociationSet>
@@ -1260,14 +1291,6 @@
       <End Role="KAT_SAYISI" EntitySet="KAT_SAYISI" />
       <End Role="KONUT_ISYERI" EntitySet="KONUT_ISYERI" />
     </AssociationSet>
-    <AssociationSet Name="FK__KiraTakip__Muste__6EF57B66" Association="Self.FK__KiraTakip__Muste__6EF57B66">
-      <End Role="MUSTERI" EntitySet="MUSTERI" />
-      <End Role="KiraTakip" EntitySet="KiraTakip" />
-    </AssociationSet>
-    <AssociationSet Name="FK__KontratTa__Muste__71D1E811" Association="Self.FK__KontratTa__Muste__71D1E811">
-      <End Role="MUSTERI" EntitySet="MUSTERI" />
-      <End Role="KontratTakip" EntitySet="KontratTakip" />
-    </AssociationSet>
     <AssociationSet Name="FK__KONUT_ISY__Kulla__4F7CD00D" Association="Self.FK__KONUT_ISY__Kulla__4F7CD00D">
       <End Role="KULLANIM_DURUMU" EntitySet="KULLANIM_DURUMU" />
       <End Role="KONUT_ISYERI" EntitySet="KONUT_ISYERI" />
@@ -1280,6 +1303,14 @@
       <End Role="USERS" EntitySet="USERS" />
       <End Role="KONUT_ISYERI" EntitySet="KONUT_ISYERI" />
     </AssociationSet>
+    <AssociationSet Name="FK__MAKBUZ_SO__Konut__6754599E" Association="Self.FK__MAKBUZ_SO__Konut__6754599E">
+      <End Role="KONUT_ISYERI" EntitySet="KONUT_ISYERI" />
+      <End Role="MAKBUZ_SOZLESME" EntitySet="MAKBUZ_SOZLESME" />
+    </AssociationSet>
+    <AssociationSet Name="FK__MAKBUZ_SO__userI__66603565" Association="Self.FK__MAKBUZ_SO__userI__66603565">
+      <End Role="USERS" EntitySet="USERS" />
+      <End Role="MAKBUZ_SOZLESME" EntitySet="MAKBUZ_SOZLESME" />
+    </AssociationSet>
     <AssociationSet Name="FK__MESAJ__Kimden__29572725" Association="Self.FK__MESAJ__Kimden__29572725">
       <End Role="USERS" EntitySet="USERS" />
       <End Role="MESAJ" EntitySet="MESAJ" />
@@ -1287,14 +1318,6 @@
     <AssociationSet Name="FK__MESAJ__Kime__2A4B4B5E" Association="Self.FK__MESAJ__Kime__2A4B4B5E">
       <End Role="USERS" EntitySet="USERS" />
       <End Role="MESAJ" EntitySet="MESAJ" />
-    </AssociationSet>
-    <AssociationSet Name="FK__MUSTERI__Musteri__68487DD7" Association="Self.FK__MUSTERI__Musteri__68487DD7">
-      <End Role="MUSTERI_TIPI" EntitySet="MUSTERI_TIPI" />
-      <End Role="MUSTERI" EntitySet="MUSTERI" />
-    </AssociationSet>
-    <AssociationSet Name="FK__MUSTERI__UserID__693CA210" Association="Self.FK__MUSTERI__UserID__693CA210">
-      <End Role="USERS" EntitySet="USERS" />
-      <End Role="MUSTERI" EntitySet="MUSTERI" />
     </AssociationSet>
     <AssociationSet Name="FK__USERS__UserType__267ABA7A" Association="Self.FK__USERS__UserType__267ABA7A">
       <End Role="USERTYPES" EntitySet="USERTYPES" />

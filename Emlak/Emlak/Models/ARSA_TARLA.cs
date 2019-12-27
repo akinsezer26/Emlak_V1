@@ -14,6 +14,12 @@ namespace Emlak.Models
     
     public partial class ARSA_TARLA
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ARSA_TARLA()
+        {
+            this.MAKBUZ_SOZLESME = new HashSet<MAKBUZ_SOZLESME>();
+        }
+    
         public long ID { get; set; }
         public Nullable<System.DateTime> Tarih { get; set; }
         public string MusteriKaynagi { get; set; }
@@ -44,6 +50,7 @@ namespace Emlak.Models
         public Nullable<int> TapuDurumu { get; set; }
         public Nullable<bool> KrediyeUygun { get; set; }
         public Nullable<bool> Depozito { get; set; }
+        public string EmlakSahibiAdres { get; set; }
         public string Kira_Satilik { get; set; }
         public string picture1 { get; set; }
         public string picture2 { get; set; }
@@ -107,6 +114,9 @@ namespace Emlak.Models
         public Nullable<bool> Gol { get; set; }
         public long UserID { get; set; }
         public string ParselSorgu { get; set; }
+        public string HurriyetEmlak { get; set; }
+        public string EsseEmlak { get; set; }
+        public Nullable<bool> KiraTakip { get; set; }
         public Nullable<double> lat { get; set; }
         public Nullable<double> lng { get; set; }
     
@@ -115,5 +125,7 @@ namespace Emlak.Models
         public virtual KAKS KAKS { get; set; }
         public virtual TAPU_DURUMU TAPU_DURUMU { get; set; }
         public virtual USERS USERS { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MAKBUZ_SOZLESME> MAKBUZ_SOZLESME { get; set; }
     }
 }

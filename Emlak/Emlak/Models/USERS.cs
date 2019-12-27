@@ -24,9 +24,9 @@ namespace Emlak.Models
             this.BORCLARIM = new HashSet<BORCLARIM>();
             this.EmlakArayanlar = new HashSet<EmlakArayanlar>();
             this.KONUT_ISYERI = new HashSet<KONUT_ISYERI>();
+            this.MAKBUZ_SOZLESME = new HashSet<MAKBUZ_SOZLESME>();
             this.MESAJ = new HashSet<MESAJ>();
             this.MESAJ1 = new HashSet<MESAJ>();
-            this.MUSTERI = new HashSet<MUSTERI>();
         }
     
         public long UserID { get; set; }
@@ -41,6 +41,7 @@ namespace Emlak.Models
         public string iban { get; set; }
         public string adres { get; set; }
         public string ppicture { get; set; }
+        public Nullable<bool> isBlocked { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AJANDA> AJANDA { get; set; }
@@ -57,11 +58,11 @@ namespace Emlak.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<KONUT_ISYERI> KONUT_ISYERI { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MAKBUZ_SOZLESME> MAKBUZ_SOZLESME { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MESAJ> MESAJ { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MESAJ> MESAJ1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MUSTERI> MUSTERI { get; set; }
         public virtual USERTYPES USERTYPES { get; set; }
         public string LoginErrorMessage { get; internal set; }
     }

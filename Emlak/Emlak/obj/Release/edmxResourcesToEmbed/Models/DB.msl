@@ -124,6 +124,8 @@
           <ScalarProperty Name="Gol" ColumnName="Gol" />
           <ScalarProperty Name="UserID" ColumnName="UserID" />
           <ScalarProperty Name="ParselSorgu" ColumnName="ParselSorgu" />
+          <ScalarProperty Name="HurriyetEmlak" ColumnName="HurriyetEmlak" />
+          <ScalarProperty Name="EsseEmlak" ColumnName="EsseEmlak" />
           <ScalarProperty Name="lat" ColumnName="lat" />
           <ScalarProperty Name="lng" ColumnName="lng" />
         </MappingFragment>
@@ -154,6 +156,9 @@
           <ScalarProperty Name="il" ColumnName="il" />
           <ScalarProperty Name="ilce" ColumnName="ilce" />
           <ScalarProperty Name="mahalle" ColumnName="mahalle" />
+          <ScalarProperty Name="sokak" ColumnName="sokak" />
+          <ScalarProperty Name="SiteAdi" ColumnName="SiteAdi" />
+          <ScalarProperty Name="BlokAdi" ColumnName="BlokAdi" />
           <ScalarProperty Name="FiyatNet" ColumnName="FiyatNet" />
           <ScalarProperty Name="FiyatSatis" ColumnName="FiyatSatis" />
           <ScalarProperty Name="KatSayisi" ColumnName="KatSayisi" />
@@ -202,6 +207,8 @@
           <ScalarProperty Name="picture35" ColumnName="picture35" />
           <ScalarProperty Name="lat" ColumnName="lat" />
           <ScalarProperty Name="lng" ColumnName="lng" />
+          <ScalarProperty Name="HurriyetEmlak" ColumnName="HurriyetEmlak" />
+          <ScalarProperty Name="EsseEmlak" ColumnName="EsseEmlak" />
           <ScalarProperty Name="DetayAsansor" ColumnName="DetayAsansor" />
           <ScalarProperty Name="DetayBahce" ColumnName="DetayBahce" />
           <ScalarProperty Name="DetayBogazManzarasi" ColumnName="DetayBogazManzarasi" />
@@ -244,11 +251,12 @@
       <EntityTypeMapping TypeName="EmlakModel.BorcluTakip">
         <MappingFragment StoreEntitySet="BorcluTakip">
           <ScalarProperty Name="BorcluTakipID" ColumnName="BorcluTakipID" />
-          <ScalarProperty Name="MusteriID" ColumnName="MusteriID" />
-          <ScalarProperty Name="MusteriAd" ColumnName="MusteriAd" />
-          <ScalarProperty Name="MusteriSoyAd" ColumnName="MusteriSoyAd" />
-          <ScalarProperty Name="MusteriCep" ColumnName="MusteriCep" />
-          <ScalarProperty Name="OdemeTL" ColumnName="OdemeTL" />
+          <ScalarProperty Name="Ad" ColumnName="Ad" />
+          <ScalarProperty Name="SoyAd" ColumnName="SoyAd" />
+          <ScalarProperty Name="Cep" ColumnName="Cep" />
+          <ScalarProperty Name="OdemeToplamTL" ColumnName="OdemeToplamTL" />
+          <ScalarProperty Name="Odenen" ColumnName="Odenen" />
+          <ScalarProperty Name="Kalan" ColumnName="Kalan" />
           <ScalarProperty Name="OdemeTarihi" ColumnName="OdemeTarihi" />
           <ScalarProperty Name="Note" ColumnName="Note" />
         </MappingFragment>
@@ -342,12 +350,9 @@
       <EntityTypeMapping TypeName="EmlakModel.KiraTakip">
         <MappingFragment StoreEntitySet="KiraTakip">
           <ScalarProperty Name="KiraTakipID" ColumnName="KiraTakipID" />
-          <ScalarProperty Name="MusteriAd" ColumnName="MusteriAd" />
-          <ScalarProperty Name="MusteriSoyAd" ColumnName="MusteriSoyAd" />
-          <ScalarProperty Name="MusteriCep" ColumnName="MusteriCep" />
-          <ScalarProperty Name="MusteriID" ColumnName="MusteriID" />
-          <ScalarProperty Name="Kalan" ColumnName="Kalan" />
-          <ScalarProperty Name="OdemeTL" ColumnName="OdemeTL" />
+          <ScalarProperty Name="Ad" ColumnName="Ad" />
+          <ScalarProperty Name="SoyAd" ColumnName="SoyAd" />
+          <ScalarProperty Name="Cep" ColumnName="Cep" />
           <ScalarProperty Name="OdemeTarihi" ColumnName="OdemeTarihi" />
           <ScalarProperty Name="Note" ColumnName="Note" />
         </MappingFragment>
@@ -357,13 +362,13 @@
       <EntityTypeMapping TypeName="EmlakModel.KontratTakip">
         <MappingFragment StoreEntitySet="KontratTakip">
           <ScalarProperty Name="KontratTakipID" ColumnName="KontratTakipID" />
-          <ScalarProperty Name="MusteriAd" ColumnName="MusteriAd" />
-          <ScalarProperty Name="MusteriSoyAd" ColumnName="MusteriSoyAd" />
-          <ScalarProperty Name="MusteriCep" ColumnName="MusteriCep" />
-          <ScalarProperty Name="MusteriID" ColumnName="MusteriID" />
-          <ScalarProperty Name="Kalan" ColumnName="Kalan" />
+          <ScalarProperty Name="Ad" ColumnName="Ad" />
+          <ScalarProperty Name="SoyAd" ColumnName="SoyAd" />
+          <ScalarProperty Name="TC" ColumnName="TC" />
+          <ScalarProperty Name="Cep" ColumnName="Cep" />
           <ScalarProperty Name="OdemeTarihi" ColumnName="OdemeTarihi" />
           <ScalarProperty Name="KaçAy" ColumnName="KaçAy" />
+          <ScalarProperty Name="Kalan" ColumnName="Kalan" />
           <ScalarProperty Name="Note" ColumnName="Note" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -405,6 +410,7 @@
           <ScalarProperty Name="KullanimDurumu" ColumnName="KullanimDurumu" />
           <ScalarProperty Name="SiteIcerisinde" ColumnName="SiteIcerisinde" />
           <ScalarProperty Name="SiteAdi" ColumnName="SiteAdi" />
+          <ScalarProperty Name="BlokAdi" ColumnName="BlokAdi" />
           <ScalarProperty Name="AidatTL" ColumnName="AidatTL" />
           <ScalarProperty Name="krediyeUygun" ColumnName="krediyeUygun" />
           <ScalarProperty Name="TapuDurumu" ColumnName="TapuDurumu" />
@@ -617,6 +623,8 @@
           <ScalarProperty Name="UserID" ColumnName="UserID" />
           <ScalarProperty Name="lat" ColumnName="lat" />
           <ScalarProperty Name="lng" ColumnName="lng" />
+          <ScalarProperty Name="HurriyetEmlak" ColumnName="HurriyetEmlak" />
+          <ScalarProperty Name="EsseEmlak" ColumnName="EsseEmlak" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -625,6 +633,63 @@
         <MappingFragment StoreEntitySet="KULLANIM_DURUMU">
           <ScalarProperty Name="KULLANIM_DURUMU_ID" ColumnName="KULLANIM_DURUMU_ID" />
           <ScalarProperty Name="KULLANIM_DURUMU1" ColumnName="KULLANIM_DURUMU" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MAKBUZ_SOZLESME">
+      <EntityTypeMapping TypeName="EmlakModel.MAKBUZ_SOZLESME">
+        <MappingFragment StoreEntitySet="MAKBUZ_SOZLESME">
+          <ScalarProperty Name="MakbuzSozlesmeID" ColumnName="MakbuzSozlesmeID" />
+          <ScalarProperty Name="KiraciAdi" ColumnName="KiraciAdi" />
+          <ScalarProperty Name="KiraciSoyAdi" ColumnName="KiraciSoyAdi" />
+          <ScalarProperty Name="KiraciTCKimlik" ColumnName="KiraciTCKimlik" />
+          <ScalarProperty Name="Cep" ColumnName="Cep" />
+          <ScalarProperty Name="KacAy" ColumnName="KacAy" />
+          <ScalarProperty Name="AylikOdemeTL" ColumnName="AylikOdemeTL" />
+          <ScalarProperty Name="OdemeBaslangicTarihi" ColumnName="OdemeBaslangicTarihi" />
+          <ScalarProperty Name="KiracininAdresi" ColumnName="KiracininAdresi" />
+          <ScalarProperty Name="Ay1" ColumnName="Ay1" />
+          <ScalarProperty Name="Ay2" ColumnName="Ay2" />
+          <ScalarProperty Name="Ay3" ColumnName="Ay3" />
+          <ScalarProperty Name="Ay4" ColumnName="Ay4" />
+          <ScalarProperty Name="Ay5" ColumnName="Ay5" />
+          <ScalarProperty Name="Ay6" ColumnName="Ay6" />
+          <ScalarProperty Name="Ay7" ColumnName="Ay7" />
+          <ScalarProperty Name="Ay8" ColumnName="Ay8" />
+          <ScalarProperty Name="Ay9" ColumnName="Ay9" />
+          <ScalarProperty Name="Ay10" ColumnName="Ay10" />
+          <ScalarProperty Name="Ay11" ColumnName="Ay11" />
+          <ScalarProperty Name="Ay12" ColumnName="Ay12" />
+          <ScalarProperty Name="KirmiziList" ColumnName="KirmiziList" />
+          <ScalarProperty Name="Borclu" ColumnName="Borclu" />
+          <ScalarProperty Name="KiraTakip" ColumnName="KiraTakip" />
+          <ScalarProperty Name="Depozit" ColumnName="Depozit" />
+          <ScalarProperty Name="DepozitTL" ColumnName="DepozitTL" />
+          <ScalarProperty Name="DanismanAd" ColumnName="DanismanAd" />
+          <ScalarProperty Name="DanismanSoyAd" ColumnName="DanismanSoyAd" />
+          <ScalarProperty Name="KirayaVerenAdi" ColumnName="KirayaVerenAdi" />
+          <ScalarProperty Name="KirayaVerenSoyAdi" ColumnName="KirayaVerenSoyAdi" />
+          <ScalarProperty Name="KirayaVerenTC" ColumnName="KirayaVerenTC" />
+          <ScalarProperty Name="KirayaVerenIBAN" ColumnName="KirayaVerenIBAN" />
+          <ScalarProperty Name="KirayaVerenCep" ColumnName="KirayaVerenCep" />
+          <ScalarProperty Name="IL" ColumnName="IL" />
+          <ScalarProperty Name="ILCE" ColumnName="ILCE" />
+          <ScalarProperty Name="Mahalle" ColumnName="Mahalle" />
+          <ScalarProperty Name="Cadde" ColumnName="Cadde" />
+          <ScalarProperty Name="Sokak" ColumnName="Sokak" />
+          <ScalarProperty Name="SiteAdi" ColumnName="SiteAdi" />
+          <ScalarProperty Name="BlokAdi" ColumnName="BlokAdi" />
+          <ScalarProperty Name="AptAdi" ColumnName="AptAdi" />
+          <ScalarProperty Name="AptNo" ColumnName="AptNo" />
+          <ScalarProperty Name="Kat" ColumnName="Kat" />
+          <ScalarProperty Name="DaireNo" ColumnName="DaireNo" />
+          <ScalarProperty Name="EmlakTuru" ColumnName="EmlakTuru" />
+          <ScalarProperty Name="KirayaVerenAdres" ColumnName="KirayaVerenAdres" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="userID" ColumnName="userID" />
+          <ScalarProperty Name="KonutID" ColumnName="KonutID" />
+          <ScalarProperty Name="ArsaTarlaID" ColumnName="ArsaTarlaID" />
+          <ScalarProperty Name="BinaID" ColumnName="BinaID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -637,30 +702,6 @@
           <ScalarProperty Name="isim" ColumnName="isim" />
           <ScalarProperty Name="soyisim" ColumnName="soyisim" />
           <ScalarProperty Name="Mesaj1" ColumnName="Mesaj" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="MUSTERI">
-      <EntityTypeMapping TypeName="EmlakModel.MUSTERI">
-        <MappingFragment StoreEntitySet="MUSTERI">
-          <ScalarProperty Name="MusteriID" ColumnName="MusteriID" />
-          <ScalarProperty Name="MusteriAd" ColumnName="MusteriAd" />
-          <ScalarProperty Name="MusteriSoyAd" ColumnName="MusteriSoyAd" />
-          <ScalarProperty Name="MusteriTC" ColumnName="MusteriTC" />
-          <ScalarProperty Name="MusteriCep" ColumnName="MusteriCep" />
-          <ScalarProperty Name="MusteriIsTelefonu" ColumnName="MusteriIsTelefonu" />
-          <ScalarProperty Name="Adres" ColumnName="Adres" />
-          <ScalarProperty Name="MusteriTipi" ColumnName="MusteriTipi" />
-          <ScalarProperty Name="UserID" ColumnName="UserID" />
-          <ScalarProperty Name="Note" ColumnName="Note" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="MUSTERI_TIPI">
-      <EntityTypeMapping TypeName="EmlakModel.MUSTERI_TIPI">
-        <MappingFragment StoreEntitySet="MUSTERI_TIPI">
-          <ScalarProperty Name="MUSTERI_TIPI_ID" ColumnName="MUSTERI_TIPI_ID" />
-          <ScalarProperty Name="MUSTERI_TIPI1" ColumnName="MUSTERI_TIPI" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

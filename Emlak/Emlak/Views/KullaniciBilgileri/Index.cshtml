@@ -2,30 +2,121 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutPageOwner.cshtml";
-     if (Session["UserID"] == null)
+    if (Session["UserID"] == null)
     {
         Response.Redirect("~/Login/Index");
     }
 }
+<div style="width:100%">
+    <table>
+        <tbody style="width:100%">
+            <tr>
+                <td>
+                    <div style="width:400px;">
+                        <h2>Kullanıcı Bilgileri</h2>
+                        
+                        @if (@Session["Userpp"] == null)
+                        {
+                            <img src="~/Image/default_user.png" style="margin-top:10%;margin-left:5%; width:300px;height:350px;" />
+                        }
 
-<h2>Kullanıcı Bilgileri</h2>
+                        else
+                        {
+                        var paths = new List<string>();
+                        paths.Add("~/Image" + @Session["Userpp"].ToString().Split(new string[] { "Image" } , StringSplitOptions.None ).Last());
+                            
+                        <img src='@Url.Content(paths[0])' style="margin-top:10%;margin-left:5%; width:300px;height:350px;" />
+                        }
+                        <a style="margin-top:10px;margin-left:5px" class='btn btn-info' onclick=PopupForm('@Url.Action("EditKullaniciBilgileri","DB")/@Session["userID"]')><i class="fa fa-id-card-o" aria-hidden="true"></i> Profili Düzenle</a>
+                    </div>
+                </td>
+                <td>
+                    <div style="vertical-align:central">
+                        <div style="margin-top:75px">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <div style="background-color:lightgrey" >
+                                            <label style="font-size:25px">İsim Soyisim &nbsp</label><br />
+                                            <label style="font-size:25px">Kullanıcı Adı &nbsp</label><br />
+                                            <label style="font-size:25px">Şifre &nbsp</label><br />
+                                            <label style="font-size:25px">Cep Telefonu &nbsp</label><br />
+                                            <label style="font-size:25px">İş Telefonu &nbsp</label><br />
+                                            <label style="font-size:25px">Unvan &nbsp</label><br />
+                                            <label style="font-size:25px">Yetki &nbsp</label><br />
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div style="margin-left:25px">
+                                            <label style="font-size:25px; font-weight:normal;">@Session["UserName"].ToString() @Session["UserSurName"].ToString()</label><br />
+                                            <label style="font-size:25px; font-weight:normal;">@Session["UserNickName"].ToString()</label><br />
+                                            <label style="font-size:25px; font-weight:normal;">@Session["UserPassword"].ToString()</label><br />
+                                            <label style="font-size:25px; font-weight:normal;">@Session["CepTel"]</label><br />
+                                            @if (Session["IsTel"] != null)
+                                            {<label style="font-size:25px; font-weight:normal;">@Session["IsTel"]</label><br />}
+                                            else
+                                            {
+                                            <label style="font-size:25px; font-weight:normal;">Belirtilmemiş</label><br />
+                                            }
+                                            <label style="font-size:25px; font-weight:normal;">@Session["Unvan"].ToString()</label><br />
+                                            <label style="font-size:25px; font-weight:normal;">@Session["UserType"].ToString()</label><br />
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<script>
+    function PopupForm(url) {
+    var formDiv = $('<div/>');
+    $.get(url)
+        .done(function (response) {
+            formDiv.html(response);
 
-@{
-    if (@Session["Userpp"] == null)
-    {
-        <img src="~/Image/default_user.png" style="margin-top:5%;margin-left:32%;" />
-    }
-
-    else
-    {
-        <img src="@Session["Userpp"].ToString()" />
-    }
+            popUp = formDiv.dialog({
+                autoOpen: true,
+                resizable: false,
+                title: 'Bilgileri Düzenle',
+                height: 370,
+                width: 600,
+                close: function myfunction() {
+                    popUp.dialog('destroy').remove();
+                }
+            });
+        });
 }
-<br /><br />
-<label style="margin-left:28%;font-size:25px">İsim Soyisim :</label><label style="font-size:25px; font-weight:normal;">&nbsp @Session["UserName"].ToString() @Session["UserSurName"].ToString()</label><br />
-<label style="margin-left:28%;font-size:25px">Kullanıcı Adı :</label><label style="font-size:25px; font-weight:normal">&nbsp @Session["UserNickName"].ToString()</label><br />
-<label style="margin-left:28%;font-size:25px">Şifre</label><label style="padding-left:4.1em; font-size:25px">:</label><label style="font-size:25px; font-weight:normal">&nbsp @Session["UserPassword"].ToString()</label><br />
-<label style="margin-left:28%;font-size:25px">Cep Tel</label><label style="padding-left:2.8em; font-size:25px">:</label><label style="font-size:25px; font-weight:normal">&nbsp @Session["CepTel"]</label><br />
-<label style="margin-left:28%;font-size:25px">İş Tel</label><label style="padding-left:3.9em; font-size:25px">:</label><label style="font-size:25px; font-weight:normal">&nbsp @Session["IsTel"]</label><br />
-<label style="margin-left:28%;font-size:25px">Unvan</label><label style="padding-left:3.3em; font-size:25px">:</label><label style="font-size:25px; font-weight:normal">&nbsp @Session["Unvan"].ToString()</label><br />
-<label style="margin-left:28%;font-size:25px">Yetki</label><label style="padding-left:4em; font-size:25px">:</label><label style="font-size:25px; font-weight:normal">&nbsp @Session["UserType"].ToString()</label><br />
+function SubmitForm(form) {
+        $.validator.unobtrusive.parse(form);
+        var data = new FormData(form)
+
+        if ($(form).valid()) {
+            $.ajax({
+                type: "POST",
+                enctype: 'multipart/form-data',
+                url: "/DB/EditKullaniciBilgileri",
+                processData: false,  // Important!
+                contentType: false,
+                cache: false,
+                data: data,
+                success: function (data) {
+                    if (data.success) {
+                        popUp.dialog('close');
+
+                        location.reload();
+
+                        $.notify(data.message, {
+                            globalPosition: "top center",
+                            className: "success"
+                        })
+                    }
+                }
+            });
+        }
+        return false;
+    }
+</script>

@@ -14,6 +14,12 @@ namespace Emlak.Models
     
     public partial class BINA
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public BINA()
+        {
+            this.MAKBUZ_SOZLESME = new HashSet<MAKBUZ_SOZLESME>();
+        }
+    
         public long ID { get; set; }
         public string ilanBasligi { get; set; }
         public string ilanDetayi { get; set; }
@@ -28,6 +34,9 @@ namespace Emlak.Models
         public string il { get; set; }
         public string ilce { get; set; }
         public string mahalle { get; set; }
+        public string sokak { get; set; }
+        public string SiteAdi { get; set; }
+        public string BlokAdi { get; set; }
         public Nullable<int> FiyatNet { get; set; }
         public Nullable<int> FiyatSatis { get; set; }
         public Nullable<int> KatSayisi { get; set; }
@@ -76,6 +85,9 @@ namespace Emlak.Models
         public string picture35 { get; set; }
         public Nullable<double> lat { get; set; }
         public Nullable<double> lng { get; set; }
+        public string HurriyetEmlak { get; set; }
+        public string EsseEmlak { get; set; }
+        public Nullable<bool> KiraTakip { get; set; }
         public Nullable<bool> DetayAsansor { get; set; }
         public Nullable<bool> DetayBahce { get; set; }
         public Nullable<bool> DetayBogazManzarasi { get; set; }
@@ -89,10 +101,13 @@ namespace Emlak.Models
         public Nullable<bool> DetayOtopark { get; set; }
         public Nullable<bool> DetaySiteIcerisinde { get; set; }
         public Nullable<bool> DetayYanginMerdiveni { get; set; }
+        public string EmlakSahibiAdres { get; set; }
     
         public virtual BINA_YASI BINA_YASI { get; set; }
         public virtual ISITMA_TIPI ISITMA_TIPI { get; set; }
         public virtual KAT_SAYISI KAT_SAYISI { get; set; }
         public virtual USERS USERS { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MAKBUZ_SOZLESME> MAKBUZ_SOZLESME { get; set; }
     }
 }

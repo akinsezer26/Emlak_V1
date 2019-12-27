@@ -12,7 +12,7 @@
         @Html.EditorFor(model => model.ilanBasligi, new { @htmlAttributes = new { placeholder = "İlan Başlığı", @class = "form-control", autocomplete = "off" } })
     </div>
     <div class="form-group">
-        @Html.TextAreaFor(model => model.ilanDetayi, 10, 120, htmlAttributes: new { style = "width: 100%; max-width: 100%;" })
+        @Html.TextAreaFor(model => model.ilanDetayi, 10, 120, htmlAttributes: new { style = "width: 100%; max-width: 100%; resize: none;" })
     </div>
     <div class="form-group">
         @Html.EditorFor(model => model.Adi, new { @htmlAttributes = new { placeholder = "İlan Sahibinin Adı", @class = "form-control", autocomplete = "off" } })

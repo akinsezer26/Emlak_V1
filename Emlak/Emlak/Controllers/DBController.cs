@@ -403,7 +403,284 @@ namespace Emlak.Controllers
             }
         }
 
+        public ActionResult getKiraTakip()
+        {
+            using (Entities db = new Entities())
+            {
+                db.Configuration.LazyLoadingEnabled = false;
+                List<KiraTakip> kiraList = db.KiraTakip.ToList<KiraTakip>();
+                return Json(new { data = kiraList }, JsonRequestBehavior.AllowGet);
+            }
+        }
+        public ActionResult getSozlesmeKontrat()
+        {
+            using (Entities db = new Entities())
+            {
+                db.Configuration.LazyLoadingEnabled = false;
+                List<MAKBUZ_SOZLESME> makbuzSozlesmeList = db.MAKBUZ_SOZLESME.ToList<MAKBUZ_SOZLESME>();
+                return Json(new { data = makbuzSozlesmeList }, JsonRequestBehavior.AllowGet);
+            }
+        }
+        public ActionResult getKontratTakip()
+        {
+            using (Entities db = new Entities())
+            {
+                db.Configuration.LazyLoadingEnabled = false;
+                List<KontratTakip> kontratList = db.KontratTakip.ToList<KontratTakip>();
+                return Json(new { data = kontratList }, JsonRequestBehavior.AllowGet);
+            }
+        }
+        public ActionResult getBorcluTakip()
+        {
+            using (Entities db = new Entities())
+            {
+                db.Configuration.LazyLoadingEnabled = false;
+                List<BorcluTakip> borcluList = db.BorcluTakip.ToList<BorcluTakip>();
+                return Json(new { data = borcluList }, JsonRequestBehavior.AllowGet);
+            }
+        }
 
+
+        public ActionResult getAdminAta()
+        {
+            using (Entities db = new Entities())
+            {
+                db.Configuration.LazyLoadingEnabled = false;
+                List<USERS> user = db.USERS.Where(x => x.UserType == 2).ToList<USERS>();
+                return Json(new { data = user }, JsonRequestBehavior.AllowGet);
+            }
+        }
+        [HttpGet]
+        public ActionResult AddOrEditAdminAta(int id = 0)
+        {
+            setViewBags();
+            if (id == 0)
+            {
+                return View(new USERS());
+            }
+            else
+            {
+                using (Entities db = new Entities())
+                {
+                    return View(db.USERS.Where(x => x.UserID == id).FirstOrDefault<USERS>());
+                }
+            }
+        }
+        [HttpPost]
+        public ActionResult AddOrEditAdminAta(USERS usrs)
+        {
+            using (Entities db = new Entities())
+            {
+                if (usrs.UserID == 0)
+                {
+                    if (db.USERS.Count() != 0)
+                    {
+                        usrs.UserID = db.USERS.Max(item => item.UserID) + 1;
+                    }
+                    else
+                    {
+                        usrs.UserID = 1;
+                    }
+
+                    usrs.UserType = 2;
+                    usrs.Unvan = "Şirket Yetkilisi";
+                    db.USERS.Add(usrs);
+
+                    db.SaveChanges();
+
+                    return Json(new { success = true, message = "Başarıyla Kaydedildi" }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    usrs.UserType = 2;
+                    usrs.Unvan = "Şirket Yetkilisi";
+                    db.Entry(usrs).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return Json(new { success = true, message = "Başarıyla Güncellendi" }, JsonRequestBehavior.AllowGet);
+                }
+            }
+        }
+
+        public ActionResult getKullaniciAta()
+        {
+            using (Entities db = new Entities())
+            {
+                db.Configuration.LazyLoadingEnabled = false;
+                List<USERS> user = db.USERS.Where(x => x.UserType == 3).ToList<USERS>();
+                return Json(new { data = user }, JsonRequestBehavior.AllowGet);
+            }
+        }
+        [HttpGet]
+        public ActionResult AddOrEditKullaniciAta(int id = 0)
+        {
+            setViewBags();
+            if (id == 0)
+            {
+                return View(new USERS());
+            }
+            else
+            {
+                using (Entities db = new Entities())
+                {
+                    return View(db.USERS.Where(x => x.UserID == id).FirstOrDefault<USERS>());
+                }
+            }
+        }
+        [HttpPost]
+        public ActionResult AddOrEditKullaniciAta(USERS usrs)
+        {
+            using (Entities db = new Entities())
+            {
+                if (usrs.UserID == 0)
+                {
+                    if (db.USERS.Count() != 0)
+                    {
+                        usrs.UserID = db.USERS.Max(item => item.UserID) + 1;
+                    }
+                    else
+                    {
+                        usrs.UserID = 1;
+                    }
+
+                    usrs.UserType = 3;
+                    usrs.Unvan = "Gayrimenkul Danışmanı";
+                    db.USERS.Add(usrs);
+
+                    db.SaveChanges();
+
+                    return Json(new { success = true, message = "Başarıyla Kaydedildi" }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    usrs.UserType = 3;
+                    usrs.Unvan = "Gayrimenkul Danışmanı";
+                    db.Entry(usrs).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return Json(new { success = true, message = "Başarıyla Güncellendi" }, JsonRequestBehavior.AllowGet);
+                }
+            }
+        }
+        public ActionResult adminBlokla(int id) {
+            using (Entities db = new Entities())
+            {
+                USERS usr = db.USERS.Where(x => x.UserID == id).FirstOrDefault<USERS>();
+                usr.isBlocked = true;
+                db.Entry(usr).State = EntityState.Modified;
+                db.SaveChanges();
+                return Json(new { success = true, message = "Bloklandı!" }, JsonRequestBehavior.AllowGet);
+            }
+        }
+        public ActionResult adminBlokKaldir(int id) {
+            using (Entities db = new Entities())
+            {
+                USERS usr = db.USERS.Where(x => x.UserID == id).FirstOrDefault<USERS>();
+                usr.isBlocked = false;
+                db.Entry(usr).State = EntityState.Modified;
+                db.SaveChanges();
+                return Json(new { success = true, message = "Blok Kaldırıldı!" }, JsonRequestBehavior.AllowGet);
+            }
+        }
+        [HttpGet]
+        public ActionResult AddOrEditSozlesmeKontrat(int id = 0)
+        {
+            setViewBags();
+            if (id == 0)
+            {
+                return View(new MAKBUZ_SOZLESME());
+            }
+            else
+            {
+                using (Entities db = new Entities())
+                {
+                    return View(db.MAKBUZ_SOZLESME.Where(x => x.MakbuzSozlesmeID == id).FirstOrDefault<MAKBUZ_SOZLESME>());
+                }
+            }
+        }
+        [HttpPost]
+        public ActionResult AddOrEditSozlesmeKontrat(MAKBUZ_SOZLESME makbuz)
+        {
+            using (Entities db = new Entities())
+            {
+                if (makbuz.MakbuzSozlesmeID == 0)
+                {
+                    if (db.MAKBUZ_SOZLESME.Count() != 0)
+                    {
+                        makbuz.MakbuzSozlesmeID = db.MAKBUZ_SOZLESME.Max(item => item.MakbuzSozlesmeID) + 1;
+                    }
+                    else
+                    {
+                        makbuz.MakbuzSozlesmeID = 1;
+                    }
+
+                    makbuz.userID = Int16.Parse(Session["userID"].ToString());
+                    db.MAKBUZ_SOZLESME.Add(makbuz);
+
+                    db.SaveChanges();
+
+                    return Json(new { success = true, message = "Başarıyla Kaydedildi" }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    makbuz.userID = Int16.Parse(Session["userID"].ToString());
+                    db.Entry(makbuz).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return Json(new { success = true, message = "Başarıyla Güncellendi" }, JsonRequestBehavior.AllowGet);
+                }
+            }
+        }
+        public ActionResult DeleteSozlesmeKontrat(int id)
+        {
+            using (Entities db = new Entities())
+            {
+                MAKBUZ_SOZLESME makbuz = db.MAKBUZ_SOZLESME.Where(x => x.MakbuzSozlesmeID == id).FirstOrDefault<MAKBUZ_SOZLESME>();
+
+                //might edit here
+                KONUT_ISYERI konut = db.KONUT_ISYERI.Where(x => x.ID == makbuz.KonutID).FirstOrDefault<KONUT_ISYERI>();
+                konut.KiraTakip = false;
+                db.Entry(konut).State = EntityState.Modified;
+                //
+
+                db.MAKBUZ_SOZLESME.Remove(makbuz);
+                db.SaveChanges();
+                return Json(new { success = true, message = "Başarıyla Silindi" }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpGet]
+        public ActionResult EditKullaniciBilgileri(int id = 0)
+        {
+            setViewBags();
+            if (id == 0)
+            {
+                return View(new USERS());
+            }
+            else
+            {
+                using (Entities db = new Entities())
+                {
+                    return View(db.USERS.Where(x => x.UserID == id).FirstOrDefault<USERS>());
+                }
+            }
+        }
+        [HttpPost]
+        public ActionResult EditKullaniciBilgileri(USERS kullanici)
+        {
+                using (Entities db = new Entities())
+                {
+                    string imgname = Path.GetFileName(Request.Files[0].FileName);
+                    string ext = Path.GetExtension(imgname);
+                    string imgpath = Path.Combine(Server.MapPath("~/Image"), "User_" + kullanici.UserID.ToString() + ext);
+                    Request.Files[0].SaveAs(imgpath);
+                    kullanici.UserID = Int16.Parse(Session["userID"].ToString());
+                    kullanici.UserType = int.Parse(Session["UserTip"].ToString());
+                    kullanici.Unvan = Session["Unvan"].ToString();
+                    kullanici.ppicture = imgpath;
+                    Session["Userpp"] = imgpath;
+                    db.Entry(kullanici).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return Json(new { success = true, message = "Başarıyla Güncellendi" }, JsonRequestBehavior.AllowGet);
+                }
+        }
 
         [HttpGet]
         public ActionResult AddOrEditKonutSatilik(int id = 0)
@@ -598,6 +875,148 @@ namespace Emlak.Controllers
                 else
                 {
                     konutisyeri.UserID = Int16.Parse(Session["userID"].ToString());
+                    konutisyeri.Isyeri_Konut = "Konut";
+                    konutisyeri.Tarih = DateTime.Now;
+                    konutisyeri.Kira_Satilik = "Satılık";
+
+                    if (Request.Files.Count < 35 && Path.GetFileName(Request.Files[0].FileName) != "")
+                    {
+                        for (int i = 0; i < Request.Files.Count; i++)
+                        {
+                            string imgname = Path.GetFileName(Request.Files[i].FileName);
+                            string ext = Path.GetExtension(imgname);
+                            if (ext == ".jpg" || ext == ".JPG" || ext == ".jpeg")
+                            {
+                                //success
+                            }
+                            else { return Json(new { status = "error", message = "Lütfen jpg veya png uzantılı dosyalar yükleyin!" }); }
+                        }
+
+                        for (int i = 0; i < Request.Files.Count; i++)
+                        {
+                            string imgname = Path.GetFileName(Request.Files[i].FileName);
+                            string ext = Path.GetExtension(imgname);
+
+                            string imgpath = Path.Combine(Server.MapPath("~/EmlakImages"), "Kisyeri_" + konutisyeri.ID.ToString() + "_" + (i + 1).ToString() + ext);
+                            Request.Files[i].SaveAs(imgpath);
+                            switch (i)
+                            {
+                                case 0:
+                                    konutisyeri.picture1 = imgpath;
+                                    break;
+                                case 1:
+                                    konutisyeri.picture2 = imgpath;
+                                    break;
+                                case 2:
+                                    konutisyeri.picture3 = imgpath;
+                                    break;
+                                case 3:
+                                    konutisyeri.picture4 = imgpath;
+                                    break;
+                                case 4:
+                                    konutisyeri.picture5 = imgpath;
+                                    break;
+                                case 5:
+                                    konutisyeri.picture6 = imgpath;
+                                    break;
+                                case 6:
+                                    konutisyeri.picture7 = imgpath;
+                                    break;
+                                case 7:
+                                    konutisyeri.picture8 = imgpath;
+                                    break;
+                                case 8:
+                                    konutisyeri.picture9 = imgpath;
+                                    break;
+                                case 9:
+                                    konutisyeri.picture10 = imgpath;
+                                    break;
+                                case 10:
+                                    konutisyeri.picture11 = imgpath;
+                                    break;
+                                case 11:
+                                    konutisyeri.picture12 = imgpath;
+                                    break;
+                                case 12:
+                                    konutisyeri.picture13 = imgpath;
+                                    break;
+                                case 13:
+                                    konutisyeri.picture14 = imgpath;
+                                    break;
+                                case 14:
+                                    konutisyeri.picture15 = imgpath;
+                                    break;
+                                case 15:
+                                    konutisyeri.picture16 = imgpath;
+                                    break;
+                                case 16:
+                                    konutisyeri.picture17 = imgpath;
+                                    break;
+                                case 17:
+                                    konutisyeri.picture18 = imgpath;
+                                    break;
+                                case 18:
+                                    konutisyeri.picture19 = imgpath;
+                                    break;
+                                case 19:
+                                    konutisyeri.picture20 = imgpath;
+                                    break;
+                                case 20:
+                                    konutisyeri.picture21 = imgpath;
+                                    break;
+                                case 21:
+                                    konutisyeri.picture22 = imgpath;
+                                    break;
+                                case 22:
+                                    konutisyeri.picture23 = imgpath;
+                                    break;
+                                case 23:
+                                    konutisyeri.picture24 = imgpath;
+                                    break;
+                                case 24:
+                                    konutisyeri.picture25 = imgpath;
+                                    break;
+                                case 25:
+                                    konutisyeri.picture26 = imgpath;
+                                    break;
+                                case 26:
+                                    konutisyeri.picture27 = imgpath;
+                                    break;
+                                case 27:
+                                    konutisyeri.picture28 = imgpath;
+                                    break;
+                                case 28:
+                                    konutisyeri.picture29 = imgpath;
+                                    break;
+                                case 29:
+                                    konutisyeri.picture30 = imgpath;
+                                    break;
+                                case 30:
+                                    konutisyeri.picture31 = imgpath;
+                                    break;
+                                case 31:
+                                    konutisyeri.picture32 = imgpath;
+                                    break;
+                                case 32:
+                                    konutisyeri.picture33 = imgpath;
+                                    break;
+                                case 33:
+                                    konutisyeri.picture34 = imgpath;
+                                    break;
+                                case 34:
+                                    konutisyeri.picture35 = imgpath;
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    }
+                    else if (Request.Files.Count > 35 && Path.GetFileName(Request.Files[0].FileName) != "") { return Json(new { status = "error", message = "25'den fazla resim giremezsiniz!" }); }
+
+                    //if(Request.Files.Count < 35 && Path.GetFileName(Request.Files[0].FileName) != "")
+                    //{
+                    //    db.Entry(model).Property(x => x.Token).IsModified = false;
+                    //}
                     db.Entry(konutisyeri).State = EntityState.Modified;
                     db.SaveChanges();
                     return Json(new { success = true, message = "Başarıyla Güncellendi" }, JsonRequestBehavior.AllowGet);
@@ -643,6 +1062,7 @@ namespace Emlak.Controllers
                             else { return Json(new { status = "error", message = "Lütfen jpg veya png uzantılı dosyalar yükleyin!" }); }
                         }
 
+
                         long tKIsyeri = 0, tArsaTarla = 0, tBina = 0;
                         if (db.KONUT_ISYERI.Count() != 0) { tKIsyeri = db.KONUT_ISYERI.Max(item => item.ID); }
                         if (db.ARSA_TARLA.Count() != 0) { tArsaTarla = db.ARSA_TARLA.Max(item => item.ID); }
@@ -651,6 +1071,7 @@ namespace Emlak.Controllers
                         else if (tArsaTarla > tKIsyeri && tArsaTarla > tBina) { konutisyeri.ID = tArsaTarla + 1; }
                         else if (tBina > tKIsyeri && tBina > tArsaTarla) { konutisyeri.ID = tBina + 1; }
                         else { konutisyeri.ID = 1; }
+
 
                         for (int i = 0; i < Request.Files.Count; i++)
                         {
@@ -798,6 +1219,148 @@ namespace Emlak.Controllers
                 else
                 {
                     konutisyeri.UserID = Int16.Parse(Session["userID"].ToString());
+                    konutisyeri.Isyeri_Konut = "Konut";
+                    konutisyeri.Tarih = DateTime.Now;
+                    konutisyeri.Kira_Satilik = "Kiralık";
+
+                    if (Request.Files.Count < 35 && Path.GetFileName(Request.Files[0].FileName) != "")
+                    {
+                        for (int i = 0; i < Request.Files.Count; i++)
+                        {
+                            string imgname = Path.GetFileName(Request.Files[i].FileName);
+                            string ext = Path.GetExtension(imgname);
+                            if (ext == ".jpg" || ext == ".JPG" || ext == ".jpeg")
+                            {
+                                //success
+                            }
+                            else { return Json(new { status = "error", message = "Lütfen jpg veya png uzantılı dosyalar yükleyin!" }); }
+                        }
+
+                        for (int i = 0; i < Request.Files.Count; i++)
+                        {
+                            string imgname = Path.GetFileName(Request.Files[i].FileName);
+                            string ext = Path.GetExtension(imgname);
+
+                            string imgpath = Path.Combine(Server.MapPath("~/EmlakImages"), "Kisyeri_" + konutisyeri.ID.ToString() + "_" + (i + 1).ToString() + ext);
+                            Request.Files[i].SaveAs(imgpath);
+                            switch (i)
+                            {
+                                case 0:
+                                    konutisyeri.picture1 = imgpath;
+                                    break;
+                                case 1:
+                                    konutisyeri.picture2 = imgpath;
+                                    break;
+                                case 2:
+                                    konutisyeri.picture3 = imgpath;
+                                    break;
+                                case 3:
+                                    konutisyeri.picture4 = imgpath;
+                                    break;
+                                case 4:
+                                    konutisyeri.picture5 = imgpath;
+                                    break;
+                                case 5:
+                                    konutisyeri.picture6 = imgpath;
+                                    break;
+                                case 6:
+                                    konutisyeri.picture7 = imgpath;
+                                    break;
+                                case 7:
+                                    konutisyeri.picture8 = imgpath;
+                                    break;
+                                case 8:
+                                    konutisyeri.picture9 = imgpath;
+                                    break;
+                                case 9:
+                                    konutisyeri.picture10 = imgpath;
+                                    break;
+                                case 10:
+                                    konutisyeri.picture11 = imgpath;
+                                    break;
+                                case 11:
+                                    konutisyeri.picture12 = imgpath;
+                                    break;
+                                case 12:
+                                    konutisyeri.picture13 = imgpath;
+                                    break;
+                                case 13:
+                                    konutisyeri.picture14 = imgpath;
+                                    break;
+                                case 14:
+                                    konutisyeri.picture15 = imgpath;
+                                    break;
+                                case 15:
+                                    konutisyeri.picture16 = imgpath;
+                                    break;
+                                case 16:
+                                    konutisyeri.picture17 = imgpath;
+                                    break;
+                                case 17:
+                                    konutisyeri.picture18 = imgpath;
+                                    break;
+                                case 18:
+                                    konutisyeri.picture19 = imgpath;
+                                    break;
+                                case 19:
+                                    konutisyeri.picture20 = imgpath;
+                                    break;
+                                case 20:
+                                    konutisyeri.picture21 = imgpath;
+                                    break;
+                                case 21:
+                                    konutisyeri.picture22 = imgpath;
+                                    break;
+                                case 22:
+                                    konutisyeri.picture23 = imgpath;
+                                    break;
+                                case 23:
+                                    konutisyeri.picture24 = imgpath;
+                                    break;
+                                case 24:
+                                    konutisyeri.picture25 = imgpath;
+                                    break;
+                                case 25:
+                                    konutisyeri.picture26 = imgpath;
+                                    break;
+                                case 26:
+                                    konutisyeri.picture27 = imgpath;
+                                    break;
+                                case 27:
+                                    konutisyeri.picture28 = imgpath;
+                                    break;
+                                case 28:
+                                    konutisyeri.picture29 = imgpath;
+                                    break;
+                                case 29:
+                                    konutisyeri.picture30 = imgpath;
+                                    break;
+                                case 30:
+                                    konutisyeri.picture31 = imgpath;
+                                    break;
+                                case 31:
+                                    konutisyeri.picture32 = imgpath;
+                                    break;
+                                case 32:
+                                    konutisyeri.picture33 = imgpath;
+                                    break;
+                                case 33:
+                                    konutisyeri.picture34 = imgpath;
+                                    break;
+                                case 34:
+                                    konutisyeri.picture35 = imgpath;
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    }
+                    else if (Request.Files.Count > 35 && Path.GetFileName(Request.Files[0].FileName) != "") { return Json(new { status = "error", message = "25'den fazla resim giremezsiniz!" }); }
+
+                    //if(Request.Files.Count < 35 && Path.GetFileName(Request.Files[0].FileName) != "")
+                    //{
+                    //    db.Entry(model).Property(x => x.Token).IsModified = false;
+                    //}
                     db.Entry(konutisyeri).State = EntityState.Modified;
                     db.SaveChanges();
                     return Json(new { success = true, message = "Başarıyla Güncellendi" }, JsonRequestBehavior.AllowGet);
@@ -805,6 +1368,102 @@ namespace Emlak.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult AddOrEditKiraTakipKonut(int id = 0)
+        {
+            setViewBags();
+            using (Entities db = new Entities())
+            {
+                List<MAKBUZ_SOZLESME> tmp2 = db.MAKBUZ_SOZLESME.Where(x => x.KonutID == id).ToList();
+                if (tmp2.Any())
+                {
+                    List<KONUT_ISYERI> tmp = db.KONUT_ISYERI.Where(x => x.ID == id).ToList();
+                    KONUT_ISYERI[] kiraTakip = tmp.Cast<KONUT_ISYERI>().ToArray();
+                    ViewBag.DanismanAdi = Session["UserName"].ToString() + " " + Session["UserSurName"];
+                    ViewBag.EvSahibiAdi = kiraTakip[0].Adi;
+                    ViewBag.EvSahibiSoyAdi = kiraTakip[0].Soyadi;
+                    ViewBag.EvSahibiTC = kiraTakip[0].TC;
+                    ViewBag.EvSahibiIban = kiraTakip[0].Iban;
+                    ViewBag.EvSahibiCep = kiraTakip[0].CepTelefonu;
+                    ViewBag.EvSahibiIl = kiraTakip[0].il;
+                    ViewBag.EvSahibiIlce = kiraTakip[0].ilce;
+                    ViewBag.EvSahibiMahalle = kiraTakip[0].Mahalle;
+                    ViewBag.EvSahibiSiteIcerisinde = kiraTakip[0].SiteIcerisinde;
+                    ViewBag.EvSahibiSiteAdi = kiraTakip[0].SiteAdi;
+                    ViewBag.EvSahibiCadde = kiraTakip[0].Cadde;
+                    ViewBag.EvSahibiSokak = kiraTakip[0].Sokak;
+                    ViewBag.EvSahibiApartmanAdi = kiraTakip[0].AptAdi;
+                    ViewBag.EvSahibiApartmanNo = kiraTakip[0].AptNo;
+                    ViewBag.EvSahibiEmlakTuru = kiraTakip[0].EMLAKTURU1.EMLAK_TURU;
+                    ViewBag.EvSahibiAdres = kiraTakip[0].EmlakSahibiAdres;
+                    ViewBag.KonutID = kiraTakip[0].ID;
+                    MAKBUZ_SOZLESME[] makbuzSozlesme = tmp2.Cast<MAKBUZ_SOZLESME>().ToArray();
+
+                    return View(makbuzSozlesme[0]);
+                }
+                else
+                {
+                    List<KONUT_ISYERI> tmp = db.KONUT_ISYERI.Where(x => x.ID == id).ToList();
+                    KONUT_ISYERI[] kiraTakip = tmp.Cast<KONUT_ISYERI>().ToArray();
+                    ViewBag.DanismanAdi = Session["UserName"].ToString() + " " + Session["UserSurName"];
+                    ViewBag.EvSahibiAdi = kiraTakip[0].Adi;
+                    ViewBag.EvSahibiSoyAdi = kiraTakip[0].Soyadi;
+                    ViewBag.EvSahibiTC = kiraTakip[0].TC;
+                    ViewBag.EvSahibiIban = kiraTakip[0].Iban;
+                    ViewBag.EvSahibiCep = kiraTakip[0].CepTelefonu;
+                    ViewBag.EvSahibiIl = kiraTakip[0].il;
+                    ViewBag.EvSahibiIlce = kiraTakip[0].ilce;
+                    ViewBag.EvSahibiMahalle = kiraTakip[0].Mahalle;
+                    ViewBag.EvSahibiSiteIcerisinde = kiraTakip[0].SiteIcerisinde;
+                    ViewBag.EvSahibiSiteAdi = kiraTakip[0].SiteAdi;
+                    ViewBag.EvSahibiCadde = kiraTakip[0].Cadde;
+                    ViewBag.EvSahibiSokak = kiraTakip[0].Sokak;
+                    ViewBag.EvSahibiApartmanAdi = kiraTakip[0].AptAdi;
+                    ViewBag.EvSahibiApartmanNo = kiraTakip[0].AptNo;
+                    ViewBag.EvSahibiEmlakTuru = kiraTakip[0].EMLAKTURU1.EMLAK_TURU;
+                    ViewBag.EvSahibiAdres = kiraTakip[0].EmlakSahibiAdres;
+                    ViewBag.KonutID = kiraTakip[0].ID;
+
+                    kiraTakip[0].KiraTakip = true;
+                    db.Entry(kiraTakip[0]).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    return View(new MAKBUZ_SOZLESME());
+                }
+            }
+        }
+        [HttpPost]
+        public ActionResult AddOrEditKiraTakipKonut(MAKBUZ_SOZLESME sozlesme)
+        {
+            using (Entities db = new Entities())
+            {
+                if (sozlesme.MakbuzSozlesmeID == 0)
+                {
+                    if (db.MAKBUZ_SOZLESME.Count() != 0)
+                    {
+                        sozlesme.MakbuzSozlesmeID = db.MAKBUZ_SOZLESME.Max(item => item.MakbuzSozlesmeID) + 1;
+                    }
+                    else
+                    {
+                        sozlesme.MakbuzSozlesmeID = 1;
+                    }
+                    sozlesme.userID = Int16.Parse(Session["userID"].ToString());
+
+                    db.MAKBUZ_SOZLESME.Add(sozlesme);
+
+                    db.SaveChanges();
+
+                    return Json(new { success = true, message = "Başarıyla Kaydedildi" }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    sozlesme.userID = Int16.Parse(Session["userID"].ToString());
+                    db.Entry(sozlesme).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return Json(new { success = true, message = "Başarıyla Güncellendi" }, JsonRequestBehavior.AllowGet);
+                }
+            }
+        }
 
 
         [HttpGet]

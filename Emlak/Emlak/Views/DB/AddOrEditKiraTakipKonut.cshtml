@@ -1,0 +1,65 @@
+﻿
+@using Emlak.Models;
+@model MAKBUZ_SOZLESME
+@{
+    Layout = null;
+}
+
+@using (Html.BeginForm("AddOrEditKiraTakipKonut", "DB", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "return SubmitFormKiraTakip(this)" }))
+{
+    @Html.HiddenFor(model => model.MakbuzSozlesmeID)
+    @Html.HiddenFor(model => model.KirayaVerenAdi, new { id = "KirayaVerenAdi", Value = ViewBag.EvSahibiAdi })
+    @Html.HiddenFor(model => model.KirayaVerenSoyAdi, new { id = "KirayaVerenSoyAdi", Value = ViewBag.EvSahibiSoyAdi })
+    @Html.HiddenFor(model => model.KirayaVerenTC, new { id = "KirayaVerenTC", Value = ViewBag.EvSahibiTC })
+    @Html.HiddenFor(model => model.KirayaVerenIBAN, new { id = "KirayaVerenIBAN", Value = ViewBag.EvSahibiIban })
+    @Html.HiddenFor(model => model.KirayaVerenCep, new { id = "KirayaVerenCep", Value = ViewBag.EvSahibiCep })
+    @Html.HiddenFor(model => model.IL, new { id = "IL", Value = ViewBag.EvSahibiIl })
+    @Html.HiddenFor(model => model.ILCE, new { id = "ILCE", Value = ViewBag.EvSahibiIlce })
+    @Html.HiddenFor(model => model.Mahalle, new { id = "Mahalle", Value = ViewBag.EvSahibiMahalle })
+    @Html.HiddenFor(model => model.SiteAdi, new { id = "SiteAdi", Value = ViewBag.EvSahibiSiteAdi })
+    @Html.HiddenFor(model => model.Cadde, new { id = "Cadde", Value = ViewBag.EvSahibiCadde })
+    @Html.HiddenFor(model => model.Sokak, new { id = "Sokak", Value = ViewBag.EvSahibiSokak })
+    @Html.HiddenFor(model => model.AptAdi, new { id = "AptAdi", Value = ViewBag.EvSahibiApartmanAdi })
+    @Html.HiddenFor(model => model.AptNo, new { id = "AptNo", Value = ViewBag.EvSahibiApartmanNo })
+    @Html.HiddenFor(model => model.EmlakTuru, new { id = "EmlakTuru", Value = ViewBag.EvSahibiEmlakTuru })
+    @Html.HiddenFor(model => model.KirayaVerenAdres, new { id = "KirayaVerenAdres", Value = ViewBag.EvSahibiAdres })
+    @Html.HiddenFor(model => model.KonutID, new { id = "KonutID", Value = ViewBag.KonutID })
+
+
+    <div class="form-group" style="margin-top:10px">
+        @Html.Label("Kiracı Bilgileri")
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.KiraciAdi, new { @htmlAttributes = new { placeholder = "Adı", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.KiraciSoyAdi, new { @htmlAttributes = new { placeholder = "Soyadı", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.KiraciTCKimlik, new { @htmlAttributes = new { placeholder = "TC", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.Cep, new { @htmlAttributes = new { placeholder = "Cep", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.KacAy, new { @htmlAttributes = new { placeholder = "Kaç Ay", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.AylikOdemeTL, new { @htmlAttributes = new { placeholder = "Ödeme TL", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.OdemeBaslangicTarihi, new { @htmlAttributes = new { placeholder = "Ödeme Tarihi", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.KiracininAdresi, new { @htmlAttributes = new { placeholder = "Adres", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.DepozitTL, new { @htmlAttributes = new { placeholder = "Depozit TL", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.Note, new { @htmlAttributes = new { placeholder = "Not", @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Kaydet" class="btn btn-primary" />
+    </div>
+}

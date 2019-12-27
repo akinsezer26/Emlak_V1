@@ -6,6 +6,11 @@
 
 <html>
 <head>
+    @Styles.Render("~/Content/bootstrap.min.css")
+    @Styles.Render("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css")
+    @Styles.Render("https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css")
+    @Styles.Render("https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css")
+    @Styles.Render("~/Content/themes/base/jquery-ui.min.css")
     <style>
         body {
             font-family: Arial;
@@ -41,7 +46,7 @@
         .next {
             cursor: pointer;
             position: absolute;
-            top: 40%;
+            top: 160px; /*caution*/
             width: auto;
             padding: 16px;
             margin-top: -50px;
@@ -105,15 +110,21 @@
                 opacity: 1;
             }
     </style>
+    <meta name="viewport" content="initial-scale=1.0,
+        width=device-width" />
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"
+            type="text/javascript" charset="utf-8"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"
+            type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
-    <div style="width:50%;margin-left:20%;margin-top:10%;border:outset;">
-        <strong>Kiralik 3+1 Daire</strong><br />
-        <label>Kiralik Daire, @Model.il, @Model.Mahalle</label><br />
-        <strong>@Model.FiyatNet</strong><br />
+    <div style="width:60%;margin-left:15%;margin-top:10%;border:outset; box-shadow: 5px 10px #888888;">
+        <h2>@Model.ilanBasligi</h2>
+        <label>Satılık @Model.EMLAKTURU1.EMLAK_TURU, @Model.il, @Model.Mahalle</label><br /><br />
+        <strong style="color:red; font-size:20px">@String.Format("{0:C0}", Model.FiyatNet)</strong><br />
     </div>
-    <div style="width:50%; margin-left:20%">
-        <div class="container" style="width:70%; float:left">
+    <div style="width:60%; margin-left:15%; margin-top:25px;">
+        <div class="container" style="width:60%; float:left">
 
             @{
                 int nullCount = 0;
@@ -245,23 +256,73 @@
                         nullCount++;
                     }
                     else { paths.Add("~/EmlakImages" + Model.picture25.ToString().Split(new string[] { "EmlakImages" }, StringSplitOptions.None).Last()); }
+                    if (Model.picture26 == null)
+                    {
+                        nullCount++;
+                    }
+                    else { paths.Add("~/EmlakImages" + Model.picture26.ToString().Split(new string[] { "EmlakImages" }, StringSplitOptions.None).Last()); }
+                    if (Model.picture27 == null)
+                    {
+                        nullCount++;
+                    }
+                    else { paths.Add("~/EmlakImages" + Model.picture27.ToString().Split(new string[] { "EmlakImages" }, StringSplitOptions.None).Last()); }
+                    if (Model.picture28 == null)
+                    {
+                        nullCount++;
+                    }
+                    else { paths.Add("~/EmlakImages" + Model.picture28.ToString().Split(new string[] { "EmlakImages" }, StringSplitOptions.None).Last()); }
+                    if (Model.picture29 == null)
+                    {
+                        nullCount++;
+                    }
+                    else { paths.Add("~/EmlakImages" + Model.picture29.ToString().Split(new string[] { "EmlakImages" }, StringSplitOptions.None).Last()); }
+                    if (Model.picture30 == null)
+                    {
+                        nullCount++;
+                    }
+                    else { paths.Add("~/EmlakImages" + Model.picture30.ToString().Split(new string[] { "EmlakImages" }, StringSplitOptions.None).Last()); }
+                    if (Model.picture31 == null)
+                    {
+                        nullCount++;
+                    }
+                    else { paths.Add("~/EmlakImages" + Model.picture31.ToString().Split(new string[] { "EmlakImages" }, StringSplitOptions.None).Last()); }
+                    if (Model.picture32 == null)
+                    {
+                        nullCount++;
+                    }
+                    else { paths.Add("~/EmlakImages" + Model.picture32.ToString().Split(new string[] { "EmlakImages" }, StringSplitOptions.None).Last()); }
+                    if (Model.picture33 == null)
+                    {
+                        nullCount++;
+                    }
+                    else { paths.Add("~/EmlakImages" + Model.picture33.ToString().Split(new string[] { "EmlakImages" }, StringSplitOptions.None).Last()); }
+                    if (Model.picture34 == null)
+                    {
+                        nullCount++;
+                    }
+                    else { paths.Add("~/EmlakImages" + Model.picture34.ToString().Split(new string[] { "EmlakImages" }, StringSplitOptions.None).Last()); }
+                    if (Model.picture35 == null)
+                    {
+                        nullCount++;
+                    }
+                    else { paths.Add("~/EmlakImages" + Model.picture35.ToString().Split(new string[] { "EmlakImages" }, StringSplitOptions.None).Last()); }
                 }
             }
 
             @{
-                if ((25 - nullCount) == 0)
+                if ((35 - nullCount) == 0)
                 {
                     <div class="mySlides">
-                        <img src='/EmlakImages/default.JPG' style="width:100%; height:30%;">
+                        <img src='/EmlakImages/default.JPG' style="width:100%; height:40%;">
                     </div>
                 }
                 else
                 {
-                    for (int i = 0; i < (25 - nullCount); i++)
+                    for (int i = 0; i < (35 - nullCount); i++)
                     {
                         <div class="mySlides">
-                            <div class="numbertext">@(i + 1) / @(25 - nullCount)</div>
-                            <img src='@Url.Content(paths[i])' style="width:100%; height:30%;">
+                            <div class="numbertext">@(i + 1) / @(35 - nullCount)</div>
+                            <img src='@Url.Content(paths[i])' style="width:100%; height:40%;">
                         </div>
                     }
                 }
@@ -274,92 +335,392 @@
                 <p id="caption"></p>
             </div>
             @{
-                if (nullCount != 25)
+                if (nullCount != 35)
                 {
-                    for (int i = 0; i < (25 - nullCount); i++)
+                    for (int i = 0; i < (35 - nullCount); i++)
                     {
                         <div class="column">
                             <img class="demo cursor" src='@Url.Content(paths[i])' style="width:100%;height:10%;" onclick="currentSlide(@(i + 1))" alt="Resim @(i + 1)">
                         </div>
                     }
                 }
+                <div>
+                    <textarea readonly id="ilanDetay" name="ilanDetay" style="width:100%; resize: none; display:block; overflow:hidden;">@Model.ilanDetayi</textarea>
+                </div>
+                if (Model.lat != null && Model.lng != null)
+                {
+                    <div style="width: 530px; height: 350px; margin-top:50px" id="mapContainer"></div>
+                }
+                <div style="margin-top:250px"></div>
             }
         </div>
-        <div style="width:30%; border:outset; float:right">
-            <strong>Ilan No:  </strong><label>@Model.ID</label><br />
-            <strong>Ilan Tarihi:  </strong><label>@Model.Tarih.GetValueOrDefault().ToString(("dd/MM/yyyy"))</label><br />
-            <strong>Konut Türü:  </strong><label>@Model.EmlakTuru</label><br />
-            <strong>Oda Sayısı:  </strong><label>@Model.OdaSayisi</label><br />
-            <strong> Banyo Sayısı: </strong><label>@Model.BanyoSayisi</label><br />
-            <strong> Metrekare:</strong> <label>@Model.MetreKare</label><br />
-            <strong> Binanın Yaşı:</strong> <label>@Model.BinaYasi</label><br />
-            <strong> Isınma Tipi:</strong> <label>@Model.IsitmaTipi</label><br />
+        <div style="width:35%; border:outset; float:right;box-shadow: 5px 10px #888888;">
+            <div style="width: 50%; float:left; background-color: #e9e9e9;  line-height: 1.3;">
+                <label>Ilan No</label><br />
+                <label>Ilan Tarihi</label><br />
+                <label>Emlak Tipi</label><br />
+                <label>m² (Brüt)</label><br />
+                <label>m² (Net)</label><br />
+                <label>Oda Sayısı</label><br />
+                <label>Banyo Sayısı</label><br />
+                <label>Binanın Yaşı</label><br />
+                <label>Bulunduğu Kat</label><br />
+                <label>Kat Sayısı</label><br />
+                <label>Isıtma</label><br />
+                <label>Balkon Sayısı</label><br />
+                <label>Eşyalı</label><br />
+                <label>Kullanım Durumu</label><br />
+                <label>Site İçerisinde</label><br />
+                <label>Aidat TL</label><br />
+                <label>Krediye Uygun</label><br />
+                <label>Takas</label><br />
+                @if (Session["userID"] != null)
+                {
+                    var yetki = Session["UserType"].ToString();
+                    var uID = Session["userID"].ToString();
+                    if (yetki == "Owner" || yetki == "Admin" || Model.UserID == long.Parse(uID))
+                    {
+                        <label>Kira Takip</label><br />
+                        <label>Kira Takip Et</label><br />
+                    }
+                }
+            </div>
+            <div style="width: 50%; float:right; line-height: 1.3;">
+                <label>@Model.ID</label><br />
+                @if (Model.Tarih != null)
+                {
+                    <label>@Model.Tarih.GetValueOrDefault().ToString(("dd/MM/yyyy"))</label><br />
+                }
+                else
+                {
+                    <label>Belirtilmemiş</label><br />
+                }
 
+                @if (Model.EMLAKTURU1.EMLAK_TURU != null)
+                {
+                    <label>Satılık @Model.EMLAKTURU1.EMLAK_TURU</label><br />
+                }
+                else
+                {
+                    <label>Belirtilmemiş</label><br />
+                }
+
+                @if (Model.MetreKareBrut != null)
+                {
+                    <label>@Model.MetreKareBrut</label><br />
+                }
+                else
+                {
+                    <label>Belirtilmemiş</label><br />
+                }
+
+                @if (Model.MetreKare != null)
+                {
+                    <label>@Model.MetreKare</label><br />
+                }
+                else
+                {
+                    <label>Belirtilmemiş</label><br />
+                }
+
+                @if (@Model.ODA_SAYISI.ODA_SAYISI1 != null)
+                {
+                    <label>@Model.ODA_SAYISI.ODA_SAYISI1</label><br />
+                }
+                else
+                {
+                    <label>Belirtilmemiş</label><br />
+                }
+
+                @if (@Model.BANYO_SAYISI.BANYO_SAYISI1 != null)
+                {
+                    <label>@Model.BANYO_SAYISI.BANYO_SAYISI1</label><br />
+                }
+                else
+                {
+                    <label>Belirtilmemiş</label><br />
+                }
+
+                @if (@Model.BINA_YASI.BINA_YASI1 != null)
+                {
+                    <label>@Model.BINA_YASI.BINA_YASI1</label><br />
+                }
+                else
+                {
+                    <label>Belirtilmemiş</label><br />
+                }
+
+                @if (@Model.BULUNDUGU_KAT.BULUNDUGU_KAT1 != null)
+                {
+                    <label>@Model.BULUNDUGU_KAT.BULUNDUGU_KAT1</label><br />
+                }
+                else
+                {
+                    <label>Belirtilmemiş</label><br />
+                }
+
+                @if (@Model.KAT_SAYISI.KAT_SAYISI1 != null)
+                {
+                    <label>@Model.KAT_SAYISI.KAT_SAYISI1</label><br />
+                }
+                else
+                {
+                    <label>Belirtilmemiş</label><br />
+                }
+
+                @if (@Model.ISITMA_TIPI.ISITMA_TIPI1 != null)
+                {
+                    <label>@Model.ISITMA_TIPI.ISITMA_TIPI1</label><br />
+                }
+                else
+                {
+                    <label>Belirtilmemiş</label><br />
+                }
+
+
+                @if (@Model.BalkonSayisi != null)
+                {
+                    <label>@Model.BalkonSayisi</label><br />
+                }
+                else
+                {
+                    <label>Belirtilmemiş</label><br />
+                }
+
+                @if (Model.EsyaliMi == true)
+                {<label>Evet</label><br />}
+                else if (Model.EsyaliMi == false)
+                {<label>Hayır</label><br />}
+                else
+                {<label>Belirtilmemiş</label><br />}
+                <label>@Model.KULLANIM_DURUMU.KULLANIM_DURUMU1</label><br />
+
+                @if (Model.SiteIcerisinde == true)
+                {<label>Evet</label><br />}
+                else if (Model.SiteIcerisinde == false)
+                {<label>Hayır</label><br />}
+                else
+                {<label>Belirtilmemiş</label><br />}
+
+                @if (Model.AidatTL != null)
+                {<label>@Model.AidatTL</label><br />}
+            else
+            {<label>Belirtilmemiş</label><br />}
+
+                @if (Model.krediyeUygun == true)
+                {<label>Evet</label><br />}
+                else if (Model.krediyeUygun == false)
+                {<label>Hayır</label><br />}
+                else
+                {<label>Belirtilmemiş</label><br />}
+
+                @if (Model.Takas == true)
+                {<label>Evet</label><br />}
+                else if (Model.Takas == false)
+                {<label>Hayır</label><br />}
+                else
+                {<label>Belirtilmemiş</label><br />}
+                @if (Session["userID"] != null)
+                {
+                    var yetki = Session["UserType"].ToString();
+                    var uID = Session["userID"].ToString();
+                    if (yetki == "Owner" || yetki == "Admin" || Model.UserID == long.Parse(uID))
+                    {
+                        if (Model.KiraTakip == true)
+                        {<label>Evet</label><br /> }
+                        else if (Model.KiraTakip == false)
+                        {<label>Hayır</label><br />}
+                        else
+                        {<label>Hayir</label><br />}
+                        <a class='btn btn-default btn-sm' onclick="PopupFormKiraTakip('@Url.Action("AddOrEditKiraTakipKonut", "DB" )/@Model.ID')">
+                            <i class='fa fa-pencil'></i>@*asd*@
+                        </a>
+                    }
+                }
+            </div>
+            @{
+                if (Session["userID"] != null)
+                {
+                    var yetki = Session["UserType"].ToString();
+                    var uID = Session["userID"].ToString();
+
+                    if (yetki == "Owner" || yetki == "Admin" || Model.UserID == long.Parse(uID))
+                    {
+                        <a class='btn btn-default btn-sm' style="margin-left:5%; margin-top:15px;" onclick="PopupFormKonutKiralik('@Url.Action("AddOrEditKonutKiralik", "DB")/@Model.ID')">
+                            <i class='fa fa-pencil'></i> Düzenle
+                        </a><a class='btn btn-danger btn-sm' style="margin-left:10px; margin-top:15px;" onclick="Delete(@Model)">
+                            <i class='fa fa-trash'></i> Sil
+                        </a>
+                    }
+                }
+            }
         </div>
     </div>
-
-    @*<label>Ilan Veren: @Model.Adi @Model.Soyadi</label>
-        <label>Müşteri Kaynağı: @Model.MusteriKaynagi</label>
-        <label>TC: @Model.TC</label>
-        <label>Iban: @Model.Iban</label>
-        <label>Cep Telefonu: @Model.CepTelefonu</label>
-        <label>İş Telefonu: @Model.IsTelefonu</label>
-        <label>İlan Tarihi: @Model.Tarih</label>
-        <label>İl: @Model.il</label>
-        <label>İlçe: @Model.ilce</label>
-        <label>Mahalle: @Model.Mahalle</label>
-        <label>Cadde: @Model.Cadde</label>
-        <label>Sokak: @Model.Sokak</label>
-        <label>Apartman Adı: @Model.AptAdi</label>
-        <label>Apartman No: @Model.AptNo</label>
-        <label>Daire No: @Model.DaireNo</label>
-        <label>Kira/Satılık: @Model.Kira_Satilik</label>
-        <label>İşyeri/Konut: @Model.Isyeri_Konut</label>
-
-        <label>Bina Yaşı: @Model.BinaYasi</label>
-        <label>Kat Sayısı: @Model.KatSayisi</label>
-        <label>Kat: @Model.Kat</label>
-        <label>Oda Sayısı: @Model.OdaSayisi</label>
-        <label>Isıtma Tipi: @Model.ISITMA_TIPI</label>
-        <label>Banyo Sayısı: @Model.BanyoSayisi</label>
-        <label>Fiyat Net: @Model.FiyatNet</label>
-        <label>Fiyat Satış: @Model.FiyatSatis</label>
-        <label>Eşyalı Mı?: @Model.EsyaliMi</label>
-        <label>Depozit: @Model.DepozitTL TL</label>
-        <label>Not: @Model.Note</label>
-        <label>Eşyalı Mı?: @Model.EsyaliMi</label>
-        <label>Devren Satılık: @Model.DevrenSatilik</label>
-        <label>Devren Kiralık: @Model.DevrenKiralik</label>
-        <label>UserID: @Model.UserID</label>*@
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="~/Scripts/notify.min.js"></script>
     <script>
-    var slideIndex = 1;
-    showSlides(slideIndex);
+        // Initialize the platform object:
+        var platform = new H.service.Platform({
+            'apikey': 'UrRVky2kcqBab-ct3CYhNh7kRkWsTNr5jtlX_lfOXlw'
+        });
 
-    function plusSlides(n) {
-        showSlides(slideIndex += n);
-    }
+        // Obtain the default map types from the platform object
+        var maptypes = platform.createDefaultLayers();
 
-    function currentSlide(n) {
-        showSlides(slideIndex = n);
-    }
+        // Instantiate (and display) a map object:
+        var map = new H.Map(
+            document.getElementById('mapContainer'),
+            maptypes.vector.normal.map,
+            {
+                zoom: 18,
+                center: { lng: '@Model.lng.ToString().Replace(",",".")', lat: '@Model.lat.ToString().Replace(",",".")' }
+            });
+        map.addObject(new H.map.Marker({lat:'@Model.lat.ToString().Replace(",",".")', lng: '@Model.lng.ToString().Replace(",",".")'}));
+    </script>
 
-    function showSlides(n) {
-        var i;
-        var slides = document.getElementsByClassName("mySlides");
-        var dots = document.getElementsByClassName("demo");
-        var captionText = document.getElementById("caption");
-        if (n > slides.length) { slideIndex = 1 }
-        if (n < 1) { slideIndex = slides.length }
-        for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";
+    <script>
+        var popUp;
+        function PopupFormKonutKiralik(url) {
+            var formDiv = $('<div/>');
+            $.get(url)
+                .done(function (response) {
+                    formDiv.html(response);
+
+                    popUp = formDiv.dialog({
+                        autoOpen: true,
+                        resizable: false,
+                        title: 'Satılık Konut Ekle',
+                        height: 600,
+                        width: 1200,
+                        close: function myfunction() {
+                            popUp.dialog('destroy').remove();
+                        }
+                    });
+                });
         }
-        for (i = 0; i < dots.length; i++) {
-            dots[i].className = dots[i].className.replace(" active", "");
+
+        function PopupFormKiraTakip(url) {
+            var formDiv = $('<div/>');
+            $.get(url)
+                .done(function (response) {
+                    formDiv.html(response);
+
+                    popUp = formDiv.dialog({
+                        autoOpen: true,
+                        resizable: false,
+                        title: 'Kiracı Ekle',
+                        height: 600,
+                        width: 500,
+                        close: function myfunction() {
+                            popUp.dialog('destroy').remove();
+                        }
+                    });
+                });
         }
-        slides[slideIndex - 1].style.display = "block";
-        dots[slideIndex - 1].className += " active";
-        captionText.innerHTML = dots[slideIndex - 1].alt;
-    }
+
+        function SubmitFormKiraTakip(form) {
+            $.validator.unobtrusive.parse(form);
+            var data = new FormData(form)
+
+            if ($(form).valid()) {
+                $.ajax({
+                    type: "POST",
+                    enctype: 'multipart/form-data',
+                    url: "/DB/AddOrEditKiraTakipKonut",
+                    processData: false,  // Important!
+                    contentType: false,
+                    cache: false,
+                    data: data,
+                    success: function (data) {
+                        if (data.success) {
+                            popUp.dialog('close');
+
+                            location.reload();
+
+                            $.notify(data.message, {
+                                globalPosition: "top center",
+                                className: "success"
+                            })
+                        }
+                    }
+                });
+            }
+            return false;
+        }
+
+        function SubmitFormKonutKiralik(form) {
+            $.validator.unobtrusive.parse(form);
+            var data = new FormData(form)
+
+            if ($(form).valid()) {
+                $.ajax({
+                    type: "POST",
+                    enctype: 'multipart/form-data',
+                    url: "/DB/AddOrEditKonutKiralik",
+                    processData: false,  // Important!
+                    contentType: false,
+                    cache: false,
+                    data: data,
+                    success: function (data) {
+                        if (data.success) {
+                            popUp.dialog('close');
+
+                            location.reload();
+
+                            $.notify(data.message, {
+                                globalPosition: "top center",
+                                className: "success"
+                            })
+                        }
+                    }
+                });
+            }
+            return false;
+        }
+    </script>
+    <script>
+        var slideIndex = 1;
+
+        showSlides(slideIndex);
+        setHeight($("#ilanDetay"));
+
+        function setHeight(jq_in) {
+            jq_in.each(function (index, elem) {
+                // This line will work with pure Javascript (taken from NicB's answer):
+                elem.style.height = elem.scrollHeight + 5 + 'px';
+            });
+        }
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+            var i;
+            var slides = document.getElementsByClassName("mySlides");
+            var dots = document.getElementsByClassName("demo");
+            var captionText = document.getElementById("caption");
+            if (n > slides.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = slides.length }
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
+            captionText.innerHTML = dots[slideIndex - 1].alt;
+        }
     </script>
 </body>
 </html>

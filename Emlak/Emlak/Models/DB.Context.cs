@@ -46,9 +46,8 @@ namespace Emlak.Models
         public virtual DbSet<KontratTakip> KontratTakip { get; set; }
         public virtual DbSet<KONUT_ISYERI> KONUT_ISYERI { get; set; }
         public virtual DbSet<KULLANIM_DURUMU> KULLANIM_DURUMU { get; set; }
+        public virtual DbSet<MAKBUZ_SOZLESME> MAKBUZ_SOZLESME { get; set; }
         public virtual DbSet<MESAJ> MESAJ { get; set; }
-        public virtual DbSet<MUSTERI> MUSTERI { get; set; }
-        public virtual DbSet<MUSTERI_TIPI> MUSTERI_TIPI { get; set; }
         public virtual DbSet<ODA_SAYISI> ODA_SAYISI { get; set; }
         public virtual DbSet<TAPU_DURUMU> TAPU_DURUMU { get; set; }
         public virtual DbSet<USERS> USERS { get; set; }

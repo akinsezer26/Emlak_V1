@@ -1,6 +1,5 @@
 ﻿
 @model Emlak.Models.USERS
-
 @{
     Layout = "~/Views/Shared/_LayoutLogin.cshtml";
 }
@@ -10,9 +9,13 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-
+    @{
+        if (!string.IsNullOrEmpty(ViewBag.LoginErrorMessage))
+        {
+            <script>alert("Kullanıcı Adı veya Şifre Hatalı !");</script>
+        }
+    }
 </head>
 <body>
-   
 </body>
 </html>

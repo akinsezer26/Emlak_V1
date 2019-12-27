@@ -1,0 +1,253 @@
+﻿@model Emlak.Models.MAKBUZ_SOZLESME
+@{
+    Layout = null;
+}
+
+@using (Html.BeginForm("AddOrEditSozlesmeKontrat", "DB", FormMethod.Post, new { onsubmit = "return SubmitFormSozlesmeKontrat(this)" }))
+{
+    @Html.HiddenFor(model => model.MakbuzSozlesmeID)
+    <div class="form-group">
+        @Html.Label("Sözleşme No") @Html.Label(Model.MakbuzSozlesmeID.ToString())
+    </div>
+    <div>
+        @*might change*@
+    <div class="form-group">
+        @Html.Label("Kiracı Bilgileri")
+    </div>
+    <div class="form-group">
+        @Html.Label("Kiracı Adı") @Html.EditorFor(model => model.KiraciAdi, new { @htmlAttributes = new { placeholder = "Adı", @class = "form-control", autocomplete = "off" } })
+        @Html.ValidationMessageFor(model => model.KiraciAdi)
+    </div>
+    <div class="form-group">
+        @Html.Label("Kiracı Soyadı") @Html.EditorFor(model => model.KiraciSoyAdi, new { @htmlAttributes = new { placeholder = "Soyadı", @class = "form-control", autocomplete = "off" } })
+        @Html.ValidationMessageFor(model => model.KiraciSoyAdi)
+    </div>
+    <div class="form-group">
+        @Html.Label("TC")@Html.EditorFor(model => model.KiraciTCKimlik, new { @htmlAttributes = new { placeholder = "TC Kimlik", @class = "form-control", autocomplete = "off" } })
+        @Html.ValidationMessageFor(model => model.KiraciTCKimlik)
+    </div>
+    <div class="form-group">
+        @Html.Label("Cep")@Html.EditorFor(model => model.Cep, new { @htmlAttributes = new { placeholder = "Cep", @class = "form-control", autocomplete = "off" } })
+        @Html.ValidationMessageFor(model => model.Cep)
+    </div>
+    <div class="form-group">
+        @Html.Label("Kaç Ay")
+        @Html.EditorFor(model => model.KacAy, new { @htmlAttributes = new { placeholder = "Kaç Ay", @class = "form-control", autocomplete = "off" } })
+        @Html.ValidationMessageFor(model => model.KacAy)
+    </div>
+    <div class="form-group">
+        @Html.Label("Başlangıç Tarihi")
+        @Html.EditorFor(model => model.OdemeBaslangicTarihi, new { @htmlAttributes = new { placeholder = "Ödeme Tarihi", @class = "form-control", autocomplete = "off" } })
+        @Html.ValidationMessageFor(model => model.OdemeBaslangicTarihi)
+    </div>
+    <div class="form-group">
+        @Html.Label("Aylık Ödeme")
+        @Html.EditorFor(model => model.AylikOdemeTL, new { @htmlAttributes = new { placeholder = "Ödeme TL", @class = "form-control", autocomplete = "off" } })
+        @Html.ValidationMessageFor(model => model.AylikOdemeTL)
+    </div>
+    <div class="form-group">
+        @Html.Label("Toplam Ödeme")
+        @Html.Label((Model.AylikOdemeTL * Model.KacAy).ToString(), new { @htmlAttributes = new { @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @Html.Label("Kalan Ödeme")
+        @Html.Label((Model.AylikOdemeTL * Model.KacAy).ToString(), new { @htmlAttributes = new { @class = "form-control", autocomplete = "off" } })
+    </div>
+    <div class="form-group">
+        @Html.Label("Kiracının Adresi")
+    </div>
+    <div class="form-group">
+        @Html.TextAreaFor(model => model.KiracininAdresi, new { @htmlAttributes = new { @class = "form-control form-control-full", placeholder = "Adres", autocomplete = "off" } })
+        @Html.ValidationMessageFor(model => model.KiracininAdresi)
+    </div>
+</div>
+<div class="form-group">
+    @{
+        if (Model.KacAy <= 12)
+        {
+            for (int i = 0; i < Model.KacAy; i++)
+            {
+                switch (i)
+                {
+                    case 0:
+                        @Html.Label("Ay 1")
+                        @Html.EditorFor(model => model.Ay1, new { @htmlAttributes = new { placeholder = "1. Ay", @class = "form-control", autocomplete = "off" } })
+                        @Html.ValidationMessageFor(model => model.Ay1)
+                        break;
+                    case 1:
+                        @Html.Label("Ay 2")
+                        @Html.EditorFor(model => model.Ay2, new { @htmlAttributes = new { placeholder = "2. Ay", @class = "form-control", autocomplete = "off" } })
+                        @Html.ValidationMessageFor(model => model.Ay2)
+                        break;
+                    case 2:
+                        @Html.Label("Ay 3")
+                        @Html.EditorFor(model => model.Ay3, new { @htmlAttributes = new { placeholder = "3. Ay", @class = "form-control", autocomplete = "off" } })
+                        @Html.ValidationMessageFor(model => model.Ay3)
+                        break;
+                    case 3:
+                        @Html.Label("Ay 4")
+                        @Html.EditorFor(model => model.Ay4, new { @htmlAttributes = new { placeholder = "4. Ay", @class = "form-control", autocomplete = "off" } })
+                        @Html.ValidationMessageFor(model => model.Ay4)
+                        break;
+                    case 4:
+                        @Html.Label("Ay 5")
+                        @Html.EditorFor(model => model.Ay5, new { @htmlAttributes = new { placeholder = "5. Ay", @class = "form-control", autocomplete = "off" } })
+                        @Html.ValidationMessageFor(model => model.Ay5)
+                        break;
+                    case 5:
+                        @Html.Label("Ay 6")
+                        @Html.EditorFor(model => model.Ay6, new { @htmlAttributes = new { placeholder = "6. Ay", @class = "form-control", autocomplete = "off" } })
+                        @Html.ValidationMessageFor(model => model.Ay6)
+                        break;
+                    case 6:
+                        @Html.Label("Ay 7")
+                        @Html.EditorFor(model => model.Ay7, new { @htmlAttributes = new { placeholder = "7. Ay", @class = "form-control", autocomplete = "off" } })
+                        @Html.ValidationMessageFor(model => model.Ay7)
+                        break;
+                    case 7:
+                        @Html.Label("Ay 8")
+                        @Html.EditorFor(model => model.Ay8, new { @htmlAttributes = new { placeholder = "8. Ay", @class = "form-control", autocomplete = "off" } })
+                        @Html.ValidationMessageFor(model => model.Ay8)
+                        break;
+                    case 8:
+                        @Html.Label("Ay 9")
+                        @Html.EditorFor(model => model.Ay9, new { @htmlAttributes = new { placeholder = "9. Ay", @class = "form-control", autocomplete = "off" } })
+                        @Html.ValidationMessageFor(model => model.Ay9)
+                        break;
+                    case 9:
+                        @Html.Label("Ay 10")
+                        @Html.EditorFor(model => model.Ay10, new { @htmlAttributes = new { placeholder = "10. Ay", @class = "form-control", autocomplete = "off" } })
+                        @Html.ValidationMessageFor(model => model.Ay10)
+                        break;
+                    case 10:
+                        @Html.Label("Ay 11")
+                        @Html.EditorFor(model => model.Ay11, new { @htmlAttributes = new { placeholder = "11. Ay", @class = "form-control", autocomplete = "off" } })
+                        @Html.ValidationMessageFor(model => model.Ay11)
+                        break;
+                    case 11:
+                        @Html.Label("Ay 12")
+                        @Html.EditorFor(model => model.Ay12, new { @htmlAttributes = new { placeholder = "12. Ay", @class = "form-control", autocomplete = "off" } })
+                        @Html.ValidationMessageFor(model => model.Ay12)
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    }
+</div>
+<div class="form-group">
+    @Html.Label("Kırmızı Liste")
+    @Html.CheckBox("Kırmızı Liste", Model.KirmiziList ?? false)
+</div>
+<div class="form-group">
+    @Html.Label("Borçlu")
+    @Html.CheckBox("Borçlu", Model.Borclu ?? false)
+</div>
+<div class="form-group">
+    @Html.Label("Kira Takip")
+    @Html.CheckBox("Kira Takip", Model.KiraTakip ?? false)
+</div>
+<div class="form-group">
+    @Html.Label("Depozit")
+    @Html.CheckBox("Depozit", Model.Depozit ?? false)
+</div>
+<div class="form-group">
+    @Html.Label("Depozit TL")
+    @Html.EditorFor(model => model.DepozitTL, new { @htmlAttributes = new { placeholder = "Depozit TL", @class = "form-control", autocomplete = "off" } })
+    @Html.ValidationMessageFor(model => model.DepozitTL)
+</div>
+<div class="form-group">
+    @Html.Label("Not")
+    @Html.EditorFor(model => model.Note, new { @htmlAttributes = new { placeholder = "Not", @class = "form-control", autocomplete = "off" } })
+    @Html.ValidationMessageFor(model => model.Note)
+</div>
+<div class="form-group">
+    @Html.Label("Emlak Sahibi Bilgileri")
+</div>
+<div class="form-group">
+    @Html.Label("Danışman Adı")
+    @Html.EditorFor(model => model.DanismanAd, new { @htmlAttributes = new { placeholder = "Danışman Adı", @class = "form-control", autocomplete = "off" } })
+    @Html.ValidationMessageFor(model => model.DanismanAd)
+</div>
+<div class="form-group">
+    @Html.Label("Danışman Soyadı")
+    @Html.EditorFor(model => model.DanismanSoyAd, new { @htmlAttributes = new { placeholder = "Danışman Soyadı", @class = "form-control", autocomplete = "off" } })
+    @Html.ValidationMessageFor(model => model.DanismanSoyAd)
+</div>
+<div class="form-group">
+    @Html.Label("Ev Sahibi Adı")
+    @Html.EditorFor(model => model.KirayaVerenAdi, new { @htmlAttributes = new { placeholder = "Adı", @class = "form-control", autocomplete = "off" } })
+    @Html.ValidationMessageFor(model => model.KirayaVerenAdi)
+</div>
+<div class="form-group">
+    @Html.Label("Ev Sahibi Soyadı")
+    @Html.EditorFor(model => model.KirayaVerenSoyAdi, new { @htmlAttributes = new { placeholder = "Soyadı", @class = "form-control", autocomplete = "off" } })
+    @Html.ValidationMessageFor(model => model.KirayaVerenSoyAdi)
+</div>
+<div class="form-group">
+    @Html.Label("Ev Sahibi TC")
+    @Html.EditorFor(model => model.KirayaVerenTC, new { @htmlAttributes = new { placeholder = "TC Kimlik", @class = "form-control", autocomplete = "off" } })
+    @Html.ValidationMessageFor(model => model.KirayaVerenTC)
+</div>
+<div class="form-group">
+    @Html.Label("Ev Sahibi IBAN")
+    @Html.EditorFor(model => model.KirayaVerenIBAN, new { @htmlAttributes = new { placeholder = "IBAN", @class = "form-control", autocomplete = "off" } })
+    @Html.ValidationMessageFor(model => model.KirayaVerenIBAN)
+</div>
+<div class="form-group">
+    @Html.Label("Ev Sahibi Cep")
+    @Html.EditorFor(model => model.KirayaVerenCep, new { @htmlAttributes = new { placeholder = "Cep", @class = "form-control", autocomplete = "off" } })
+    @Html.ValidationMessageFor(model => model.KirayaVerenCep)
+</div>
+<div class="form-group">
+    @Html.Label("İl")
+    @Html.EditorFor(model => model.IL, new { @htmlAttributes = new { placeholder = "İl", @class = "form-control", autocomplete = "off" } })
+    @Html.ValidationMessageFor(model => model.IL)
+</div>
+<div class="form-group">
+    @Html.Label("İlçe")
+    @Html.EditorFor(model => model.ILCE, new { @htmlAttributes = new { placeholder = "İlçe", @class = "form-control", autocomplete = "off" } })
+    @Html.ValidationMessageFor(model => model.ILCE)
+</div>
+<div class="form-group">
+    @Html.Label("Mahalle")
+    @Html.EditorFor(model => model.Mahalle, new { @htmlAttributes = new { placeholder = "Mahalle", @class = "form-control", autocomplete = "off" } })
+    @Html.ValidationMessageFor(model => model.Mahalle)
+</div>
+<div class="form-group">
+    @Html.Label("Sokak")
+    @Html.EditorFor(model => model.Sokak, new { @htmlAttributes = new { placeholder = "Sokak", @class = "form-control", autocomplete = "off" } })
+    @Html.ValidationMessageFor(model => model.Sokak)
+</div>
+<div class="form-group">
+    @Html.Label("Apartman Adı")
+    @Html.EditorFor(model => model.AptAdi, new { @htmlAttributes = new { placeholder = "Apartman Adı", @class = "form-control", autocomplete = "off" } })
+    @Html.ValidationMessageFor(model => model.AptAdi)
+</div>
+<div class="form-group">
+    @Html.Label("Apartman No")
+    @Html.EditorFor(model => model.AptNo, new { @htmlAttributes = new { placeholder = "Apartman No", @class = "form-control", autocomplete = "off" } })
+    @Html.ValidationMessageFor(model => model.AptNo)
+</div>
+<div class="form-group">
+    @Html.Label("Site Adı")
+    @Html.EditorFor(model => model.SiteAdi, new { @htmlAttributes = new { placeholder = "Site Adı", @class = "form-control", autocomplete = "off" } })
+    @Html.ValidationMessageFor(model => model.SiteAdi)
+</div>
+@*<div class="form-group">
+        @Html.EditorFor(model => model.cadde, new { @htmlAttributes = new { placeholder = "Site Adı", @class = "form-control", autocomplete = "off" } })
+        @Html.ValidationMessageFor(model => model.SiteAdi)
+    </div>*@
+<div class="form-group">
+    @Html.Label("Ev Sahibi Adres")
+</div>
+<div class="form-group">
+    @Html.TextAreaFor(model => model.KirayaVerenAdres, new { @htmlAttributes = new { @class = "form-control form-control-full", placeholder = "Adres", autocomplete = "off" } })
+    @Html.ValidationMessageFor(model => model.KirayaVerenAdres)
+</div>
+
+<div class="form-group">
+    <input type="submit" value="Düzenle" class="btn btn-primary" />
+</div>
+}
